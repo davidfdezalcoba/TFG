@@ -5,7 +5,6 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 #include <assimp/Importer.hpp>
@@ -55,7 +54,9 @@ private:
     {
         // read file via ASSIMP
         Assimp::Importer importer;
-        const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
+        // const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
+        const aiScene* scene = importer.ReadFile(path, aiProcess_GenNormals | aiProcess_Triangulate);
+        scene = importer.ApplyPostProcessing(aiProcess_CalcTangentSpace);
         // check for errors
         if(!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // if is Not Zero
         {
@@ -207,11 +208,13 @@ unsigned int TextureFromFile(const char *path, const string &directory, bool gam
 {
     string filename = string(path);
     filename = directory + '/' + filename;
+	cout << path << endl;
 
     unsigned int textureID;
     glGenTextures(1, &textureID);
 
     int width, height, nrComponents;
+	stbi_set_flip_vertically_on_load(true);
     unsigned char *data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
     if (data)
     {

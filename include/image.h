@@ -2,7 +2,6 @@
 #define IMAGE_H
 
 #include <glad.h> 
-//#define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
 #include <string>

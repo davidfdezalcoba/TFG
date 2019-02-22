@@ -53,11 +53,15 @@ int main(int argc, char *argv[])
 	Shader imageShader("/home/david/Projects/TFG/Project/src/shaders/imageShaders/vertexShader.vs",
 					"/home/david/Projects/TFG/Project/src/shaders/imageShaders/fragmentShader.frs");
 
-    Shader nanoShader2("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/vertexShader.vs",
-                     "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/fragmentShader.frs");
+    Shader nanoShader2("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/planeshaders/vertexShader.vs",
+                     "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/planeshaders/fragmentShader.frs");
 
-	Image image("/home/david/Projects/TFG/Project/resources/images/foto.png");
-	Model nanosuit("/home/david/Projects/TFG/Project/resources/objects/nanosuit/nanosuit.obj");
+	// Image image("/home/david/Projects/TFG/Project/resources/images/foto.png");
+	// Model nanosuit("/home/david/Projects/TFG/Project/resources/objects/nanosuit/nanosuit.obj");
+	// Model hitler("/home/david/Projects/TFG/Project/resources/objects/hitler/source/hitler/hitler.obj");
+	// Model car("/home/david/Projects/TFG/Project/resources/objects/borderlandsCar/source/Veh_Runner_Static.obj");
+	// Model earth("/home/david/Projects/TFG/Project/resources/objects/earth/Earth.blend");
+	Model tree("/home/david/Projects/TFG/Project/resources/objects/tree/tree.obj");
 
     // render loop
     while (!glfwWindowShouldClose(window))
@@ -79,32 +83,26 @@ int main(int argc, char *argv[])
 
         glm::mat4 nanoModel = glm::mat4(1.0f); 
 		//nanoModel = glm::rotate(nanoModel, glm::radians(90.0f), glm::vec3(0.0, 0.0, 1.0));
-        nanoModel = glm::translate(nanoModel, glm::vec3(0.0f, -1.75f, 0.0f));
+        nanoModel = glm::translate(nanoModel, glm::vec3(0.0f, -1.75f, -5.0f));
         nanoModel = glm::scale(nanoModel, glm::vec3(0.2f, 0.2f, 0.2f));
-        glm::mat4 nanoModelView = view * nanoModel; 
         glm::mat4 nanoModelViewProjection = projection * view * nanoModel; 
 		glm::mat3 nanoNormal = glm::mat3(transpose(inverse(nanoModel)));
 		glm::mat4 lightModel = glm::mat4(1.0f);
-		lightModel = glm::rotate(lightModel, time, glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f)));
-		lightPos = glm::vec3(2.0, -1.75, 2.0);
-		lightPos = lightModel * glm::vec4(lightPos, 1.0);
+		// lightModel = glm::rotate(lightModel, time, glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f)));
+		// lightPos = glm::vec3(2.0, -1.75, 2.0);
+		// lightPos = lightModel * glm::vec4(lightPos, 1.0);
 
 		//set uniforms in shader
-		// nanoShader2.use();
-		// nanoShader2.setFloat("aTime", time);
-		// nanoShader2.setMat4("uModel", nanoModel);
-		// nanoShader2.setMat4("uModelViewMatrix", nanoModelView);
-		// nanoShader2.setMat4("uModelViewProjectionMatrix", nanoModelViewProjection);
-		// nanoShader2.setFloat("uShrink", 0.7);
+		nanoShader2.use();
+		nanoShader2.setMat4("uModel", nanoModel);
+		nanoShader2.setMat4("uView", view);
+		nanoShader2.setMat4("uProjection", projection);
 		// nanoShader2.setMat3("uNormalMatrix", nanoNormal);
-		// nanoShader2.setVec3("uLightPos", lightPos);
-		// nanoShader2.setVec3("uLightColor", lightColor);
-		// nanoShader2.setVec3("uLightPos", lightPos);
-        // nanosuit.Draw(nanoShader2);
+        tree.Draw(nanoShader2);
 
 		//load image
-		imageShader.use();
-		image.Draw(imageShader);
+		// imageShader.use();
+		// image.Draw(imageShader);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
