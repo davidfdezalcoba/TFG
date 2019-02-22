@@ -25,7 +25,7 @@ Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 //set lightning
 glm::vec3 lightPos = glm::vec3(1.0f, 1.0f, 1.0f);
-glm::vec3 lightColor = glm::vec3(1.0f);
+glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
 float ambientLight = 0.7;
 
 float lastX = SCR_WIDTH / 2.0f;
@@ -53,15 +53,18 @@ int main(int argc, char *argv[])
 	Shader imageShader("/home/david/Projects/TFG/Project/src/shaders/imageShaders/vertexShader.vs",
 					"/home/david/Projects/TFG/Project/src/shaders/imageShaders/fragmentShader.frs");
 
-    Shader nanoShader2("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/planeshaders/vertexShader.vs",
-                     "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/planeshaders/fragmentShader.frs");
+    Shader nanoShader2("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/lightShaders/vertexShader.vs",
+                     "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/lightShaders/fragmentShader.frs");
 
 	// Image image("/home/david/Projects/TFG/Project/resources/images/foto.png");
-	// Model nanosuit("/home/david/Projects/TFG/Project/resources/objects/nanosuit/nanosuit.obj");
-	// Model hitler("/home/david/Projects/TFG/Project/resources/objects/hitler/source/hitler/hitler.obj");
+	Model nanosuit("/home/david/Projects/TFG/Project/resources/objects/nanosuit/nanosuit.obj");
+	Model hitler("/home/david/Projects/TFG/Project/resources/objects/hitler/source/hitler/hitler.obj");
 	// Model car("/home/david/Projects/TFG/Project/resources/objects/borderlandsCar/source/Veh_Runner_Static.obj");
 	// Model earth("/home/david/Projects/TFG/Project/resources/objects/earth/Earth.blend");
-	Model tree("/home/david/Projects/TFG/Project/resources/objects/tree/tree.obj");
+	// Model tree("/home/david/Projects/TFG/Project/resources/objects/tree/tree.obj");
+	Model mars("/home/david/Projects/TFG/Project/resources/objects/terrain/mars_valles_mar.stl");
+	Model spiderman("/home/david/Projects/TFG/Project/resources/objects/spiderman/source/M-CoC_iOS_HERO_Peter_Parker_Spider-Man_Stark_Enhanced.obj");
+	Model cat("/home/david/Projects/TFG/Project/resources/objects/cat/source/Fransicat.OBJ");
 
     // render loop
     while (!glfwWindowShouldClose(window))
@@ -77,28 +80,31 @@ int main(int argc, char *argv[])
         glClearColor(0.0f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		//Wireframe mode
+		// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
 		//set model view and projection matrices
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         glm::mat4 view = camera.GetViewMatrix();
-
-        glm::mat4 nanoModel = glm::mat4(1.0f); 
-		//nanoModel = glm::rotate(nanoModel, glm::radians(90.0f), glm::vec3(0.0, 0.0, 1.0));
-        nanoModel = glm::translate(nanoModel, glm::vec3(0.0f, -1.75f, -5.0f));
-        nanoModel = glm::scale(nanoModel, glm::vec3(0.2f, 0.2f, 0.2f));
-        glm::mat4 nanoModelViewProjection = projection * view * nanoModel; 
-		glm::mat3 nanoNormal = glm::mat3(transpose(inverse(nanoModel)));
+        glm::mat4 model = glm::mat4(1.0f); 
+        model = glm::translate(model, glm::vec3(0.0f, -1.75f, -5.0f));
+        model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
+		glm::mat3 nanoNormal = glm::mat3(transpose(inverse(model)));
 		glm::mat4 lightModel = glm::mat4(1.0f);
 		// lightModel = glm::rotate(lightModel, time, glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f)));
-		// lightPos = glm::vec3(2.0, -1.75, 2.0);
-		// lightPos = lightModel * glm::vec4(lightPos, 1.0);
+		lightPos = glm::vec3(2.0, -1.75, 2.0);
+		lightPos = lightModel * glm::vec4(lightPos, 1.0);
 
 		//set uniforms in shader
 		nanoShader2.use();
-		nanoShader2.setMat4("uModel", nanoModel);
+		nanoShader2.setMat4("uModel", model);
 		nanoShader2.setMat4("uView", view);
 		nanoShader2.setMat4("uProjection", projection);
-		// nanoShader2.setMat3("uNormalMatrix", nanoNormal);
-        tree.Draw(nanoShader2);
+		nanoShader2.setMat3("uNormalMatrix", nanoNormal);
+		nanoShader2.setVec3("uLightPos", lightPos);
+		nanoShader2.setVec3("uLightColor", lightColor);
+		nanoShader2.setVec3("uLightColor", lightColor);
+        cat.Draw(nanoShader2);
 
 		//load image
 		// imageShader.use();

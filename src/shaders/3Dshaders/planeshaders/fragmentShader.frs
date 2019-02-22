@@ -3,10 +3,17 @@ out vec4 fFragColor;
 
 in vec2 vTexCoords;
 
-uniform sampler2D texture_diffuse299;
-uniform sampler2D texture_specular1;
+struct Material {
+	vec3 Diffuse;
+	vec3 Specular;
+	vec3 Ambient;
+	float Shininess;
+};
+
+uniform sampler2D texture_diffuse1;
+uniform Material uMaterial;
 
 void main()
 {    
-    fFragColor = texture(texture_diffuse299, vTexCoords);
+    fFragColor = texture(texture_diffuse1, vTexCoords);
 }

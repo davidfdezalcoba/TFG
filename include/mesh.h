@@ -15,6 +15,13 @@
 #include <vector>
 using namespace std;
 
+struct Material {
+	glm::vec3 Diffuse;
+	glm::vec3 Specular;
+	glm::vec3 Ambient;
+	float Shininess;
+};
+
 struct Vertex {
     // position
     glm::vec3 Position;
@@ -40,15 +47,17 @@ public:
     vector<Vertex> vertices;
     vector<unsigned int> indices;
     vector<Texture> textures;
+	Material material;
     unsigned int VAO;
 
     /*  Functions  */
     // constructor
-    Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures)
+    Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures, Material material)
     {
         this->vertices = vertices;
         this->indices = indices;
         this->textures = textures;
+		this->material = material;
 
         // now that we have all the required data, set the vertex buffers and its attribute pointers.
         setupMesh();
@@ -79,6 +88,10 @@ public:
 
 													 // now set the sampler to the correct texture unit
             glUniform1i(glGetUniformLocation(shader.ID, (name + number).c_str()), i);
+			shader.setVec3("uMaterial.Ambient", material.Ambient);
+			shader.setVec3("uMaterial.Diffuse", material.Diffuse);
+			shader.setVec3("uMaterial.Specular", material.Specular);
+			shader.setFloat("uMaterial.Shininess", material.Shininess);
             // and finally bind the texture
             glBindTexture(GL_TEXTURE_2D, textures[i].id);
         }

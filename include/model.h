@@ -120,19 +120,22 @@ private:
                 vec.x = mesh->mTextureCoords[0][i].x; 
                 vec.y = mesh->mTextureCoords[0][i].y;
                 vertex.TexCoords = vec;
+				// tangent
+            	vector.x = mesh->mTangents[i].x;
+            	vector.y = mesh->mTangents[i].y;
+            	vector.z = mesh->mTangents[i].z;
+            	vertex.Tangent = vector;
+            	// bitangent
+            	vector.x = mesh->mBitangents[i].x;
+            	vector.y = mesh->mBitangents[i].y;
+            	vector.z = mesh->mBitangents[i].z;
+            	vertex.Bitangent = vector;
             }
-            else
+            else{
                 vertex.TexCoords = glm::vec2(0.0f, 0.0f);
-            // tangent
-            vector.x = mesh->mTangents[i].x;
-            vector.y = mesh->mTangents[i].y;
-            vector.z = mesh->mTangents[i].z;
-            vertex.Tangent = vector;
-            // bitangent
-            vector.x = mesh->mBitangents[i].x;
-            vector.y = mesh->mBitangents[i].y;
-            vector.z = mesh->mBitangents[i].z;
-            vertex.Bitangent = vector;
+            	vertex.Tangent = glm::vec3(0.0f, 0.0f, 0.0f);
+            	vertex.Bitangent = glm::vec3(0.0f, 0.0f, 0.0f);
+			}
             vertices.push_back(vertex);
         }
         // now wak through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.
@@ -164,10 +167,33 @@ private:
         // 4. height maps
         std::vector<Texture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
         textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
+
+		Material meshMaterial = loadMaterial(material);
         
         // return a mesh object created from the extracted mesh data
-        return Mesh(vertices, indices, textures);
+        return Mesh(vertices, indices, textures, meshMaterial);
     }
+	
+	Material loadMaterial(aiMaterial* mat) {
+
+		Material material;
+		aiColor3D color(0.f, 0.f, 0.f);
+		float shininess;
+		
+		mat->Get(AI_MATKEY_COLOR_DIFFUSE, color);
+		material.Diffuse = glm::vec3(color.r, color.g, color.b);
+		
+		mat->Get(AI_MATKEY_COLOR_AMBIENT, color);
+		material.Ambient = glm::vec3(color.r, color.g, color.b);
+		
+		mat->Get(AI_MATKEY_COLOR_SPECULAR, color);
+		material.Specular = glm::vec3(color.r, color.g, color.b);
+		
+		mat->Get(AI_MATKEY_SHININESS, shininess);
+		material.Shininess = shininess;
+		
+		return material;
+	}
 
     // checks all material textures of a given type and loads the textures if they're not loaded yet.
     // the required info is returned as a Texture struct.

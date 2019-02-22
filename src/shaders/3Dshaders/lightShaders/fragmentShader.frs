@@ -5,15 +5,23 @@ in vec3 vFragPos;
 
 out vec4 fFragColor;
 
+struct Material {
+	vec3 Diffuse;
+	vec3 Specular;
+	vec3 Ambient;
+	float Shininess;
+};
+
 uniform sampler2D texture_diffuse1;
 uniform vec3 uLightPos;
 uniform vec3 uLightColor;
 uniform vec3 uViewPos;
 uniform mat3 uNormalMatrix;
+uniform Material uMaterial;
 
 void main()
 {    
-	vec3 ambient = 0.1 * uLightColor;	
+	vec3 ambient = 0.3 * uLightColor;
 	vec3 norm = normalize(uNormalMatrix * vNormal);
 	vec3 lightDirection = normalize(uLightPos - vFragPos);
 	vec3 diffuse = max(dot(norm, lightDirection), 0.0) * uLightColor;

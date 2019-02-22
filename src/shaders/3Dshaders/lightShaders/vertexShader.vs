@@ -9,8 +9,8 @@ out vec3 vFragPos;
 
 uniform float aTime;
 uniform mat4 uModel;
-uniform mat4 uModelViewMatrix;
-uniform mat4 uModelViewProjectionMatrix;
+uniform mat4 uView;
+uniform mat4 uProjection;
 uniform mat3 uNormalMatrix;
 
 void main()
@@ -18,5 +18,5 @@ void main()
     vTexCoords = aTexCoords;    
   	vNormal = aNormal;
 	vFragPos = vec3(uModel * vec4(aPos, 1.0)); 
-	gl_Position = uModelViewProjectionMatrix * vec4(aPos, 1.0);
+	gl_Position =  uProjection * uView * uModel * vec4(aPos, 1.0);
 }
