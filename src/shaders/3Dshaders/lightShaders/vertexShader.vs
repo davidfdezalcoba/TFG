@@ -18,5 +18,5 @@ void main()
     vTexCoords = aTexCoords;    
   	vNormal = aNormal;
 	vFragPos = vec3(uModel * vec4(aPos, 1.0)); 
-	gl_Position =  uProjection * uView * uModel * vec4(aPos, 1.0);
+	gl_Position =  uProjection * uView * vec4(vFragPos, 1.0);
 }

@@ -59,8 +59,7 @@ int main(int argc, char *argv[])
 	// Image image("/home/david/Projects/TFG/Project/resources/images/foto.png");
 	Model nanosuit("/home/david/Projects/TFG/Project/resources/objects/nanosuit/nanosuit.obj");
 	Model hitler("/home/david/Projects/TFG/Project/resources/objects/hitler/source/hitler/hitler.obj");
-	// Model car("/home/david/Projects/TFG/Project/resources/objects/borderlandsCar/source/Veh_Runner_Static.obj");
-	// Model earth("/home/david/Projects/TFG/Project/resources/objects/earth/Earth.blend");
+	Model car("/home/david/Projects/TFG/Project/resources/objects/borderlandsCar/source/Veh_Runner_Static.obj");
 	// Model tree("/home/david/Projects/TFG/Project/resources/objects/tree/tree.obj");
 	Model mars("/home/david/Projects/TFG/Project/resources/objects/terrain/mars_valles_mar.stl");
 	Model spiderman("/home/david/Projects/TFG/Project/resources/objects/spiderman/source/M-CoC_iOS_HERO_Peter_Parker_Spider-Man_Stark_Enhanced.obj");
@@ -90,8 +89,8 @@ int main(int argc, char *argv[])
         model = glm::translate(model, glm::vec3(0.0f, -1.75f, -5.0f));
         model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
 		glm::mat3 nanoNormal = glm::mat3(transpose(inverse(model)));
+		// setup light
 		glm::mat4 lightModel = glm::mat4(1.0f);
-		// lightModel = glm::rotate(lightModel, time, glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f)));
 		lightPos = glm::vec3(2.0, -1.75, 2.0);
 		lightPos = lightModel * glm::vec4(lightPos, 1.0);
 
@@ -100,11 +99,14 @@ int main(int argc, char *argv[])
 		nanoShader2.setMat4("uModel", model);
 		nanoShader2.setMat4("uView", view);
 		nanoShader2.setMat4("uProjection", projection);
+		nanoShader2.setVec3("uViewPos", camera.Position);
 		nanoShader2.setMat3("uNormalMatrix", nanoNormal);
-		nanoShader2.setVec3("uLightPos", lightPos);
-		nanoShader2.setVec3("uLightColor", lightColor);
-		nanoShader2.setVec3("uLightColor", lightColor);
-        cat.Draw(nanoShader2);
+		nanoShader2.setVec3("uLight.position",  lightPos);
+		nanoShader2.setVec3("uLight.ambient",  0.2f, 0.2f, 0.2f);
+		nanoShader2.setVec3("uLight.diffuse",  0.5f, 0.5f, 0.5f);
+		nanoShader2.setVec3("uLight.specular", 1.0f, 1.0f, 1.0f);
+		nanoShader2.setFloat("uShininess", 25.0f);
+        mars.Draw(nanoShader2);
 
 		//load image
 		// imageShader.use();
