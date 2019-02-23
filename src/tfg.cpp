@@ -15,8 +15,10 @@
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
-void processInput(GLFWwindow* window);
+void processInput(GLFWwindow* window, Shader &shader);
 int createWindow(GLFWwindow* & window);
+void processHeights();
+void reloadShader(Shader &shader);
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
@@ -49,12 +51,13 @@ int main(int argc, char *argv[])
 
     // Configure global opengl state
     glEnable(GL_DEPTH_TEST);
+	glEnable(GL_POLYGON_SMOOTH);
 
 	Shader imageShader("/home/david/Projects/TFG/Project/src/shaders/imageShaders/vertexShader.vs",
 					"/home/david/Projects/TFG/Project/src/shaders/imageShaders/fragmentShader.frs");
 
-    Shader nanoShader2("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/lightShaders/vertexShader.vs",
-                     "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/lightShaders/fragmentShader.frs");
+    Shader nanoShader2("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/terrainshaders/vertexShader.vs",
+                     "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/terrainshaders/fragmentShader.frs");
 
 	// Image image("/home/david/Projects/TFG/Project/resources/images/foto.png");
 	Model nanosuit("/home/david/Projects/TFG/Project/resources/objects/nanosuit/nanosuit.obj");
@@ -70,11 +73,10 @@ int main(int argc, char *argv[])
     {
 
         float currentFrame = (float) glfwGetTime();
-        float time = (float) glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
 		
-        processInput(window);
+        processInput(window, nanoShader2);
 
         glClearColor(0.0f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -91,21 +93,23 @@ int main(int argc, char *argv[])
 		glm::mat3 nanoNormal = glm::mat3(transpose(inverse(model)));
 		// setup light
 		glm::mat4 lightModel = glm::mat4(1.0f);
-		lightPos = glm::vec3(2.0, -1.75, 2.0);
+		lightPos = glm::vec3(1.0, -1.75, 1.0);
 		lightPos = lightModel * glm::vec4(lightPos, 1.0);
 
 		//set uniforms in shader
 		nanoShader2.use();
+		nanoShader2.setFloat("uMaxHeight", mars.maxHeight);
+		nanoShader2.setFloat("uMinHeight", mars.minHeight);
 		nanoShader2.setMat4("uModel", model);
 		nanoShader2.setMat4("uView", view);
 		nanoShader2.setMat4("uProjection", projection);
 		nanoShader2.setVec3("uViewPos", camera.Position);
 		nanoShader2.setMat3("uNormalMatrix", nanoNormal);
 		nanoShader2.setVec3("uLight.position",  lightPos);
-		nanoShader2.setVec3("uLight.ambient",  0.2f, 0.2f, 0.2f);
-		nanoShader2.setVec3("uLight.diffuse",  0.5f, 0.5f, 0.5f);
+		nanoShader2.setVec3("uLight.ambient",  0.4f, 0.4f, 0.4f);
+		nanoShader2.setVec3("uLight.diffuse",  1.0f, 1.0f, 1.0f);
 		nanoShader2.setVec3("uLight.specular", 1.0f, 1.0f, 1.0f);
-		nanoShader2.setFloat("uShininess", 25.0f);
+		nanoShader2.setFloat("uShininess", 49.0f);
         mars.Draw(nanoShader2);
 
 		//load image
@@ -121,7 +125,7 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-void processInput(GLFWwindow *window)
+void processInput(GLFWwindow *window, Shader &shader)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		{glfwSetWindowShouldClose(window, true);}
@@ -133,6 +137,8 @@ void processInput(GLFWwindow *window)
 		{camera.ProcessKeyboard(LEFT, deltaTime);}
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		{camera.ProcessKeyboard(RIGHT, deltaTime);}
+    if (glfwGetKey(window, GLFW_KEY_F5) == GLFW_PRESS)
+		{reloadShader(shader);}
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -191,4 +197,13 @@ int createWindow(GLFWwindow* & window)
     // tell GLFW to capture our mouse
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     return 0;
+}
+
+void processHeights(){
+
+}
+
+void reloadShader(Shader &shader){
+    shader = Shader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/terrainshaders/vertexShader.vs",
+                     "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/terrainshaders/fragmentShader.frs");
 }

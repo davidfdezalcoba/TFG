@@ -30,6 +30,8 @@ public:
     /*  Model Data */
     vector<Texture> textures_loaded;	// stores all the textures loaded so far, optimization to make sure textures aren't loaded more than once.
     vector<Mesh> meshes;
+	float maxHeight;
+	float minHeight;
     string directory;
     bool gammaCorrection;
 
@@ -37,6 +39,8 @@ public:
     // constructor, expects a filepath to a 3D model.
     Model(string const &path, bool gamma = false) : gammaCorrection(gamma)
     {
+		maxHeight = FLT_MIN;
+		minHeight = FLT_MAX;
         loadModel(path);
     }
 
@@ -136,6 +140,11 @@ private:
             	vertex.Tangent = glm::vec3(0.0f, 0.0f, 0.0f);
             	vertex.Bitangent = glm::vec3(0.0f, 0.0f, 0.0f);
 			}
+			// Calculate max/min height
+			if(vertex.Position.z > maxHeight)
+				maxHeight = vertex.Position.z;
+			if(vertex.Position.z < minHeight)
+				minHeight = vertex.Position.z;
             vertices.push_back(vertex);
         }
         // now wak through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.
