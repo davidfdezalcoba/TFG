@@ -36,5 +36,5 @@ void main()
 	vec3 specular = uLight.specular * (spec * texture(texture_specular1, vTexCoords).rgb);
 
 	vec3 light = ambient + diffuse + specular;
-    fFragColor = vec4(light, 1.0) * vec4(vFragColor, 1.0f);
+    fFragColor = vec4(light, 1.0);// * vec4(vFragColor, 1.0f);
 }

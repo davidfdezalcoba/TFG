@@ -16,16 +16,22 @@ uniform mat4 uProjection;
 uniform mat3 uNormalMatrix;
 
 const vec3 RED = vec3(1.0, 0.0, 0.0);
+const vec3 YELLOW = vec3(1.0, 1.0, 0.0);
 const vec3 GREEN = vec3(0.0, 1.0, 0.0);
 const vec3 BLUE = vec3(0.0, 0.0, 1.0);
 
 void main()
 {
 	float alpha;
-	float middle = (uMaxHeight - uMinHeight) / 2;
-	if (aPos.z > middle) {
-		alpha = smoothstep(uMaxHeight, middle, aPos.z);	
-		vFragColor = mix(RED, GREEN, alpha);	
+	float middle = ((uMaxHeight - uMinHeight) / 2) + uMinHeight;
+	float threecuarters = ((uMaxHeight - middle) / 2) + uMinHeight;
+	if (aPos.z > threecuarters) {
+		alpha = smoothstep(uMaxHeight, threecuarters, aPos.z);	
+		vFragColor = mix(RED, YELLOW, alpha);	
+	}
+	else if (aPos.z > middle) {
+		alpha = smoothstep(threecuarters, middle, aPos.z);	
+		vFragColor = mix(YELLOW, GREEN, alpha);	
 	}
 	else {
 		alpha = smoothstep(middle, uMinHeight, aPos.z);	
