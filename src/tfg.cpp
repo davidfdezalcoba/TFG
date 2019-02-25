@@ -26,9 +26,9 @@ const unsigned int SCR_HEIGHT = 600;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 //set lightning
-glm::vec3 lightPos = glm::vec3(1.0f, 1.0f, 1.0f);
+glm::vec3 lightPos = glm::vec3(0.0f, 0.0f, 1.0f);
 glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
-float ambientLight = 0.7;
+float ambientLight = 1.0;
 
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
@@ -51,22 +51,14 @@ int main(int argc, char *argv[])
 
     // Configure global opengl state
     glEnable(GL_DEPTH_TEST);
-	glEnable(GL_POLYGON_SMOOTH);
 
-	Shader imageShader("/home/david/Projects/TFG/Project/src/shaders/imageShaders/vertexShader.vs",
-					"/home/david/Projects/TFG/Project/src/shaders/imageShaders/fragmentShader.frs");
+	// Shader imageShader("/home/david/Projects/TFG/Project/src/shaders/imageShaders/vertexShader.vs",
+					// "/home/david/Projects/TFG/Project/src/shaders/imageShaders/fragmentShader.frs");
 
-    Shader nanoShader2("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/terrainshaders/vertexShader.vs",
-                     "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/terrainshaders/fragmentShader.frs");
+    Shader nanoShader2("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/terrainshaders/notextures/vertexShader.vs",
+                     "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/terrainshaders/notextures/fragmentShader.frs");
 
-	// Image image("/home/david/Projects/TFG/Project/resources/images/foto.png");
-	Model nanosuit("/home/david/Projects/TFG/Project/resources/objects/nanosuit/nanosuit.obj");
-	Model hitler("/home/david/Projects/TFG/Project/resources/objects/hitler/source/hitler/hitler.obj");
-	Model car("/home/david/Projects/TFG/Project/resources/objects/borderlandsCar/source/Veh_Runner_Static.obj");
-	// Model tree("/home/david/Projects/TFG/Project/resources/objects/tree/tree.obj");
 	Model mars("/home/david/Projects/TFG/Project/resources/objects/terrain/mars_valles_mar.stl");
-	Model spiderman("/home/david/Projects/TFG/Project/resources/objects/spiderman/source/M-CoC_iOS_HERO_Peter_Parker_Spider-Man_Stark_Enhanced.obj");
-	Model cat("/home/david/Projects/TFG/Project/resources/objects/cat/source/Fransicat.OBJ");
 
     // render loop
     while (!glfwWindowShouldClose(window))
@@ -88,12 +80,12 @@ int main(int argc, char *argv[])
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         glm::mat4 view = camera.GetViewMatrix();
         glm::mat4 model = glm::mat4(1.0f); 
-        model = glm::translate(model, glm::vec3(0.0f, -1.75f, -5.0f));
+        model = glm::translate(model, glm::vec3(0.0f, -1.75f, -10.0f));
         model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
 		glm::mat3 nanoNormal = glm::mat3(transpose(inverse(model)));
 		// setup light
 		glm::mat4 lightModel = glm::mat4(1.0f);
-		lightPos = glm::vec3(1.0, -1.75, 1.0);
+		lightPos = glm::vec3(0.0, 0.0, 0.0);
 		lightPos = lightModel * glm::vec4(lightPos, 1.0);
 
 		//set uniforms in shader
@@ -106,9 +98,9 @@ int main(int argc, char *argv[])
 		nanoShader2.setVec3("uViewPos", camera.Position);
 		nanoShader2.setMat3("uNormalMatrix", nanoNormal);
 		nanoShader2.setVec3("uLight.position",  lightPos);
-		nanoShader2.setVec3("uLight.ambient",  0.4f, 0.4f, 0.4f);
-		nanoShader2.setVec3("uLight.diffuse",  1.0f, 1.0f, 1.0f);
-		nanoShader2.setVec3("uLight.specular", 1.0f, 1.0f, 1.0f);
+		nanoShader2.setVec3("uLight.ambient",  0.1f, 0.1f, 0.1f);
+		nanoShader2.setVec3("uLight.diffuse",  0.7f, 0.7f, 0.7f);
+		nanoShader2.setVec3("uLight.specular", 0.7f, 0.7f, 0.7f);
 		nanoShader2.setFloat("uShininess", 49.0f);
         mars.Draw(nanoShader2);
 

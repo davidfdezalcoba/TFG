@@ -19,22 +19,23 @@ uniform float uShininess;
 uniform vec3 uViewPos;
 uniform mat3 uNormalMatrix;
 uniform Light uLight;
+uniform float uMinHeight;
 
 void main()
 {    
 	//Ambient
-	vec3 ambient = uLight.ambient * texture(texture_diffuse1, vTexCoords).rgb;
+	vec3 ambient = uLight.ambient * vFragColor; 
 	//Difuse
 	vec3 norm = normalize(uNormalMatrix * vNormal);
 	vec3 lightDir = normalize(uLight.position - vFragPos);
 	float diff = max(dot(norm, lightDir), 0.0);
-	vec3 diffuse = uLight.diffuse * (diff * texture(texture_diffuse1, vTexCoords).rgb);
+	vec3 diffuse = uLight.diffuse * (diff * vFragColor); 
 	//Specular
 	vec3 viewDir = normalize(uViewPos - vFragPos);
     vec3 reflectDir = reflect(-lightDir, norm); 
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0), uShininess);
-	vec3 specular = uLight.specular * (spec * texture(texture_specular1, vTexCoords).rgb);
+	vec3 specular = uLight.specular * (spec * vFragColor);
 
 	vec3 light = ambient + diffuse + specular;
-    fFragColor = vec4(light, 1.0) * vec4(vFragColor, 1.0f);
+    fFragColor = vec4(light, 1.0);
 }
