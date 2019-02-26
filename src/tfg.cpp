@@ -52,6 +52,7 @@ int main(int argc, char *argv[])
     // Configure global opengl state
     glEnable(GL_DEPTH_TEST);
 
+	// Load shaders and models
     Shader marsShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/terrainshaders/notextures/vertexShader.vs",
                      "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/terrainshaders/notextures/fragmentShader.frs");
 
