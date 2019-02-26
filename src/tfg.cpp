@@ -9,6 +9,7 @@
 #include <image.h>
 #include <model.h>
 #include <camera.h>
+#include <modes.h>
 
 #include <iostream>
 
@@ -18,17 +19,20 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window, Shader &shader);
 int createWindow(GLFWwindow* & window);
 void processHeights();
-void reloadShader(Shader &shader);
+void reloadShader();
+void setOptions(const Modes & mode);
+void setUniforms(const Modes & mode);
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
+const Modes MODE = terrain;
 
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+static GLFWwindow* window = nullptr;
 
-//set lightning
-glm::vec3 lightPos = glm::vec3(0.0f, 0.0f, 1.0f);
-glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
-float ambientLight = 1.0;
+static Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+
+static Shader * shader = nullptr;
+static Model * model = nullptr;
 
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
@@ -39,8 +43,6 @@ float lastFrame = 0.0f;
 
 int main(int argc, char *argv[])
 {
-
-    GLFWwindow* window = NULL;
     createWindow(window);
     // glad: load all OpenGL function pointers
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -51,12 +53,7 @@ int main(int argc, char *argv[])
 
     // Configure global opengl state
     glEnable(GL_DEPTH_TEST);
-
-	// Load shaders and models
-    Shader marsShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/terrainshaders/notextures/vertexShader.vs",
-                     "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/terrainshaders/notextures/fragmentShader.frs");
-
-	Model mars("/home/david/Projects/TFG/Project/resources/objects/terrain/mars_valles_mar.stl");
+	setOptions(MODE);
 
     // render loop
     while (!glfwWindowShouldClose(window))
@@ -66,7 +63,7 @@ int main(int argc, char *argv[])
 		deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
 		
-        processInput(window, marsShader);
+        processInput(window, *shader);
 
         glClearColor(0.0f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -74,44 +71,19 @@ int main(int argc, char *argv[])
 		//Wireframe mode
 		// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-		//set model view and projection matrices
-		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-        glm::mat4 view = camera.GetViewMatrix();
-        glm::mat4 model = glm::mat4(1.0f); 
-        model = glm::translate(model, glm::vec3(0.0f, -1.75f, -10.0f));
-        model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
-		glm::mat3 nanoNormal = glm::mat3(transpose(inverse(model)));
-		// setup light
-		glm::mat4 lightModel = glm::mat4(1.0f);
-		lightPos = glm::vec3(0.0, 0.0, 0.0);
-		lightPos = lightModel * glm::vec4(lightPos, 1.0);
-
 		//set uniforms in shader
-		marsShader.use();
-		marsShader.setFloat("uMaxHeight", mars.maxHeight);
-		marsShader.setFloat("uMinHeight", mars.minHeight);
-		marsShader.setMat4("uModel", model);
-		marsShader.setMat4("uView", view);
-		marsShader.setMat4("uProjection", projection);
-		marsShader.setVec3("uViewPos", camera.Position);
-		marsShader.setMat3("uNormalMatrix", nanoNormal);
-		marsShader.setVec3("uLight.position",  lightPos);
-		marsShader.setVec3("uLight.ambient",  0.1f, 0.1f, 0.1f);
-		marsShader.setVec3("uLight.diffuse",  0.7f, 0.7f, 0.7f);
-		marsShader.setVec3("uLight.specular", 0.7f, 0.7f, 0.7f);
-		marsShader.setFloat("uShininess", 49.0f);
-        mars.Draw(marsShader);
-
-		//load image
-		// imageShader.use();
-		// image.Draw(imageShader);
+		shader->use();
+		setUniforms(MODE);
+        model->Draw(*shader, GL_TRIANGLES);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
 
-    // glfw: terminate, clearing all previously allocated GLFW resources.
+    // Clear all previously allocated resources
     glfwTerminate();
+	delete shader;
+	delete model;
     return 0;
 }
 
@@ -128,7 +100,7 @@ void processInput(GLFWwindow *window, Shader &shader)
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		{camera.ProcessKeyboard(RIGHT, deltaTime);}
     if (glfwGetKey(window, GLFW_KEY_F5) == GLFW_PRESS)
-		{reloadShader(shader);}
+		{reloadShader();}
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -181,19 +153,62 @@ int createWindow(GLFWwindow* & window)
     }
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-	glfwSetCursorPosCallback(window, mouse_callback);
-    glfwSetScrollCallback(window, scroll_callback);
 
     // tell GLFW to capture our mouse
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     return 0;
 }
 
-void processHeights(){
-
+void reloadShader(){
+	const char * vp = shader->vertexPath;
+	const char * fp = shader->fragmentPath;
+	const char * gp = shader->geometryPath;
+	delete shader;
+    shader = new Shader(vp, fp, gp);
 }
 
-void reloadShader(Shader &shader){
-    shader = Shader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/terrainshaders/vertexShader.vs",
-                     "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/terrainshaders/fragmentShader.frs");
+void setOptions(const Modes & mode){
+	switch(mode) {
+		case terrain: 
+			shader = new Shader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/terrainshaders/notextures/vertexShader.vs",
+				              "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/terrainshaders/notextures/fragmentShader.frs");
+
+			model = new Model("/home/david/Projects/TFG/Project/resources/objects/terrain/mars_valles_mar.stl");
+
+			glfwSetCursorPosCallback(window, mouse_callback);
+			glfwSetScrollCallback(window, scroll_callback);
+			break;
+		default: ;
+	}
 }
+
+void setUniforms(const Modes & mode){
+	switch(mode) {
+		case terrain: 
+			//set model view and projection matrices
+			glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+        	glm::mat4 view = camera.GetViewMatrix();
+        	glm::mat4 modelMatrix = glm::mat4(1.0f); 
+        	modelMatrix = glm::translate(modelMatrix, glm::vec3(0.0f, -1.75f, -10.0f));
+        	modelMatrix = glm::scale(modelMatrix, glm::vec3(0.2f, 0.2f, 0.2f));
+			glm::mat3 nanoNormal = glm::mat3(transpose(inverse(modelMatrix)));
+			// setup light
+			glm::mat4 lightModel = glm::mat4(1.0f);
+			glm::vec3 lightPos = glm::vec3(0.0, 0.0, 0.0);
+			lightPos = lightModel * glm::vec4(lightPos, 1.0);
+
+			shader->setFloat("uMaxHeight", model->maxHeight);
+			shader->setFloat("uMinHeight", model->minHeight);
+			shader->setMat4("uModel", modelMatrix);
+			shader->setMat4("uView", view);
+			shader->setMat4("uProjection", projection);
+			shader->setVec3("uViewPos", camera.Position);
+			shader->setMat3("uNormalMatrix", nanoNormal);
+			shader->setVec3("uLight.position",  lightPos);
+			shader->setVec3("uLight.ambient",  0.1f, 0.1f, 0.1f);
+			shader->setVec3("uLight.diffuse",  0.7f, 0.7f, 0.7f);
+			shader->setVec3("uLight.specular", 0.4f, 0.4f, 0.4f);
+			shader->setFloat("uShininess", 15.0f);
+			break;
+	}
+}	

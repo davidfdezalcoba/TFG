@@ -23,16 +23,11 @@ struct Material {
 };
 
 struct Vertex {
-    // position
-    glm::vec3 Position;
-    // normal
-    glm::vec3 Normal;
-    // texCoords
-    glm::vec2 TexCoords;
-    // tangent
-    glm::vec3 Tangent;
-    // bitangent
-    glm::vec3 Bitangent;
+    glm::vec3 Position; // position
+    glm::vec3 Normal; // normal
+    glm::vec2 TexCoords; // texCoords
+    glm::vec3 Tangent; // tangent
+    glm::vec3 Bitangent; // bitangent
 };
 
 struct Texture {
@@ -64,7 +59,7 @@ public:
     }
 
     // render the mesh
-    void Draw(Shader shader) 
+    void Draw(Shader shader, GLenum primitive) 
     {
         // bind appropriate textures
         unsigned int diffuseNr  = 1;
@@ -99,7 +94,7 @@ public:
         
         // draw mesh
         glBindVertexArray(VAO);
-        glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
+        glDrawElements(primitive, indices.size(), GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
 
         // always good practice to set everything back to defaults once configured.
