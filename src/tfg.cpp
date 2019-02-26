@@ -45,17 +45,14 @@ int main(int argc, char *argv[])
     // glad: load all OpenGL function pointers
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
-        std::cout << "Failed to iinitialize GLAD" << std::endl;
+        std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
 
     // Configure global opengl state
     glEnable(GL_DEPTH_TEST);
 
-	// Shader imageShader("/home/david/Projects/TFG/Project/src/shaders/imageShaders/vertexShader.vs",
-					// "/home/david/Projects/TFG/Project/src/shaders/imageShaders/fragmentShader.frs");
-
-    Shader nanoShader2("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/terrainshaders/notextures/vertexShader.vs",
+    Shader marsShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/terrainshaders/notextures/vertexShader.vs",
                      "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/terrainshaders/notextures/fragmentShader.frs");
 
 	Model mars("/home/david/Projects/TFG/Project/resources/objects/terrain/mars_valles_mar.stl");
@@ -68,7 +65,7 @@ int main(int argc, char *argv[])
 		deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
 		
-        processInput(window, nanoShader2);
+        processInput(window, marsShader);
 
         glClearColor(0.0f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -89,20 +86,20 @@ int main(int argc, char *argv[])
 		lightPos = lightModel * glm::vec4(lightPos, 1.0);
 
 		//set uniforms in shader
-		nanoShader2.use();
-		nanoShader2.setFloat("uMaxHeight", mars.maxHeight);
-		nanoShader2.setFloat("uMinHeight", mars.minHeight);
-		nanoShader2.setMat4("uModel", model);
-		nanoShader2.setMat4("uView", view);
-		nanoShader2.setMat4("uProjection", projection);
-		nanoShader2.setVec3("uViewPos", camera.Position);
-		nanoShader2.setMat3("uNormalMatrix", nanoNormal);
-		nanoShader2.setVec3("uLight.position",  lightPos);
-		nanoShader2.setVec3("uLight.ambient",  0.1f, 0.1f, 0.1f);
-		nanoShader2.setVec3("uLight.diffuse",  0.7f, 0.7f, 0.7f);
-		nanoShader2.setVec3("uLight.specular", 0.7f, 0.7f, 0.7f);
-		nanoShader2.setFloat("uShininess", 49.0f);
-        mars.Draw(nanoShader2);
+		marsShader.use();
+		marsShader.setFloat("uMaxHeight", mars.maxHeight);
+		marsShader.setFloat("uMinHeight", mars.minHeight);
+		marsShader.setMat4("uModel", model);
+		marsShader.setMat4("uView", view);
+		marsShader.setMat4("uProjection", projection);
+		marsShader.setVec3("uViewPos", camera.Position);
+		marsShader.setMat3("uNormalMatrix", nanoNormal);
+		marsShader.setVec3("uLight.position",  lightPos);
+		marsShader.setVec3("uLight.ambient",  0.1f, 0.1f, 0.1f);
+		marsShader.setVec3("uLight.diffuse",  0.7f, 0.7f, 0.7f);
+		marsShader.setVec3("uLight.specular", 0.7f, 0.7f, 0.7f);
+		marsShader.setFloat("uShininess", 49.0f);
+        mars.Draw(marsShader);
 
 		//load image
 		// imageShader.use();
