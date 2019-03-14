@@ -15,6 +15,7 @@ private:
 	Shader pointShader;
 	float uNum;
 	VertexLoader vLoader;
+	VertexLoader vLoader2;
 	void setUniforms();
 };
 
