@@ -2,7 +2,8 @@
 #define MODES_H
 
 enum Modes {
-	terrain
+	terrain,
+	bezier
 };
 
 #endif
