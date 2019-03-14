@@ -2,9 +2,9 @@
 #define BEZIERCURVE_H
 
 #include <iostream>
-#include <shader.h>
-#include <object.h>
-#include <vertexLoader.h>
+#include "shader.h"
+#include "vertexLoader.h"
+#include "object.h"
 
 class BezierCurve : public Object{
 public:

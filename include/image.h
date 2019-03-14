@@ -2,7 +2,6 @@
 #define IMAGE_H
 
 #include <glad.h> 
-#include <stb_image.h>
 
 #include <string>
 #include <shader.h>

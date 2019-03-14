@@ -1,21 +1,20 @@
-#include "BezierCurve.h"
-#include <object.h>
+#include "beziersurface.h"
 
-BezierCurve :: BezierCurve(float width, float height) : 
-	bezierShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/bezier/vertexshader.vs",
-				 "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/bezier/fragmentshader.frs",
-				 "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/bezier/geometryshader.grs"), 
-	pointShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/bezier/pointshader.vs",
-				"/home/david/Projects/TFG/Project/src/shaders/3Dshaders/bezier/pointshader.frs"), uNum(25),
-	vLoader("/home/david/Projects/TFG/Project/resources/objects/bezier/bezier.vtx"),
-	vLoader2("/home/david/Projects/TFG/Project/resources/objects/bezier/axis.vtx")
+BezierSurface :: BezierSurface(float width, float height) : 
+	bezierShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/vertexshader.vs",
+				 "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/fragmentshader.frs",
+				 "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/geometryshader.grs"), 
+	pointShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/pointshader.vs",
+				"/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/pointshader.frs"), uNum(25),
+	vLoader("/home/david/Projects/TFG/Project/resources/objects/beziersurface/bezier.vtx"),
+	vLoader2("/home/david/Projects/TFG/Project/resources/objects/beziersurface/axis.vtx")
 	{
 		camera = Camera(glm::vec3(3.0f, 3.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f), 225, -30);
 		this->width = width;
 	   	this->height = height;
 	}
 
-void BezierCurve :: draw(){
+void BezierSurface :: draw(){
 	setUniforms();
 	glPointSize(9);
 	pointShader.use();
@@ -27,7 +26,7 @@ void BezierCurve :: draw(){
 	vLoader.Draw(bezierShader, GL_LINES_ADJACENCY);	
 }
 
-void BezierCurve :: setUniforms(){
+void BezierSurface :: setUniforms(){
 	projection = glm::perspective(glm::radians(camera.Zoom), this->width / this->height, 0.1f, 100.0f);
 	view = camera.GetViewMatrix();
 	model = glm::mat4(1.0f); 
