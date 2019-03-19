@@ -8,8 +8,9 @@
 #include "camera.h"
 #include "modes.h"
 
-#include "beziercurve.h"
 #include "terrain.h"
+#include "beziercurve.h"
+#include "beziersurface.h"
 
 #include <iostream>
 
@@ -23,7 +24,7 @@ Object* setupModel(const Modes & mode);
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
-const Modes MODE = bezier;
+const Modes MODE = terrain;
 
 static GLFWwindow* window = nullptr;
 
@@ -129,8 +130,8 @@ int createWindow(GLFWwindow* & window)
 		fprintf(stderr, "Failed to initialize GLFW");
 		return -1;
 	}
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // glfw window creation
@@ -160,6 +161,10 @@ void setOptions(const Modes & mode){
 			glfwSetCursorPosCallback(window, mouse_callback);
 			glfwSetScrollCallback(window, scroll_callback);
 			break;	
+		case beziersurface:
+			glfwSetCursorPosCallback(window, mouse_callback);
+			glfwSetScrollCallback(window, scroll_callback);
+			break;
 		default: ;
 	}
 }
@@ -171,6 +176,9 @@ Object* setupModel(const Modes & mode){
 			break;
 		case bezier:
 			return new BezierCurve(SCR_WIDTH, SCR_HEIGHT);
+			break;
+		case beziersurface:
+			return new BezierSurface(SCR_WIDTH, SCR_HEIGHT);
 			break;
 		default:;	
 	}

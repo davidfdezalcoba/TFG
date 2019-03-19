@@ -3,7 +3,8 @@
 
 enum Modes {
 	terrain,
-	bezier
+	bezier,
+	beziersurface
 };
 
 #endif

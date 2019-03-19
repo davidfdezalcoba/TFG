@@ -1,9 +1,14 @@
 #include "beziersurface.h"
 
+#include <iostream>
+using namespace std;
+
 BezierSurface :: BezierSurface(float width, float height) : 
 	bezierShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/vertexshader.vs",
 				 "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/fragmentshader.frs",
-				 "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/geometryshader.grs"), 
+				 nullptr,
+				 "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/tescontrolshader.tecs", 
+				 "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/tesevalshader.tees"), 
 	pointShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/pointshader.vs",
 				"/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/pointshader.frs"), uNum(25),
 	vLoader("/home/david/Projects/TFG/Project/resources/objects/beziersurface/bezier.vtx"),
@@ -22,8 +27,9 @@ void BezierSurface :: draw(){
 	glLineWidth(1);
 	vLoader2.Draw(pointShader, GL_LINES);	
 	bezierShader.use();
+	glPatchParameteri(GL_PATCH_VERTICES, 16);
 	glLineWidth(3);
-	vLoader.Draw(bezierShader, GL_LINES_ADJACENCY);	
+	vLoader.Draw(bezierShader, GL_PATCHES);	
 }
 
 void BezierSurface :: setUniforms(){
@@ -40,6 +46,10 @@ void BezierSurface :: setUniforms(){
 	bezierShader.setVec3("uViewPos", camera.Position);
 	bezierShader.setVec3("uLight.position", lightPos);
 	bezierShader.setInt("uNum", uNum);
+	bezierShader.setFloat("uOuter02", 50);
+	bezierShader.setFloat("uOuter13", 50);
+	bezierShader.setFloat("uInner0", 50);
+	bezierShader.setFloat("uInner1", 50);
 	pointShader.use();	
 	pointShader.setMat4("uModel", model);
 	pointShader.setMat4("uView", view);
