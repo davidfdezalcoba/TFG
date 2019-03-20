@@ -10,7 +10,8 @@ BezierSurface :: BezierSurface(float width, float height) :
 				 "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/tescontrolshader.tecs", 
 				 "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/tesevalshader.tees"), 
 	pointShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/pointshader.vs",
-				"/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/pointshader.frs"), uNum(25),
+				"/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/pointshader.frs"),
+		uOuter02(10), uOuter13(10), uInner0(10), uInner1(10),
 	vLoader("/home/david/Projects/TFG/Project/resources/objects/beziersurface/bezier.vtx"),
 	vLoader2("/home/david/Projects/TFG/Project/resources/objects/beziersurface/axis.vtx")
 	{
@@ -24,12 +25,27 @@ void BezierSurface :: draw(){
 	glPointSize(9);
 	pointShader.use();
 	vLoader.Draw(pointShader, GL_POINTS);	
-	glLineWidth(1);
 	vLoader2.Draw(pointShader, GL_LINES);	
 	bezierShader.use();
 	glPatchParameteri(GL_PATCH_VERTICES, 16);
-	glLineWidth(3);
 	vLoader.Draw(bezierShader, GL_PATCHES);	
+}
+
+void BezierSurface :: processInput(GLFWwindow *window){
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		{glfwSetWindowShouldClose(window, true);}
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+		{camera.ProcessKeyboard(FORWARD, deltaTime);}
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		{camera.ProcessKeyboard(BACKWARD, deltaTime);}
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		{camera.ProcessKeyboard(LEFT, deltaTime);}
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		{camera.ProcessKeyboard(RIGHT, deltaTime);}
+    if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+		{uOuter02++;uOuter13++;uInner0++;uInner1++;}
+    if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+		{uOuter02--;uOuter13--;uInner0--;uInner1--;}
 }
 
 void BezierSurface :: setUniforms(){
@@ -45,11 +61,10 @@ void BezierSurface :: setUniforms(){
 	bezierShader.setMat4("uProjection", projection);
 	bezierShader.setVec3("uViewPos", camera.Position);
 	bezierShader.setVec3("uLight.position", lightPos);
-	bezierShader.setInt("uNum", uNum);
-	bezierShader.setFloat("uOuter02", 50);
-	bezierShader.setFloat("uOuter13", 50);
-	bezierShader.setFloat("uInner0", 50);
-	bezierShader.setFloat("uInner1", 50);
+	bezierShader.setFloat("uOuter02", uOuter02);
+	bezierShader.setFloat("uOuter13", uOuter13);
+	bezierShader.setFloat("uInner0", uInner0);
+	bezierShader.setFloat("uInner1", uInner1);
 	pointShader.use();	
 	pointShader.setMat4("uModel", model);
 	pointShader.setMat4("uView", view);

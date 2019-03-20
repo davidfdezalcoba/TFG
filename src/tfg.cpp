@@ -24,7 +24,7 @@ Object* setupModel(const Modes & mode);
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
-const Modes MODE = terrain;
+const Modes MODE = beziersurface;
 
 static GLFWwindow* window = nullptr;
 
@@ -59,12 +59,15 @@ int main(int argc, char *argv[])
 
         float currentFrame = (float) glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
+		obj->setDeltaTime(deltaTime);
         lastFrame = currentFrame;
 		
-        processInput(window);
+        obj->processInput(window);
 
         glClearColor(0.0f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 		obj->draw();
 
