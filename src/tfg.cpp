@@ -181,7 +181,7 @@ Object* setupModel(const Modes & mode){
 			return new BezierCurve(SCR_WIDTH, SCR_HEIGHT);
 			break;
 		case beziersurface:
-			return new BezierSurface(SCR_WIDTH, SCR_HEIGHT);
+			return new BezierSurface(SCR_WIDTH, SCR_HEIGHT, mouse_callback);
 			break;
 		default:;	
 	}
