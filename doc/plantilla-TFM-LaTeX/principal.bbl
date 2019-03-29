@@ -1,0 +1,24 @@
+\begin{thebibliography}{3}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Loy(1974)]{ARP:Loy:1974}
+M.~M.~T. Loy.
+\newblock Observation population inversion by optical adiabatic rapid passage.
+\newblock \emph{Phys. Rev. Lett.}, 32:\penalty0 814--817, 1974.
+
+\bibitem[Phillips et~al.(1985)Phillips, Prodan, and Metcalf]{CT:Phillips:1985}
+W.~D. Phillips, J.~V. Prodan, and H.~J. Metcalf.
+\newblock Laser cooling and electromagnetic trapping of neutral atoms.
+\newblock \emph{J.~Opt. Soc. Am.~B}, 2:\penalty0 1751--1767, 1985.
+
+\bibitem[Weiner et~al.(1999)Weiner, Bagnato, Zilio, and
+  Julienne]{CT:Weiner:1999}
+J.~Weiner, V.~S. Bagnato, S.~Zilio, and P.~S. Julienne.
+\newblock Experiments and theory in cold and ultracold collisions.
+\newblock \emph{Rev. Mod. Phys.}, 71:\penalty0 1--85, 1999.
+
+\end{thebibliography}
