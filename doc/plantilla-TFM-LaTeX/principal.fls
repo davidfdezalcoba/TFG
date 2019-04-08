@@ -174,9 +174,12 @@ INPUT dedicatoria.tex
 INPUT dedicatoria.tex
 INPUT chapter1.tex
 INPUT chapter1.tex
-INPUT figures/graph.png
-INPUT ./figures/graph.png
-INPUT ./figures/graph.png
+INPUT figures/lowressur.png
+INPUT ./figures/lowressur.png
+INPUT ./figures/lowressur.png
+INPUT figures/highressur.png
+INPUT ./figures/highressur.png
+INPUT ./figures/highressur.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecti1200.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm0800.tfm
 INPUT chapter2.tex

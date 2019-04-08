@@ -343,7 +343,7 @@
 \def\@makeschapterhead#1{%
 \vspace*{10\p@}%
 {\centering
- {\parindent \z@ % \raggedright
+ {\parindent \z@ %\raggedright
     \normalfont
     \interlinepenalty\@M
     \Huge \bfseries  #1\par\nobreak

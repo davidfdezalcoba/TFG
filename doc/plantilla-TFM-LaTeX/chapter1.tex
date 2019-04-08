@@ -16,7 +16,7 @@
 % | will automatically number the chapters.
 % +--------------------------------------------------------------------+
 
-\chapter{Chapter Title}
+\chapter{Title}
 %\label{ch:chapter1}
 \label{makereference}
 
@@ -26,7 +26,10 @@ figure inserted into the text:
 
 \begin{figure}[htb]%t=top, b=bottom, h=here
 
-    \includegraphics[height=2.5in]{figures/graph.png}
+	\begin{center}
+	    \includegraphics[height=2.5in]{figures/lowressur.png}
+	    \includegraphics[height=2.5in]{figures/highressur.png}
+	\end{center}
 
     \caption[Optional: Short caption to appear in List of
     Figures]{Full caption to appear below the Figure}
@@ -51,7 +54,6 @@ figure inserted into the text:
 % +--------------------------------------------------------------------+
 
 Here is an example of a Table:
-
 \begin{table}
 
 % +--------------------------------------------------------------------+
@@ -115,5 +117,5 @@ Section~\ref{makereference1.1} on page~\pageref{makereference1.1}.
 \label{makereference1.3}
 
 Here's an example of a citation to a single
-work.~\citet{CT:Weiner:1999} It's also possible to make multiple
-citations.~\citet{CT:Phillips:1985, ARP:Loy:1974}
+work.~\citet{GS:Bailey:2009} It's also possible to make multiple
+citations.~\citet{GS:Bailey:2009, GS:Bailey:2011}

@@ -41,7 +41,7 @@
 % |                                                                    |
 % +--------------------------------------------------------------------+
 
-\documentclass[final, 12pt,oneside]{class_diss}
+\documentclass[final,12pt,oneside]{class_diss}
 
 % +--------------------------------------------------------------------+
 % | The following command sets the bibliography style to American
@@ -101,7 +101,7 @@
 % | style.                                                             |
 % +--------------------------------------------------------------------+
 
-\usepackage[sort&compress, numbers]{natbib}
+\usepackage[sort&compress]{natbib}
 \bibpunct{}{}{,}{s}{}{}
 \usepackage{hypernat}
 
@@ -159,15 +159,13 @@
 \input{autorizacion.tex}
    \pdfbookmark[0]{Autorización}{PDFAutorizacionPage}
 
-
-   
-   \input{resumen.tex}
-   
+\input{resumen.tex}
    \pdfbookmark[0]{Resumen}{PDFResumenPage}
 
-    \input{abstract.tex}
-       \pdfbookmark[0]{Abstract}{PDFAbstractPage}
-    \vfill
+\input{abstract.tex}
+	\pdfbookmark[0]{Abstract}{PDFAbstractPage}
+
+ \vfill
 
 
 % +--------------------------------------------------------------------+
@@ -205,8 +203,8 @@
 %\listoffigures
 %\listoftables
 
-%\hfill  Are these lines necessary?
-%\hfill
+\hfill  %Are these lines necessary?
+\hfill
 
 % +--------------------------------------------------------------------+
 % | Acknowledgements Page
