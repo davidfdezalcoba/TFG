@@ -24,7 +24,7 @@ Object* setupModel(const Modes & mode);
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
-const Modes MODE = terrain;
+const Modes MODE = beziersurface;
 
 static GLFWwindow* window = nullptr;
 
