@@ -1,4 +1,5 @@
 #include "beziercurve.h"
+#include <glfw3.h>
 
 BezierCurve :: BezierCurve(float width, float height) : 
 	bezierShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/bezier/vertexshader.vs",
@@ -24,6 +25,19 @@ void BezierCurve :: draw(){
 	bezierShader.use();
 	glLineWidth(3);
 	vLoader.Draw(bezierShader, GL_LINES_ADJACENCY);	
+}
+
+void BezierCurve :: processInput(GLFWwindow *window){
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		{glfwSetWindowShouldClose(window, true);}
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+		{camera.ProcessKeyboard(FORWARD, deltaTime);}
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		{camera.ProcessKeyboard(BACKWARD, deltaTime);}
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		{camera.ProcessKeyboard(LEFT, deltaTime);}
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		{camera.ProcessKeyboard(RIGHT, deltaTime);}
 }
 
 void BezierCurve :: setUniforms(){

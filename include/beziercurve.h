@@ -10,6 +10,7 @@ class BezierCurve : public Object{
 public:
 	BezierCurve(float width, float height);
 	void draw();
+	void processInput(GLFWwindow * window);
 private:
 	Shader bezierShader;	
 	Shader pointShader;

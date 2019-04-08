@@ -59,12 +59,15 @@ int main(int argc, char *argv[])
 
         float currentFrame = (float) glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
+		obj->setDeltaTime(deltaTime);
         lastFrame = currentFrame;
 		
-        processInput(window);
+        obj->processInput(window);
 
         glClearColor(0.0f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 		obj->draw();
 
@@ -178,7 +181,7 @@ Object* setupModel(const Modes & mode){
 			return new BezierCurve(SCR_WIDTH, SCR_HEIGHT);
 			break;
 		case beziersurface:
-			return new BezierSurface(SCR_WIDTH, SCR_HEIGHT);
+			return new BezierSurface(SCR_WIDTH, SCR_HEIGHT, mouse_callback);
 			break;
 		default:;	
 	}
