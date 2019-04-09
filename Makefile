@@ -8,10 +8,10 @@ CFLAGS = -g -I$(IDIR) -L$(LDIR) -Wall
 
 LIBS = -lglfw3 -lGL -lX11 -lpthread -lXrandr -lXi -ldl -lXext -lGLU -lXxf86vm -lXinerama -lXcursor -lassimp
 
-_DEPS = glad.h glfw3.h mesh.h model.h shader.h camera.h vertexLoader.h vertex.h modes.h object.h beziercurve.h terrain.h beziersurface.h
+_DEPS = glad.h glfw3.h mesh.h model.h image.h shader.h camera.h vertexLoader.h vertex.h modes.h object.h beziercurve.h terrain.h beziersurface.h negative.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = tfg.o glad.o model.o beziercurve.o terrain.o beziersurface.o
+_OBJ = tfg.o glad.o model.o image.o beziercurve.o terrain.o beziersurface.o negative.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(ODIR)/%.o: $(SDIR)/%.cpp $(DEPS)

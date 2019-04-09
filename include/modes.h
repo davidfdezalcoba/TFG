@@ -4,7 +4,8 @@
 enum Modes {
 	terrain,
 	bezier,
-	beziersurface
+	beziersurface,
+	negative
 };
 
 #endif

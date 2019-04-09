@@ -11,6 +11,7 @@
 #include "terrain.h"
 #include "beziercurve.h"
 #include "beziersurface.h"
+#include "negative.h"
 
 #include <iostream>
 
@@ -24,7 +25,7 @@ Object* setupModel(const Modes & mode);
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
-const Modes MODE = beziersurface;
+const Modes MODE = negative;
 
 static GLFWwindow* window = nullptr;
 
@@ -67,7 +68,8 @@ int main(int argc, char *argv[])
         glClearColor(0.0f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		//wireframe mode
+		// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 		obj->draw();
 
@@ -168,6 +170,10 @@ void setOptions(const Modes & mode){
 			glfwSetCursorPosCallback(window, mouse_callback);
 			glfwSetScrollCallback(window, scroll_callback);
 			break;
+		case negative:
+			glfwSetCursorPosCallback(window, mouse_callback);
+			glfwSetScrollCallback(window, scroll_callback);
+			break;
 		default: ;
 	}
 }
@@ -182,6 +188,9 @@ Object* setupModel(const Modes & mode){
 			break;
 		case beziersurface:
 			return new BezierSurface(SCR_WIDTH, SCR_HEIGHT, mouse_callback);
+			break;
+		case negative:
+			return new Negative(SCR_WIDTH, SCR_HEIGHT);
 			break;
 		default:;	
 	}
