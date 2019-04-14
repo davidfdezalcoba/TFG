@@ -3,7 +3,23 @@ out vec4 fFragColor;
 
 in float vScalar;
 
+uniform float uMaxData;
+
+const vec3 BLUE = vec3(0.0, 0.0, 1.0);
+const vec3 RED = vec3(1.0, 0.0, 0.0);
+const vec3 GREEN = vec3(0.0, 1.0, 0.0);
+const vec3 WHITE = vec3(1.0, 1.0, 1.0);
+
 void main()
 {    
-    fFragColor = vScalar * vec4(1.0f);
+	float alpha;
+	float middle = uMaxData / 2;
+	if(vScalar >= middle){
+		alpha = smoothstep(middle, uMaxData, vScalar);
+		fFragColor = vec4(mix(GREEN, RED, alpha), 1.0f);
+	}
+	else{
+		alpha = smoothstep(0.0, middle, vScalar);
+		fFragColor = vec4(mix(BLUE, GREEN, alpha), 1.0f);
+	}
 }

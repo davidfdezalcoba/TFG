@@ -48,4 +48,5 @@ void Cloud :: setUniforms(){
 	cloudShader.setMat4("uModel", model);
 	cloudShader.setMat4("uView", view);
 	cloudShader.setMat4("uProjection", projection);
+	cloudShader.setFloat("uMaxData", vl.maxData);
 }

@@ -26,6 +26,7 @@ Object* setupModel(const Modes & mode);
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
+
 const Modes MODE = cloud;
 
 static GLFWwindow* window = nullptr;
@@ -52,6 +53,7 @@ int main(int argc, char *argv[])
 
     // Configure global opengl state
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_PROGRAM_POINT_SIZE);
 	setOptions(MODE);
 	obj = setupModel(MODE);
 	camera = &obj->camera;

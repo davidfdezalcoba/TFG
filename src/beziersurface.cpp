@@ -25,7 +25,7 @@ BezierSurface :: BezierSurface(float width, float height, void (*mc)(GLFWwindow*
 
 void BezierSurface :: draw(){
 	setUniforms();
-	glPointSize(9);
+	// glPointSize(9);
 	pointShader.use();
 	vLoader.Draw(pointShader, GL_POINTS);	
 	vLoader2.Draw(pointShader, GL_LINES);	

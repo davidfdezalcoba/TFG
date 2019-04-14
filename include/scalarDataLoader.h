@@ -22,6 +22,7 @@ class ScalarDataLoader
 {
 public:
 	bool gammaCorrection;
+	float maxData = 0;
 
 	ScalarDataLoader(string const &path, bool gamma=false) : gammaCorrection(gamma)
 	{
@@ -34,6 +35,8 @@ public:
 			cin >> vertexToBeLoaded.position.y;
 			cin >> vertexToBeLoaded.position.z;
 			cin >> vertexToBeLoaded.scalar;
+			if (vertexToBeLoaded.scalar > maxData)
+				maxData = vertexToBeLoaded.scalar;
 			this->vertices.push_back(vertexToBeLoaded);
 		}
 		std::cin.rdbuf(cinbuf); //reset to standard input again
