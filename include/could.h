@@ -1,0 +1,22 @@
+#ifndef CLOUD_H
+#define CLOUD_H
+
+#include "shader.h"
+#include "object.h"
+#include "scalarDataLoader.h"
+#include <glfw3.h>
+
+#include <iostream>
+
+class Cloud : public Object{
+public:
+	Cloud(float width, float height);
+	void draw();
+	void processInput(GLFWwindow *window);
+private:
+	Shader cloudShader;
+	ScalarDataLoader vl;
+	void setUniforms();
+};
+
+#endif

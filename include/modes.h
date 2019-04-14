@@ -5,7 +5,8 @@ enum Modes {
 	terrain,
 	bezier,
 	beziersurface,
-	negative
+	negative,
+	cloud
 };
 
 #endif

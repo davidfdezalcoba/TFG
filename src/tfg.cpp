@@ -12,6 +12,7 @@
 #include "beziercurve.h"
 #include "beziersurface.h"
 #include "negative.h"
+#include "could.h"
 
 #include <iostream>
 
@@ -25,7 +26,7 @@ Object* setupModel(const Modes & mode);
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
-const Modes MODE = beziersurface;
+const Modes MODE = cloud;
 
 static GLFWwindow* window = nullptr;
 
@@ -174,6 +175,10 @@ void setOptions(const Modes & mode){
 			glfwSetCursorPosCallback(window, mouse_callback);
 			glfwSetScrollCallback(window, scroll_callback);
 			break;
+		case cloud:
+			glfwSetCursorPosCallback(window, mouse_callback);
+			glfwSetScrollCallback(window, scroll_callback);
+			break;
 		default: ;
 	}
 }
@@ -191,6 +196,9 @@ Object* setupModel(const Modes & mode){
 			break;
 		case negative:
 			return new Negative(SCR_WIDTH, SCR_HEIGHT);
+			break;
+		case cloud:
+			return new Cloud(SCR_WIDTH, SCR_HEIGHT);
 			break;
 		default:;	
 	}
