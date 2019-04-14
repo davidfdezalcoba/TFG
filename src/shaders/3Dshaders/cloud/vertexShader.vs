@@ -11,5 +11,6 @@ uniform mat4 uProjection;
 void main()
 {
 	vScalar = aScalar;
+    gl_PointSize = aScalar;
     gl_Position = uProjection * uView * uModel * vec4(aPos, 1.0);
 }

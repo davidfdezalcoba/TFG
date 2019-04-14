@@ -1,4 +1,4 @@
-#include "could.h"
+#include "cloud.h"
 #include <glad.h>
 #include <glfw3.h>
 
@@ -40,10 +40,9 @@ void Cloud :: setUniforms(){
 	projection = glm::perspective(glm::radians(camera.Zoom), this->width / this->height, 0.1f, 100.0f);
 	view = camera.GetViewMatrix();
 	model = glm::mat4(1.0f); 
-	model = glm::translate(model, glm::vec3(0.0f, 0.0f, -15.0f));
-	model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
+	model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.0f));
+	model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
 	// glm::mat3 normal = glm::mat3(transpose(inverse(model)));
-	lightPos = glm::vec3(0.0f);
 
 	cloudShader.use();	
 	cloudShader.setMat4("uModel", model);
