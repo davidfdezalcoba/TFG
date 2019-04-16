@@ -11,7 +11,8 @@ using namespace std;
 Cloud :: Cloud(float width, float height) : 
 	cloudShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/cloud/vertexShader.vs",
 				  "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/cloud/fragmentShader.frs"),
-	vl("/home/david/Projects/TFG/Project/resources/objects/scalar.csv", false)
+	vl("/home/david/Projects/TFG/Project/resources/objects/scalar.csv", false),
+	uMax(0)
 	{
 		this->width = width;
 	   	this->height = height;
@@ -33,6 +34,10 @@ void Cloud :: processInput(GLFWwindow *window){
 		{camera.ProcessKeyboard(LEFT, deltaTime);}
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		{camera.ProcessKeyboard(RIGHT, deltaTime);}
+    if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+		{uMax++;}
+    if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+		{uMax--;}
 }
 
 void Cloud :: setUniforms(){
@@ -49,4 +54,5 @@ void Cloud :: setUniforms(){
 	cloudShader.setMat4("uView", view);
 	cloudShader.setMat4("uProjection", projection);
 	cloudShader.setFloat("uMaxData", vl.maxData);
+	cloudShader.setFloat("uMax", uMax);
 }

@@ -16,6 +16,7 @@ public:
 private:
 	Shader cloudShader;
 	ScalarDataLoader vl;
+	float uMax;
 	void setUniforms();
 };
 
