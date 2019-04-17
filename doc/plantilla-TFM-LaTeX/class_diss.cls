@@ -55,6 +55,7 @@
 \fi
 \DeclareOption{11pt}{\renewcommand\@ptsize{1}}
 \DeclareOption{12pt}{\renewcommand\@ptsize{2}}
+\DeclareOption{14pt}{\renewcommand\@ptsize{4}}
 \if@compatibility\else
 \DeclareOption{oneside}{\@twosidefalse \@mparswitchfalse}
 \fi
