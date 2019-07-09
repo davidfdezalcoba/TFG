@@ -6,7 +6,8 @@ enum Modes {
 	bezier,
 	beziersurface,
 	negative,
-	cloud
+	cloud,
+	revolution
 };
 
 #endif

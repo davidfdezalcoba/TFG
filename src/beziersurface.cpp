@@ -49,6 +49,10 @@ void BezierSurface :: processInput(GLFWwindow *window){
 		{uOuter02++;uOuter13++;uInner0++;uInner1++;}
     if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
 		{uOuter02--;uOuter13--;uInner0--;uInner1--;}
+    if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
+		{glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );}
+    if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
+		{glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );}
     if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
 	{
 		if(glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_DISABLED){

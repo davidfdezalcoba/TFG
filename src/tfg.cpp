@@ -13,6 +13,7 @@
 #include "beziersurface.h"
 #include "negative.h"
 #include "cloud.h"
+#include "revolution.h"
 
 #include <iostream>
 
@@ -27,7 +28,7 @@ Object* setupModel(const Modes & mode);
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
-const Modes MODE = cloud;
+const Modes MODE = revolution;
 
 static GLFWwindow* window = nullptr;
 
@@ -181,6 +182,10 @@ void setOptions(const Modes & mode){
 			glfwSetCursorPosCallback(window, mouse_callback);
 			glfwSetScrollCallback(window, scroll_callback);
 			break;
+		case revolution:
+			glfwSetCursorPosCallback(window, mouse_callback);
+			glfwSetScrollCallback(window, scroll_callback);
+			break;
 		default: ;
 	}
 }
@@ -201,6 +206,9 @@ Object* setupModel(const Modes & mode){
 			break;
 		case cloud:
 			return new Cloud(SCR_WIDTH, SCR_HEIGHT);
+			break;
+		case revolution:
+			return new Revolution(SCR_WIDTH, SCR_HEIGHT);
 			break;
 		default:;	
 	}
