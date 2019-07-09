@@ -16,6 +16,7 @@
 #include "revolution.h"
 
 #include <iostream>
+#include <stdio.h>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -23,12 +24,11 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
 int createWindow(GLFWwindow* & window);
 void setOptions(const Modes & mode);
+Modes selectmode(char * mode);
 Object* setupModel(const Modes & mode);
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
-
-const Modes MODE = revolution;
 
 static GLFWwindow* window = nullptr;
 
@@ -44,6 +44,8 @@ float lastFrame = 0.0f;
 
 int main(int argc, char *argv[])
 {
+	Modes MODE = (argc > 1)? selectmode(argv[1]) : revolution;
+
     createWindow(window);
     // glad: load all OpenGL function pointers
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -213,4 +215,14 @@ Object* setupModel(const Modes & mode){
 		default:;	
 	}
 	return nullptr;
+}
+
+Modes selectmode(char * mode){
+	if (strncmp(mode, "terrain", 7) == 0) return terrain;
+	else if (strncmp(mode, "bezier", 7) == 0) return bezier;
+	else if (strncmp(mode, "bsurface", 7) == 0) return beziersurface;
+	else if (strncmp(mode, "negative", 7) == 0) return negative;
+	else if (strncmp(mode, "cloud", 7) == 0) return cloud;
+	else if (strncmp(mode, "revolution", 7) == 0) return revolution;
+	else return revolution;
 }
