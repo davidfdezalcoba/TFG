@@ -11,6 +11,8 @@ BezierSurface :: BezierSurface(float width, float height, void (*mc)(GLFWwindow*
 				 "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/tesevalshader.tees"), 
 	pointShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/pointshader.vs",
 				"/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/pointshader.frs"),
+	axisShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/axisshader.vs",
+				"/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/axisshader.frs"),
 		uOuter02(10), uOuter13(10), uInner0(10), uInner1(10),
 		lastX(width / 2.0), lastY(height / 2.0),
 		move(true), firstMouse(true),
@@ -28,7 +30,8 @@ void BezierSurface :: draw(){
 	// glPointSize(9);
 	pointShader.use();
 	vLoader.Draw(pointShader, GL_POINTS);	
-	vLoader2.Draw(pointShader, GL_LINES);	
+	axisShader.use();
+	vLoader2.Draw(axisShader, GL_LINES);	
 	bezierShader.use();
 	glPatchParameteri(GL_PATCH_VERTICES, 16);
 	vLoader.Draw(bezierShader, GL_PATCHES);	
@@ -54,19 +57,16 @@ void BezierSurface :: processInput(GLFWwindow *window){
     if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
 		{glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );}
     if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-	{
-		if(glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_DISABLED){
-			glfwSetCursorPosCallback(window, NULL);
-			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-			move = false;
-		}
-		else{
-			firstMouse = true;
-			glfwSetCursorPosCallback(window, mouse_callback);
-			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-			move = true;
-		}
-	}
+		{vLoader.getNextActiveVertex();}
+    if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
+		{vLoader.moveVertexX(
+			glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS ? 0 : 1);}
+    if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS)
+		{vLoader.moveVertexY(
+			glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS ? 0 : 1);}
+    if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS)
+		{vLoader.moveVertexZ(
+			glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS ? 0 : 1);}
 }
 
 void BezierSurface :: setUniforms(){
@@ -92,4 +92,10 @@ void BezierSurface :: setUniforms(){
 	pointShader.setMat4("uProjection", projection);
 	pointShader.setVec3("uViewPos", camera.Position);
 	pointShader.setVec3("uLight.position", lightPos);
+	axisShader.use();	
+	axisShader.setMat4("uModel", model);
+	axisShader.setMat4("uView", view);
+	axisShader.setMat4("uProjection", projection);
+	axisShader.setVec3("uViewPos", camera.Position);
+	axisShader.setVec3("uLight.position", lightPos);
 }

@@ -41,6 +41,10 @@ void Revolution :: processInput(GLFWwindow *window){
 		{glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );}
     if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
 		{glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );}
+    if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+		{uNum++;}
+    if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+		{uNum--;}
 
 }
 

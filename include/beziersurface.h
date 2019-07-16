@@ -15,6 +15,7 @@ public:
 private:
 	Shader bezierShader;	
 	Shader pointShader;
+	Shader axisShader;
 	float uOuter02;
 	float uOuter13;
 	float uInner0;
