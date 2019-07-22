@@ -1,37 +1,4 @@
 % +--------------------------------------------------------------------+
-% | LaTeX Template                                                     |
-% | for K-State Electronic Theses, Dissertations, and Reports          |
-% |                                                                    |
-% | Comments and guidelines for using the template are shown           |
-% | within boxes like this one.                                        |
-% |                                                                    |
-% | Revised 6/30/06                                                    |
-% | 9/14/06: Removed typos                                             |
-% +--------------------------------------------------------------------+
-
-% +--------------------------------------------------------------------+
-% | Your paper should contain the following sections, except where     |
-% | indicated as optional, in the order shown.  Also, all headings     |
-% | shown with an asterisk (*) must be centered and in uppercase       |
-% | letters:                                                           |
-% |                                                                    |
-% | Abstract Title Page (doctoral dissertations only)                  |
-% | ABSTRACT* (doctoral dissertations only)                            |
-% | Title Page                                                         |
-% | Copyright Page (Optional - only needed if copyrighting)            |
-% | ABSTRACT *                                                         |
-% | TABLE OF CONTENTS *                                                |
-% | LIST OF FIGURES *                                                  |
-% | LIST OF TABLES*                                                    |
-% | ACKNOWLEDGMENTS* (Optional)                                        |
-% | DEDICATION * (Optional)                                            |
-% | PREFACE * (Optional)                                               |
-% | Individual Chapters                                                |
-% | References and/or bibliography                                     |
-% | Appendices (as needed)                                             |
-% +--------------------------------------------------------------------+
-
-% +--------------------------------------------------------------------+
 % | The LaTex keyword \documentclass selects a particular class to     |
 % | associate with the document.  The current documentclass            |
 % | {class_diss} generates a Table of Contents that has leading dots   |
@@ -41,25 +8,12 @@
 % |                                                                    |
 % +--------------------------------------------------------------------+
 
-\documentclass[final,14pt,oneside]{class_diss}
-
-% +--------------------------------------------------------------------+
-% | The following command sets the bibliography style to American
-% | Institute of Physics (AIP).  Other styles are available in the
-% | styles directory.  To use a different style, replace "aip" with
-% | the filename of the style you want to use.
-% +--------------------------------------------------------------------+
-
-\bibliographystyle{plainnat}
+\documentclass[final,12pt,oneside]{class_diss}
+\bibliographystyle{unsrtnat}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[spanish]{babel}
-% +--------------------------------------------------------------------+
-% | Now, we add in all external packages that we will use throughout   |
-% | the document.  You can add other packages as needed.
-% +--------------------------------------------------------------------+
-
 %\usepackage{     caption2} % Customize captions a bit more
 \usepackage{      amsmath} % American Mathematics Society standards
 %\usepackage{      wrapfig} % Wraps text around a figure or table
@@ -75,40 +29,16 @@
 \usepackage{amsthm}
 \usepackage{latexsym}
 
-% +--------------------------------------------------------------------+
-% | The color package allows one to select colors for hyperlinking     |
-% | (see below).                                                       |
-% +--------------------------------------------------------------------+
-
 \usepackage[usenames]{color}
-
-% +--------------------------------------------------------------------+
-% | Colors defined for use with this template.                         |
-% +--------------------------------------------------------------------+
 
 \definecolor{  Pink}{rgb}{1.0, 0.5, 0.5}
 \definecolor{Maroon}{rgb}{0.8, 0.0, 0.0}
 
-% +--------------------------------------------------------------------+
-% | In the commands below, we use the 'natbib' package, and specify    |
-% | the 'sort&compress' option, which condenses                        |
-% | citations from (1,2,3,5,9,10,11) to (1-3,5,9-11).  The 'bibpunct'  |
-% | option selects various parameters for how the citation will be     |
-% | displayed.  In this case, only the comma (separation between       |
-% | citations) and the 's' (superscript) arguments are chosen.  The    |
-% | other curly braces deal with how to 'wrap' the citation (using     |
-% | parentheses, brackets, etc.) and are not needed for the chosen     |
-% | style.                                                             |
-% +--------------------------------------------------------------------+
-
 \usepackage[sort&compress]{natbib}
-\bibpunct{}{}{,}{s}{}{}
+\bibpunct{[}{]}{,}{n}{}{}
 \usepackage{hypernat}
 
-% +--------------------------------------------------------------------+
-% | Lastly, the hyperref package allows one to hyperlink cross-        |
-% | references and figures in a LaTeX document.                        |
-% +--------------------------------------------------------------------+
+% Hyperref settings
 
 \usepackage[pdftex, plainpages=false, pdfpagelabels]{hyperref}
 
@@ -124,37 +54,23 @@
     linkbordercolor={.7 .8 .8},
     breaklinks=true,
     pdfpagelabels=true,
-    }
+}
 
-% +--------------------------------------------------------------------+
-% | Page margins are set on 1 inch on all sides.                       |
-% +--------------------------------------------------------------------+
+% Margins
 
 \topmargin      = -0.56in
 \textheight     =  8.60in
 \textwidth      =  6.46in
 \oddsidemargin  =  0.02in
 
-% +--------------------------------------------------------------------+
-% | The document finally begins here.                                  |
-% +--------------------------------------------------------------------+
+% Beginning of document
 
 \begin{document}
 
-
   \setcounter{page}{-1}
-
-
-% +--------------------------------------------------------------------+
-% | Title Page -- Required for both Doctoral and Masters Students
-% +--------------------------------------------------------------------+
 
 \input{title.tex}
    \pdfbookmark[0]{Portada}{PDFPortadaPage}
-
-% +--------------------------------------------------------------------+
-% | Autorizacion Page -- Required for both Doctoral and Masters Students
-% +--------------------------------------------------------------------+
 
 \input{autorizacion.tex}
    \pdfbookmark[0]{Autorización}{PDFAutorizacionPage}
@@ -166,7 +82,6 @@
 	\pdfbookmark[0]{Abstract}{PDFAbstractPage}
 
  \vfill
-
 
 % +--------------------------------------------------------------------+
 % | We use the following code to suppress page numbers and other
@@ -188,7 +103,7 @@
 % | first page on which page numbers are displayed.
 % +--------------------------------------------------------------------+
 
-\setcounter{page}{1}
+\setcounter{page}{5}
 
 % +--------------------------------------------------------------------+
 % | Here, we will generate our Table of Contents (TOC) entries.        |
@@ -200,41 +115,11 @@
 \addcontentsline{toc}{chapter}{Índice}
 
 \tableofcontents
-%\listoffigures
-%\listoftables
+\listoffigures
+\listoftables
 
 \hfill  %Are these lines necessary?
 \hfill
-
-% +--------------------------------------------------------------------+
-% | Acknowledgements Page
-% |
-% | If you choose not to have an Acknowledgements page, comment out
-% | or delete the following 3 lines.
-% +--------------------------------------------------------------------+
-
-% \input{agradecimientos.tex}
-% \phantomsection
-% \addcontentsline{toc}{chapter}{Agradecimientos}
-
-% +--------------------------------------------------------------------+
-% | Dedication Page
-% |
-% | If you choose not to have a Dedication page, comment out
-% | or delete the following 3 lines.
-% +--------------------------------------------------------------------+
-
-% \input{dedicatoria.tex}
-% \phantomsection
-% \addcontentsline{toc}{chapter}{Dedicatoria}
-
-% +--------------------------------------------------------------------+
-% | Preface Page
-% +--------------------------------------------------------------------+
-
-%\input{preface.tex}
-%\phantomsection
-%\addcontentsline{toc}{chapter}{Preface}
 
 % +--------------------------------------------------------------------+
 % | We use arabic (1, 2, 3...) page numbering starting from page 1.    |
@@ -258,16 +143,10 @@
 % +--------------------------------------------------------------------+
 
 \input{chapter1.tex}
-
-% +--------------------------------------------------------------------+
-% | Uncomment the lines below to add additional chapters.  Name the
-% | files chapter2.tex for Chapter 2, chapter3.tex for Chapter 3, etc.
-% +--------------------------------------------------------------------+
-
 \input{chapter2.tex}
 \input{chapter3.tex}
-%\input{chapter4.tex}
-%\input{chapter5.tex}
+\input{chapter4.tex}
+\input{chapter5.tex}
 
 % +-------------------------------------------------------------------------+
 % | References                                                              |
@@ -310,7 +189,7 @@
 % +--------------------------------------------------------------------+
 
 \appendix
-\input{appendixA.tex}
-\input{appendixB.tex}
+% \input{appendixA.tex}
+% \input{appendixB.tex}
 
 \end{document}

@@ -612,7 +612,7 @@
     \chapter*{\listfigurename
       \@mkboth{\MakeUppercase\listfigurename}%
               {\MakeUppercase\listfigurename}}%
-    \addcontentsline{toc}{chapter}{List of Figures}%
+    \addcontentsline{toc}{chapter}{Índice de figuras}%
     \@starttoc{lof}%
     \if@restonecol\twocolumn\fi
     }
@@ -626,7 +626,7 @@
     \chapter*{\listtablename
       \@mkboth{%
           \MakeUppercase\listtablename}{\MakeUppercase\listtablename}}%
-    \addcontentsline{toc}{chapter}{List of Tables}%
+    \addcontentsline{toc}{chapter}{Índice de cuadros}%
     \@starttoc{lot}%
     \if@restonecol\twocolumn\fi
     }
