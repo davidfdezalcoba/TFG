@@ -626,7 +626,7 @@
     \chapter*{\listtablename
       \@mkboth{%
           \MakeUppercase\listtablename}{\MakeUppercase\listtablename}}%
-    \addcontentsline{toc}{chapter}{Índice de cuadros}%
+    \addcontentsline{toc}{chapter}{Índice de tablas}%
     \@starttoc{lot}%
     \if@restonecol\twocolumn\fi
     }

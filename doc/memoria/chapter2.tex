@@ -9,7 +9,7 @@
 % | LaTeX will automatically number the chapters.
 % +--------------------------------------------------------------------+
 
-\chapter{OpenGL y DirectX}
+\chapter{OpenGL y Direct3D}
 \label{makereference2}
 
 El objetivo de este capítulo es explicar en qué consiste OpenGl, así como su
@@ -19,7 +19,7 @@ presenta con DirectX, su principal competidor.\\
 \section{¿Qué es?}
 \label{makereference2.1}
 
-OpenGL se define como una API \textit{(application programming interface)}, que
+OpenGL~\cite{OpenGL} se define como una API \textit{(application programming interface)}, que
 es simplemente una librería de software para acceder a capacidades del hardware
 de gráficos (ver \citet{Shreiner:2009:OPG:1696492}).
 
@@ -59,44 +59,174 @@ Microsystems.\\
 
 En otoño de 2006, el OpenGL ARB y los directores de Khronos votaron para transferir el
 control de OpenGL a Khronos Group. El secretario de la ARB Jon Leech observó:
-\textit{"Hemos decidido mover OpenGL a Khronos para asegurar la salud futura de
-OpenGL en todas sus formas."}\cite{OpenGLARB}
+\textit{``Hemos decidido mover OpenGL a Khronos para asegurar la salud futura de
+OpenGL en todas sus formas.''}~\cite{OpenGLARB}
 
-\section{Diseño}
+\section{Diseño de OpenGL}
 \label{makereference2.3}
 
-\begin{figure}[h]%t=top, b=bottom, h=here
+OpenGL implementa el llamado pipeline de gráficos o pipeline de renderizado. Este
+pipeline consiste en una secuencia de etapas de procesamiento para convertir
+datos de una aplicación en una imagen final renderizada. \\
 
-	\begin{center}
-	    \includegraphics[height=4in]{figures/pipeline.png}
-	    \includegraphics[height=4in]{figures/pipelineExtendido.png}
-	\end{center}
-
-    \caption[Pipeline de OpenGl]{Pipeline de OpenGl en el hardware gráfico.}
-	\label{figurePipeline}
-
+\begin{figure}[h]
+		\centering
+		\includegraphics[height=7cm,width=\textwidth]{figures/pipelinefijo.png}
+		\caption{Pipeline no programable. OpenGL 1.5}
+		\label{fig2.1}
 \end{figure}
 
+En un principio, este pipeline de renderizado consistía en varias etapas fijas y
+no programables, en las que el programador simplemente elegía una serie de
+configuraciones para que OpenGL realizase las operaciones propias de cada etapa.
+Las etapas principales de este pipeline eran las siguientes (Ver
+Figura~\ref{fig2.1}):
 
+\begin{itemize}
+		\item Procesamiento de primitivas
+		\item Transformación e iluminación
+		\item Ensamblado de primitivas
+		\item Rasterización
+		\item Ensamblado de texturas
+		\item Adición de color
+		\item Niebla
+		\item Test Alfa
+		\item Operaciones con fragmentos
+\end{itemize}
 
-% +--------------------------------------------------------------------+
-% | In this chapter, I want to refer to Chapter~\ref{makereference},
-% | so I'm going to use the slash ref command along with the
-% | "makereference" label which I assigned back at the beginning of
-% | Chapter 1.
-% | 
-% | \section{Page Number References}
-% | \label{makereference2.1} I should also be able to refer to a
-% | specific page number, such as page~\pageref{makereference}.  Of
-% | course, I'll need to have a slash label command and a unique name
-% | in each section that I want to be able to refer to later in the
-% | text.
-% | 
-% | \section{Referring to Sections Within Chapter 1}
-% | \label{makereference2.2} Now, I'm going to refer to different
-% | sections within Chapter 1. I gave an example of a figure in
-% | section~\ref{makereference1.1} and an example of a table in
-% | section~\ref{makereference1.2}.  In
-% | section~\ref{makereference1.3}, we looked at examples of
-% | bibliographic citations.
-% +--------------------------------------------------------------------+
+Sin embargo, con la versión 2.0 de OpenGL se introdujeron los \textit{shaders},
+explorados en detalle en el Capítulo~\ref{makereference3}, que sustituyeron
+algunas de estas etapas fijas por etapas programables, dando mayor flexibilidad
+al programador. La Figura~\ref{fig2.2} muestra el pipeline asociado a la versión
+4.3 de OpenGL. \\
+
+\begin{figure}[h]%t=top, b=bottom, h=here
+	\begin{subfigure}[b]{.5\textwidth}
+		\centering
+		\includegraphics[height=8cm]{figures/pipeline.png}
+		\caption{Pipeline de OpenGL}
+		\label{fig2.2a}
+	\end{subfigure}
+	\begin{subfigure}[b]{.5\textwidth}
+		\centering
+		\includegraphics[height=8cm]{figures/pipelineExtendido.png}
+		\caption{Pipeline detallado}
+		\label{fig2.2b}
+	\end{subfigure}
+	\caption{Pipeline de gráficos de OpenGL}
+	\label{fig2.2}
+\end{figure}
+
+Como entrada, la primera etapa del pipeline programable ---Vertex Processor,
+Figura~\ref{fig2.2a}---, está formada a su vez por los shaders programables de
+vértice, teselación y geométrico, que sustituyen a las etapas de transformación
+e iluminación del pipeline no programable, así como la etapa fija realizada por
+OpenGL conocida como Ensamblado de Primitivas. Obtiene como entrada vértices,
+normales, definiciones de primitivas geométricas, colores, parámetros de
+iluminación, materiales y coordenadas para las texturas. Esta etapa opera sobre
+estos datos y los organiza en las primitivas geométricas asociadas en
+preparación para la etapa de post-procesado de vértices, en la que se realizan,
+entre otras cosas, su recorte y rasterización.  Así, la salida es un conjunto de
+vértices como píxeles, con su color, profundidad y coordenadas de textura.\\
+
+Posteriormente se realiza el recorte o \textit{clipping}, que ocurre cuando,
+ocasionalmente, algunos vértices quedan fuera de lo que se denomina
+\textit{viewport}---la región de la ventana donde se permite dibujar---
+modificando las primitivas geométricas para que nada quede fuera de ese espacio.
+(Ver Figura~\ref{fig2.3a}).\\
+
+\begin{figure}[h]
+	\begin{subfigure}[b]{0.5\textwidth}
+		\centering 
+		\includegraphics{figures/clipping.png}
+		\caption{Clipping en OpenGL}
+		\label{fig2.3a}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.5\textwidth}
+		\centering 
+		\includegraphics{figures/rasterization.png}
+		\caption{Rasterización en OpenGL}
+		\label{fig2.3b}
+	\end{subfigure}
+	\caption{Clipping y rasterización en OpenGL}
+	\label{fig2.3}
+\end{figure}
+
+La siguiente etapa es la rasterización (ver Figura~\ref{fig2.3b}). Este paso
+implementa la transición de vértice a fragmento. Inmediatamente después del
+clipping, las primitivas geométricas actualizadas se mandan al rasterizador para
+la generación de fragmentos. Podemos considerar un fragmento como un ``candidato
+a pixel'', en el sentido de que un pixel reside en el \textit{framebuffer}--- un
+espacio de memoria manejado por el hardware gráfico que manda al dispositivo de
+salida digital--- mientras que un fragmento puede ser rechazado y nunca
+actualizar su localización de pixel asociada. \\
+
+En la última etapa, el procesado de fragmentos se realiza a su vez en dos pasos,
+uno de ellos programable con el shader de fragmentos y otras operaciones sobre
+fragmentos realizadas automáticamente por OpenGL.  Durante este último
+procesamiento, la visibilidad de cada fragmento es determinada utilizando
+diferentes tests (profundidad, color, plantilla, ruido\ldots). \\
+
+Cuando un fragmento pasa por todas estas etapas y todos los test activos, puede
+ser escrito directamente en el buffer de fragmentos, actualizando su color y
+valor de profundidad de su pixel o, si el \textit{blending} está activado,
+mezclando su color con el del pixel actual para generar un nuevo color que se
+escribe en el buffer de fragmentos.\\
+
+\section{Diferencias con Direct3D}
+\label{makereference2.4}
+
+Direct3D es parte del conjunto de la API multimedia DirectX, propiedad de
+Microsoft~\cite{Microsoft}. Es la principal competidora de OpenGL, ofreciendo
+ambas un conjunto similar de funcionalidades. Aun así, se pueden observar varias
+diferencias en términos de disponibilidad, portabilidad, facilidad de uso,
+rendimiento, estructura y usuarios finales. En la tabla~\ref{tabla2.1}, se
+muestran algunas de ellas resumidas.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{ | m{4cm} | m{5cm} | m{5cm} | }
+		\hline
+		& OpenGL & Direct3D \\
+		\hline
+		Soporte de escritorio & Multiplataforma & Microsoft Windows Xbox
+		\\
+		\hline
+		Soporte sistemas empotrados & Multiplataforma (OpenGL ES) & Windows
+		Embedded Windows CE \\
+		\hline
+		Licencia & Libre (con características patentadas) & Privativa
+		\\
+		\hline
+		Usuario final & Profesionales & Juegos \\ 
+		\hline
+	\end{tabular}
+	\caption{Diferencias entre OpenGL y Direct3D}
+	\label{tabla2.1}
+\end{table}
+
+En cuanto a la portabilidad, DirectX solo está disponible para la familia de
+sistemas operativos Microsoft Windows, mientras que OpenGL tiene
+implementaciones en muchas plataformas, incluyendo Microsoft Windows y sistemas
+Unix.\\
+
+En términos de facilidad de uso hoy en día ambas APIs se encuentran bastante
+parejas, habiendo evolucionado desde las primeras versiones, en las que los
+desarrolladores instaban a Microsoft a unirse a la iniciativa OpenGL, debido a
+que suponía menos esfuerzo trabajar con esta última.\\
+
+El diseño de ambas es también similar. Tras muchos años de evolución, el
+pipeline gráfico es bastante parecido, como puede apreciarse en la
+Figura~\ref{fig2.3}.\\
+
+En conclusión, hoy en día ambas se consideran bastante similares en cuanto a
+rendimiento y capacidades, siendo el soporte a otros sistemas y el carácter de
+las licencias las únicas grandes diferencias que hacen decantarse a los
+desarrolladores por una u otra.\\
+
+\begin{figure}[h]%t=top, b=bottom, h=here
+	\centering
+	\includegraphics[height=10cm]{figures/directxpipeline.png}
+	\caption{Pipeline de gráficos de Direct3D}
+	\label{fig2.3}
+\end{figure}
