@@ -64,7 +64,8 @@ GLSL se incluye en el Apéndice~\ref{ApendiceA}.
 
 El Vertex Shader es la etapa de sombreado en el pipeline de renderizado que se
 encarga del procesamiento de los vértices individuales~\cite{VertexShader}. El
-Vertex Shader tiene como entrada los atributos de vértice. Recibe un único
+Vertex Shader tiene como entrada unos atributos de vértice especificados desde
+un \textit{Vertex Array Object (VAO)} por un comando de dibujo. Recibe un único
 vértice, formado por sus atributos, del flujo de vértices y genera un único
 vértice al flujo de salida. Por cada vértice de entrada ha de haber,
 necesariamente, uno de salida. \\
@@ -267,16 +268,118 @@ ha expuesto antes, este shader es el que determina si ocurrirá o no la etapa de
 generación de primitivas de teselación, puesto que solo se ejecutará si existe
 un TES activo.\\
 
+El TES, en caso de ser utilizado, debe especificar el tipo de primitiva que
+servirá como entrada al geometry shader. Este tipo puede ser puntos, isolíneas,
+triángulos o cuadriláteros.
+
 \subsection{Geometry Shader}
 \label{ref:GeoShader}
 
 El Geometry Shader~\cite{GeoShader} es un programa escrito en GLSL que
 corresponde a la etapa del pipeline programable que se encuentra entre el TES o
 el Vertex Shader (dependiendo de si existe o no teselación) y la etapa fija de
-post-procesado de vértices.
+post-procesado de vértices. Este shader es opcional y no es necesaria su
+utilización.\\
+
+Las invocaciones a este shader toman como entrada una única primitiva geométrica
+y puede dar como salida cero o más primitivas, aunque existe un límite de
+primitivas que se pueden generar en cada invocación, dependiendo de la
+implementación. Los shaders geométricos están diseñados para aceptar como
+entrada una primitiva específica y dar como salida otra. \\
+
+Sus usos varían bastante, pudiéndose utilizar como una manera de amplificar la
+geometría, sirviendo como una especie de teselación, así como para realizar un
+renderizado por capas o incluso para la realización de tareas de cómputo en la
+GPU. \\
+
+Entre las primitivas de entrada aceptadas por el geometry shader se encuentran
+las siguientes:
+
+\begin{table}[h]
+		%\centering
+		\begin{tabular}{|m{4cm}|m{7cm}|m{2.2cm}|m{1.5cm}|}
+
+			\hline
+			Entrada & Primitiva & Parámetro TES & Vértices\\
+			\hline
+
+			\verb|points| & \verb|GL_POINTS| & \verb|point_mode| & 1 \\
+			\hline
+
+			\verb|lines| & \verb|GL_LINES, GL_LINE_STRIP,| \verb|GL_LINE_LIST| &
+			\verb|isolines| & 2\\
+
+			\hline
+
+			\verb|lines_adjacency| & \verb|GL_LINES_ADJACENCY,|
+			\verb|GL_LINE_STRIP_ADJACENCY| & \verb|N/A| & 4\\
+
+			\hline
+
+			\verb|triangles| & \verb|GL_TRIANGLES, GL_TRIANGLE_STRIP,|
+			\verb|GL_TRIANGLE_FAN| & \verb|triangles,| \verb|quads| & 3 \\
+
+			\hline
+
+			\verb|triangles_adjacency| & \verb|GL_TRIANGLES_ADJACENCY,|
+			\verb|GL_TRIANGLE_STRIP_ADJACENCY| & \verb|N/A| & 6 \\
+
+			\hline
+		\end{tabular}
+		\caption{Primitivas de entrada al Geometry Shader}
+		\label{tabla3.1}
+\end{table}
+
+Las primitivas de salida pueden ser únicamente alguna de las siguientes:
+
+\begin{itemize}
+		\item \verb|points|	
+		\item \verb|line_strip|
+		\item \verb|triangle_strip|
+\end{itemize}
+
+Los shaders geométricos pueden generar tantos vértices como permita el límite de
+implementación. Para ello, el programador genera los valores que necesite para
+el nuevo vértice y, una vez estos valores sean correctos, una llamada a la
+función \verb|EmitVertex()| produce el vértice deseado. Una vez llamada esta
+función, los valores escritos para el vértice son reseteados, teniendo que
+volver a escribirlos para generar otro vértice. \\
+
+De igual modo, para generar una primitiva, debemos especificar del modo anterior
+todos los vértices que forman esa primitiva y posteriormente llamar a la función
+\verb|EndPrimitive()|. De esta forma, si se desea generar más de una primitiva,
+se deben especificar los vértices que forman la primera, llamar a
+\verb|EndPrimitive()|, generar los vértices que forman la segunda y llamar de
+nuevo a \verb|EndPrimitive()| para generar la segunda primitiva.
 
 \subsection{Fragment Shader}
 \label{ref:FragShader}
+
+El Fragment Shader~\cite{FragShader} es la etapa posterior a la rasterización.
+Por cada uno de los píxeles cubiertos por una primitiva, se genera un fragmento.
+Cada uno de estos fragmentos tiene una posición en la espacio de ventana, así
+como otros valores procedentes de la etapa de procesamiento de vértices. \\ 
+
+La salida del fragment shader consta de un valor de profundidad, un posible
+valor de plantilla (que no es modificado por el shader) y cero o más valores de
+color para ser potencialmente escritos en los buffers del frame buffer actual.
+Estos shaders toman como entrada un único fragmento, producido por el
+rasterizador, y dan como salida otro único fragmento. \\
+
+Técnicamente, la utilización de estos shaders es también opcional, puesto que de
+no utilizarlo, los valores de color del fragmento de entrada quedarán
+indefinidos, pero los valores de profundidad y plantilla en la salida serán los
+mismos que los de entrada. Esto puede ser interesante en el caso de solo estar
+interesados en los valores de profundidad computados por el sistema en lugar de
+otro valor calculado por el programador. \\
+
+Este shader también tiene operaciones especiales no presentes en los otros tipos
+de shader, como puede ser la instrucción \verb|discard|, cuyo objetivo es
+descartar los valores de salida generados durante la ejecución del shader para
+un fragmento en concreto, haciendo que este fragmento no pase a las siguientes
+etapas del pipeline. Esto puede ser útil para descartar fragmentos cuyos valores
+generados en la ejecución se queden fuera de unos límites impuestos por el
+programador.
 
 \section{Uso en Visualización Científica}
 \label{ref:SciVis}

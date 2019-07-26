@@ -1,4 +1,4 @@
-\begin{thebibliography}{13}
+\begin{thebibliography}{15}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -50,55 +50,68 @@ The Khronos~Group Inc.
 \newblock \url{https://www.opengl.org/archives/about/arb/}, {\natexlab{b}}.
 \newblock Accessed: 19/07/2019.
 
+\bibitem[Inc({\natexlab{c}})]{Primitivas}
+The Khronos~Group Inc.
+\newblock {Primitivas - OpenGL wiki}.
+\newblock \url{https://www.khronos.org/opengl/wiki/Primitive}, {\natexlab{c}}.
+\newblock Accessed: 26/07/2019.
+
 \bibitem[Microsoft()]{Microsoft}
 Microsoft.
 \newblock {Microsoft Website}.
 \newblock \url{https://www.microsoft.com/es-es}.
 \newblock Accessed: 23/07/2019.
 
-\bibitem[Inc({\natexlab{c}})]{GLSL}
+\bibitem[Inc({\natexlab{d}})]{GLSL}
 The Khronos~Group Inc.
 \newblock {GLSL Website}.
 \newblock \url{https://www.khronos.org/opengl/wiki/Core_Language_(GLSL)},
-  {\natexlab{c}}.
-\newblock Accessed: 24/07/2019.
-
-\bibitem[Inc({\natexlab{d}})]{VertexShader}
-The Khronos~Group Inc.
-\newblock {Vertex Shader - OpenGL wiki}.
-\newblock \url{https://www.khronos.org/opengl/wiki/Vertex_Shader},
   {\natexlab{d}}.
 \newblock Accessed: 24/07/2019.
 
-\bibitem[Inc({\natexlab{e}})]{TesConShader}
+\bibitem[Inc({\natexlab{e}})]{VertexShader}
+The Khronos~Group Inc.
+\newblock {Vertex Shader - OpenGL wiki}.
+\newblock \url{https://www.khronos.org/opengl/wiki/Vertex_Shader},
+  {\natexlab{e}}.
+\newblock Accessed: 24/07/2019.
+
+\bibitem[Inc({\natexlab{f}})]{TesConShader}
 The Khronos~Group Inc.
 \newblock {Tessellation Control Shader - OpenGL wiki}.
 \newblock
   \url{https://www.khronos.org/opengl/wiki/Tessellation_Control_Shader},
-  {\natexlab{e}}.
+  {\natexlab{f}}.
 \newblock Accessed: 24/07/2019.
 
-\bibitem[Inc({\natexlab{f}})]{TesPriGen}
+\bibitem[Inc({\natexlab{g}})]{TesPriGen}
 The Khronos~Group Inc.
 \newblock {Tessellation Primitive Generator - OpenGL wiki}.
 \newblock
   \url{https://www.khronos.org/opengl/wiki/Tessellation#Tessellation_primitive_generation},
-  {\natexlab{f}}.
+  {\natexlab{g}}.
 \newblock Accessed: 26/07/2019.
 
-\bibitem[Inc({\natexlab{g}})]{TesEvaShader}
+\bibitem[Inc({\natexlab{h}})]{TesEvaShader}
 The Khronos~Group Inc.
 \newblock {Tessellation Evaluation Shader - OpenGL wiki}.
 \newblock
   \url{https://www.khronos.org/opengl/wiki/Tessellation_Evaluation_Shader},
-  {\natexlab{g}}.
+  {\natexlab{h}}.
 \newblock Accessed: 25/07/2019.
 
-\bibitem[Inc({\natexlab{h}})]{GeoShader}
+\bibitem[Inc({\natexlab{i}})]{GeoShader}
 The Khronos~Group Inc.
 \newblock {Geometry Shader - OpenGL wiki}.
 \newblock \url{https://www.khronos.org/opengl/wiki/Geometry_Shader},
-  {\natexlab{h}}.
+  {\natexlab{i}}.
+\newblock Accessed: 26/07/2019.
+
+\bibitem[Inc({\natexlab{j}})]{FragShader}
+The Khronos~Group Inc.
+\newblock {Fragment Shader - OpenGL wiki}.
+\newblock \url{https://www.khronos.org/opengl/wiki/Fragment_Shader},
+  {\natexlab{j}}.
 \newblock Accessed: 26/07/2019.
 
 \end{thebibliography}

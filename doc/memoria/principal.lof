@@ -3,13 +3,14 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Pipeline no programable. OpenGL 1.5\relax }}{6}{figure.caption.6}
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Pipeline de gr\IeC {\'a}ficos de OpenGL\relax }}{7}{figure.caption.7}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Clipping y rasterizaci\IeC {\'o}n en OpenGL\relax }}{8}{figure.caption.8}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Pipeline de gr\IeC {\'a}ficos de Direct3D\relax }}{10}{figure.caption.10}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Primitivas de OpenGL\relax }}{9}{figure.caption.8}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Clipping y rasterizaci\IeC {\'o}n en OpenGL\relax }}{10}{figure.caption.9}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Pipeline de gr\IeC {\'a}ficos de Direct3D\relax }}{12}{figure.caption.11}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Comunicaci\IeC {\'o}n entre shaders del pipeline\relax }}{12}{figure.caption.11}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Teselaci\IeC {\'o}n - Espaciado equidistante\relax }}{14}{figure.caption.14}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Teselaci\IeC {\'o}n - Espaciado fraccional par\relax }}{15}{figure.caption.15}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Teselaci\IeC {\'o}n - Espaciado fraccional impar\relax }}{15}{figure.caption.16}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Comunicaci\IeC {\'o}n entre shaders del pipeline\relax }}{14}{figure.caption.12}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Teselaci\IeC {\'o}n - Espaciado equidistante\relax }}{16}{figure.caption.15}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Teselaci\IeC {\'o}n - Espaciado fraccional par\relax }}{17}{figure.caption.16}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Teselaci\IeC {\'o}n - Espaciado fraccional impar\relax }}{17}{figure.caption.17}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

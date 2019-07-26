@@ -1,7 +1,7 @@
 \babel@toc {spanish}{}
 \contentsline {chapter}{\IeC {\'I}ndice}{\es@scroman {v}}{section*.1}
-\contentsline {chapter}{Índice de figuras}{\es@scroman {vi}}{chapter*.3}
-\contentsline {chapter}{Índice de tablas}{\es@scroman {vii}}{chapter*.4}
+\contentsline {chapter}{Índice de figuras}{\es@scroman {vii}}{chapter*.3}
+\contentsline {chapter}{Índice de tablas}{\es@scroman {viii}}{chapter*.4}
 \contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Motivaci\IeC {\'o}n}{2}{section.1.1}
 \contentsline {section}{\numberline {1.2}Objetivos}{2}{section.1.2}
@@ -11,18 +11,25 @@
 \contentsline {section}{\numberline {2.1}\IeC {\textquestiondown }Qu\IeC {\'e} es?}{5}{section.2.1}
 \contentsline {section}{\numberline {2.2}Breve historia de OpenGL}{5}{section.2.2}
 \contentsline {section}{\numberline {2.3}Dise\IeC {\~n}o de OpenGL}{6}{section.2.3}
-\contentsline {section}{\numberline {2.4}Diferencias con Direct3D}{9}{section.2.4}
-\contentsline {chapter}{\numberline {3}Shaders y Visulizaci\IeC {\'o}n Cient\IeC {\'\i }fica}{11}{chapter.3}
-\contentsline {section}{\numberline {3.1}Shaders}{11}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Vertex Shader}{12}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Tessellation Shaders}{13}{subsection.3.1.2}
-\contentsline {subsubsection}{Tessellation Control Shader}{13}{section*.12}
-\contentsline {subsubsection}{Generador de primitivas de teselaci\IeC {\'o}n}{13}{section*.13}
-\contentsline {subsubsection}{Tessellation Evaluation Shader}{15}{section*.17}
-\contentsline {subsection}{\numberline {3.1.3}Geometry Shader}{16}{subsection.3.1.3}
-\contentsline {subsection}{\numberline {3.1.4}Fragment Shader}{16}{subsection.3.1.4}
-\contentsline {section}{\numberline {3.2}Uso en Visualizaci\IeC {\'o}n Cient\IeC {\'\i }fica}{16}{section.3.2}
-\contentsline {chapter}{\numberline {4}Aplicaci\IeC {\'o}n}{17}{chapter.4}
-\contentsline {chapter}{\numberline {5}Conclusiones y Trabajo Futuro}{18}{chapter.5}
-\contentsline {chapter}{Bibliography}{20}{chapter*.18}
-\contentsline {chapter}{\numberline {A}El lenguaje GLSL}{21}{appendix.Alph1}
+\contentsline {subsection}{\numberline {2.3.1}Primitivas de Puntos}{8}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Primitivas de L\IeC {\'\i }nea}{8}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}Primitivas de Tri\IeC {\'a}ngulo}{8}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.4}Procesamiento de V\IeC {\'e}rtices}{9}{subsection.2.3.4}
+\contentsline {subsection}{\numberline {2.3.5}Clipping}{10}{subsection.2.3.5}
+\contentsline {subsection}{\numberline {2.3.6}Rasterizaci\IeC {\'o}n}{10}{subsection.2.3.6}
+\contentsline {subsection}{\numberline {2.3.7}Procesamiento de Fragmentos}{10}{subsection.2.3.7}
+\contentsline {section}{\numberline {2.4}Diferencias con Direct3D}{11}{section.2.4}
+\contentsline {chapter}{\numberline {3}Shaders y Visulizaci\IeC {\'o}n Cient\IeC {\'\i }fica}{13}{chapter.3}
+\contentsline {section}{\numberline {3.1}Shaders}{13}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Vertex Shader}{14}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Tessellation Shaders}{15}{subsection.3.1.2}
+\contentsline {subsubsection}{Tessellation Control Shader}{15}{section*.13}
+\contentsline {subsubsection}{Generador de primitivas de teselaci\IeC {\'o}n}{15}{section*.14}
+\contentsline {subsubsection}{Tessellation Evaluation Shader}{17}{section*.18}
+\contentsline {subsection}{\numberline {3.1.3}Geometry Shader}{18}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}Fragment Shader}{19}{subsection.3.1.4}
+\contentsline {section}{\numberline {3.2}Uso en Visualizaci\IeC {\'o}n Cient\IeC {\'\i }fica}{20}{section.3.2}
+\contentsline {chapter}{\numberline {4}Aplicaci\IeC {\'o}n}{21}{chapter.4}
+\contentsline {chapter}{\numberline {5}Conclusiones y Trabajo Futuro}{22}{chapter.5}
+\contentsline {chapter}{Bibliography}{24}{chapter*.20}
+\contentsline {chapter}{\numberline {A}El lenguaje GLSL}{25}{appendix.Alph1}

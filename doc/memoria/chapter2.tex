@@ -65,9 +65,9 @@ OpenGL en todas sus formas.''}~\cite{OpenGLARB}
 \section{Diseño de OpenGL}
 \label{makereference2.3}
 
-OpenGL implementa el llamado pipeline de gráficos o pipeline de renderizado. Este
-pipeline consiste en una secuencia de etapas de procesamiento para convertir
-datos de una aplicación en una imagen final renderizada. \\
+OpenGL implementa el llamado pipeline de gráficos o pipeline de renderizado.
+Este pipeline consiste en una secuencia de etapas de procesamiento para
+convertir datos de una aplicación en una imagen final renderizada. \\
 
 \begin{figure}[h]
 		\centering
@@ -117,17 +117,87 @@ al programador. La Figura~\ref{fig2.2} muestra el pipeline asociado a la versió
 	\label{fig2.2}
 \end{figure}
 
-Como entrada, la primera etapa del pipeline programable ---Vertex Processor,
+El renderizado de una imagen comienza con una llamada, desde la aplicación
+principal, a una función de dibujado de OpenGL. Con esta llamada, OpenGL coge
+datos sobre vértices contenidos en diferentes objetos y renderiza con estos
+datos una o más \textit{primitivas}~\cite{Primitivas}. \\
+
+Las primitivas geométricas son las interpretaciones que OpenGL puede
+hacer sobre lo que representa un flujo de vértices. Por ejemplo, tres vértices
+pueden significar tres puntos independientes, dos líneas, un triángulo, etc.
+OpenGL contiene los siguientes tipos principales de primitivas:
+
+\subsection{Primitivas de Puntos}
+\label{ref:points}
+
+OpenGL contiene una única primitiva de puntos: \verb|GL_POINTS|. Cuando se llama
+a una función de dibujado con esta primitiva, OpenGL interpreta el flujo de
+vértices como puntos independientes.
+
+\subsection{Primitivas de Línea}
+\label{ref:lines}
+
+En cuanto a las primitivas de línea, hay tres tipos, basándose en distintas
+interpretaciones del flujo de vértices.
+
+\begin{itemize}
+		\item \verb|GL_LINES|: Los dos primeros vértices se consideran una línea,
+				los dos siguientes otra línea, etc.
+		\item \verb|GL_LINE_STRIP|: Los vértices adyacentes se consideran una
+			línea. Es decir el primero y el segundo forman una línea, el segundo
+			y el tercero forman otra línea, etc.
+		\item \verb|GL_LINE_LOOP|: Como \verb|GL_LINE_STRIP|, pero el primer y
+				último vértices se consideran también una línea.
+\end{itemize}
+
+\subsection{Primitivas de Triángulo}
+\label{ref:triangles}
+
+Un triángulo es una primitiva formada por tres vértices. También existen tres
+primitivas de triángulo:
+
+\begin{itemize}
+		\item \verb|GL_TRIANGLES|: los tres primeros vértices forman un
+				triángulo, los tres siguientes otro, etc.
+		\item \verb|GL_TRIANGLE_STRIP|: cada grupo de tres vértices adyacentes
+				forman un triángulo. El (0, 1, 2), el (1, 2, 3), etc.
+		\item \verb|GL_TRIANGLE_FAN|: El primer vértice queda fijo, y cada grupo
+				de dos vértices adyacentes a partir de él forma un triángulo con
+				el primero. Por ejemplo el (0, 1, 2), (0, 2, 3), etc.
+\end{itemize}
+
+En la Figura~\ref{fig:primitives} se pueden ver las diferentes interpretaciones
+en forma de primitiva que puede realizar OpenGL para renderizar un flujo de
+vértices. \\
+
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=\textwidth]{figures/primitives.png}
+	\caption{Primitivas de OpenGL}
+	\label{fig:primitives}
+\end{figure}
+
+Una vez se ha hecho la llamada a la función de dibujado, comienza el proceso de
+renderizado, recorriéndose las diferentes etapas que forman el pipeline de
+renderizado. \\
+
+\subsection{Procesamiento de Vértices}
+\label{ref:procesamiento}
+
+La primera etapa del pipeline programable ---Vertex Processor,
 Figura~\ref{fig2.2a}---, está formada a su vez por los shaders programables de
 vértice, teselación y geométrico, que sustituyen a las etapas de transformación
 e iluminación del pipeline no programable, así como la etapa fija realizada por
-OpenGL conocida como Ensamblado de Primitivas. Obtiene como entrada vértices,
-normales, definiciones de primitivas geométricas, colores, parámetros de
-iluminación, materiales y coordenadas para las texturas. Esta etapa opera sobre
-estos datos y los organiza en las primitivas geométricas asociadas en
+OpenGL conocida como Ensamblado de Primitivas. Obtiene como entrada el flujo de
+vértices, normales, definiciones de primitivas geométricas, colores, parámetros
+de iluminación, materiales y coordenadas para las texturas. Esta etapa opera
+sobre estos datos y los organiza en las primitivas geométricas asociadas en
 preparación para la etapa de post-procesado de vértices, en la que se realizan,
 entre otras cosas, su recorte y rasterización.  Así, la salida es un conjunto de
 vértices como píxeles, con su color, profundidad y coordenadas de textura.\\
+
+\subsection{Clipping}
+\label{ref:clipping}
 
 Posteriormente se realiza el recorte o \textit{clipping}, que ocurre cuando,
 ocasionalmente, algunos vértices quedan fuera de lo que se denomina
@@ -152,6 +222,9 @@ modificando las primitivas geométricas para que nada quede fuera de ese espacio
 	\label{fig2.3}
 \end{figure}
 
+\subsection{Rasterización}
+\label{ref:rasterizacion}
+
 La siguiente etapa es la rasterización (ver Figura~\ref{fig2.3b}). Este paso
 implementa la transición de vértice a fragmento. Inmediatamente después del
 clipping, las primitivas geométricas actualizadas se mandan al rasterizador para
@@ -160,6 +233,9 @@ a pixel'', en el sentido de que un pixel reside en el \textit{framebuffer}--- un
 espacio de memoria manejado por el hardware gráfico que manda al dispositivo de
 salida digital--- mientras que un fragmento puede ser rechazado y nunca
 actualizar su localización de pixel asociada. \\
+
+\subsection{Procesamiento de Fragmentos}
+\label{ref:procesamientofrags}
 
 En la última etapa, el procesado de fragmentos se realiza a su vez en dos pasos,
 uno de ellos programable con el shader de fragmentos y otras operaciones sobre

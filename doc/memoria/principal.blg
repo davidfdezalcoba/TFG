@@ -6,6 +6,7 @@ Database file #1: references.bib
 Warning--empty booktitle in DEFANTI1991247
 Warning--empty year in OpenGL
 Warning--empty year in OpenGLARB
+Warning--empty year in Primitivas
 Warning--empty year in Microsoft
 Warning--empty year in GLSL
 Warning--empty year in VertexShader
@@ -13,45 +14,46 @@ Warning--empty year in TesConShader
 Warning--empty year in TesPriGen
 Warning--empty year in TesEvaShader
 Warning--empty year in GeoShader
-You've used 13 entries,
+Warning--empty year in FragShader
+You've used 15 entries,
             2481 wiz_defined-function locations,
-            633 strings with 6529 characters,
-and the built_in function-call counts, 4246 in all, are:
-= -- 393
-> -- 127
-< -- 14
-+ -- 69
-- -- 36
-* -- 232
-:= -- 637
-add.period$ -- 55
-call.type$ -- 13
-change.case$ -- 26
+            641 strings with 6734 characters,
+and the built_in function-call counts, 4782 in all, are:
+= -- 441
+> -- 141
+< -- 16
++ -- 79
+- -- 40
+* -- 256
+:= -- 717
+add.period$ -- 63
+call.type$ -- 15
+change.case$ -- 30
 chr.to.int$ -- 6
-cite$ -- 23
-duplicate$ -- 230
-empty$ -- 435
-format.name$ -- 51
-if$ -- 946
-int.to.chr$ -- 8
-int.to.str$ -- 14
+cite$ -- 27
+duplicate$ -- 258
+empty$ -- 495
+format.name$ -- 57
+if$ -- 1064
+int.to.chr$ -- 10
+int.to.str$ -- 16
 missing$ -- 5
-newline$ -- 87
-num.names$ -- 39
-pop$ -- 161
+newline$ -- 99
+num.names$ -- 45
+pop$ -- 189
 preamble$ -- 1
-purify$ -- 13
+purify$ -- 15
 quote$ -- 0
-skip$ -- 136
+skip$ -- 150
 stack$ -- 0
-substring$ -- 102
-swap$ -- 57
+substring$ -- 106
+swap$ -- 63
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 88
-warning$ -- 10
-while$ -- 31
+type$ -- 102
+warning$ -- 12
+while$ -- 35
 width$ -- 0
-write$ -- 198
-(There were 10 warnings)
+write$ -- 226
+(There were 12 warnings)
