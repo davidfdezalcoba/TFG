@@ -11,7 +11,7 @@ using namespace std;
 Negative :: Negative(float width, float height) : 
 		negativeShader("/home/david/Projects/TFG/Project/src/shaders/imageShaders/negative/vertexShader.vs",
 			   	"/home/david/Projects/TFG/Project/src/shaders/imageShaders/negative/fragmentShader.frs"),
-	   	image("/home/david/Projects/TFG/Project/resources/images/PHIL_2351_lores.jpg")
+	   	image("/home/david/Projects/TFG/Project/resources/images/negativo.jpg")
 	{
 		this->width = width;
 		this->height = height;

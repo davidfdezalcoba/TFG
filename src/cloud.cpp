@@ -11,7 +11,7 @@ using namespace std;
 Cloud :: Cloud(float width, float height) : 
 	cloudShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/cloud/vertexShader.vs",
 				  "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/cloud/fragmentShader.frs"),
-	vl("/home/david/Projects/TFG/Project/resources/objects/scalar.csv", false),
+	vl("/home/david/Projects/TFG/Project/resources/objects/cloud/scalar.csv", false),
 	uMax(0)
 	{
 		this->width = width;

@@ -7,7 +7,7 @@ Revolution :: Revolution(float width, float height) :
 				 "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/revolution/geometryshader.grs"), 
 	pointShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/revolution/pointshader.vs",
 				"/home/david/Projects/TFG/Project/src/shaders/3Dshaders/revolution/pointshader.frs"), uNum(25),
-	vLoader("/home/david/Projects/TFG/Project/resources/objects/revolution/bezier.vtx"),
+	vLoader("/home/david/Projects/TFG/Project/resources/objects/revolution/curve.vtx"),
 	vLoader2("/home/david/Projects/TFG/Project/resources/objects/revolution/axis.vtx")
 	{
 		camera = Camera(glm::vec3(3.0f, 3.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f), 225, -30);

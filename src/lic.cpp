@@ -7,7 +7,7 @@ using namespace std;
 Lic :: Lic(float width, float height) : 
 	licShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/lic/vertexshader.vs", 
 				"/home/david/Projects/TFG/Project/src/shaders/3Dshaders/lic/fragmentshader.frs"), 
-		vLoader("/home/david/Projects/TFG/Project/resources/objects/lic/grid.txt", "/home/david/Projects/TFG/Project/resources/objects/lic/prueba.txt"),
+		vLoader("/home/david/Projects/TFG/Project/resources/objects/lic/grid.txt", "/home/david/Projects/TFG/Project/resources/objects/lic/indices.txt"),
 		uLength(20)
 	{
 		this->noisetexture = ImageFromFile("/home/david/Projects/TFG/Project/resources/objects/lic/whitenoise.png", false);
