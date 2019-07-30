@@ -5,7 +5,8 @@
 
 struct MyVertex {
     glm::vec3 Position; // position
-    glm::vec3 Color; // bitangent
+    glm::vec3 Color; // color
+	glm::vec2 TexCoords;
 };
 
 #endif

@@ -1,0 +1,41 @@
+#version 400 core
+out vec4 fFragColor;
+
+in vec2 vTexCoords;
+
+uniform int uLength;
+uniform sampler2D texture1;
+uniform sampler2D texture2;
+
+void main()
+{    
+	vec3 color = texture( texture1, vTexCoords ).rgb;
+	vec2 st = vTexCoords;
+	float stp = 0.00281;
+
+	for( int i = 0; i < uLength; i++ )
+	{
+		vec2 k1 = texture( texture2, st ).xy;
+		vec2 k2 = texture( texture2, st + k1*stp/2 ).xy;
+		vec2 k3 = texture( texture2, st + k2*stp/2 ).xy;
+		vec2 k4 = texture( texture2, st + k3*stp).xy;
+		vec2 ks = k1 + 2*k2 + 2*k3 + k4;
+		st += stp/6*ks;
+		st = clamp( st, 0., 1. );
+		color += vec3( texture( texture1, st ) );
+	}
+	st = vTexCoords;
+	for( int i = 0; i < uLength; i++ )
+	{
+		vec2 k1 = texture( texture2, st ).xy;
+		vec2 k2 = texture( texture2, st - k1 * stp / 2 ).xy;
+		vec2 k3 = texture( texture2, st - k2 * stp / 2 ).xy;
+		vec2 k4 = texture( texture2, st - stp*k3).xy;
+		vec2 ks = k1 + 2*k2 + 2*k3 + k4;
+		st -= stp/6*ks;
+		st = clamp( st, 0., 1. );
+		color += vec3( texture( texture1, st ) );
+	}
+	color /= float(2*uLength + 1); 
+    fFragColor = vec4(color, 1.0f);
+}

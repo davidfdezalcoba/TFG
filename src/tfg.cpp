@@ -14,6 +14,7 @@
 #include "negative.h"
 #include "cloud.h"
 #include "revolution.h"
+#include "lic.h"
 
 #include <iostream>
 #include <stdio.h>
@@ -188,7 +189,10 @@ void setOptions(const Modes & mode){
 			glfwSetCursorPosCallback(window, mouse_callback);
 			glfwSetScrollCallback(window, scroll_callback);
 			break;
-		default: ;
+		default:
+			glfwSetCursorPosCallback(window, mouse_callback);
+			glfwSetScrollCallback(window, scroll_callback);
+			break;
 	}
 }
 
@@ -212,6 +216,9 @@ Object* setupModel(const Modes & mode){
 		case revolution:
 			return new Revolution(SCR_WIDTH, SCR_HEIGHT);
 			break;
+		case lic:
+			return new Lic(SCR_WIDTH, SCR_HEIGHT);
+			break;
 		default:;	
 	}
 	return nullptr;
@@ -224,5 +231,6 @@ Modes selectmode(char * mode){
 	else if (strncmp(mode, "negative", 7) == 0) return negative;
 	else if (strncmp(mode, "cloud", 7) == 0) return cloud;
 	else if (strncmp(mode, "revolution", 7) == 0) return revolution;
+	else if (strncmp(mode, "lic", 7) == 0) return lic;
 	else return revolution;
 }
