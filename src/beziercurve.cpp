@@ -6,7 +6,9 @@ BezierCurve :: BezierCurve(float width, float height) :
 				 "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/bezier/fragmentshader.frs",
 				 "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/bezier/geometryshader.grs"), 
 	pointShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/bezier/pointshader.vs",
-				"/home/david/Projects/TFG/Project/src/shaders/3Dshaders/bezier/pointshader.frs"), uNum(25),
+				"/home/david/Projects/TFG/Project/src/shaders/3Dshaders/bezier/pointshader.frs"),
+	axisShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/bezier/axisshader.vs",
+				"/home/david/Projects/TFG/Project/src/shaders/3Dshaders/bezier/axisshader.frs"), uNum(25),
 	vLoader("/home/david/Projects/TFG/Project/resources/objects/bezier/bezier.vtx"),
 	vLoader2("/home/david/Projects/TFG/Project/resources/objects/bezier/axis.vtx")
 	{
@@ -21,7 +23,8 @@ void BezierCurve :: draw(){
 	pointShader.use();
 	vLoader.Draw(pointShader, GL_POINTS);	
 	glLineWidth(1);
-	vLoader2.Draw(pointShader, GL_LINES);	
+	axisShader.use();
+	vLoader2.Draw(axisShader, GL_LINES);	
 	bezierShader.use();
 	glLineWidth(3);
 	vLoader.Draw(bezierShader, GL_LINES_ADJACENCY);	
@@ -38,6 +41,21 @@ void BezierCurve :: processInput(GLFWwindow *window){
 		{camera.ProcessKeyboard(LEFT, deltaTime);}
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		{camera.ProcessKeyboard(RIGHT, deltaTime);}
+    if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+		{uNum++;}
+    if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+		{uNum--;}
+    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+		{vLoader.getNextActiveVertex();}
+    if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
+		{vLoader.moveVertexX(
+			glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS ? 0 : 1);}
+    if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS)
+		{vLoader.moveVertexY(
+			glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS ? 0 : 1);}
+    if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS)
+		{vLoader.moveVertexZ(
+			glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS ? 0 : 1);}
 }
 
 void BezierCurve :: setUniforms(){
@@ -60,4 +78,10 @@ void BezierCurve :: setUniforms(){
 	pointShader.setMat4("uProjection", projection);
 	pointShader.setVec3("uViewPos", camera.Position);
 	pointShader.setVec3("uLight.position", lightPos);
+	axisShader.use();	
+	axisShader.setMat4("uModel", model);
+	axisShader.setMat4("uView", view);
+	axisShader.setMat4("uProjection", projection);
+	axisShader.setVec3("uViewPos", camera.Position);
+	axisShader.setVec3("uLight.position", lightPos);
 }

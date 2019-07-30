@@ -66,11 +66,11 @@ private:
 	vector<glm::uvec3> indices;
 	unsigned int VAO, VBO, EBO;
 
+	// This function loads vertices
 	void loadVertices(const string &path){
 		ifstream in(path);
 		auto cinbuf = std::cin.rdbuf(in.rdbuf()); //save old buf and redirect std::cin to casos.txt
 		MyVertex vertexToBeLoaded;
-		vertexToBeLoaded.Color = glm::vec3(1.0f, 0.0f, 0.0f);
 		cin >> this->numVertices;
 		int numCoords;
 		cin >> numCoords;
@@ -83,9 +83,11 @@ private:
 			vertexToBeLoaded.TexCoords = glm::vec2(vertexToBeLoaded.Position.x, vertexToBeLoaded.Position.y);
 			this->vertices.push_back(vertexToBeLoaded);
 		}
+		this->vertices[0].Color = glm::vec3(1.0f, 0.0f, 0.0f);
 		std::cin.rdbuf(cinbuf); //reset to standard input again
 	}
 
+	// This function loads indices to EBO if there is a path provided
 	void loadIndices(const string & indexpath){
 		if ( indexpath != "" ) {
 			drawfromindices = true;
@@ -118,6 +120,7 @@ private:
 		// vertex position
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*)0);
+
 		// vertex color
 		glEnableVertexAttribArray(1);
 		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*)(3*sizeof(float)));

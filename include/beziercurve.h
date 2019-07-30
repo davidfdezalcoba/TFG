@@ -14,6 +14,7 @@ public:
 private:
 	Shader bezierShader;	
 	Shader pointShader;
+	Shader axisShader;
 	float uNum;
 	VertexLoader vLoader;
 	VertexLoader vLoader2;
