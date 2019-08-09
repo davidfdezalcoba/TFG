@@ -1,19 +1,10 @@
-% +--------------------------------------------------------------------+
-% | Sample Chapter 3
-% +--------------------------------------------------------------------+
-
 \cleardoublepage
 
-% +--------------------------------------------------------------------+
-% | Replace "This is Chapter 3" below with the title of your chapter.
-% | LaTeX will automatically number the chapters.
-% +--------------------------------------------------------------------+
-
-\chapter{Shaders y Visualización Científica}
+\chapter{Shaders Gráficos}
 \label{makereference3}
 
-Como se ha visto en la sección~\ref{makereference2.3}, el pipeline de gráficos de
-OpenGL tiene cuatro etapas programables:
+Como se ha visto en la sección~\ref{makereference2.3}, el pipeline de gráficos
+de OpenGL tiene cuatro etapas programables:
 
 \begin{itemize}
 		\item Shader de Vértices (Vertex Shader)
@@ -25,12 +16,6 @@ OpenGL tiene cuatro etapas programables:
 		\item Shader Geométrico (Geometry Shader)
 		\item Shader de Fragmento (Fragment Shader)
 \end{itemize}
-
-En este capítulo se explicará cómo funcionan, cómo desarrollarlos y cómo
-utilizarlos para resolver problemas de visualización científica habituales.
-
-\section{Shaders}
-\label{makereference3.1}
 
 Los shaders gráficos son un tipo de programa utilizado inicialmente para
 producir niveles apropiados de luz, oscuridad y color en una imagen. Sin
@@ -45,12 +30,22 @@ desarrolladores tuviesen más control sobre el pipeline de renderizado.---\\
 Durante el proceso de desarrollo de shaders no es necesario incluir todas las
 etapas que se muestran en la Figura~\ref{fig2.2b}, aunque normalmente, si se
 decide utilizar alguno de ellos, se requiere utilizar, al menos, un Vertex
-Shader. 
+Shader. \\
 
-Los shaders del pipeline se comunican entre ellos mediante variables
-proporcionadas por GLSL, siendo la salida de un shader la entrada del siguiente,
-como se muestra en la Figura~\ref{fig3.1}. Un breve resumen acerca del lenguaje
-GLSL se incluye en el Apéndice~\ref{ApendiceA}.
+Los datos se proporcionan a los shaders de dos maneras distintas desde la
+aplicación principal. La primera es proporcionando los datos necesarios para el
+renderizado de vértices a la primera etapa, el Vertex Shader. A partir de ese
+momento Los shaders del pipeline se comunican entre ellos mediante variables
+proporcionadas por GLSL o definidas por el programador en los shaders, siendo la
+salida de un shader la entrada del siguiente, como se muestra en la
+Figura~\ref{fig3.1}. Un breve resumen acerca del lenguaje GLSL se incluye en el
+Apéndice~\ref{ApendiceA}. \\
+
+El segundo modo de especificar datos a los shaders es mediante variables
+\verb|uniform|. Estas variables se definen en los shaders. Se trata de variables
+de solo lectura por parte de los shaders. Al contrario que las variables
+definidas como entrada y salida de un shader a otro, estas variables toman sus
+valores del programa principal cada vez que se invoca el shader.  \\
 
 \begin{figure}
 		\centering
@@ -59,7 +54,7 @@ GLSL se incluye en el Apéndice~\ref{ApendiceA}.
 		\label{fig3.1}
 \end{figure}
 
-\subsection{Vertex Shader}
+\section{Vertex Shader}
 \label{ref:Vertex}
 
 El Vertex Shader es la etapa de sombreado en el pipeline de renderizado que se
@@ -80,7 +75,7 @@ Normalmente, las operaciones que se realizan en el Vertex Shader son
 transformaciones para el espacio de post-proyección, iluminación por vértice o
 preparación para las siguientes etapas del pipeline. \\
 
-\subsection{Tessellation Shaders}
+\section{Tessellation Shaders}
 \label{ref:TesShaders}
 
 La Teselación es la etapa, opcional, del pipeline de renderizado que consiste en
@@ -91,9 +86,9 @@ etapas se encarga de una parte del proceso de teselación.\\
 
 En esta sección se explican los dos shaders involucrados, además de la etapa
 intermedia, llamada generador de primitivas de teselación, pues resulta
-importante para entender el proceso y las entradas y salidas a los shaders.
+importante para entender el proceso y las entradas y salidas a los shaders.\\
 
-\subsubsection{Tessellation Control Shader}
+\subsection{Tessellation Control Shader}
 \label{ref:TesConShader}
 
 El Tessellation Control Shader (TCS)~\cite{TesConShader} es la primera etapa del
@@ -114,7 +109,7 @@ invocaciones como vértices hay en dicho parche. \\
 En el caso de no utilizar un TCS, se pueden pasar valores por defecto a las
 siguientes etapas de teselación.
 
-\subsubsection{Generador de primitivas de teselación}
+\subsection{Generador de primitivas de teselación}
 \label{ref:TesPriGen}
 
 El generador de primitivas de teselación~\cite{TesPriGen} es la etapa que se
@@ -248,7 +243,7 @@ Por tanto, cuando se cumple que $n-f=0$ se tiene que todos los segmentos tienen
 igual longitud. Estos comportamientos se pueden observar en las
 Figuras~\ref{fig3.3},~\ref{fig3.4}.
 
-\subsubsection{Tessellation Evaluation Shader}
+\subsection{Tessellation Evaluation Shader}
 \label{ref:TesEvaShader}
 
 El Tessellation Evaluation Shader (TES)~\cite{TesEvaShader} es la etapa opcional
@@ -272,7 +267,7 @@ El TES, en caso de ser utilizado, debe especificar el tipo de primitiva que
 servirá como entrada al geometry shader. Este tipo puede ser puntos, isolíneas,
 triángulos o cuadriláteros.
 
-\subsection{Geometry Shader}
+\section{Geometry Shader}
 \label{ref:GeoShader}
 
 El Geometry Shader~\cite{GeoShader} es un programa escrito en GLSL que
@@ -352,7 +347,7 @@ se deben especificar los vértices que forman la primera, llamar a
 \verb|EndPrimitive()|, generar los vértices que forman la segunda y llamar de
 nuevo a \verb|EndPrimitive()| para generar la segunda primitiva.
 
-\subsection{Fragment Shader}
+\section{Fragment Shader}
 \label{ref:FragShader}
 
 El Fragment Shader~\cite{FragShader} es la etapa posterior a la rasterización.
@@ -380,12 +375,3 @@ un fragmento en concreto, haciendo que este fragmento no pase a las siguientes
 etapas del pipeline. Esto puede ser útil para descartar fragmentos cuyos valores
 generados en la ejecución se queden fuera de unos límites impuestos por el
 programador.
-
-\section{Uso en Visualización Científica}
-\label{ref:SciVis}
-
-Una vez entendido cómo funcionan los shaders y qué entradas y salidas toman, en
-esta sección se explora sus posibles aplicaciones en la disciplina de la
-visualización científica. Para ello, mostraremos algunos problemas típicos de
-visualización y analizaremos cómo resolver estos problemas gracias a las
-capacidades que cada uno de los shaders nos proporcionan.

@@ -19,17 +19,42 @@
 \contentsline {subsection}{\numberline {2.3.6}Rasterizaci\IeC {\'o}n}{10}{subsection.2.3.6}
 \contentsline {subsection}{\numberline {2.3.7}Procesamiento de Fragmentos}{10}{subsection.2.3.7}
 \contentsline {section}{\numberline {2.4}Diferencias con Direct3D}{11}{section.2.4}
-\contentsline {chapter}{\numberline {3}Shaders y Visulizaci\IeC {\'o}n Cient\IeC {\'\i }fica}{13}{chapter.3}
-\contentsline {section}{\numberline {3.1}Shaders}{13}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Vertex Shader}{14}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Tessellation Shaders}{15}{subsection.3.1.2}
-\contentsline {subsubsection}{Tessellation Control Shader}{15}{section*.13}
-\contentsline {subsubsection}{Generador de primitivas de teselaci\IeC {\'o}n}{15}{section*.14}
-\contentsline {subsubsection}{Tessellation Evaluation Shader}{17}{section*.18}
-\contentsline {subsection}{\numberline {3.1.3}Geometry Shader}{18}{subsection.3.1.3}
-\contentsline {subsection}{\numberline {3.1.4}Fragment Shader}{19}{subsection.3.1.4}
-\contentsline {section}{\numberline {3.2}Uso en Visualizaci\IeC {\'o}n Cient\IeC {\'\i }fica}{20}{section.3.2}
-\contentsline {chapter}{\numberline {4}Aplicaci\IeC {\'o}n}{21}{chapter.4}
-\contentsline {chapter}{\numberline {5}Conclusiones y Trabajo Futuro}{22}{chapter.5}
-\contentsline {chapter}{Bibliography}{24}{chapter*.20}
-\contentsline {chapter}{\numberline {A}El lenguaje GLSL}{25}{appendix.Alph1}
+\contentsline {chapter}{\numberline {3}Shaders Gr\IeC {\'a}ficos}{13}{chapter.3}
+\contentsline {section}{\numberline {3.1}Vertex Shader}{14}{section.3.1}
+\contentsline {section}{\numberline {3.2}Tessellation Shaders}{15}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Tessellation Control Shader}{15}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Generador de primitivas de teselaci\IeC {\'o}n}{16}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Tessellation Evaluation Shader}{17}{subsection.3.2.3}
+\contentsline {section}{\numberline {3.3}Geometry Shader}{18}{section.3.3}
+\contentsline {section}{\numberline {3.4}Fragment Shader}{19}{section.3.4}
+\contentsline {chapter}{\numberline {4}Visualizaci\IeC {\'o}n Cient\IeC {\'\i }fica}{21}{chapter.4}
+\contentsline {section}{\numberline {4.1}Manipulaci\IeC {\'o}n de im\IeC {\'a}genes}{21}{section.4.1}
+\contentsline {section}{\numberline {4.2}Curvas y superficies de B\IeC {\'e}zier}{21}{section.4.2}
+\contentsline {section}{\numberline {4.3}Visualizaci\IeC {\'o}n de datos en 3D}{24}{section.4.3}
+\contentsline {section}{\numberline {4.4}Superficies de revoluci\IeC {\'o}n}{24}{section.4.4}
+\contentsline {section}{\numberline {4.5}Coloreado de terrenos}{25}{section.4.5}
+\contentsline {section}{\numberline {4.6}Line Integral Convolution}{25}{section.4.6}
+\contentsline {subsection}{\numberline {4.6.1}Computar la l\IeC {\'\i }nea de flujo}{26}{subsection.4.6.1}
+\contentsline {subsection}{\numberline {4.6.2}Computar los pesos de convoluci\IeC {\'o}n}{26}{subsection.4.6.2}
+\contentsline {subsection}{\numberline {4.6.3}Computar los valores de salida del pixel}{26}{subsection.4.6.3}
+\contentsline {chapter}{\numberline {5}Aplicaci\IeC {\'o}n desarrollada}{29}{chapter.5}
+\contentsline {section}{\numberline {5.1}Plan de desarrollo}{29}{section.5.1}
+\contentsline {section}{\numberline {5.2}Herramientas de desarrollo}{30}{section.5.2}
+\contentsline {section}{\numberline {5.3}Dise\IeC {\~n}o de la aplicaci\IeC {\'o}n}{31}{section.5.3}
+\contentsline {section}{\numberline {5.4}Matem\IeC {\'a}ticas necesarias}{32}{section.5.4}
+\contentsline {subsection}{\numberline {5.4.1}Transformaciones matriciales}{32}{subsection.5.4.1}
+\contentsline {subsection}{\numberline {5.4.2}\IeC {\'A}ngulos de Euler y Cuaterniones}{32}{subsection.5.4.2}
+\contentsline {subsection}{\numberline {5.4.3}M\IeC {\'e}todos Num\IeC {\'e}ricos para la resoluci\IeC {\'o}n de Ecuaciones Diferenciales}{32}{subsection.5.4.3}
+\contentsline {subsection}{\numberline {5.4.4}Otras F\IeC {\'o}rmulas}{32}{subsection.5.4.4}
+\contentsline {section}{\numberline {5.5}Shaders en la aplicaci\IeC {\'o}n}{32}{section.5.5}
+\contentsline {subsection}{\numberline {5.5.1}Coloreado de terrenos}{32}{subsection.5.5.1}
+\contentsline {subsection}{\numberline {5.5.2}Curvas de B\IeC {\'e}zier}{32}{subsection.5.5.2}
+\contentsline {subsection}{\numberline {5.5.3}Superficies de B\IeC {\'e}zier}{32}{subsection.5.5.3}
+\contentsline {subsection}{\numberline {5.5.4}S\IeC {\'o}lidos de revoluci\IeC {\'o}n}{32}{subsection.5.5.4}
+\contentsline {subsection}{\numberline {5.5.5}Nube de puntos}{32}{subsection.5.5.5}
+\contentsline {subsection}{\numberline {5.5.6}Negativo de una imagen}{32}{subsection.5.5.6}
+\contentsline {subsection}{\numberline {5.5.7}Detecci\IeC {\'o}n de bordes}{32}{subsection.5.5.7}
+\contentsline {subsection}{\numberline {5.5.8}Line Integral Convolution}{32}{subsection.5.5.8}
+\contentsline {chapter}{\numberline {6}Conclusiones y Trabajo Futuro}{33}{chapter.6}
+\contentsline {chapter}{Bibliography}{36}{chapter*.23}
+\contentsline {chapter}{\numberline {A}El lenguaje GLSL}{37}{appendix.Alph1}

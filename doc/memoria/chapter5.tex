@@ -1,4 +1,175 @@
 \cleardoublepage
 
-\chapter{Conclusiones y Trabajo Futuro}
+\chapter{Aplicación desarrollada}
 \label{makereference5}
+
+En este capítulo se introducirá la aplicación que se ha desarrollado con el
+fin de demostrar los conceptos expuestos en los capítulos anteriores. En
+concreto se desarrollarán shaders para los siguientes problemas:
+
+\begin{itemize}
+		\item Coloreado de terrenos
+		\item Curvas de Bézier
+		\item Superficies de Bézier
+		\item Sólidos de revolución
+		\item Nubes de puntos
+		\item Negativo de una imagen
+		\item Detección de bordes en una imagen
+		\item Line Integral Convolution
+\end{itemize}
+
+Para el desarrollo de la aplicación y los shaders será necesario introducir
+algunos conceptos matemáticos importantes, que se explican en la
+sección~\ref{makereference5.1}.
+
+\section{Plan de desarrollo}
+\label{makereference5.1}
+
+Durante las primera semanas de desarrollo de la aplicación lo más importante fue
+realizar un exhaustivo estudio del funcionamiento de OpenGL, así como la lectura
+y realización de tutoriales sobre la materia. Una vez adquirido el conocimiento
+necesario, se comenzó a desarrollar el esqueleto principal de la aplicación,
+sobre el cual se incorporarían después los distintos tipos de visualización a
+realizar.\\
+
+Una vez desarrollado este esqueleto se comenzó a la preparación de los shaders
+que se utilizarían en cada uno de los problemas, para lo que se utilizó en gran
+medida la información expuesta en el texto~\citet{Bailey}.\\
+
+El siguiente paso fue conseguir datos y prepararlos adecuadamente para poder
+mostrar las capacidades de visualización de la aplicación, así como comprobar su
+correcto funcionamiento.\\
+
+Lo anterior fue reiterado con cada uno de los problemas, añadiéndose cada vez
+más a lo largo del desarrollo de todo el proyecto.
+
+\section{Herramientas de desarrollo}
+\label{makereference5.2}
+
+Como entorno de desarrollo principal se ha utilizado el sistema operativo Ubuntu
+Linux 18.04 LTS~\cite{UBUNTU}. En este sistema, además, se han utilizado las
+siguientes herramientas de desarrollo:
+
+\begin{itemize}
+		\item Vim como editor de textos.~\cite{VIM}
+		\item Git para el control de versiones.~\cite{GIT}
+		\item Github como respositorio.~\cite{GITHUB}
+		\item GCC como compilador.~\cite{GCC}
+		\item GDB para la depuración.~\cite{GDB}
+		\item Make para la gestión de dependencias.~\cite{MAKE}
+\end{itemize}. 
+
+Asimismo, siguiendo las recomendaciones del tutorial~\citet{LearnOpenGL}, se han
+utilizado las siguientes librerías:
+
+\begin{itemize}
+		\item GLFW~\cite{GLFW}. GLFW es una librería orientada específicamente a
+				OpenGL que proporciona las necesidades básicas para el
+				renderizado en pantalla. Permite crear un contexto de OpenGL,
+				definir parámetros de ventana y manejar la entrada del usuario.
+				Estas son las funciones que utilizaremos en la aplicación.
+		\item GLAD~\cite{GLAD}. La localización de funciones de OpenGL depende
+				tanto del controlador gráfico utilizado como del sistema
+				operativo utilizado. Esta localización es desconocida en tiempo
+				de  compilación y ha de ser conseguida en tiempo de ejecución.
+				Es, pues, tarea del programador conseguir la localización de
+				estas funciones. GLAD es una  librería que realiza esta tarea
+				automáticamente.
+		\item Assimp~\cite{ASSIMP}. Assimp --- \textit{The
+				Open-Asset-Importer-Lib} --- es una librería que permite
+				importar diferentes formatos de modelos 3D de una manera
+				uniforme. Será utilizado para cargar los modelos para el
+				colorado de terrenos.
+		\item GLM~\cite{GLM}. GLM --- OpenGL Mathematics --- es una librería
+				para matemáticas en software gráfico en C++ basada en las
+				especificaciones del lenguaje GLSL. Proporciona funciones
+				diseñadas e implementadas con el mismo convenio de nombres y
+				funcionalidades que GLSL. Proporciona capacidades como
+				transformaciones de matrices, cuaterniones, empaquetado de
+				datos, aleatoriedad, ruido\ldots
+		\item Otras librerías especificas del sistema operativo, como Pthreads,
+				xrandr, x11, xi, xcursor, etc.
+\end{itemize}
+
+\section{Diseño de la aplicación}
+\label{makereference5.3}
+
+Para esta aplicación se ha optado por un diseño modular orientado a objetos, en
+el que poder incrementalmente añadir distintos tipos de visualización sin tener
+demasiados problemas. Como se ha expuesto en la sección~\ref{makereference5.1}
+la aplicación consta de un esqueleto principal utilizado por todos los tipos de
+visualización. Este esqueleto consta de una ventana principal, creada en el
+programa principal, en la que se renderizará el objeto particular que representa
+el tipo de visualización. Así, con el fin de añadir un nuevo tipo de
+visualización solo se habrían de realizar las siguientes acciones:\\
+
+\begin{enumerate}
+		\item Crear un nuevo objeto que implemente los métodos necesarios
+				de la clase \verb|Object|.
+		\item Añadir un nuevo modo al \verb|enum Modes|.
+		\item Añadir las opciones necesarias para dicho objeto en el programa
+				principal e incluir la nueva clase \verb|#include "class.h"|.
+		\item Actualizar las dependencias en el Makefile.
+\end{enumerate}
+
+En esta ventana principal se tiene por defecto un sistema de cámara en primera
+persona, con la capacidad de moverse para visualizar mejor detalles del objeto
+en cuestión. Este sistema puede ser sobreescribir en el objeto específico en
+caso de necesitar otro comportamiento. \\
+
+En la clase \verb|Object| existen tres métodos virtuales puros, que han de ser
+implementados por las clases específicas de cada tipo de visualización:
+
+\begin{itemize}
+		\item \verb|draw()|, que ha de encargarse de dibujar el objeto en
+				cuestión.
+		\item \verb|processInputGLFWwindow * window)|, que ha de especificar que
+				hacer con la entrada del usuario para este tipo de
+				visualización.
+		\item \verb|setUniforms()|, que ha de especificar las variables
+				\verb|uniform| que utilicen los shaders de este tipo de
+				visualización.
+\end{itemize}
+
+Estos métodos se llaman una vez por vuelta del bucle principal. En la sección
+siguiente se introducen las matemáticas necesarias e importantes para el
+desarrollo de la aplicación y los shaders concretos.
+
+\section{Matemáticas necesarias}
+\label{makereference5.4}
+
+Con el fin de desarrollar el sistema de cámaras que utiliza la aplicación es
+necesario conocer varios conceptos importantes sobre álgebra lineal y
+transformaciones matriciales, así como los ángulos de Euler y su relación con
+los cuaterniones. También se explorarán distintos métodos numéricos, relevantes
+en el método de Line Integral Convolution, así como fórmulas matemáticas
+específicas de cada tipo de visualización.
+
+\subsection{Transformaciones matriciales}
+\label{makereference5.4.1}
+\subsection{Ángulos de Euler y Cuaterniones}
+\label{makereference5.4.2}
+\subsection{Métodos Numéricos para la resolución de Ecuaciones Diferenciales}
+\label{makereference5.4.3}
+\subsection{Otras Fórmulas}
+\label{makereference5.4.4}
+
+\section{Shaders en la aplicación}
+\label{makereference5.5}
+
+\subsection{Coloreado de terrenos}
+\label{makereference5.5.1}
+\subsection{Curvas de Bézier}
+\label{makereference5.5.2}
+\subsection{Superficies de Bézier}
+\label{makereference5.5.3}
+\subsection{Sólidos de revolución}
+\label{makereference5.5.4}
+\subsection{Nube de puntos}
+\label{makereference5.5.5}
+\subsection{Negativo de una imagen}
+\label{makereference5.5.6}
+\subsection{Detección de bordes}
+\label{makereference5.5.7}
+\subsection{Line Integral Convolution}
+\label{makereference5.5.8}
