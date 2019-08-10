@@ -10,9 +10,8 @@ explicando los shaders utilizados en ella.
 \section{Manipulación de imágenes}
 \label{ref:images}
 
-\begin{figure}
-		
-\end{figure}
+% Incluir imágenes de las diferentes manipulaciones
+% TODO
 
 La manipulación de imágenes es la disciplina que incluye las diferentes técnicas
 de filtrado, combinación o modificación de imágenes con el fin de resaltar
@@ -261,7 +260,8 @@ Figura~\ref{fig:lic}). \\
 	\begin{subfigure}{.45\textwidth}
 		\includegraphics[height=5cm,width=\textwidth]{figures/lic1.png}
 	\end{subfigure}
-	\caption{Resultado del método Line Integral Convolution}
+	\caption{Resultado del método Line Integral Convolution. Imagen
+	de~\citet{osti_10185520}}
 	\label{fig:lic}
 \end{figure}
 
@@ -272,13 +272,34 @@ Para cada pixel en la imagen de entrada, hacer:
 \begin{enumerate}
 		\item Computar la línea de flujo \textit{(streamline)} para una longitud
 				determinada por el usuario en direcciones positivas y
-				negativas. (Figura~\ref{fig:licpaso1})
+				negativas. (Figura~\ref{fig:licstreamline})
 		\item \label{ref:licpaso2} Para cada punto en la streamline, computar su
-				peso de convolución $h_i$. (Figura~\ref{fig:licpaso2})
+				peso de convolución $h_i$. (Figura~\ref{fig:licweights})
 		\item Computar el valor de salida del pixel con los valores de entrada y
 				los pesos computados en~\ref{ref:licpaso2}.
-				(Figura~\ref{fig:licpaso3})
+				(Figura~\ref{fig:licoutputpixel})
 \end{enumerate}
+
+\begin{figure}
+		\centering
+		\includegraphics[height=9cm]{figures/licstreamline.png}
+		\caption{Computar la línea de flujo. Imagen de~\citet{licthesis}}	
+		\label{fig:licstreamline}
+\end{figure}
+
+\begin{figure}
+		\centering
+		\includegraphics[height=9cm]{figures/licweights.png}
+		\caption{Computar los pesos. Imagen de~\citet{licthesis}}	
+		\label{fig:licweights}
+\end{figure}
+
+\begin{figure}
+		\centering
+		\includegraphics[height=9cm]{figures/licoutputpixel.png}
+		\caption{Computar valores de salida del pixel. Imagen de~\citet{licthesis}}	
+		\label{fig:licoutputpixel}
+\end{figure}
 
 Como imagen de entrada se puede utilizar, realmente, cualquier imagen,
 haciendo ver las líneas de flujo con los colores de la imagen original. Sin
@@ -298,7 +319,7 @@ autores originales en~\citet{osti_10185520}, o el método de Runge-Gutta de orde
 explican estos métodos como preparación para su implementación. De esta manera,
 se consiguen una serie de puntos a lo largo de la línea de flujo, dependiendo
 del paso escogido en el método numérico y la longitud de la línea escogida por
-el usuario.\\
+el usuario.
 
 \subsection{Computar los pesos de convolución}
 \label{ref:convolution}
@@ -309,7 +330,7 @@ ha de resolver la integral~\eqref{eq:11}.
 
 \begin{equation}
 		h_i = \int_{a}^{b}k(\omega) d\omega \label{eq:11}
-\end{equation}
+\end{equation}\\
 
 donde $i$ se representa el índice del punto actual en la línea de flujo, $a$
 es la distancia a lo largo de la línea de flujo entre el punto actual y el pixel

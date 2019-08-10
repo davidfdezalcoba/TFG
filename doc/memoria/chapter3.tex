@@ -109,6 +109,26 @@ invocaciones como vértices hay en dicho parche. \\
 En el caso de no utilizar un TCS, se pueden pasar valores por defecto a las
 siguientes etapas de teselación.
 
+\begin{figure}[t]
+	\centering
+	\begin{subfigure}{.45\textwidth}
+		\includegraphics[width=\textwidth]{figures/TriangleLevels.png}	
+		\caption{Niveles de triángulos}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{.45\textwidth}
+		\includegraphics[width=\textwidth]{figures/QuadLevels.png}	
+		\caption{Niveles de cuadriláteros}
+	\end{subfigure}
+	\par\bigskip \par\bigskip \par\bigskip
+	\begin{subfigure}{.45\textwidth}
+		\includegraphics[width=\textwidth]{figures/300px-Tessellation_isoline.png}	
+		\caption{Niveles de isolíneas}
+	\end{subfigure}
+	\label{fig:tesselationlevels}	
+	\caption{Teselación - Funcionamiento de los niveles}
+\end{figure}
+
 \subsection{Generador de primitivas de teselación}
 \label{ref:TesPriGen}
 
@@ -136,13 +156,13 @@ esta etapa se ve afectada por distintos factores:
 \end{itemize}
 
 La cantidad de teselación a realizar se define en niveles de teselación internos
-y externos. Funcionan de la siguiente manera: un nivel de teselación 4 indica
-que un borde se convertirá en 4 bordes (2 vértices se convertirán en 5). El
-nivel externo define el grado de teselación para los bordes externos de la
-primitiva. Esto permite que dos parches distintos se conecten apropiadamente, a
-pesar de tener distintos niveles de teselación dentro del parche. El nivel
-interno hace referencia el número de teselaciones a realizar dentro del parche
-abstracto. \\
+y externos (Ver Figura~\ref{fig:tesellationlevels}). Funcionan de la siguiente
+manera: un nivel de teselación 4 indica que un borde se convertirá en 4 bordes
+(2 vértices se convertirán en 5). El nivel externo define el grado de teselación
+para los bordes externos de la primitiva. Esto permite que dos parches distintos
+se conecten apropiadamente, a pesar de tener distintos niveles de teselación
+dentro del parche. El nivel interno hace referencia el número de teselaciones a
+realizar dentro del parche abstracto. \\
 
 Cabe destacar que no todos los parches abstractos utilizan los mismos niveles de
 teselación. Por ejemplo, los triángulos utilizan un único nivel interno y tres
@@ -266,6 +286,52 @@ un TES activo.\\
 El TES, en caso de ser utilizado, debe especificar el tipo de primitiva que
 servirá como entrada al geometry shader. Este tipo puede ser puntos, isolíneas,
 triángulos o cuadriláteros.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+			\includegraphics[height=8cm,width=\textwidth]{figures/TriInnerOnlyTriCorr.png}	
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+			\includegraphics[height=8cm,width=\textwidth]{figures/TriInnerOnlyPointCorr.png}	
+	\end{subfigure}
+	\newline
+	\begin{subfigure}{0.45\textwidth}
+			\includegraphics[height=8cm,width=\textwidth]{figures/TriOuterAndNotris.png}	
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+			\includegraphics[height=8cm,width=\textwidth]{figures/TriFull.png}	
+	\end{subfigure}
+	\caption{Teselación - Triángulos}
+	\label{fig:triangletessellation}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.40\textwidth}
+			\includegraphics[height=7cm,width=\textwidth]{figures/QuadInnerOnlyQuadCorr.png}	
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.40\textwidth}
+			\includegraphics[height=7cm,width=\textwidth]{figures/QuadInnerOnlyPointCorr.png}	
+	\end{subfigure}
+	\newline
+	\begin{subfigure}{0.40\textwidth}
+			\includegraphics[height=7cm,width=\textwidth]{figures/QuadOuterAndNotris.png}	
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.40\textwidth}
+			\includegraphics[height=7cm,width=\textwidth]{figures/QuadInnerOnlyLineCorr.png}	
+	\end{subfigure}
+	\newline
+	\begin{subfigure}{0.40\textwidth}
+			\includegraphics[height=7cm,width=\textwidth]{figures/QuadFull.png}	
+	\end{subfigure}
+	\caption{Teselación - Cuadriláteros}
+	\label{fig:quadtessellation}
+\end{figure}
 
 \section{Geometry Shader}
 \label{ref:GeoShader}

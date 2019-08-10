@@ -4,6 +4,7 @@ The top-level auxiliary file: principal.aux
 The style file: unsrtnat.bst
 Database file #1: references.bib
 Warning--empty year in 3dimages
+Warning--empty journal in osti_10185520
 Warning--empty booktitle in DEFANTI1991247
 Warning--empty year in OpenGL
 Warning--empty year in OpenGLARB
@@ -16,7 +17,6 @@ Warning--empty year in TesPriGen
 Warning--empty year in TesEvaShader
 Warning--empty year in GeoShader
 Warning--empty year in FragShader
-Warning--empty journal in osti_10185520
 Warning--empty year in UBUNTU
 Warning--empty year in VIM
 Warning--empty year in GIT
@@ -28,45 +28,45 @@ Warning--empty year in GLFW
 Warning--empty year in GLAD
 Warning--empty year in ASSIMP
 Warning--empty year in GLM
-You've used 32 entries,
+You've used 33 entries,
             2481 wiz_defined-function locations,
-            728 strings with 8325 characters,
-and the built_in function-call counts, 9367 in all, are:
-= -- 836
-> -- 284
+            734 strings with 8488 characters,
+and the built_in function-call counts, 9712 in all, are:
+= -- 858
+> -- 311
 < -- 36
-+ -- 155
-- -- 80
-* -- 456
-:= -- 1432
-add.period$ -- 126
-call.type$ -- 32
-change.case$ -- 61
-chr.to.int$ -- 21
-cite$ -- 57
-duplicate$ -- 515
-empty$ -- 993
-format.name$ -- 120
-if$ -- 2065
++ -- 165
+- -- 88
+* -- 483
+:= -- 1492
+add.period$ -- 129
+call.type$ -- 33
+change.case$ -- 62
+chr.to.int$ -- 22
+cite$ -- 58
+duplicate$ -- 534
+empty$ -- 1023
+format.name$ -- 129
+if$ -- 2136
 int.to.chr$ -- 12
-int.to.str$ -- 33
-missing$ -- 12
-newline$ -- 196
-num.names$ -- 96
-pop$ -- 416
+int.to.str$ -- 34
+missing$ -- 14
+newline$ -- 201
+num.names$ -- 99
+pop$ -- 428
 preamble$ -- 1
-purify$ -- 32
+purify$ -- 33
 quote$ -- 0
-skip$ -- 298
+skip$ -- 307
 stack$ -- 0
-substring$ -- 140
-swap$ -- 102
+substring$ -- 142
+swap$ -- 104
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 212
+type$ -- 216
 warning$ -- 25
-while$ -- 69
+while$ -- 71
 width$ -- 0
-write$ -- 448
+write$ -- 460
 (There were 25 warnings)

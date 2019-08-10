@@ -305,17 +305,278 @@ exclusiva para este tema. (Ver sección~\ref{makereference5.4.2}).
 \subsection{Métodos Numéricos para la resolución de Ecuaciones Diferenciales}
 \label{makereference5.4.3}
 
-Como ya se vio en la sección~\ref{ref:lic}, en el método del Line Integral Convolution
-se ha de utilizar un método numérico para computar la línea de flujo. En esta
-sección se analizan algunos de los métodos utilizados y propuestos tanto
-por~\citet{osti_10185520} como por \citet{licthesis}. 
+Como ya se vio en la sección~\ref{ref:lic}, en el método del Line Integral
+Convolution se ha de utilizar un método numérico para computar la línea de
+flujo. En esta sección se analizan algunos de los métodos utilizados y
+propuestos tanto por~\citet{osti_10185520} como por \citet{licthesis}.\\
+
+Para poder analizar los métodos hemos de introducir algunas definiciones
+relacionadas con ellos. Recordemos que un método numérico sirve para calcular de
+manera aproximada la solución de una ecuación diferencial en un intervalo $[t_0,
+T]$. Para ello, dividiremos el intervalo en una serie de puntos, dando lugar a
+los siguientes conceptos:
+
+\begin{itemize}
+
+		\item \textbf{Puntos de red.} Cada uno de los puntos en los que se
+				divide el intervalo $[t_0, T]$. Los subintervalos resultantes
+				pueden ser de longitud constante (Redes uniformes de paso
+				$h=\frac{T-t_0}{N}$) o de longitud variable, dando lugar a
+				los métodos númericos de paso variable.
+
+		\item \textbf{Esquema Numérico.} Se denomina esquema numérico al proceso
+				iterativo mediante el cual, conociendo los $r$ primeros valores
+				$x_0, x_1, \ldots, x_{r-1}$, que son aproximaciones de los
+				valores exactos $x(t_0),x(t_1),\ldots,x(t_{n-1})$ de la solución
+				de la ecuación diferencial en los puntos $t_0, t_1, \ldots,
+				t_{r-1}$ podemos calcular todos los demás valores $x_n, n =
+				r,\ldots,N$, que son aproximaciones de los valores exactos en
+				los puntos de red.
+
+				El esquema numérico se escribe de la siguiente forma:
+
+				\begin{equation}
+					\left\{ \begin{aligned}
+							& x_0,x_1,\ldots,x_{r-1} \; \textrm{dados} \\
+							& x_{n-r} = \Phi
+							(t_n,x_n,x_{n+1},\ldots,x_{n+r-1},h), \; n =
+							0,\ldots,N-r \\
+					\end{aligned} \right.
+				\end{equation}
+
+		\item \textbf{Error Local de Truncamiento.} Dado un esquema como el
+				anterior, suponiendo que las soluciones exactas verifican
+
+				\begin{equation}
+						x(t_{n+r}) = \Phi (t_n,
+						t_{n+1},\ldots,t_{n+r-1},x(t_n),x(t_{n+1}),\ldots,x(t_{n+r-1}))
+						+ h\tau_{n+r}(h)
+				\end{equation}
+
+				el error local de truncamiento viene dado por
+
+				\begin{equation}
+						\tau (h) := \max_{n=0,\ldots,N-r}|\tau_{n+r}(h)|	
+				\end{equation}
+
+				que consiste en el error que se comete al calcular el valor
+				exacto utilizando el esquema numérico.
+
+		\item \textbf{Consistencia.} Se dice que un método es consistente si
+
+				\begin{equation}
+						\lim_{h\to 0} \tau(h) = 0	
+				\end{equation}
+
+				Se dice que es consistente de orden $p$ si
+
+				\begin{equation}
+					\tau(h) = O(h^p)				
+				\end{equation}
+
+		\item \textbf{Error Global de Discretización.} Siguiendo la notación
+				anterior, el Error global de discretización viene dado por
+
+				\begin{equation}
+					\epsilon (h) := \max_{n=0,\ldots,N}|x_n - x(t_n)|
+				\end{equation}
+
+		\item \textbf{Convergencia.} Se dice que un método es convergente cuando
+				se verifica lo siguiente:
+
+				\begin{equation}
+						si \;\;\; \max_{k=0,\ldots,r-1}|x_k - x(t_k)|
+						\xrightarrow {h\to 0} 0	\;\;\; entonces \;\;\; \lim_{h\to
+						0}\epsilon(h) = 0
+				\end{equation}
+
+				Se dice que es convergente de orden $p$ si
+
+				\begin{equation}
+						\epsilon(h) = O(h^p)	
+				\end{equation}
+
+\end{itemize}
+
+Con estas nociones ya podemos empezar a analizar los distintos métodos
+utilizados, para así conocer cuáles proporcionarán mejores resultados. 
 
 \subsubsection{Método de Euler}
 \label{makereference5.4.3.1}
+
+El método de Euler es el más sencillo de los métodos numéricos a considerar. Se
+trata de un método por aproximación de la derivada. Para ver cómo aparece este
+método, hemos de recurrir a la definición de derivada. Para cada $t \in (t_0,T)$
+
+\begin{equation}
+		x'(t) = \lim_{h \to 0} \frac{x(t+h) - x(t)}{h} 	
+\end{equation}\\
+
+Si $h>0$ es suficientemente pequeño, podemos suponer que
+
+\begin{equation}
+		x'(t_n)\approx \frac{x(t_n+h) - x(t_n)}{h} = \frac{x(t_{n+1}) -
+		x(t_n)}{h}	
+\end{equation}\\
+
+lo que nos conduce a que
+
+\begin{equation}
+		x(t_{n+1}) \approx x(t_n) + hf(t_n,x(t_n))	
+\end{equation}\\
+
+De aquí aparece el esquema numérico del método de Euler
+
+\begin{equation}
+		\left\{ \begin{aligned}
+				& x_{n+1} = x_n + hf(t_n,x_n) \; n=0,\ldots,N-1 \\
+				& x_0 \approx a \\
+		\end{aligned} \right.
+\end{equation}\\
+
+En~\citet{ANNU} se puede ver una demostración de que el método de Euler supone
+un método \textbf{consistente de orden 1} y \textbf{convergente}.
+
 \subsubsection{Método de Euler de paso variable}
 \label{makereference5.4.3.2}
+
+El método de Euler de paso variable sigue la misma idea general que el método de
+Euler de paso uniforme. En este caso, sin embargo, el siguiente punto en el que
+calcular la solución aproximada se calcula en cada paso. Para ello, se ha de
+fijar previamente una tolerancia permitida para el error cometido. Por tanto,
+necesitamos ser capaces de \textbf{estimar} el error que vamos a cometer al
+escoger el siguiente paso. Entonces, si el error estimado es mayor que la
+tolerancia fijada, el cálculo se descarta y se vuelve a realiza, y si éste es
+menor que la tolerancia, entonces se acepta y se pasa al siguiente cálculo.\\
+
+Con el fin de realizar esta estimación, como hemos dicho, necesitamos introducir
+los siguientes conceptos:
+
+\begin{itemize}
+
+		\item \textbf{Error local relativo al paso $h$.} Se define el error local relativo
+				al paso $h$ en el nodo $t_{n+1} = t_n + h$ como 
+
+				\begin{equation}
+						ERR_n(h) := \frac{|y(t_n + h) - y_1(t_n,h)|}{h}	
+				\end{equation}
+
+				donde la función $y = y(t)$ es la solución del problema y la
+				función $y_1(t_n,h)$ representa la aproximación numérica desde
+				el instante $t_n$ en un paso $h$,dada por $y_1(t_n,h) :=  x_n +
+				h\Phi (t_n,x_n,h)$ Con esta notación, $x_{n+1} = y_1(t_n,hn+1)$.
+
+		\item \textbf{Error local relativo.} Se define el error local relativo
+				como 
+
+				\begin{equation}
+						ERR(h_1,\ldots,h_N):=\max_{n=1,\ldots,N-1}|ERR_n(h_n+1)|	
+				\end{equation}
+
+\end{itemize}
+
+De nuevo en~\citet{ANNU} podemos encontrar demostrado que si un método de paso
+adaptativo es consistente, estable y de orden $p$, entonces
+
+\[\tau(h_1,\ldots,h_N) \le Ch_{max}^p\]
+
+para una constante $C$ y, por tanto, si $x_0\to a$ y $h_{max}\to 0$, obtenemos que $\epsilon(h_1,\ldots,h_N)\to 0$.
+
+El esquema para este tipo de métodos es:
+
+\begin{equation}
+		\left\{
+		\begin{aligned}
+			& x_{n+1} = x_n + h_{n+1}\Phi(t_n,x_n,h_{n+1}) \;\;\; n= 0,\ldots,N-1 \\
+			& x_0 \sim a \\
+		\end{aligned}
+		\right.
+\end{equation}\\
+
+El método de Euler adaptativo es, por tanto:
+
+\begin{equation}
+		\left\{
+		\begin{aligned}
+			& x_{n+1} = x_n + h_{n+1}f(t_n,x_n) \;\;\; n= 0,\ldots,N-1 \\
+			& x_0 \sim a \\
+		\end{aligned}
+		\right.
+\end{equation}\\
+
+Este método es propuesto en~\citet{osti_10185520}.
+
 \subsubsection{Métodos de Runge-Kutta}
 \label{makereference5.4.3.3}
+
+Los últimos métodos que vamos a considerar, y en particular el que vamos a
+implementar en nuestra aplicación para el método del Line Integral Convolution,
+son los métodos de Runge-Kutta. Esta familia de métodos se basa en añadir puntos
+intermedios entre los puntos del mallado $t_n$ y $t_{n+1}$ en la media
+ponderada. \\
+
+Como ejemplo, si consideramos una media ponderada entre las pendientes en los
+puntos $t_n$ y $t_n + ch$ con $c \in (0,1]$ podemos aproximar el valor de
+$x(t_{n+1})$ por 
+
+\[x(t_{n+1}) \approx x(t_n) + h\left[ b_1f(t_n,x(t_n)) + b_2f(t_n + ch,
+x(t_n+ch))\right]\]
+
+donde $b_1 + b_2 = 1$, para que sea realmente una media. El problema ahora
+radica en cómo calcular el valor $x(t_n +ch)$. Una manera de hacerlo es utilizar
+el método de Euler, es decir,
+
+\[x(t_n + ch) \approx x(t_n) + chf(tn,x(t_n))\]
+
+De esta forma, la aproximación de $x(t_{n+1})$ queda:
+
+\[x(t_{n+1}) \approx x(t_n) + h\Big[ b_1f(t_n,x(t_n)) + b_2f\Big(t_n+ch,x(t_n) +
+		chf(t_n,x(t_n))\Big)\Big] \]
+
+obteniéndose la familia de métodos Runge-Kutta
+
+\[ x_{n+1} = x_n + h\Big[b_1f(t_n,x_n + b_2f\Big(t_n + ch, x_n +
+chf(t_n,x_n)\Big)\Big] \]
+
+que suele escribirse como
+
+\[ \left\{ 
+		\begin{aligned}
+		& K_1 = f(t_n,x_n) \\
+		& K_2 = f(t_n + ch, x_n + chK_1) \\
+		& x_{n+1} = x_n + h(b_1K_1 + b_2K_2) \\
+		\end{aligned}
+	\right. \]
+
+Esta familia de métodos de puede generalizar, dando lugar a la siguiente forma
+
+\begin{equation}
+	\left\{	
+		\begin{aligned}
+			& K_i = f\bigg(t_n + c_ih,x_n + h\sum_{j=1}^sa_{ij}K_j\bigg),
+			\;\;\; i=1,2,3,\ldots,s, \\
+			& x_{n+1} = x_n + h\sum_{i=1}^sb_iK_i \\
+		\end{aligned}
+		\right.
+\end{equation}\\
+
+El que vamos a utilizar en nuestra aplicación es el método de Runge-Kutta de
+orden 4, que tiene el siguiente esquema numérico:
+
+\begin{equation}
+	\left\{	
+		\begin{aligned}
+			& K_1 = f(t,x) \\
+			& K_2 = f\bigg(t+\frac{h}{2},x+\frac{h}{2}K_1\bigg) \\
+			& K_3 = f\bigg(t+\frac{h}{2},x+\frac{h}{2}K_2\bigg) \\
+			& K_4 = f\Big(t+h,x+hK_3\Big) \\
+			& x_{n+1} = x_n + \frac{h}{6}[K_1 + 2K_2 + 2K_3 + K_4] \\
+		\end{aligned}
+	\right.
+\end{equation}
+
+La demostración de que este método es consistente de orden 4 se puede encontrar
+en~\citet{ANNU}.
 
 \subsection{Otras Fórmulas}
 \label{makereference5.4.4}
