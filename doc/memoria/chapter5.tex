@@ -300,9 +300,201 @@ exclusiva para este tema. (Ver sección~\ref{makereference5.4.2}).
 \subsection{Rotación: Ángulos de Euler y Cuaterniones}
 \label{makereference5.4.2}
 
-%% TODO
+La rotación tridimensional es un caso particularmente complejo. Esto se debe a
+determinados problemas que surgen a la hora de formalizar matemáticamente este
+movimiento. \\
 
-\subsection{Métodos Numéricos para la resolución de Ecuaciones Diferenciales}
+La manera más intuitiva de pensar en la rotación consiste en especificar esta
+rotación mediante un eje de giro y un ángulo. Con esto, el movimiento
+consistiría en rotar el vector en torno al eje de giro. (Ver
+Figura~\ref{fig:rotacion}). \\
+
+Existen diversas maneras de formular matemáticamente este movimiento. Para ello
+existe un grupo, llamado $SO(3)$, que es el grupo de todas las rotaciones en
+torno al origen del espacio vectorial Euclídeo $\mathbb{R}^3$ bajo la operación
+de la composición. Una rotación en $\mathbb{R}^3$ es una aplicación lineal. Como
+toda aplicación lineal en un espacio vectorial, ésta puede ser representada
+mediante una matriz, dando lugar a la representación matricial de la rotación.
+
+\begin{figure}
+	\centering		
+	\includegraphics[height=10cm]{figures/rotation.png}
+	\caption{Rotación de un vector 3D}
+	\label{fig:rotacion}
+\end{figure}
+
+\subsubsection{Ángulos de Euler y Matriz de rotación}
+\label{makereference5.4.2.1}
+
+En el espacio vectorial $\mathbb{R}^3$, los vectores se representan a partir de
+una base. Esta base estará formada por tres vectores unitarios. Por tanto, si
+queremos realizar una rotación de cualquier otro vector en $\mathbb{R}^3$,
+bastará con rotar los vectores de la base acorde al eje de rotación y después
+calcular el vector a rotar en términos de la base rotada. \\
+
+Los vectores rotados que forman la nueva base definen completamente la rotación
+y, escritos como una matriz nos da la matriz de rotación. Esta matriz, al ser
+los vectores una base ortonormal de $\mathbb{R}^3$, forman una matriz ortogonal.
+Por tanto, el grupo $SO(3)$ se identifica con el grupo formado por las matrices
+ortogonales $3\times 3$ bajo la operación de la multiplicación. Estas matrices
+se conocen como \textit{Matrices Ortogonales Especiales (Special Orthogonal
+Matrices)}, de ahí la notación de $SO(3)$. \\
+
+Como sabemos, dos rotaciones en $SO(3)$ se pueden concatenar mediante la
+composición, dando lugar a otra nueva rotación. Lo mismo pasa con la
+representación matricial, multiplicando dos matrices de rotación. Para nuestra
+aplicación, es conveniente realizar las rotaciones como composición de
+rotaciones en torno a los ejes de referencia. Para ello definimos las matrices
+de rotación. \\
+
+\begin{equation}
+	R_x(\theta) =
+	\left(	
+		\begin{array}{cccc}
+			1 & 0 & 0 & 0 \\				
+			0 & \cos{\theta} & -\sin{\theta} & 0 \\				
+			0 & \sin{\theta} & \cos{\theta} & 0 \\				
+			0 & 0 & 0 & 1 \\				
+		\end{array}
+	\right)
+\end{equation}
+
+\begin{equation}
+	R_y(\theta) =
+	\left(	
+		\begin{array}{cccc}
+			\cos{\theta} & 0 & \sin{\theta} & 0 \\				
+			0 & 1 & 0 & 0 \\				
+			-\sin{\theta} & 0 & \cos{\theta} & 0 \\				
+			0 & 0 & 0 & 1 \\				
+		\end{array}
+	\right)
+\end{equation}
+
+\begin{equation}
+	R_z(\theta) =
+	\left(	
+		\begin{array}{cccc}
+			\cos{\theta} & -\sin{\theta} & 0 & 0 \\				
+			\sin{\theta} & \cos{\theta} & 0 & 0 \\				
+			0 & 0 & 1 & 0\\				
+			0 & 0 & 0 & 1 \\				
+		\end{array}
+	\right)
+\end{equation} \\
+
+Esto da lugar a los conocidos como ángulos de Euler, llamados en inglés
+\textit{yaw, pitch, roll}. (Ver Figura~\ref{fig:eulerangles}). Así, una rotación
+cualquiera en el espacio tridimensional viene dada por:
+
+\begin{figure}
+	\centering
+	\includegraphics[height=7.5cm,width=\textwidth]{figures/eulerangles.png}
+	\caption{Ángulos de Euler. Imagen de~\citet{LearnOpenGL}}
+	\label{fig:eulerangles}
+\end{figure}
+
+\begin{equation}
+		R = Roll(\phi)Pitch(\theta)Yaw(\varphi) = R_x(\phi)R_y(\theta)R_z(\varphi)	
+\end{equation}
+
+Ahora bien, aunque este sistema es el que utilizaremos en nuestra aplicación,
+tanto mediante GLM como implementándolo nosotros, existen diversos problemas
+derivados de él. El más importante es el llamado Bloqueo del
+Cardán~\cite{Vince}. Aunque los formalismos matemáticos son más complejos,
+intuitivamente este bloqueo ocurre debido a que la descripción de cualquier
+rotación tridimensional mediante ángulos de Euler no es única y existen puntos
+sobre los que no todo cambio en el espacio de rotaciones puede ser expresado
+mediante cambios en el espacio de los ángulos de Euler. \\
+
+Con el fin de disminuir el riesgo del bloqueo, se puede prescindir de la
+multiplicación de matrices utilizando una sola matriz utilizando un eje de giro
+arbitrario unitario $u = (u_x, u_y, u_z)$ y un ángulo de giro $\theta$. La
+procedencia de dicha matriz se puede consultar en~\citet{rotationformula}. \\
+
+\begin{equation}
+		R = 
+		\left(
+				\begin{array}{cccc}
+						\cos\theta + u_x^2(1-\cos\theta) &
+						u_xu_y(1-\cos\theta)-u_z\sin\theta &
+						u_xu_z(1-\cos\theta)+u_y\sin\theta & 0 \\
+
+						u_yu_x(1-\cos\theta)+u_z\sin\theta & \cos\theta +
+						u_y^2(1-\cos\theta) &
+						u_yu_z(1-\cos\theta)-u_x\sin\theta & 0 \\
+
+						u_zu_x(1-\cos\theta)-u_y\sin\theta &
+						u_zu_y(1-\cos\theta) + u_x\sin\theta & \cos\theta +
+						u_z^2(1-\cos\theta) & 0 \\
+
+						0 & 0 & 0 & 1 \\
+				\end{array}
+		\right)
+\end{equation}
+
+\subsubsection{Cuaterniones}
+\label{makereference5.4.2.2}
+
+Debido a la importancia de la precisión en muchos sistemas informáticos que
+necesitan cálculos de rotaciones y el problema que supone el bloqueo del Cardán,
+se hace importante la mención de los cuaterniones como sistema de representación
+de rotaciones en tres dimensiones, aunque no los vayamos a utilizar en nuestra
+aplicación. \\
+
+Los cuaterniones, también conocidos como cuaternios, suponen una notación para
+representar orientaciones y rotaciones en tres dimensiones. En contraposición
+con los ángulos de Euler, son más sencillos de componer y previenen el bloqueo
+del Cardán. Comparados con las matrices de rotación, suponen un método más
+compacto, más estable numéricamente y más eficiente. \\
+
+Los cuaterniones son una extensión de los números complejos, descritos por
+primera vez por William Rowan Hamilton en 1843, definiéndolos como el cociente
+de dos lineas dirigidas en un espacio tridimensional.  Cuando se utilizan para
+representar rotaciones se les denomina también cuaterniones de rotación, puesto
+que representan el grupo $SO(3)$. \\
+
+Generalmente, se representan de la siguiente forma:
+
+\[a + b\boldsymbol{i} + c\boldsymbol{j} + d\boldsymbol{k} \] \\
+
+donde $a,b,c$ y $d$ son números reales y $\boldsymbol{i}, \boldsymbol{j}$ y
+$\boldsymbol{k}$
+son las unidades fundamentales del cuaternión. Además, los cuaterniones  siguen
+las reglas algebraicas usuales, excepto la de la propiedad conmutativa de la
+multiplicación, y cumplen la siguiente propiedad:
+
+\[\boldsymbol{i}^2 = \boldsymbol{j}^2 = \boldsymbol{k}^2 = \boldsymbol{ijk} = -1 \]\\
+
+Es conveniente verlos representados como un escalar más un vector, es decir:
+
+\[a + b\boldsymbol{i} + c\boldsymbol{j} + d\boldsymbol{k} = a +
+\overrightarrow{v} \] \\
+
+considerando la parte imaginaria $b\boldsymbol{i} + c\boldsymbol{j} +
+d\boldsymbol{k}$ como un vector $\overrightarrow{v} = (b,c,d)$. \\
+
+Recordemos que cualquier rotación en el espacio tridimensional puede verse como
+una giro de ángulo $\theta$ en torno a un eje definido por un vector unitario
+$u$. Esto puede ser representado mediante un cuaternión de la siguiente forma:
+
+\[\boldsymbol{q} = \exp{\frac{\theta}{2}(u_x\boldsymbol{i} + u_y\boldsymbol{j} +
+		u_z\boldsymbol{k})} = \cos{\frac{\theta}{2}} + (u_x\boldsymbol{i} + 
+u_y\boldsymbol{j} + u_z\boldsymbol{k})\sin{\frac{\theta}{2}} \]
+
+Se puede demostrar que un la rotación deseada se puede aplicar a un vector
+ordinario $\boldsymbol{p} = (p_x, p_y, p_z) = p_x\boldsymbol{i} +
+p_y\boldsymbol{j} + p_z\boldsymbol{k}$ en el espacio tridimensional, considerado
+como un cuaternión con parte real igual a cero, evaluando la conjunción de
+$\boldsymbol{p}$ por $\boldsymbol{q}$:
+
+\[ \boldsymbol{p'} = \boldsymbol{qpq^{-1}} \]
+
+donde $\boldsymbol{p'}$ es la nueva posición del vector $\boldsymbol{p}$ tras la
+rotación. La parte vectorial del este cuaternión es el vector deseado. Se puede
+leer más acerca de cuaterniones utilizados para las rotaciones en~\citet{Vicci}.
+
+\subsection{Métodos Numéricos para la resolución de Ecuaciones Diferenciales} 
 \label{makereference5.4.3}
 
 Como ya se vio en la sección~\ref{ref:lic}, en el método del Line Integral
@@ -480,7 +672,7 @@ adaptativo es consistente, estable y de orden $p$, entonces
 
 \[\tau(h_1,\ldots,h_N) \le Ch_{max}^p\]
 
-para una constante $C$ y, por tanto, si $x_0\to a$ y $h_{max}\to 0$, obtenemos que $\epsilon(h_1,\ldots,h_N)\to 0$.
+para cierta constante $C$ y, por tanto, si $x_0\to a$ y $h_{max}\to 0$, obtenemos que $\epsilon(h_1,\ldots,h_N)\to 0$.
 
 El esquema para este tipo de métodos es:
 
@@ -548,7 +740,9 @@ que suele escribirse como
 		\end{aligned}
 	\right. \]
 
-Esta familia de métodos de puede generalizar, dando lugar a la siguiente forma
+En este caso, el método tiene $2$ etapas. Esta familia de métodos de puede
+generalizar, dando lugar a los métodos de Runge-Kutta de $s$ etapas. La
+forma de escribir estos métodos es la siguiente:
 
 \begin{equation}
 	\left\{	
@@ -584,7 +778,7 @@ en~\citet{ANNU}.
 Para el desarrollo de la aplicación también se han tenido que utilizar fórmulas
 matemáticas que describen el comportamiento de las curvas y superficies de
 Bézier, ya explicadas en la sección~\ref{ref:bezier}, así como las
-fórmulas para la obtención de los valores de los pixeles de salida en el método
+fórmulas para la obtención de los valores de los píxeles de salida en el método
 del Line Integral Convolution (Sección~\ref{ref:lic}).
 
 \section{Shaders en la aplicación}

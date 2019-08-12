@@ -3,6 +3,8 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: principal.aux
 The style file: unsrtnat.bst
 Database file #1: references.bib
+Warning--I didn't find a database entry for "Vince"
+Warning--I didn't find a database entry for "rotationformula"
 Warning--empty year in 3dimages
 Warning--empty journal in osti_10185520
 Warning--empty booktitle in DEFANTI1991247
@@ -28,45 +30,46 @@ Warning--empty year in GLFW
 Warning--empty year in GLAD
 Warning--empty year in ASSIMP
 Warning--empty year in GLM
-You've used 33 entries,
+Warning--empty journal in Vicci
+You've used 34 entries,
             2481 wiz_defined-function locations,
-            734 strings with 8488 characters,
-and the built_in function-call counts, 9712 in all, are:
-= -- 858
-> -- 311
-< -- 36
-+ -- 165
-- -- 88
-* -- 483
-:= -- 1492
-add.period$ -- 129
-call.type$ -- 33
-change.case$ -- 62
-chr.to.int$ -- 22
-cite$ -- 58
-duplicate$ -- 534
-empty$ -- 1023
-format.name$ -- 129
-if$ -- 2136
+            742 strings with 8623 characters,
+and the built_in function-call counts, 9971 in all, are:
+= -- 879
+> -- 318
+< -- 37
++ -- 169
+- -- 90
+* -- 496
+:= -- 1534
+add.period$ -- 132
+call.type$ -- 34
+change.case$ -- 64
+chr.to.int$ -- 23
+cite$ -- 60
+duplicate$ -- 552
+empty$ -- 1051
+format.name$ -- 132
+if$ -- 2190
 int.to.chr$ -- 12
-int.to.str$ -- 34
-missing$ -- 14
-newline$ -- 201
-num.names$ -- 99
-pop$ -- 428
+int.to.str$ -- 35
+missing$ -- 15
+newline$ -- 206
+num.names$ -- 102
+pop$ -- 439
 preamble$ -- 1
-purify$ -- 33
+purify$ -- 34
 quote$ -- 0
-skip$ -- 307
+skip$ -- 317
 stack$ -- 0
-substring$ -- 142
-swap$ -- 104
+substring$ -- 144
+swap$ -- 106
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 216
-warning$ -- 25
-while$ -- 71
+type$ -- 223
+warning$ -- 26
+while$ -- 73
 width$ -- 0
-write$ -- 460
-(There were 25 warnings)
+write$ -- 471
+(There were 28 warnings)
