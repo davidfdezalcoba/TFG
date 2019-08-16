@@ -30,15 +30,15 @@ realizar un exhaustivo estudio del funcionamiento de OpenGL, así como la lectur
 y realización de tutoriales sobre la materia. Una vez adquirido el conocimiento
 necesario, se comenzó a desarrollar el esqueleto principal de la aplicación,
 sobre el cual se incorporarían después los distintos tipos de visualización a
-realizar.\\
+realizar.
 
 Una vez desarrollado este esqueleto se comenzó a la preparación de los shaders
 que se utilizarían en cada uno de los problemas, para lo que se utilizó en gran
-medida la información expuesta en el texto~\citet{Bailey}.\\
+medida la información expuesta en el texto~\citet{Bailey}.
 
 El siguiente paso fue conseguir datos y prepararlos adecuadamente para poder
 mostrar las capacidades de visualización de la aplicación, así como comprobar su
-correcto funcionamiento.\\
+correcto funcionamiento.
 
 Lo anterior fue reiterado con cada uno de los problemas, añadiéndose cada vez
 más a lo largo del desarrollo de todo el proyecto.
@@ -115,7 +115,7 @@ visualización solo se habrían de realizar las siguientes acciones:
 En esta ventana principal se tiene por defecto un sistema de cámara en primera
 persona, con la capacidad de moverse para visualizar mejor detalles del objeto
 en cuestión. Este sistema puede ser sobreescrito en el objeto específico en
-caso de necesitar otro comportamiento. \\
+caso de necesitar otro comportamiento. 
 
 En la clase \verb|Object| existen tres métodos virtuales puros, que han de ser
 implementados por las clases específicas de cada tipo de visualización:
@@ -155,22 +155,22 @@ objetos para que estos aparezcan en su lugar y con sus dimensiones adecuadas.
 Es deseable, además, realizar estas operaciones con vectores matricialmente,
 puesto que éstas permiten presentar transformaciones arbitrarias en un
 formato consistente y apto para la computación. Así, se pueden concatenar
-diferentes transformaciones de manera sencilla multiplicando sus matrices. \\
+diferentes transformaciones de manera sencilla multiplicando sus matrices. 
 
 Entre estas transformaciones podemos encontrar lineales y no lineales. Así, para
 representar matricialmente transformaciones no lineales en un espacio Euclídeo
 $n$-dimensional $\mathbb{R}^n$ se puede utilizar una transformación lineal en el
 espacio $(n+1)$-dimensional $\mathbb{R}^{n+1}$. Este tipo de transformaciones
 incluye tanto las transformaciones afines (como la
-traslación~\ref{makereference5.4.1.1}) como transformaciones proyectivas.\\
+traslación~\ref{makereference5.4.1.1}) como transformaciones proyectivas.
 
 Esta es la razón por la que las matrices $4 \times 4$ son tan ampliamente
 utilizadas en la informática gráfica y, en consecuencia, en nuestra
-aplicación.\\
+aplicación.
 
 En esta sección se presentan las transformaciones lineales y afines más
 habituales y necesarias para nuestra aplicación, así como sus formas
-matriciales. \\
+matriciales. 
 
 \subsubsection{Traslación}
 \label{makereference5.4.1.1}
@@ -179,7 +179,14 @@ Se denomina traslación a la operación consistente en \textit{mover} un vector 
 una posición a otra nueva posición. Supongamos, pues, que queremos trasladar un
 vector $\overrightarrow{v} = (x,y,z)$ en la dirección marcada por el vector
 $\overrightarrow{t} = (t_1, t_2, t_3)$ como se muestra en la
-figura~\ref{fig:translation}. Para ello realizaríamos la siguiente operación:\\
+figura~\ref{fig:traslation}. Para ello realizaríamos la siguiente operación:
+
+\begin{figure}
+	\centering	
+	\includegraphics[height=9cm]{figures/traslacion.png}
+	\caption{Traslación de un vector}
+	\label{fig:traslation}
+\end{figure}
 
 \begin{equation}
 	\label{eq:translation}
@@ -189,7 +196,7 @@ figura~\ref{fig:translation}. Para ello realizaríamos la siguiente operación:\
 			y + t_2 \\
 			z + t_3 \\
 	\end{array} \right)
-\end{equation}\\
+\end{equation}
 
 La traslación se trata de una transformación afín sin puntos fijos. Como se ha
 expuesto previamente, para poder representar esta transformación de forma
@@ -198,7 +205,7 @@ recurre a las coordenadas homogéneas para representar la traslación de un
 espacio vectorial con multiplicación de matrices. Escribiendo el vector
 $\overrightarrow{v} = (x,y,z)$ utilizando una cuarta coordenada homogénea
 $\overrightarrow{v} = (x,y,z,1)$. Esta operación se muestra
-en~\eqref{eq:matrixtranslation}. \\
+en~\eqref{eq:matrixtranslation}. 
 
 \begin{equation}
 	\label{eq:matrixtranslation}
@@ -230,7 +237,7 @@ El escalado de un vector es la operación consistente en modificar la longitud
 del vector. Para ello, debemos multiplicar cada una de sus coordenadas por el
 factor de escalado deseado en cada eje. Es decir, para escalar un vector
 $\overrightarrow{v}$ por un factor de $0.5$ en el eje $x$ y $3$ en el eje $y$,
-la operación a realizar sería la siguiente:\\
+la operación a realizar sería la siguiente:
 
 \begin{equation}
 	\label{eq:scaling}
@@ -261,7 +268,7 @@ la operación a realizar sería la siguiente:\\
 Esta operación de escalado se puede escribir matricialmente como sigue.
 Supongamos que tenemos un vector $\overrightarrow{v}=(x,y,z)$ y lo queremos
 escalar por un factor $fac=(F_1,F_2,F_3)$. Entonces podemos escribir la
-operación anterior con la matriz $FAC$ como sigue:\\
+operación anterior con la matriz $FAC$ como sigue:
 
 \begin{equation}
 	\label{eq:matrixscaling}
@@ -288,7 +295,7 @@ operación anterior con la matriz $FAC$ como sigue:\\
 
 Nótese que también en este caso al vector $\overrightarrow{v}$ se le ha añadido
 una cuarta coordenada $w$ con el fin de ser consistentes con aquellas
-transformaciones no lineales que necesitan de un espacio de dimensión mayor. \\
+transformaciones no lineales que necesitan de un espacio de dimensión mayor. 
 
 \subsubsection{Rotación}
 \label{makereference5.4.1.3}
@@ -303,12 +310,12 @@ exclusiva para este tema. (Ver sección~\ref{makereference5.4.2}).
 
 La rotación tridimensional es un caso particularmente complejo. Esto se debe a
 determinados problemas que surgen a la hora de formalizar matemáticamente este
-movimiento. \\
+movimiento. 
 
 La manera más intuitiva de pensar en la rotación consiste en especificar esta
 rotación mediante un eje de giro y un ángulo. Con esto, el movimiento
 consistiría en rotar el vector en torno al eje de giro. (Ver
-Figura~\ref{fig:rotacion}). \\
+Figura~\ref{fig:rotacion}). 
 
 Existen diversas maneras de formular matemáticamente este movimiento. Para ello
 existe un grupo, llamado $SO(3)$, que es el grupo de todas las rotaciones en
@@ -331,7 +338,7 @@ En el espacio vectorial $\mathbb{R}^3$, los vectores se representan a partir de
 una base. Esta base estará formada por tres vectores unitarios. Por tanto, si
 queremos realizar una rotación de cualquier otro vector en $\mathbb{R}^3$,
 bastará con rotar los vectores de la base acorde al eje de rotación y después
-calcular el vector a rotar en términos de la base rotada. \\
+calcular el vector a rotar en términos de la base rotada. 
 
 Los vectores rotados que forman la nueva base definen completamente la rotación
 y, escritos como una matriz nos da la matriz de rotación. Esta matriz, al ser
@@ -339,14 +346,14 @@ los vectores una base ortonormal de $\mathbb{R}^3$, forman una matriz ortogonal.
 Por tanto, el grupo $SO(3)$ se identifica con el grupo formado por las matrices
 ortogonales $3\times 3$ bajo la operación de la multiplicación. Estas matrices
 se conocen como \textit{Matrices Ortogonales Especiales (Special Orthogonal
-Matrices)}, de ahí la notación de $SO(3)$. \\
+Matrices)}, de ahí la notación de $SO(3)$. 
 
 Como sabemos, dos rotaciones en $SO(3)$ se pueden concatenar mediante la
 composición, dando lugar a otra nueva rotación. Lo mismo pasa con la
 representación matricial, multiplicando dos matrices de rotación. Para nuestra
 aplicación, es conveniente realizar las rotaciones como composición de
 rotaciones en torno a los ejes de referencia. Para ello definimos las matrices
-de rotación. \\
+de rotación. 
 
 \begin{equation}
 	R_x(\theta) =
@@ -382,7 +389,7 @@ de rotación. \\
 			0 & 0 & 0 & 1 \\				
 		\end{array}
 	\right)
-\end{equation} \\
+\end{equation} 
 
 Esto da lugar a los conocidos como ángulos de Euler, llamados en inglés
 \textit{yaw, pitch, roll}. (Ver Figura~\ref{fig:eulerangles}). Así, una rotación
@@ -402,16 +409,16 @@ cualquiera en el espacio tridimensional viene dada por:
 Ahora bien, aunque este sistema es el que utilizaremos en nuestra aplicación,
 tanto mediante GLM como implementándolo nosotros, existen diversos problemas
 derivados de él. El más importante es el llamado Bloqueo del
-Cardán~\cite{Vince}. Aunque los formalismos matemáticos son más complejos,
-intuitivamente este bloqueo ocurre debido a que la descripción de cualquier
-rotación tridimensional mediante ángulos de Euler no es única y existen puntos
-sobre los que no todo cambio en el espacio de rotaciones puede ser expresado
-mediante cambios en el espacio de los ángulos de Euler. \\
+Cardán~\cite{Vince:2011:QCG:2016678}. Aunque los formalismos matemáticos son más
+complejos, intuitivamente este bloqueo ocurre debido a que la descripción de
+cualquier rotación tridimensional mediante ángulos de Euler no es única y
+existen puntos sobre los que no todo cambio en el espacio de rotaciones puede
+ser expresado mediante cambios en el espacio de los ángulos de Euler. 
 
 Con el fin de disminuir el riesgo del bloqueo, se puede prescindir de la
 multiplicación de matrices utilizando una sola matriz utilizando un eje de giro
 arbitrario unitario $u = (u_x, u_y, u_z)$ y un ángulo de giro $\theta$. La
-procedencia de dicha matriz se puede consultar en~\citet{rotationformula}. \\
+procedencia de dicha matriz se puede consultar en~\citet{Rodrigues}. 
 
 \begin{equation}
 		R = 
@@ -441,39 +448,38 @@ Debido a la importancia de la precisión en muchos sistemas informáticos que
 necesitan cálculos de rotaciones y el problema que supone el bloqueo del Cardán,
 se hace importante la mención de los cuaterniones como sistema de representación
 de rotaciones en tres dimensiones, aunque no los vayamos a utilizar en nuestra
-aplicación. \\
+aplicación. 
 
 Los cuaterniones, también conocidos como cuaternios, suponen una notación para
 representar orientaciones y rotaciones en tres dimensiones. En contraposición
 con los ángulos de Euler, son más sencillos de componer y previenen el bloqueo
 del Cardán. Comparados con las matrices de rotación, suponen un método más
-compacto, más estable numéricamente y más eficiente. \\
+compacto, más estable numéricamente y más eficiente. 
 
 Los cuaterniones son una extensión de los números complejos, descritos por
 primera vez por William Rowan Hamilton en 1843, definiéndolos como el cociente
 de dos lineas dirigidas en un espacio tridimensional.  Cuando se utilizan para
 representar rotaciones se les denomina también cuaterniones de rotación, puesto
-que representan el grupo $SO(3)$. \\
+que representan el grupo $SO(3)$. 
 
 Generalmente, se representan de la siguiente forma:
 
-\[a + b\boldsymbol{i} + c\boldsymbol{j} + d\boldsymbol{k} \] \\
+\[a + b\boldsymbol{i} + c\boldsymbol{j} + d\boldsymbol{k} \] 
 
 donde $a,b,c$ y $d$ son números reales y $\boldsymbol{i}, \boldsymbol{j}$ y
-$\boldsymbol{k}$
-son las unidades fundamentales del cuaternión. Además, los cuaterniones  siguen
-las reglas algebraicas usuales, excepto la de la propiedad conmutativa de la
-multiplicación, y cumplen la siguiente propiedad:
+$\boldsymbol{k}$ son las unidades fundamentales del cuaternión. Además, los
+cuaterniones  siguen las reglas algebraicas usuales, excepto la de la propiedad
+conmutativa de la multiplicación, y cumplen la siguiente propiedad:
 
-\[\boldsymbol{i}^2 = \boldsymbol{j}^2 = \boldsymbol{k}^2 = \boldsymbol{ijk} = -1 \]\\
+\[\boldsymbol{i}^2 = \boldsymbol{j}^2 = \boldsymbol{k}^2 = \boldsymbol{ijk} = -1 \]
 
 Es conveniente verlos representados como un escalar más un vector, es decir:
 
 \[a + b\boldsymbol{i} + c\boldsymbol{j} + d\boldsymbol{k} = a +
-\overrightarrow{v} \] \\
+\overrightarrow{v} \] 
 
 considerando la parte imaginaria $b\boldsymbol{i} + c\boldsymbol{j} +
-d\boldsymbol{k}$ como un vector $\overrightarrow{v} = (b,c,d)$. \\
+d\boldsymbol{k}$ como un vector $\overrightarrow{v} = (b,c,d)$. 
 
 Recordemos que cualquier rotación en el espacio tridimensional puede verse como
 una giro de ángulo $\theta$ en torno a un eje definido por un vector unitario
@@ -501,7 +507,7 @@ leer más acerca de cuaterniones utilizados para las rotaciones en~\citet{Vicci}
 Como ya se vio en la sección~\ref{ref:lic}, en el método del Line Integral
 Convolution se ha de utilizar un método numérico para computar la línea de
 flujo. En esta sección se analizan algunos de los métodos utilizados y
-propuestos tanto por~\citet{osti_10185520} como por \citet{licthesis}.\\
+propuestos tanto por~\citet{osti_10185520} como por \citet{licthesis}.
 
 Para poder analizar los métodos hemos de introducir algunas definiciones
 relacionadas con ellos. Recordemos que un método numérico sirve para calcular de
@@ -603,20 +609,20 @@ método, hemos de recurrir a la definición de derivada. Para cada $t \in (t_0,T
 
 \begin{equation}
 		x'(t) = \lim_{h \to 0} \frac{x(t+h) - x(t)}{h} 	
-\end{equation}\\
+\end{equation}
 
 Si $h>0$ es suficientemente pequeño, podemos suponer que
 
 \begin{equation}
 		x'(t_n)\approx \frac{x(t_n+h) - x(t_n)}{h} = \frac{x(t_{n+1}) -
 		x(t_n)}{h}	
-\end{equation}\\
+\end{equation}
 
 lo que nos conduce a que
 
 \begin{equation}
 		x(t_{n+1}) \approx x(t_n) + hf(t_n,x(t_n))	
-\end{equation}\\
+\end{equation}
 
 De aquí aparece el esquema numérico del método de Euler
 
@@ -625,7 +631,7 @@ De aquí aparece el esquema numérico del método de Euler
 				& x_{n+1} = x_n + hf(t_n,x_n) \; n=0,\ldots,N-1 \\
 				& x_0 \approx a \\
 		\end{aligned} \right.
-\end{equation}\\
+\end{equation}
 
 En~\citet{ANNU} se puede ver una demostración de que el método de Euler supone
 un método \textbf{consistente de orden 1} y \textbf{convergente}.
@@ -640,7 +646,7 @@ fijar previamente una tolerancia permitida para el error cometido. Por tanto,
 necesitamos ser capaces de \textbf{estimar} el error que vamos a cometer al
 escoger el siguiente paso. Entonces, si el error estimado es mayor que la
 tolerancia fijada, el cálculo se descarta y se vuelve a realiza, y si éste es
-menor que la tolerancia, entonces se acepta y se pasa al siguiente cálculo.\\
+menor que la tolerancia, entonces se acepta y se pasa al siguiente cálculo.
 
 Con el fin de realizar esta estimación, como hemos dicho, necesitamos introducir
 los siguientes conceptos:
@@ -684,7 +690,7 @@ El esquema para este tipo de métodos es:
 			& x_0 \sim a \\
 		\end{aligned}
 		\right.
-\end{equation}\\
+\end{equation}
 
 El método de Euler adaptativo es, por tanto:
 
@@ -695,7 +701,7 @@ El método de Euler adaptativo es, por tanto:
 			& x_0 \sim a \\
 		\end{aligned}
 		\right.
-\end{equation}\\
+\end{equation}
 
 Este método es propuesto en~\citet{osti_10185520}.
 
@@ -706,7 +712,7 @@ Los últimos métodos que vamos a considerar, y en particular el que vamos a
 implementar en nuestra aplicación para el método del Line Integral Convolution,
 son los métodos de Runge-Kutta. Esta familia de métodos se basa en añadir puntos
 intermedios entre los puntos del mallado $t_n$ y $t_{n+1}$ en la media
-ponderada. \\
+ponderada. 
 
 Como ejemplo, si consideramos una media ponderada entre las pendientes en los
 puntos $t_n$ y $t_n + ch$ con $c \in (0,1]$ podemos aproximar el valor de
@@ -753,7 +759,7 @@ forma de escribir estos métodos es la siguiente:
 			& x_{n+1} = x_n + h\sum_{i=1}^sb_iK_i \\
 		\end{aligned}
 		\right.
-\end{equation}\\
+\end{equation}
 
 El que vamos a utilizar en nuestra aplicación es el método de Runge-Kutta de
 orden 4, que tiene el siguiente esquema numérico:
@@ -792,7 +798,7 @@ cálculos realizados y explorando las entradas y salidas de cada uno de ellos.
 \subsection{Coloreado de terrenos}
 \label{makereference5.5.1}
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{figures/myterrain.png}
 	\caption{Coloreado de Valles Marineris. Modelo de NASA~\cite{NASA}}
@@ -804,7 +810,7 @@ vertex shader y un fragment shader. Partiendo del modelo de un terreno existen
 dos posibilidades: que las alturas vengan codificadas en forma de textura o que
 venga implícitamente en la posición de los vértices. En este último caso, en la
 aplicación se lee el valor más alto y el valor más bajo en el eje $y$ para
-realizar la coloración. \\
+realizar la coloración. 
 
 Así, el vertex shader toma como entrada la posición y los normales de los
 vértices, sacados de un modelo tridimensional.
@@ -894,7 +900,7 @@ Valles Marineris, un sistema de cañones que recorre el ecuador de marte.
 
 Para mostrar las curvas de Bézier se han utilizado un vertex shader, un geometry
 shader y un fragment shader. Además, se ha utilizado otro par de shaders para
-renderizar tanto los ejes como los puntos de control de la curva. \\
+renderizar tanto los ejes como los puntos de control de la curva. 
 
 En este caso, todo el trabajo se realiza en el geometry shader. El vertex shader
 simplemente se encarga de realizar la transformación mediante
@@ -908,11 +914,11 @@ mediante la instrucción
 
 \begin{verbatim}
     fFragColor = vec4(ORANGE, 1.0);
-\end{verbatim}\\
+\end{verbatim}
 
 Así pues, veamos qué acciones realizar en el geometry shader para conseguir,
 mediante los 4 vértices de control, renderizar una curva de Bézier en nuestra
-aplicación. Este shader es la versión de~\citet{Bailey}. \\
+aplicación. Este shader es la versión de~\citet{Bailey}. 
 
 Recordemos de la sección~\ref{ref:GeoShader} que para el shader geométrico ha de
 especificarse la primitiva de entrada y la de salida. Esto se realiza mediante
@@ -982,7 +988,7 @@ anterior, utilizaremos los shaders de teselación. Por tanto, tendremos, al igua
 que en el caso anterior, un vertex shader, un tessellation control shader, un
 tessellation evaluation shader y un fragment shader, además de los mismos
 shaders que en el caso anterior para renderizar los ejes y los puntos de
-control. \\
+control. 
 
 El vertex y fragment shader son exactamente iguales que en el caso de la curva
 de Bézier, por lo que nos centraremos exclusivamente en los shaders de
@@ -1110,7 +1116,7 @@ siguiente:
 Para realizar esta visualización se han utilizado únicamente un vertex shader y
 un fragment shader. Como entradas, el vertex shader utiliza tanto la posición
 del vértice en la nube de puntos como el escalar que representa la información
-que queremos visualizar. \\
+que queremos visualizar. 
 
 En el vertex shader, además de definir la posición mediante las transformaciones
 necesarias, utilizamos la siguiente instrucción
@@ -1122,7 +1128,7 @@ necesarias, utilizamos la siguiente instrucción
 para definir el tamaño del punto acorde al escalar. Así, los puntos que se
 correspondan con escalares más altos tendrán un tamaño mayor. El valor escalar
 \verb|aScalar| es pasado también al fragment shader para realizar una coloración
-del punto acorde a este valor. \\
+del punto acorde a este valor. 
 
 \begin{figure}[hb]
 	\centering	
@@ -1177,7 +1183,7 @@ corresponden en la textura. Estas coordenadas de textura se definen en el
 intervalo $(0,1)\times(0,1)$, siendo el punto $(0,0)$ la esquina inferior
 izquierda de la textura y el punto $(1,1)$ la esquina superior derecha. Con
 estos datos, el vertex shader escribe la posición de los cuatro vértices y pasa
-las coordenadas de textura al fragment shader, que es el que las utilizará. \\
+las coordenadas de textura al fragment shader, que es el que las utilizará. 
 
 El fragment shader, por su parte, obtiene el color original de los fragmentos
 con la instrucción
@@ -1210,25 +1216,225 @@ Figura~\ref{fig:mynegative}.
 \subsection{Line Integral Convolution}
 \label{makereference5.5.8}
 
+El caso del Line Integral Convolution presenta un problema a la hora de realizar
+mediante un shader los cálculos necesarios. Esto se debe a que, como hemos visto
+anteriormente, necesitamos, para calcular la línea de flujo, los valores del
+campo vectorial de los demás vértices, algo que no podemos, a priori, obtener en
+un shader. La solución para este problema consiste en codificar en forma de
+textura la información del campo vectorial asociado al problema. 
+
+\begin{figure}[b]
+	\centering	
+	\begin{subfigure}{0.7\textwidth}
+			\includegraphics[width=\textwidth]{figures/lictexture2.png}	
+	\end{subfigure}
+	\begin{subfigure}{0.28\textwidth}
+			\includegraphics[width=\textwidth]{figures/lictexture.png}	
+	\end{subfigure}
+	\caption{LIC - Información del campo vectorial codificado en una textura}
+	\label{fig:lictexture}
+\end{figure}
+
+Para ello, como se explica en~\citet{Bailey} y como se puede observar en la
+Figura~\ref{fig:lictexture}, se asocia a cada punto del campo un color
+dependiendo de los valores de las componentes vectoriales de dicho punto. A
+mayor valor de la coordenada $x$ se le asocia un valor más alto del color rojo
+siguiendo el convenio RGB. Similarmente, a mayor valor de la coordenada $y$ se
+le asocia un valor mayor del color verde. 
+
 \begin{figure}
 	\centering	
 	\begin{subfigure}{0.45\textwidth}
 		\includegraphics[height=\textwidth,width=\textwidth]{figures/mylic.png}
+		\caption{}
+		\label{fig:mylic1}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.45\textwidth}
 		\includegraphics[height=\textwidth,width=\textwidth]{figures/mylic2.png}
+		\caption{}
+		\label{fig:mylic2}
 	\end{subfigure}
 	\newline 
-	\par\bigskip\par\bigskip\par\bigskip
+	\par\bigskip\par\bigskip
 	\begin{subfigure}{0.45\textwidth}
 		\includegraphics[height=\textwidth,width=\textwidth]{figures/mylic3.jpg}
+		\caption{}
+		\label{fig:mylic3}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.45\textwidth}
 		\includegraphics[height=\textwidth,width=\textwidth]{figures/mylic4.png}
+		\caption{}
+		\label{fig:mylic4}
 	\end{subfigure}
 	\caption{Line Integral Convolution}
 	\label{fig:mylic}
 \end{figure}
 
+La textura con estos valores así calculados tiene un aspecto similar al de las
+Figuras~\ref{fig:mylic3} y~\ref{fig:mylic4}.
+
+Para esta técnica necesitaremos solo un vertex shader y un fragment shader. El
+vertex shader toma de nuevo la posición de los vértices, que en este caso se
+trata de una malla de $256\times 256$ vértices y las coordenadas de textura de
+cada uno de ellos. Este shader simplemente pasa las coordenadas de textura al
+fragment shader y escribe la posición del vértice. 
+
+El fragment shader toma las coordenadas de textura procedentes del vertex shader
+y realiza las operaciones explicadas en la sección~\ref{ref:lic}. Primero
+realiza, para cada vértice, el cómputo de la línea de flujo mediante el método
+de Runge-Kutta de orden 4. Para este método se define el tamaño del paso
+mediante la variable \verb|stp| y la longitud de la línea de flujo que queremos
+calcular mediante la variable \verb|uniform uLength|.
+
+\begin{verbatim}
+    vec3 color = texture( texture1, vTexCoords ).rgb;
+    vec2 st = vTexCoords;
+    float stp = 0.00281;
+
+    // Cálculo de la línea de flujo en dirección positiva
+    for( int i = 0; i < uLength; i++ )
+    {
+        vec2 k1 = texture( texture2, st ).xy;
+        vec2 k2 = texture( texture2, st + k1*stp/2 ).xy;
+        vec2 k3 = texture( texture2, st + k2*stp/2 ).xy;
+        vec2 k4 = texture( texture2, st + k3*stp).xy;
+        vec2 ks = k1 + 2*k2 + 2*k3 + k4;
+        st += stp/6*ks;
+        st = clamp( st, 0., 1. );
+        color += vec3( texture( texture1, st ) );
+    }
+
+    // Cálculo de la línea de flujo en dirección negativa
+    st = vTexCoords;
+    for( int i = 0; i < uLength; i++ )
+    {
+        vec2 k1 = texture( texture2, st ).xy;
+        vec2 k2 = texture( texture2, st - k1 * stp / 2 ).xy;
+        vec2 k3 = texture( texture2, st - k2 * stp / 2 ).xy;
+        vec2 k4 = texture( texture2, st - stp*k3).xy;
+        vec2 ks = k1 + 2*k2 + 2*k3 + k4;
+        st -= stp/6*ks;
+        st = clamp( st, 0., 1. );
+        color += vec3( texture( texture1, st ) );
+    }
+    color /= float(2*uLength + 1); 
+\end{verbatim}
+
+En este shader se ha omitido el cálculo de los pesos, tomando como valor para
+ellos $1$ en todos los casos y dividiendo por el número de puntos en la línea
+de flujo. Con todo esto en cuenta, el resultado final se puede observar en la
+Figura~\ref{fig:mylic}.
+
+\subsection{Uso de la aplicación}
+\label{subsection:uso}
+
+Una vez visto el diseño de la aplicación y los shaders utilizados, se presenta
+el modo de utilización de la aplicación. Una vez conseguido el ejecutable, para
+esta explicación llamado \verb|tfg| se debe ejecutar con alguno de los modos de
+visualización explicados anteriormente. Cada uno de estos modos permite unas
+opciones de visualización diferentes, que se explican a continuación.
+
+Además, todos los modos comparten el movimiento de la cámara, que es el
+siguiente:
+
+\begin{itemize}
+		\item \verb|Esc| - Salir.
+		\item \verb|w| - Mover la cámara hacia delante.
+		\item \verb|s| - Mover la cámara hacia atrás.
+		\item \verb|d| - Mover la cámara hacia la derecha.
+		\item \verb|a| - Mover la cámara hacia la izquierda.
+\end{itemize}
+
+Junto con el movimiento del ratón, que cambia el objetivo al que apunta la
+cámara, y la ruleta del ratón, que permite hacer y deshacer zoom.
+
+\subsubsection{Visualización de Terrenos}
+
+\verb|$ ./tfg terrain|
+
+Opciones: No tiene opciones especiales.
+
+\subsubsection{Curva de Bézier}
+
+\verb|$ ./tfg bezier|
+
+La aplicación permite aumentar y disminuir el número de vértices de la curva,
+así como mover los puntos de control.
+Opciones:
+
+\begin{itemize}
+		\item \verb|\textvisiblespace| - Seleccionar siguiente vértice.
+		\item \verb|\uparrow| - Aumentar número de segmentos.
+		\item \verb|\downarrow| - Disminuir número de segmentos.
+		\item \verb|x| - Mover el vértice seleccionado en la dirección $+x$.
+		\item \verb|y| - Mover el vértice seleccionado en la dirección $+y$.
+		\item \verb|z| - Mover el vértice seleccionado en la dirección $+z$.
+		\item \verb|Shift + x| - Mover el vértice seleccionado en la dirección $-x$.
+		\item \verb|Shift + y| - Mover el vértice seleccionado en la dirección $-y$.
+		\item \verb|Shift + z| - Mover el vértice seleccionado en la dirección $-z$.
+\end{itemize}
+
+\subsubsection{Superficie de Bézier}
+
+\verb|$ ./tfg bsurface|
+
+La aplicación permite aumentar y disminuir el grado de teselación de la
+superficie, así como mover los puntos de control.  
+Opciones:
+
+\begin{itemize}
+		\item \verb|\textvisiblespace| - Seleccionar siguiente vértice.
+		\item \verb|\uparrow| - Aumentar grado de teselación.
+		\item \verb|\downarrow| - Disminuir grado de teselación.
+		\item \verb|t| - Activar el modo wireframe
+		\item \verb|u| - Desactivar el modo wireframe
+		\item \verb|x| - Mover el vértice seleccionado en la dirección $+x$.
+		\item \verb|y| - Mover el vértice seleccionado en la dirección $+y$.
+		\item \verb|z| - Mover el vértice seleccionado en la dirección $+z$.
+		\item \verb|Shift + x| - Mover el vértice seleccionado en la dirección $-x$.
+		\item \verb|Shift + y| - Mover el vértice seleccionado en la dirección $-y$.
+		\item \verb|Shift + z| - Mover el vértice seleccionado en la dirección $-z$.
+\end{itemize}
+
+\subsubsection{Nube de puntos}
+
+\verb|$ ./tfg cloud|
+
+Opciones:
+
+\begin{itemize}
+		\item \verb|\uparrow| - Aumentar límite para el escalar.
+		\item \verb|\downarrow| - Disminuir límite para el escalar.
+\end{itemize}
+
+\subsubsection{Negativo}
+
+\verb|$ ./tfg negative|
+
+Opciones: No tiene opciones especiales
+
+\subsubsection{Sólido de revolución}
+
+\verb|$ ./tfg revolution|
+
+Opciones:
+
+\begin{itemize}
+		\item \verb|\uparrow| - Aumentar número de vértices de revolución.
+		\item \verb|\downarrow| - Disminuir número de vértices de revolución.
+		\item \verb|t| - Activar el modo wireframe
+		\item \verb|u| - Desactivar el modo wireframe
+\end{itemize}
+
+\subsubsection{Line Integral Convolution}
+
+\verb|$ ./tfg lic|
+
+Opciones:
+
+\begin{itemize}
+		\item \verb|\uparrow| - Aumentar longitud de la línea de flujo.
+		\item \verb|\downarrow| - Disminuir longitud de la línea de flujo.
+\end{itemize}

@@ -20,7 +20,7 @@ ejemplo, se puede utilizar el negativo de la imagen de una estructura ósea con
 el fin de detectar defectos que de otro modo resulta más complicado ver;
 utilizar una mezcla de imágenes astronómicas en diferentes espectros para
 conseguir una imagen mas realista; o aumentar el brillo y nitidez de una imagen
-para conseguir una visualización más eficaz. \\
+para conseguir una visualización más eficaz. 
 
 Entre estas técnicas podemos encontrar, por ejemplo:
 
@@ -39,7 +39,7 @@ en los años 60 por Pierre Bézier. El modelo se basa en una descripción
 matemática que se utiliza extensivamente en programas tipo CAD, y son muy útiles
 para modelar curvas suaves y fáciles de manipular mediante sus puntos de
 control. Éstas pueden ser, generalmente, lineales, cuadráticas o cúbicas, aunque
-se puede generalizar a cualquier grado. \\
+se puede generalizar a cualquier grado. 
 
 Las curvas de Bézier vienen definidas mediante el llamado Polinomio de Bézier
 $B(t)$ y el grado de este polinomio es el que determina el grado de la curva.
@@ -50,7 +50,7 @@ esos dos puntos. Siguen la fórmula general de una recta, es decir:
 \begin{equation}
 	B(t) = \mathbf{P_0} + (\mathbf{P_1} - \mathbf{P_0})t = (1 - t)\mathbf{P_0} +
 	t\mathbf{P_1}, \; t \in [0,1] \label{eq:1}
-\end{equation}\\
+\end{equation}
 
 Las cuadráticas tienen tres puntos de control $\mathbf{P_0}$, $\mathbf{P_1}$ y $\mathbf{P_2}$ y sigue la
 trayectoria marcada por la función $B(t)$:
@@ -58,7 +58,7 @@ trayectoria marcada por la función $B(t)$:
 \begin{equation}
 	B(t) = (1 - t)^2\mathbf{P_0} + 2t(1-t)\mathbf{P_1} + t^2\mathbf{P_2}, \; t
 	\in [0,1] \label{eq:2}
-\end{equation}\\
+\end{equation}
 
 En las curvas cúbicas se utilizan cuatro  puntos de control $\mathbf{P_0}$,
 $\mathbf{P_1}$, $\mathbf{P_2}$ y $\mathbf{P_3}$, siguiendo la trayectoria:
@@ -66,20 +66,20 @@ $\mathbf{P_1}$, $\mathbf{P_2}$ y $\mathbf{P_3}$, siguiendo la trayectoria:
 \begin{equation}
 	B(t) = (1 - t)^3\mathbf{P_0} + 3t(1-t)^2\mathbf{P_1} + 3t^2(1-t)\mathbf{P_2}
 	+ t^3\mathbf{P_3}, \; t \in [0,1] \label{eq:3}\\
-\end{equation}\\
+\end{equation}
 
 Si generalizamos este polinomio se pueden generar curvas de grado $n$ siguiendo
 la fórmula:
 
 \begin{equation}
 	B(t) = \sum_{k = 0}^{n}\mathbf{P_k}BEZ_{k,n}(t) , \; t \in [0,1] \label{eq:4}
-\end{equation}\\
+\end{equation}
 
 donde $BEZ_{k,n}(t)$ son conocidos como los polinomios de Bernstein:
 
 \begin{equation}
 	BEZ(t) = \binom{n}{k}t^k(1-t)^{n-k}, \; k=0,\ldots,n \label{eq:5}
-\end{equation}\\
+\end{equation}
 
 En cuanto a las superficies de Bézier, se generan mediante dos conjuntos de
 curvas de Bézier ortogonales, especificadas mediante una malla de puntos de
@@ -89,7 +89,7 @@ control. La ecuación para estas superficies es:
 B(t, u) =
 \sum_{j=0}^{m}{\sum_{k=0}^{n}{\mathbf{P_{j,k}}BEZ_{j,m}(t)BEZ_{k,n}(u)}}
 \label{eq:6}
-\end{equation}\\
+\end{equation}
 
 Las curvas y superficies de Bézier tienen propiedades muy interesantes, como la
 posibilidad de calcular las primeras y segundas derivadas de la curva en los
@@ -132,11 +132,11 @@ Otra de las grandes áreas de la visualización científica es la de visualizar
 conjuntos grandes de datos en tres dimensiones. Estos datos pueden ser tanto
 escalares como vectoriales. Por ejemplo, se pueden monitorizar los datos de
 temperatura en la atmósfera durante un determinado período de tiempo, queriendo
-después visualizar las áreas que han estado más calientes de media. \\
+después visualizar las áreas que han estado más calientes de media. 
 
 Otro tipo de visualización de datos en tres dimensiones es la visualización de
 datos vectoriales en tres dimensiones, con el fin de capturar, por ejemplo,
-flujos vectoriales de fluidos al rededor de un objeto, etc.\\
+flujos vectoriales de fluidos al rededor de un objeto, etc.
 
 Para este tipo de tareas existen diferentes métodos de visualización, entre los
 que se encuentran los siguientes:
@@ -194,7 +194,7 @@ que se encuentran los siguientes:
 
 Los sólidos de revolución han sido siempre objeto de estudio en matemáticas,
 física e ingeniería. Debido a la facilidad para calcular su área, son utilizadas
-ampliamente en diseño industrial y modelado científico.\\
+ampliamente en diseño industrial y modelado científico.
 
 Este tipo de superficies surgen al rotar una curva planar ---la generatriz--- en
 torno a un eje. Como se ha dicho antes, se conocen fórmulas exactas para su área
@@ -243,13 +243,13 @@ figura~\ref{fig:terrain}.
 
 La última de las técnicas de visualización que vamos a ver tiene que ver con la
 visualización de fluidos en dos dimensiones. Para ello veremos un método
-importante denominado Line Integral Convolution.\\
+importante denominado Line Integral Convolution.
 
 El método Line Integral Convolution fue originalmente propuesto en el artículo
 de~\citet{osti_10185520}. Se utiliza para visualizar campos vectoriales densos.
 En este método, se utiliza una imagen junto con datos de un flujo vectorial,
 modificando esta imagen para mostrar el flujo de los datos. (ver
-Figura~\ref{fig:lic}). \\
+Figura~\ref{fig:lic}). 
 
 \begin{figure}[h!]
 	\centering	
@@ -266,7 +266,7 @@ Figura~\ref{fig:lic}). \\
 \end{figure}
 
 En~\citet{licthesis} se muestra como funciona el método de Line Integral
-Convolution, señalando los principales pasos que sigue:\\
+Convolution, señalando los principales pasos que sigue:
 
 Para cada pixel en la imagen de entrada, hacer:
 \begin{enumerate}
@@ -306,7 +306,7 @@ haciendo ver las líneas de flujo con los colores de la imagen original. Sin
 embargo, con el fin de que perturbaciones en la imagen original no condicionen
 el análisis del flujo a visualizar, la opción recomendada y casi siempre
 utilizada en este método es la del ruido blanco, debido a la distribución
-uniforme de los colores de sus píxeles. \\
+uniforme de los colores de sus píxeles. 
 
 \subsection{Computar la línea de flujo}
 \label{ref:streamline}
@@ -315,11 +315,11 @@ Para computar la línea de flujo se ha de utilizar algún método numérico. Ent
 las posibilidades se encuentran el método de Euler, utilizado
 por~\citet{licthesis}, el método de Euler de paso variable, utilizado por los
 autores originales en~\citet{osti_10185520}, o el método de Runge-Gutta de orden
-4, propuesto como alternativa en ambos textos. En la sección~\ref{ref:math}, se
-explican estos métodos como preparación para su implementación. De esta manera,
-se consiguen una serie de puntos a lo largo de la línea de flujo, dependiendo
-del paso escogido en el método numérico y la longitud de la línea escogida por
-el usuario.
+4, propuesto como alternativa en ambos textos. En la
+sección~\ref{makereference5.4.3}, se explican estos métodos como preparación
+para su implementación. De esta manera, se consiguen una serie de puntos a lo
+largo de la línea de flujo, dependiendo del paso escogido en el método numérico
+y la longitud de la línea escogida por el usuario.
 
 \subsection{Computar los pesos de convolución}
 \label{ref:convolution}
@@ -330,7 +330,7 @@ ha de resolver la integral~\eqref{eq:11}.
 
 \begin{equation}
 		h_i = \int_{a}^{b}k(\omega) d\omega \label{eq:11}
-\end{equation}\\
+\end{equation}
 
 donde $i$ se representa el índice del punto actual en la línea de flujo, $a$
 es la distancia a lo largo de la línea de flujo entre el punto actual y el pixel
@@ -348,4 +348,3 @@ los puntos de la línea de flujo, se sigue la siguiente ecuación:
 		F_{out}(x,y) =
 		\frac{\sum\limits_{i=0}^{l}{F_{in}(P_i)h_i}+\sum\limits_{i=0}^{l'}{F_{in}(P'_i)h'_i}}{\sum\limits_{i=0}^{l}{h_i} + \sum\limits_{i=0}^{l'}{h'_i}} \label{eq:12}
 \end{equation}
-

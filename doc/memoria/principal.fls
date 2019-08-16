@@ -11,6 +11,8 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
 INPUT /usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
+INPUT /usr/share/texlive/texmf-dist/tex/latex/parskip/parskip.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/parskip/parskip.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
@@ -345,6 +347,9 @@ INPUT ./figures/licoutputpixel.png
 INPUT ./figures/licoutputpixel.png
 INPUT chapter5.tex
 INPUT chapter5.tex
+INPUT figures/traslacion.png
+INPUT ./figures/traslacion.png
+INPUT ./figures/traslacion.png
 INPUT figures/scaling.png
 INPUT ./figures/scaling.png
 INPUT ./figures/scaling.png
@@ -390,6 +395,12 @@ INPUT ./figures/mynegative0.jpg
 INPUT figures/mynegative1.png
 INPUT ./figures/mynegative1.png
 INPUT ./figures/mynegative1.png
+INPUT figures/lictexture2.png
+INPUT ./figures/lictexture2.png
+INPUT ./figures/lictexture2.png
+INPUT figures/lictexture.png
+INPUT ./figures/lictexture.png
+INPUT ./figures/lictexture.png
 INPUT figures/mylic.png
 INPUT ./figures/mylic.png
 INPUT ./figures/mylic.png

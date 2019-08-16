@@ -14,7 +14,7 @@
 
 El objetivo de este capítulo es explicar en qué consiste OpenGl, así como su
 pipeline de gráficos, los tipos de shaders que incluye y las diferencias que
-presenta con DirectX, su principal competidor.\\
+presenta con DirectX, su principal competidor.
 
 \section{¿Qué es?}
 \label{makereference2.1}
@@ -30,7 +30,7 @@ OpenGL no proporciona ninguna funcionalidad para describir modelos en tres
 dimensiones ni operaciones para leer ficheros (como imágenes JPEG, por ejemplo).
 En su lugar, se deben construir los objetos tridimensionales a partir de un
 pequeño conjunto de primitivas geométricas---puntos, líneas, triángulos y
-parches. 
+parches.---
 
 \section{Breve historia de OpenGL}
 \label{makereference2.2}
@@ -42,20 +42,20 @@ Posteriormente, debido a la pérdida de cuota de mercado, decidió hacer su API
 pública. Sin embargo, a causa de problemas con patentes y el hecho de tener
 características poco relevantes para los gráficos 3D como la funcionalidad de
 ventanas, se decidió reescribir algunas de las partes y se lanzó lo que ahora se
-conoce como OpenGL.\\
+conoce como OpenGL.
 
 Esta nueva especificación consiguió logros importantes para la informática gráfica,
 como estandarizar el acceso al hardware gráfico, trasladar a los fabricantes la
 responsabilidad del desarrollo de las interfaces con el hardware y delegar la
 funcionalidad de ventanas al sistema operativo. Todo esto supuso un gran impacto
 en la industria, al ofrecer a los desarrolladores una plataforma de alto nivel
-sobre la que trabajar.\\
+sobre la que trabajar.
 
 En 1992, Silicon Graphics lideró la creación del OpenGL Architecture Review
 Board (OpenGL ARB)~\cite{OpenGLARB}, un grupo de empresas del sector que sería la encargada de
 mantener y extender la especificación en los años siguientes. El OpenGL ARB
 estaba formado por 3Dlabs, Apple, ATI, Dell, IBM, Intel, Nvidia, SGI and Sun
-Microsystems.\\
+Microsystems.
 
 En otoño de 2006, el OpenGL ARB y los directores de Khronos votaron para transferir el
 control de OpenGL a Khronos Group. El secretario de la ARB Jon Leech observó:
@@ -67,7 +67,7 @@ OpenGL en todas sus formas.''}~\cite{OpenGLARB}
 
 OpenGL implementa el llamado pipeline de gráficos o pipeline de renderizado.
 Este pipeline consiste en una secuencia de etapas de procesamiento para
-convertir datos de una aplicación en una imagen final renderizada. \\
+convertir datos de una aplicación en una imagen final renderizada. 
 
 \begin{figure}[h]
 		\centering
@@ -98,7 +98,7 @@ Sin embargo, con la versión 2.0 de OpenGL se introdujeron los \textit{shaders},
 explorados en detalle en el Capítulo~\ref{makereference3}, que sustituyeron
 algunas de estas etapas fijas por etapas programables, dando mayor flexibilidad
 al programador. La Figura~\ref{fig2.2} muestra el pipeline asociado a la versión
-4.3 de OpenGL. \\
+4.3 de OpenGL. 
 
 \begin{figure}[h]%t=top, b=bottom, h=here
 	\begin{subfigure}[b]{.5\textwidth}
@@ -120,7 +120,7 @@ al programador. La Figura~\ref{fig2.2} muestra el pipeline asociado a la versió
 El renderizado de una imagen comienza con una llamada, desde la aplicación
 principal, a una función de dibujado de OpenGL. Con esta llamada, OpenGL coge
 datos sobre vértices contenidos en diferentes objetos y renderiza con estos
-datos una o más \textit{primitivas}~\cite{Primitivas}. \\
+datos una o más \textit{primitivas}~\cite{Primitivas}. 
 
 Las primitivas geométricas son las interpretaciones que OpenGL puede
 hacer sobre lo que representa un flujo de vértices. Por ejemplo, tres vértices
@@ -168,7 +168,7 @@ primitivas de triángulo:
 
 En la Figura~\ref{fig:primitives} se pueden ver las diferentes interpretaciones
 en forma de primitiva que puede realizar OpenGL para renderizar un flujo de
-vértices. \\
+vértices. 
 
 \begin{figure}[h]
 	\centering	
@@ -179,7 +179,7 @@ vértices. \\
 
 Una vez se ha hecho la llamada a la función de dibujado, comienza el proceso de
 renderizado, recorriéndose las diferentes etapas que forman el pipeline de
-renderizado. \\
+renderizado. 
 
 \subsection{Procesamiento de Vértices}
 \label{ref:procesamiento}
@@ -194,7 +194,7 @@ de iluminación, materiales y coordenadas para las texturas. Esta etapa opera
 sobre estos datos y los organiza en las primitivas geométricas asociadas en
 preparación para la etapa de post-procesado de vértices, en la que se realizan,
 entre otras cosas, su recorte y rasterización.  Así, la salida es un conjunto de
-vértices como píxeles, con su color, profundidad y coordenadas de textura.\\
+vértices como píxeles, con su color, profundidad y coordenadas de textura.
 
 \subsection{Clipping}
 \label{ref:clipping}
@@ -203,7 +203,7 @@ Posteriormente se realiza el recorte o \textit{clipping}, que ocurre cuando,
 ocasionalmente, algunos vértices quedan fuera de lo que se denomina
 \textit{viewport}---la región de la ventana donde se permite dibujar---
 modificando las primitivas geométricas para que nada quede fuera de ese espacio.
-(Ver Figura~\ref{fig2.3a}).\\
+(Ver Figura~\ref{fig2.3a}).
 
 \begin{figure}[h]
 	\begin{subfigure}[b]{0.5\textwidth}
@@ -232,7 +232,7 @@ la generación de fragmentos. Podemos considerar un fragmento como un ``candidat
 a pixel'', en el sentido de que un pixel reside en el \textit{framebuffer}--- un
 espacio de memoria manejado por el hardware gráfico que manda al dispositivo de
 salida digital--- mientras que un fragmento puede ser rechazado y nunca
-actualizar su localización de pixel asociada. \\
+actualizar su localización de pixel asociada. 
 
 \subsection{Procesamiento de Fragmentos}
 \label{ref:procesamientofrags}
@@ -241,13 +241,13 @@ En la última etapa, el procesado de fragmentos se realiza a su vez en dos pasos
 uno de ellos programable con el shader de fragmentos y otras operaciones sobre
 fragmentos realizadas automáticamente por OpenGL.  Durante este último
 procesamiento, la visibilidad de cada fragmento es determinada utilizando
-diferentes tests (profundidad, color, plantilla, ruido\ldots). \\
+diferentes tests (profundidad, color, plantilla, ruido\ldots). 
 
 Cuando un fragmento pasa por todas estas etapas y todos los test activos, puede
 ser escrito directamente en el buffer de fragmentos, actualizando su color y
 valor de profundidad de su pixel o, si el \textit{blending} está activado,
 mezclando su color con el del pixel actual para generar un nuevo color que se
-escribe en el buffer de fragmentos.\\
+escribe en el buffer de fragmentos.
 
 \section{Diferencias con Direct3D}
 \label{makereference2.4}
@@ -284,25 +284,25 @@ muestran algunas de ellas resumidas.
 En cuanto a la portabilidad, DirectX solo está disponible para la familia de
 sistemas operativos Microsoft Windows, mientras que OpenGL tiene
 implementaciones en muchas plataformas, incluyendo Microsoft Windows y sistemas
-Unix.\\
+Unix.
 
 En términos de facilidad de uso hoy en día ambas APIs se encuentran bastante
 parejas, habiendo evolucionado desde las primeras versiones, en las que los
 desarrolladores instaban a Microsoft a unirse a la iniciativa OpenGL, debido a
-que suponía menos esfuerzo trabajar con esta última.\\
+que suponía menos esfuerzo trabajar con esta última.
+
+\begin{figure}
+	\centering
+	\includegraphics[height=10cm]{figures/directxpipeline.png}
+	\caption{Pipeline de gráficos de Direct3D}
+	\label{fig:differences}
+\end{figure}
 
 El diseño de ambas es también similar. Tras muchos años de evolución, el
 pipeline gráfico es bastante parecido, como puede apreciarse en la
-Figura~\ref{fig2.3}.\\
+Figura~\ref{fig:differences}.
 
 En conclusión, hoy en día ambas se consideran bastante similares en cuanto a
 rendimiento y capacidades, siendo el soporte a otros sistemas y el carácter de
 las licencias las únicas grandes diferencias que hacen decantarse a los
-desarrolladores por una u otra.\\
-
-\begin{figure}[h]%t=top, b=bottom, h=here
-	\centering
-	\includegraphics[height=10cm]{figures/directxpipeline.png}
-	\caption{Pipeline de gráficos de Direct3D}
-	\label{fig2.3}
-\end{figure}
+desarrolladores por una u otra.
