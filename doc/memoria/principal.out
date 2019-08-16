@@ -34,7 +34,7 @@
 \BOOKMARK [1][-]{section.4.1}{Manipulaci\363n de im\341genes}{chapter.4}% 34
 \BOOKMARK [1][-]{section.4.2}{Curvas y superficies de B\351zier}{chapter.4}% 35
 \BOOKMARK [1][-]{section.4.3}{Visualizaci\363n de datos en 3D}{chapter.4}% 36
-\BOOKMARK [1][-]{section.4.4}{Superficies de revoluci\363n}{chapter.4}% 37
+\BOOKMARK [1][-]{section.4.4}{S\363lidos de revoluci\363n}{chapter.4}% 37
 \BOOKMARK [1][-]{section.4.5}{Coloreado de terrenos}{chapter.4}% 38
 \BOOKMARK [1][-]{section.4.6}{Line Integral Convolution}{chapter.4}% 39
 \BOOKMARK [2][-]{subsection.4.6.1}{Computar la l\355nea de flujo}{section.4.6}% 40
@@ -56,8 +56,7 @@
 \BOOKMARK [2][-]{subsection.5.5.4}{S\363lidos de revoluci\363n}{section.5.5}% 56
 \BOOKMARK [2][-]{subsection.5.5.5}{Nube de puntos}{section.5.5}% 57
 \BOOKMARK [2][-]{subsection.5.5.6}{Negativo de una imagen}{section.5.5}% 58
-\BOOKMARK [2][-]{subsection.5.5.7}{Detecci\363n de bordes}{section.5.5}% 59
-\BOOKMARK [2][-]{subsection.5.5.8}{Line Integral Convolution}{section.5.5}% 60
-\BOOKMARK [0][-]{chapter.6}{Conclusiones y Trabajo Futuro}{}% 61
-\BOOKMARK [0][-]{chapter*.39}{Bibliography}{}% 62
-\BOOKMARK [0][-]{appendix.Alph1}{El lenguaje GLSL}{}% 63
+\BOOKMARK [2][-]{subsection.5.5.7}{Line Integral Convolution}{section.5.5}% 59
+\BOOKMARK [0][-]{chapter.6}{Conclusiones y Trabajo Futuro}{}% 60
+\BOOKMARK [0][-]{chapter*.47}{Bibliography}{}% 61
+\BOOKMARK [0][-]{appendix.Alph1}{El lenguaje GLSL}{}% 62

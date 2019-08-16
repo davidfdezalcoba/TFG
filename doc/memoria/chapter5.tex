@@ -120,6 +120,7 @@ caso de necesitar otro comportamiento. \\
 En la clase \verb|Object| existen tres métodos virtuales puros, que han de ser
 implementados por las clases específicas de cada tipo de visualización:
 
+
 \begin{itemize}
 		\item \verb|draw()|, que ha de encargarse de dibujar el objeto en
 				cuestión.
@@ -790,17 +791,444 @@ cálculos realizados y explorando las entradas y salidas de cada uno de ellos.
 
 \subsection{Coloreado de terrenos}
 \label{makereference5.5.1}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{figures/myterrain.png}
+	\caption{Coloreado de Valles Marineris. Modelo de NASA~\cite{NASA}}
+	\label{fig:myterrain}
+\end{figure}
+
+Para este problema, descrito en la sección~\ref{ref:terrain}, se ha elaborado un
+vertex shader y un fragment shader. Partiendo del modelo de un terreno existen
+dos posibilidades: que las alturas vengan codificadas en forma de textura o que
+venga implícitamente en la posición de los vértices. En este último caso, en la
+aplicación se lee el valor más alto y el valor más bajo en el eje $y$ para
+realizar la coloración. \\
+
+Así, el vertex shader toma como entrada la posición y los normales de los
+vértices, sacados de un modelo tridimensional.
+
+\begin{verbatim}
+    layout (location = 0) in vec3 aPos;
+    layout (location = 1) in vec3 aNormal;
+\end{verbatim}
+
+Como solo se están utilizando el vertex shader y fragment shader, la salida del
+vertex shader se da como entrada al fragment shader. Esta salida corresponde al
+normal, que es el mismo que entra; la posición del fragmento y el color del
+fragmento. Estas dos últimas variables se calculan en el vertex shader
+utilizando la altura máxima y mínima del modelo, que se pasan mediante variables
+\verb|uniform|.  Además, con el fin de mejorar el rendimiento, las
+transformaciones de los vértices, que vienen dadas por las matrices de modelo,
+vista y proyección, se calculan también en este shader. El siguiente fragmento
+de código muestra las salidas del vertex shader junto con las variables
+\verb|uniform| utilizadas:
+
+\begin{verbatim}
+    out vec3 vNormal;
+    out vec3 vFragPos;
+    out vec3 vFragColor;
+    
+    uniform float uMaxHeight;
+    uniform float uMinHeight;
+    uniform mat4 uModel;
+    uniform mat4 uView;
+    uniform mat4 uProjection;
+\end{verbatim}
+
+El color del fragmento se calcula realizando una interpolación entre el valor
+máximo de altura(rojo), el valor tres cuartos de altura(amarillo), el valor
+medio de la altura(verde) y el valor mínimo de altura(azul). El código siguiente
+muestra el cálculo del color de un fragmento entre la altura máxima y los tres
+cuartos:
+
+\begin{verbatim}
+    if (aPos.z > threecuarters) {
+        alpha = smoothstep(uMaxHeight, threecuarters, aPos.z);	
+        vFragColor = mix(RED, YELLOW, alpha);	
+    }
+\end{verbatim}
+
+Asimismo, para calcular la posición del fragmento se utiliza el siguiente
+código:
+
+\begin{verbatim}		
+    vFragPos = vec3(uModel * vec4(aPos, 1.0)); 
+    gl_Position =  uProjection * uView * vec4(vFragPos, 1.0);
+\end{verbatim}
+
+Esto es todo lo que realiza el vertex shader, y sería suficiente para renderizar
+el terreno coloreado. Sin embargo, con el fin de darle más realismo, en esta
+ocasión se ha utilizado el fragment shader para dotar de iluminación a la
+escena. Así, se han utilizado los normales, la posición y el color del fragmento
+para elaborar un modelo de iluminación ADS~\cite{Bailey}. Esto es todo lo que
+realiza el fragment shader, quedándonos lo siguiente:
+
+\begin{verbatim}
+    //Ambient
+    vec3 ambient = uLight.ambient * vFragColor; 
+    
+    //Difuse
+    vec3 norm = normalize(uNormalMatrix * vNormal);
+    vec3 lightDir = normalize(uLight.position - vFragPos);
+    float diff = max(dot(norm, lightDir), 0.0);
+    vec3 diffuse = uLight.diffuse * (diff * vFragColor); 
+    
+    //Specular
+    vec3 viewDir = normalize(uViewPos - vFragPos);
+    vec3 reflectDir = reflect(-lightDir, norm); 
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), uShininess);
+    vec3 specular = uLight.specular * (spec * vFragColor);
+    
+    vec3 light = ambient + diffuse + specular;
+    fFragColor = vec4(light, 1.0);
+\end{verbatim}
+
+El resultado final de la utilización de estos shaders se puede ver en la
+figura~\ref{fig:myterrain}, para la que se ha utilizado un modelo de la NASA de
+Valles Marineris, un sistema de cañones que recorre el ecuador de marte.
+
 \subsection{Curvas de Bézier}
 \label{makereference5.5.2}
+
+Para mostrar las curvas de Bézier se han utilizado un vertex shader, un geometry
+shader y un fragment shader. Además, se ha utilizado otro par de shaders para
+renderizar tanto los ejes como los puntos de control de la curva. \\
+
+En este caso, todo el trabajo se realiza en el geometry shader. El vertex shader
+simplemente se encarga de realizar la transformación mediante
+
+\begin{verbatim}
+    gl_Position = uProjection * uView * uModel * vec4(aPos, 1.0);
+\end{verbatim}
+
+mientras que el fragment shaders solo se encarga de darle color a la curva
+mediante la instrucción
+
+\begin{verbatim}
+    fFragColor = vec4(ORANGE, 1.0);
+\end{verbatim}\\
+
+Así pues, veamos qué acciones realizar en el geometry shader para conseguir,
+mediante los 4 vértices de control, renderizar una curva de Bézier en nuestra
+aplicación. Este shader es la versión de~\citet{Bailey}. \\
+
+Recordemos de la sección~\ref{ref:GeoShader} que para el shader geométrico ha de
+especificarse la primitiva de entrada y la de salida. Esto se realiza mediante
+las líneas
+
+\begin{verbatim}
+    layout( lines_adjacency ) in;
+    layout( line_strip, max_vertices=256 ) out;
+\end{verbatim}
+
+Utilizamos \verb|lines_adjacency| puesto que como entrada tomaremos los 4 puntos
+de control (y esta es la única entrada que toma 4 puntos. Ver
+tabla~\ref{tabla3.1}) y como salida \verb|line_strip| pues queremos renderizar
+nuestra curva como una serie de segmentos. El nivel de detalle de nuestra curva
+vendrá dado por este número de segmentos, que se especifica mediante una
+variable \verb|uniform|.
+
+\begin{verbatim}
+    float dt = 1. / float(uNum);
+    float t = 0.;
+    for( int i  = 0; i <=uNum; i++, t+= dt){
+        float omt = 1. -t;
+        float omt2 = omt * omt;
+        float omt3 = omt * omt2;
+        float t2 = t * t;
+        float t3 = t * t2;
+        vec4 xyzw = omt3 * gl_PositionIn[0] +
+        3. * t * omt2 * gl_PositionIn[1] +
+        3. * t2 * omt * gl_PositionIn[2] +
+        t3 * gl_PositionIn[3];
+        gl_Position = xyzw;
+        EmitVertex( );
+    }
+\end{verbatim}
+
+El código anterior supone la totalidad del geometry shader. En él, mediante el
+uniform \verb|uNum| indicamos la cantidad de puntos que queremos incluir de la
+curva, obteniendo mayor detalle cuanto más alto es este número. El vector
+\verb|xyzw| se calcula mediante la ecuación~\eqref{eq:3}. El resultado de este
+shader puede verse en la Figura~\ref{fig:mybeziercurve}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{figures/mybeziercurve.png}
+	\caption{Bézier Curve}
+	\label{fig:mybeziercurve}
+\end{figure}
+
 \subsection{Superficies de Bézier}
 \label{makereference5.5.3}
+
+\begin{figure}
+	\centering		
+	\begin{subfigure}{\textwidth}
+		\includegraphics[width=\textwidth]{figures/mybeziersurface1.png}
+	\end{subfigure}
+	\newline
+	\begin{subfigure}{\textwidth}
+		\includegraphics[width=\textwidth]{figures/mybeziersurface2.png}
+	\end{subfigure}
+	\caption{Superficie de Bézier}
+	\label{fig:mybeziersurface}
+\end{figure}
+
+En este caso, en lugar de utilizar el shader geométrico como en el caso
+anterior, utilizaremos los shaders de teselación. Por tanto, tendremos, al igual
+que en el caso anterior, un vertex shader, un tessellation control shader, un
+tessellation evaluation shader y un fragment shader, además de los mismos
+shaders que en el caso anterior para renderizar los ejes y los puntos de
+control. \\
+
+El vertex y fragment shader son exactamente iguales que en el caso de la curva
+de Bézier, por lo que nos centraremos exclusivamente en los shaders de
+teselación. El TCS ha de marcar el nivel de teselación, acorde a lo explicado en
+la sección~\ref{ref:TesShaders}, y, debido a que queremos utilizar cuadriláteros
+y guiándonos por la Figura~\ref{fig:quadlevels}, debemos especificar los
+siguientes niveles de teselación:
+
+\begin{verbatim}
+    gl_TessLevelOuter[0] = gl_TessLevelOuter[2] = uOuter02;
+    gl_TessLevelOuter[1] = gl_TessLevelOuter[3] = uOuter13;
+    gl_TessLevelInner[0] = uInner0;
+    gl_TessLevelInner[1] = uInner1;
+\end{verbatim}
+
+Además se pasa al TES la posición del vértice dentro del parche mediante la
+instrucción:
+
+\begin{verbatim}
+    gl_out[ gl_InvocationID ].gl_Position =
+        gl_in[ gl_InvocationID ].gl_Position;
+\end{verbatim}
+
+En el TES es donde realmente se realizan los cálculos necesarios para obtener la
+superficie de Bézier. El siguiente código, que realiza el cálculo de la
+ecuación~\eqref{eq:6} es una versión simplificada del que se puede encontrar
+en~\citet{Bailey}. Este último utiliza también las propiedades de las derivadas
+de las superficies de Bézier para calcular el normal con el fin je utilizar un
+modelo de luz como el utilizado en~\ref{makereference5.5.1}.
+
+\begin{verbatim}
+    vec4 p00 = gl_in[0].gl_Position;
+    vec4 p10 = gl_in[1].gl_Position;
+    vec4 p20 = gl_in[2].gl_Position;
+    vec4 p30 = gl_in[3].gl_Position;
+    vec4 p01 = gl_in[4].gl_Position;
+    vec4 p11 = gl_in[5].gl_Position;
+    vec4 p21 = gl_in[6].gl_Position;
+    vec4 p31 = gl_in[7].gl_Position;
+    vec4 p02 = gl_in[8].gl_Position;
+    vec4 p12 = gl_in[9].gl_Position;
+    vec4 p22 = gl_in[10].gl_Position;
+    vec4 p32 = gl_in[11].gl_Position;
+    vec4 p03 = gl_in[12].gl_Position;
+    vec4 p13 = gl_in[13].gl_Position;
+    vec4 p23 = gl_in[14].gl_Position;
+    vec4 p33 = gl_in[15].gl_Position;
+    
+    float u = gl_TessCoord.x;
+    float v = gl_TessCoord.y;
+    
+    float bu0 = (1.-u) * (1.-u) * (1.-u);
+    float bu1 = 3. * u * (1.-u) * (1.-u);
+    float bu2 = 3. * u * u * (1.-u);
+    float bu3 = u * u  * u;
+    
+    float bv0 = (1.-v) * (1.-v) * (1.-v);
+    float bv1 = 3. * v * (1.-v) * (1.-v);
+    float bv2 = 3. * v * v * (1.-v);
+    float bv3 = v * v * v;
+    
+    gl_Position = 
+          bu0 * ( bv0*p00 + bv1*p01 + bv2*p02 + bv3*p03 )
+        + bu1 * ( bv0*p10 + bv1*p11 + bv2*p12 + bv3*p13 )
+        + bu2 * ( bv0*p20 + bv1*p21 + bv2*p22 + bv3*p23 )
+        + bu3 * ( bv0*p30 + bv1*p31 + bv2*p32 + bv3*p33 );
+
+\end{verbatim}
+
+El resultado de estos shaders se puede ver en la
+Figura~\ref{fig:mybeziersurface}.
+
 \subsection{Sólidos de revolución}
 \label{makereference5.5.4}
+
+\begin{figure}
+	\centering		
+	\includegraphics[width=\textwidth]{figures/myrevolution.png}
+	\caption{Sólido de revolución}
+	\label{fig:myrevolution}
+\end{figure}
+
+En este caso, de nuevo, tanto el vertex shader como el fragment shader son los
+más simples posible, como en los casos anteriores. Todo el trabajo recae en el
+geometry shader. Así, dados los vértices que forman una curva, se van generando
+vértices en torno al eje $y$, tantos como indica la variable \verb|uNum|. El
+resultado de revolucionar una curva en torno al eje $y$ puede verse en la
+Figura~\ref{fig:myrevolution}. El código del geometry shader utilizado es el
+siguiente:
+
+\begin{verbatim}
+    for( int i  = 0; i <= uNum; i++){
+        float grados = 2.0*PI / uNum * i;
+        
+        gl_Position = gl_in[0].gl_Position;
+        gl_Position.x = cos(grados)*gl_PositionIn[0].x 
+		                + sin(grados)*gl_PositionIn[0].z;
+        gl_Position.z = cos(grados)*gl_PositionIn[0].z 
+		                - sin(grados)*gl_PositionIn[0].x;
+
+        gl_Position = uProjection * uView * uModel * gl_Position;
+        EmitVertex( );
+        
+        gl_Position = gl_PositionIn[1];
+        gl_Position.x = cos(grados)*gl_PositionIn[1].x 
+		                + sin(grados)*gl_PositionIn[1].z;
+        gl_Position.z = cos(grados)*gl_PositionIn[1].z 
+		                - sin(grados)*gl_PositionIn[1].x;
+
+        gl_Position = uProjection * uView * uModel * gl_Position;
+        EmitVertex( );
+    }
+\end{verbatim}
+
 \subsection{Nube de puntos}
 \label{makereference5.5.5}
+
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=\textwidth]{figures/mycloud.png}
+	\caption{Nube de puntos}
+	\label{fig:mycloud}
+\end{figure}
+
+Para realizar esta visualización se han utilizado únicamente un vertex shader y
+un fragment shader. Como entradas, el vertex shader utiliza tanto la posición
+del vértice en la nube de puntos como el escalar que representa la información
+que queremos visualizar. \\
+
+En el vertex shader, además de definir la posición mediante las transformaciones
+necesarias, utilizamos la siguiente instrucción
+
+\begin{verbatim}
+    gl_PointSize = 2 + pow((smoothstep(0.0, uMaxData, aScalar) + 1), 2);
+\end{verbatim}
+
+para definir el tamaño del punto acorde al escalar. Así, los puntos que se
+correspondan con escalares más altos tendrán un tamaño mayor. El valor escalar
+\verb|aScalar| es pasado también al fragment shader para realizar una coloración
+del punto acorde a este valor. \\
+
+\begin{figure}[hb]
+	\centering	
+	\includegraphics[width=\textwidth]{figures/mycloud2.png}
+	\caption{Nube de puntos con valores descartados}
+	\label{fig:mycloud2}
+\end{figure}
+
+Además, en el fragment shader se ha declarado la variable \verb|uniform uMax|
+que se utiliza para descartar los puntos que tengan valores escalares menores
+que él. Así, podemos visualizar de una manera  más efectiva datos por encima de
+cierto límite. Este comportamiento puede verse en la Figura~\ref{fig:mycloud2}.
+El código para este shader se incluye a continuación.
+
+\begin{verbatim}
+    if(vScalar < uMax) discard;	
+    float alpha;
+    float middle = uMaxData / 2;
+    if(vScalar >= middle){
+        alpha = smoothstep(middle, uMaxData, vScalar);
+        fFragColor = vec4(mix(GREEN, RED, alpha), 1.0f);
+    }
+    else{
+        alpha = smoothstep(0.0, middle, vScalar);
+        fFragColor = vec4(mix(BLUE, GREEN, alpha), 1.0f);
+    }
+\end{verbatim}
+
 \subsection{Negativo de una imagen}
 \label{makereference5.5.6}
-\subsection{Detección de bordes}
-\label{makereference5.5.7}
+
+\begin{figure}[h]
+	\centering	
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[height=8cm,width=\textwidth]{figures/mynegative0.jpg}
+		\caption{Imagen original}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[height=8cm,width=\textwidth]{figures/mynegative1.png}
+		\caption{Negativo}
+	\end{subfigure}
+	\caption{Negativo de una imagen}
+	\label{fig:mynegative}
+\end{figure}
+
+En este caso, al tratarse de una imagen, los únicos elementos que necesitamos
+son cuatro vértices cuya posición se corresponda con cada una de las esquinas de
+la imagen y la textura para la imagen. Así pues, el vertex shader toma como
+entrada la posición de estos cuatro vértices junto a las coordenadas que le
+corresponden en la textura. Estas coordenadas de textura se definen en el
+intervalo $(0,1)\times(0,1)$, siendo el punto $(0,0)$ la esquina inferior
+izquierda de la textura y el punto $(1,1)$ la esquina superior derecha. Con
+estos datos, el vertex shader escribe la posición de los cuatro vértices y pasa
+las coordenadas de textura al fragment shader, que es el que las utilizará. \\
+
+El fragment shader, por su parte, obtiene el color original de los fragmentos
+con la instrucción
+
+\begin{verbatim}
+    vec3 irgb = texture( texture1, vTexCoords ).rgb;
+\end{verbatim}
+
+para posteriormente computar el color negativo y escribirlo como salida para el
+pixel. Esta tarea se realiza con las siguientes instrucciones:
+
+\begin{verbatim}
+    vec3 neg = vec3(1.,1.,1.) - irgb;
+    fFragColor = vec4( mix( irgb, neg, uT ), 1. );
+\end{verbatim}
+
+Una muestra del funcionamiento de este shader se puede encontrar en la
+Figura~\ref{fig:mynegative}.
+
+% \subsection{Detección de bordes}
+% \label{makereference5.5.7}
+% 
+% \begin{figure}
+% 	\centering	
+% 	\includegraphics[width=\textwidth]{figures/myborder.png}
+% 	\caption{Detección de bordes}
+% 	\label{fig:myborder}
+% \end{figure}
+
 \subsection{Line Integral Convolution}
 \label{makereference5.5.8}
+
+\begin{figure}
+	\centering	
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[height=\textwidth,width=\textwidth]{figures/mylic.png}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[height=\textwidth,width=\textwidth]{figures/mylic2.png}
+	\end{subfigure}
+	\newline 
+	\par\bigskip\par\bigskip\par\bigskip
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[height=\textwidth,width=\textwidth]{figures/mylic3.jpg}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[height=\textwidth,width=\textwidth]{figures/mylic4.png}
+	\end{subfigure}
+	\caption{Line Integral Convolution}
+	\label{fig:mylic}
+\end{figure}
+

@@ -31,7 +31,7 @@
 \contentsline {section}{\numberline {4.1}Manipulaci\IeC {\'o}n de im\IeC {\'a}genes}{24}{section.4.1}
 \contentsline {section}{\numberline {4.2}Curvas y superficies de B\IeC {\'e}zier}{24}{section.4.2}
 \contentsline {section}{\numberline {4.3}Visualizaci\IeC {\'o}n de datos en 3D}{26}{section.4.3}
-\contentsline {section}{\numberline {4.4}Superficies de revoluci\IeC {\'o}n}{27}{section.4.4}
+\contentsline {section}{\numberline {4.4}S\IeC {\'o}lidos de revoluci\IeC {\'o}n}{27}{section.4.4}
 \contentsline {section}{\numberline {4.5}Coloreado de terrenos}{28}{section.4.5}
 \contentsline {section}{\numberline {4.6}Line Integral Convolution}{28}{section.4.6}
 \contentsline {subsection}{\numberline {4.6.1}Computar la l\IeC {\'\i }nea de flujo}{29}{subsection.4.6.1}
@@ -55,14 +55,13 @@
 \contentsline {subsubsection}{M\IeC {\'e}todos de Runge-Kutta}{47}{section*.38}
 \contentsline {subsection}{\numberline {5.4.4}Otras F\IeC {\'o}rmulas}{48}{subsection.5.4.4}
 \contentsline {section}{\numberline {5.5}Shaders en la aplicaci\IeC {\'o}n}{48}{section.5.5}
-\contentsline {subsection}{\numberline {5.5.1}Coloreado de terrenos}{49}{subsection.5.5.1}
-\contentsline {subsection}{\numberline {5.5.2}Curvas de B\IeC {\'e}zier}{49}{subsection.5.5.2}
-\contentsline {subsection}{\numberline {5.5.3}Superficies de B\IeC {\'e}zier}{49}{subsection.5.5.3}
-\contentsline {subsection}{\numberline {5.5.4}S\IeC {\'o}lidos de revoluci\IeC {\'o}n}{49}{subsection.5.5.4}
-\contentsline {subsection}{\numberline {5.5.5}Nube de puntos}{49}{subsection.5.5.5}
-\contentsline {subsection}{\numberline {5.5.6}Negativo de una imagen}{49}{subsection.5.5.6}
-\contentsline {subsection}{\numberline {5.5.7}Detecci\IeC {\'o}n de bordes}{49}{subsection.5.5.7}
-\contentsline {subsection}{\numberline {5.5.8}Line Integral Convolution}{49}{subsection.5.5.8}
-\contentsline {chapter}{\numberline {6}Conclusiones y Trabajo Futuro}{50}{chapter.6}
-\contentsline {chapter}{Bibliography}{53}{chapter*.39}
-\contentsline {chapter}{\numberline {A}El lenguaje GLSL}{54}{appendix.Alph1}
+\contentsline {subsection}{\numberline {5.5.1}Coloreado de terrenos}{48}{subsection.5.5.1}
+\contentsline {subsection}{\numberline {5.5.2}Curvas de B\IeC {\'e}zier}{51}{subsection.5.5.2}
+\contentsline {subsection}{\numberline {5.5.3}Superficies de B\IeC {\'e}zier}{52}{subsection.5.5.3}
+\contentsline {subsection}{\numberline {5.5.4}S\IeC {\'o}lidos de revoluci\IeC {\'o}n}{55}{subsection.5.5.4}
+\contentsline {subsection}{\numberline {5.5.5}Nube de puntos}{56}{subsection.5.5.5}
+\contentsline {subsection}{\numberline {5.5.6}Negativo de una imagen}{58}{subsection.5.5.6}
+\contentsline {subsection}{\numberline {5.5.7}Line Integral Convolution}{59}{subsection.5.5.7}
+\contentsline {chapter}{\numberline {6}Conclusiones y Trabajo Futuro}{61}{chapter.6}
+\contentsline {chapter}{Bibliography}{64}{chapter*.47}
+\contentsline {chapter}{\numberline {A}El lenguaje GLSL}{65}{appendix.Alph1}
