@@ -9,9 +9,14 @@ Warning--empty year in NASA
 Warning--empty booktitle in DEFANTI1991247
 Warning--empty year in OpenGL
 Warning--empty year in OpenGLARB
+Warning--empty year in Khronos
+Warning--empty year in Vulkan
+Warning--empty year in AMD
+Warning--empty year in SPIR
 Warning--empty year in Primitivas
 Warning--empty year in Microsoft
 Warning--empty year in GLSL
+Warning--empty year in HLSL
 Warning--empty year in VertexShader
 Warning--empty year in TesConShader
 Warning--empty year in TesPriGen
@@ -31,45 +36,45 @@ Warning--empty year in ASSIMP
 Warning--empty year in GLM
 Warning--empty journal in Vicci
 Warning--empty year in EHT
-You've used 39 entries,
+You've used 44 entries,
             2481 wiz_defined-function locations,
-            772 strings with 9484 characters,
-and the built_in function-call counts, 11403 in all, are:
-= -- 1008
-> -- 353
-< -- 42
-+ -- 189
-- -- 100
-* -- 566
-:= -- 1761
-add.period$ -- 151
-call.type$ -- 39
-change.case$ -- 74
-chr.to.int$ -- 28
-cite$ -- 67
-duplicate$ -- 637
-empty$ -- 1209
-format.name$ -- 147
-if$ -- 2504
-int.to.chr$ -- 12
-int.to.str$ -- 40
+            795 strings with 9894 characters,
+and the built_in function-call counts, 12737 in all, are:
+= -- 1127
+> -- 388
+< -- 47
++ -- 211
+- -- 110
+* -- 623
+:= -- 1965
+add.period$ -- 171
+call.type$ -- 44
+change.case$ -- 84
+chr.to.int$ -- 31
+cite$ -- 77
+duplicate$ -- 707
+empty$ -- 1359
+format.name$ -- 162
+if$ -- 2798
+int.to.chr$ -- 14
+int.to.str$ -- 45
 missing$ -- 19
-newline$ -- 235
-num.names$ -- 117
-pop$ -- 492
+newline$ -- 265
+num.names$ -- 132
+pop$ -- 563
 preamble$ -- 1
-purify$ -- 39
+purify$ -- 44
 quote$ -- 0
-skip$ -- 365
+skip$ -- 399
 stack$ -- 0
-substring$ -- 178
-swap$ -- 116
+substring$ -- 188
+swap$ -- 130
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 255
-warning$ -- 28
-while$ -- 85
+type$ -- 290
+warning$ -- 33
+while$ -- 95
 width$ -- 0
-write$ -- 540
-(There were 28 warnings)
+write$ -- 609
+(There were 33 warnings)

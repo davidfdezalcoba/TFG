@@ -12,9 +12,9 @@
 \chapter{OpenGL y Direct3D}
 \label{makereference2}
 
-El objetivo de este capítulo es explicar en qué consiste OpenGl, así como su
+El objetivo de este capítulo es explicar en qué consiste OpenGL, así como su
 pipeline de gráficos, los tipos de shaders que incluye y las diferencias que
-presenta con DirectX, su principal competidor.
+presenta con Direct3D, su principal competidor.
 
 \section{¿Qué es?}
 \label{makereference2.1}
@@ -30,7 +30,7 @@ OpenGL no proporciona ninguna funcionalidad para describir modelos en tres
 dimensiones ni operaciones para leer ficheros (como imágenes JPEG, por ejemplo).
 En su lugar, se deben construir los objetos tridimensionales a partir de un
 pequeño conjunto de primitivas geométricas---puntos, líneas, triángulos y
-parches.---
+parches.---(Ver Sección~\ref{makereference2.3}).
 
 \section{Breve historia de OpenGL}
 \label{makereference2.2}
@@ -52,15 +52,47 @@ en la industria, al ofrecer a los desarrolladores una plataforma de alto nivel
 sobre la que trabajar.
 
 En 1992, Silicon Graphics lideró la creación del OpenGL Architecture Review
-Board (OpenGL ARB)~\cite{OpenGLARB}, un grupo de empresas del sector que sería la encargada de
-mantener y extender la especificación en los años siguientes. El OpenGL ARB
-estaba formado por 3Dlabs, Apple, ATI, Dell, IBM, Intel, Nvidia, SGI and Sun
-Microsystems.
+Board (OpenGL ARB)~\cite{OpenGLARB}, un grupo de empresas del sector que sería
+la encargada de mantener y extender la especificación en los años siguientes. El
+OpenGL ARB estaba formado por 3Dlabs, Apple, ATI, Dell, IBM, Intel, Nvidia, SGI
+and Sun Microsystems.
 
-En otoño de 2006, el OpenGL ARB y los directores de Khronos votaron para transferir el
-control de OpenGL a Khronos Group. El secretario de la ARB Jon Leech observó:
-\textit{``Hemos decidido mover OpenGL a Khronos para asegurar la salud futura de
-OpenGL en todas sus formas.''}~\cite{OpenGLARB}
+En el año 2000 surge el grupo Khronos~\cite{Khronos}, una organización sin ánimo
+de lucro centrada en la creación de estándares abiertos para permitir la
+creación, reproducción multimedia y computación paralela en un amplio abanico de
+plataformas y dispositivos.
+
+En otoño de 2006, el OpenGL ARB y los directores de Khronos Group
+votaron para transferir el control de OpenGL a Khronos Group. El secretario de
+la ARB Jon Leech observó: \textit{``Hemos decidido mover OpenGL a Khronos para
+		asegurar la salud futura de OpenGL en todas sus
+formas.''}~\cite{OpenGLARB}
+
+Khronos Group anunció en 2015 el lanzamiento de una nueva API llamada
+Vulkan~\cite{Vulkan}, llamada a ser la sucesora de OpenGL. De hecho, en un
+principio esta API fue bautizada por Khronos como ``La iniciativa OpenGL de
+nueva generación''. Se trata de una API similar a OpenGL pero de más bajo nivel,
+basada en Mantle, cedida a Khronos por AMD~\cite{AMD}.
+
+La principal característica de Vulkan frente a OpenGL es la posibilidad de
+aprovechar los núcleos presentes en la CPU con el fin de incrementar
+drásticamente el rendimiento gráfico, además de permitir un mayor control sobre
+la GPU, disminuyendo la carga de la CPU.
+
+Junto con Vulkan surgió SPIR-V \textit{(Standard Portable Intermediate
+Representation)}~\cite{SPIR}, un lenguaje intermedio de computación paralela y
+gráficos, también perteneciente al grupo Khronos. Su principal finalidad era la
+permitir a los desarrolladores la creación y distribución de binarios
+independientes del dispositivo.
+
+Con su aparición, se pasó de utilizar un compilador de GLSL implementado en cada
+controlador de OpenGL a la utilización de shaders ya traducidos a un formato
+binario por SPIR-V en Vulkan, mejorando considerablemente la velocidad de
+inicialización de la aplicación y el número de shaders a utilizar por escena.
+
+En la actualidad conviven ambas APIs, aconsejándose en algunos casos más
+simples la utilización de OpenGL en lugar de Vulkan debido a su mayor facilidad
+de uso y menor carga de mantenimiento.
 
 \section{Diseño de OpenGL}
 \label{makereference2.3}
@@ -118,7 +150,7 @@ al programador. La Figura~\ref{fig2.2} muestra el pipeline asociado a la versió
 \end{figure}
 
 El renderizado de una imagen comienza con una llamada, desde la aplicación
-principal, a una función de dibujado de OpenGL. Con esta llamada, OpenGL coge
+principal, a una función de dibujado de OpenGL. Con esta llamada, OpenGL toma
 datos sobre vértices contenidos en diferentes objetos y renderiza con estos
 datos una o más \textit{primitivas}~\cite{Primitivas}. 
 
@@ -186,12 +218,13 @@ renderizado.
 
 La primera etapa del pipeline programable ---Vertex Processor,
 Figura~\ref{fig2.2a}---, está formada a su vez por los shaders programables de
-vértice, teselación y geométrico, que sustituyen a las etapas de transformación
-e iluminación del pipeline no programable, así como la etapa fija realizada por
-OpenGL conocida como Ensamblado de Primitivas. Obtiene como entrada el flujo de
-vértices, normales, definiciones de primitivas geométricas, colores, parámetros
-de iluminación, materiales y coordenadas para las texturas. Esta etapa opera
-sobre estos datos y los organiza en las primitivas geométricas asociadas en
+vértice, teselación y geométrico \textit{(vertex, tessellation y geometry
+shaders)}, que sustituyen a las etapas de transformación e iluminación del
+pipeline no programable, así como la etapa fija realizada por OpenGL conocida
+como Ensamblado de Primitivas. Obtiene como entrada el flujo de vértices,
+normales, definiciones de primitivas geométricas, colores, parámetros de
+iluminación, materiales y coordenadas para las texturas. Esta etapa opera sobre
+estos datos y los organiza en las primitivas geométricas asociadas en
 preparación para la etapa de post-procesado de vértices, en la que se realizan,
 entre otras cosas, su recorte y rasterización.  Así, la salida es un conjunto de
 vértices como píxeles, con su color, profundidad y coordenadas de textura.
@@ -244,10 +277,10 @@ procesamiento, la visibilidad de cada fragmento es determinada utilizando
 diferentes tests (profundidad, color, plantilla, ruido\ldots). 
 
 Cuando un fragmento pasa por todas estas etapas y todos los test activos, puede
-ser escrito directamente en el buffer de fragmentos, actualizando su color y
-valor de profundidad de su pixel o, si el \textit{blending} está activado,
-mezclando su color con el del pixel actual para generar un nuevo color que se
-escribe en el buffer de fragmentos.
+ser escrito directamente en el framebuffer, actualizando su color y valor de
+profundidad de su pixel o, si el \textit{blending} está activado, mezclando su
+color con el del pixel actual para generar un nuevo color que se escribe en el
+buffer de fragmentos.
 
 \section{Diferencias con Direct3D}
 \label{makereference2.4}
@@ -276,6 +309,8 @@ muestran algunas de ellas resumidas.
 		\hline
 		Usuario final & Profesionales & Juegos \\ 
 		\hline
+		Lenguaje de shaders & GLSL & HLSL \\
+		\hline
 	\end{tabular}
 	\caption{Diferencias entre OpenGL y Direct3D}
 	\label{tabla2.1}
@@ -301,6 +336,14 @@ que suponía menos esfuerzo trabajar con esta última.
 El diseño de ambas es también similar. Tras muchos años de evolución, el
 pipeline gráfico es bastante parecido, como puede apreciarse en la
 Figura~\ref{fig:differences}.
+
+Además, las etapas programables del pipeline de OpenGL (vertex, tessellation,
+geometry y fragment shader) se escriben en GLSL \textit{OpenGL Shading
+Language}~\cite{GLSL}, un lenguaje creado específicamente para este propósito
+por el OpenGL ARB. En contraposición, las etapas programables del pipeline
+implementado por Direct3D (vertex, geometry y pixel shaders) se escriben en el
+lenguaje HLSL \textit{(High Level Shader Language)}~\cite{HLSL} desarrollado por
+Microsoft y análogo a GLSL.
 
 En conclusión, hoy en día ambas se consideran bastante similares en cuanto a
 rendimiento y capacidades, siendo el soporte a otros sistemas y el carácter de

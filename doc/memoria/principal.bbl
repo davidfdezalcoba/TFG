@@ -1,4 +1,4 @@
-\begin{thebibliography}{39}
+\begin{thebibliography}{44}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -79,16 +79,40 @@ The Khronos~Group Inc.
 \newblock \url{https://www.opengl.org/archives/about/arb/}, {\natexlab{b}}.
 \newblock Accessed: 19/07/2019.
 
+\bibitem[Inc.()]{Khronos}
+The Khronos~Group Inc.
+\newblock {The Khronos Group Inc.}
+\newblock \url{https://www.khronos.org/}.
+\newblock Accessed: 18/08/2019.
+
+\bibitem[Inc({\natexlab{a}})]{Vulkan}
+The Khronos~Group Inc.
+\newblock {Vulkan Website}.
+\newblock \url{https://www.khronos.org/vulkan/}, {\natexlab{a}}.
+\newblock Accessed: 18/08/2019.
+
+\bibitem[Advanced Micro~Devices()]{AMD}
+Inc Advanced Micro~Devices.
+\newblock {AMD Website}.
+\newblock \url{https://www.amd.com/es}.
+\newblock Accessed: 18/08/2019.
+
+\bibitem[Inc({\natexlab{b}})]{SPIR}
+The Khronos~Group Inc.
+\newblock {SPIR Website}.
+\newblock \url{https://www.khronos.org/spir/}, {\natexlab{b}}.
+\newblock Accessed: 18/08/2019.
+
 \bibitem[Inc({\natexlab{c}})]{Primitivas}
 The Khronos~Group Inc.
 \newblock {Primitivas - OpenGL wiki}.
 \newblock \url{https://www.khronos.org/opengl/wiki/Primitive}, {\natexlab{c}}.
 \newblock Accessed: 26/07/2019.
 
-\bibitem[Microsoft()]{Microsoft}
+\bibitem[Microsoft({\natexlab{a}})]{Microsoft}
 Microsoft.
 \newblock {Microsoft Website}.
-\newblock \url{https://www.microsoft.com/es-es}.
+\newblock \url{https://www.microsoft.com/es-es}, {\natexlab{a}}.
 \newblock Accessed: 23/07/2019.
 
 \bibitem[Inc({\natexlab{d}})]{GLSL}
@@ -97,6 +121,14 @@ The Khronos~Group Inc.
 \newblock \url{https://www.khronos.org/opengl/wiki/Core_Language_(GLSL)},
   {\natexlab{d}}.
 \newblock Accessed: 24/07/2019.
+
+\bibitem[Microsoft({\natexlab{b}})]{HLSL}
+Microsoft.
+\newblock {HLSL Website}.
+\newblock
+  \url{https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl},
+  {\natexlab{b}}.
+\newblock Accessed: 18/08/2019.
 
 \bibitem[Inc({\natexlab{e}})]{VertexShader}
 The Khronos~Group Inc.

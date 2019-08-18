@@ -3,39 +3,39 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Pipeline no programable. OpenGL 1.5\relax }}{7}{figure.caption.6}
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Pipeline de gr\IeC {\'a}ficos de OpenGL\relax }}{8}{figure.caption.7}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Primitivas de OpenGL\relax }}{9}{figure.caption.8}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Clipping y rasterizaci\IeC {\'o}n en OpenGL\relax }}{10}{figure.caption.9}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Pipeline de gr\IeC {\'a}ficos de Direct3D\relax }}{12}{figure.caption.11}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Primitivas de OpenGL\relax }}{10}{figure.caption.8}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Clipping y rasterizaci\IeC {\'o}n en OpenGL\relax }}{11}{figure.caption.9}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Pipeline de gr\IeC {\'a}ficos de Direct3D\relax }}{13}{figure.caption.11}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Comunicaci\IeC {\'o}n entre shaders del pipeline\relax }}{14}{figure.caption.12}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Teselaci\IeC {\'o}n - Funcionamiento de los niveles\relax }}{21}{figure.caption.13}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Teselaci\IeC {\'o}n - Espaciado equidistante\relax }}{22}{figure.caption.14}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Teselaci\IeC {\'o}n - Espaciado fraccional par\relax }}{22}{figure.caption.15}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Teselaci\IeC {\'o}n - Espaciado fraccional impar\relax }}{22}{figure.caption.16}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Teselaci\IeC {\'o}n - Tri\IeC {\'a}ngulos\relax }}{23}{figure.caption.17}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Teselaci\IeC {\'o}n - Cuadril\IeC {\'a}teros\relax }}{24}{figure.caption.18}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Comunicaci\IeC {\'o}n entre shaders del pipeline\relax }}{15}{figure.caption.12}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Teselaci\IeC {\'o}n - Funcionamiento de los niveles\relax }}{22}{figure.caption.13}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Teselaci\IeC {\'o}n - Espaciado equidistante\relax }}{23}{figure.caption.14}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Teselaci\IeC {\'o}n - Espaciado fraccional par\relax }}{23}{figure.caption.15}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Teselaci\IeC {\'o}n - Espaciado fraccional impar\relax }}{23}{figure.caption.16}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Teselaci\IeC {\'o}n - Tri\IeC {\'a}ngulos\relax }}{24}{figure.caption.17}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Teselaci\IeC {\'o}n - Cuadril\IeC {\'a}teros\relax }}{25}{figure.caption.18}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Curvas de B\IeC {\'e}zier.\relax }}{27}{figure.caption.20}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Superficie de B\IeC {\'e}zier con 16 puntos de control\relax }}{28}{figure.caption.21}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces T\IeC {\'e}cnicas de visualizaci\IeC {\'o}n en 3D. Figuras provenientes de~\cite {3dimages}\relax }}{32}{figure.caption.22}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Coloreado de terreno por alturas\relax }}{33}{figure.caption.23}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Resultado del m\IeC {\'e}todo Line Integral Convolution. Imagen de~\citet {osti_10185520}\relax }}{33}{figure.caption.24}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Computar la l\IeC {\'\i }nea de flujo. Imagen de~\citet {licthesis}\relax }}{34}{figure.caption.25}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Computar los pesos. Imagen de~\citet {licthesis}\relax }}{34}{figure.caption.26}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Computar valores de salida del pixel. Imagen de~\citet {licthesis}\relax }}{35}{figure.caption.27}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Curvas de B\IeC {\'e}zier.\relax }}{28}{figure.caption.20}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Superficie de B\IeC {\'e}zier con 16 puntos de control\relax }}{29}{figure.caption.21}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces T\IeC {\'e}cnicas de visualizaci\IeC {\'o}n en 3D. Figuras provenientes de~\cite {3dimages}\relax }}{33}{figure.caption.22}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Coloreado de terreno por alturas\relax }}{34}{figure.caption.23}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Resultado del m\IeC {\'e}todo Line Integral Convolution. Imagen de~\citet {osti_10185520}\relax }}{34}{figure.caption.24}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Computar la l\IeC {\'\i }nea de flujo. Imagen de~\citet {licthesis}\relax }}{35}{figure.caption.25}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Computar los pesos. Imagen de~\citet {licthesis}\relax }}{35}{figure.caption.26}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Computar valores de salida del pixel. Imagen de~\citet {licthesis}\relax }}{36}{figure.caption.27}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Traslaci\IeC {\'o}n de un vector\relax }}{41}{figure.caption.29}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Escalar un vector\relax }}{42}{figure.caption.31}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Rotaci\IeC {\'o}n de un vector 3D\relax }}{43}{figure.caption.33}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces \IeC {\'A}ngulos de Euler. Imagen de~\citet {LearnOpenGL}\relax }}{45}{figure.caption.35}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Coloreado de Valles Marineris. Modelo de NASA~\cite {NASA}\relax }}{53}{figure.caption.40}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces B\IeC {\'e}zier Curve\relax }}{57}{figure.caption.41}
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Superficie de B\IeC {\'e}zier\relax }}{58}{figure.caption.42}
-\contentsline {figure}{\numberline {5.8}{\ignorespaces S\IeC {\'o}lido de revoluci\IeC {\'o}n\relax }}{60}{figure.caption.43}
-\contentsline {figure}{\numberline {5.9}{\ignorespaces Nube de puntos\relax }}{61}{figure.caption.44}
-\contentsline {figure}{\numberline {5.10}{\ignorespaces Nube de puntos con valores descartados\relax }}{62}{figure.caption.45}
-\contentsline {figure}{\numberline {5.11}{\ignorespaces Negativo de una imagen\relax }}{63}{figure.caption.46}
-\contentsline {figure}{\numberline {5.12}{\ignorespaces LIC - Informaci\IeC {\'o}n del campo vectorial codificado en una textura\relax }}{64}{figure.caption.47}
-\contentsline {figure}{\numberline {5.13}{\ignorespaces Line Integral Convolution\relax }}{65}{figure.caption.48}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Traslaci\IeC {\'o}n de un vector\relax }}{42}{figure.caption.29}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Escalar un vector\relax }}{43}{figure.caption.31}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Rotaci\IeC {\'o}n de un vector 3D\relax }}{44}{figure.caption.33}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces \IeC {\'A}ngulos de Euler. Imagen de~\citet {LearnOpenGL}\relax }}{46}{figure.caption.35}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Coloreado de Valles Marineris. Modelo de NASA~\cite {NASA}\relax }}{54}{figure.caption.40}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces B\IeC {\'e}zier Curve\relax }}{58}{figure.caption.41}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Superficie de B\IeC {\'e}zier\relax }}{59}{figure.caption.42}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces S\IeC {\'o}lido de revoluci\IeC {\'o}n\relax }}{61}{figure.caption.43}
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Nube de puntos\relax }}{62}{figure.caption.44}
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Nube de puntos con valores descartados\relax }}{63}{figure.caption.45}
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Negativo de una imagen\relax }}{64}{figure.caption.46}
+\contentsline {figure}{\numberline {5.12}{\ignorespaces LIC - Informaci\IeC {\'o}n del campo vectorial codificado en una textura\relax }}{65}{figure.caption.47}
+\contentsline {figure}{\numberline {5.13}{\ignorespaces Line Integral Convolution\relax }}{66}{figure.caption.48}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
