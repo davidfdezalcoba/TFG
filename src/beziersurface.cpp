@@ -73,7 +73,7 @@ void BezierSurface::key_callback(GLFWwindow* window, int key, int scancode, int 
 {
 	BezierSurface* bs = static_cast<BezierSurface*>(glfwGetWindowUserPointer(window));
 
-    if (key == GLFW_KEY_E && action == GLFW_PRESS)
+    if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
 		{bs->vLoader.getNextActiveVertex();}
 }
 

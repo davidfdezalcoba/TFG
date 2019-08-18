@@ -45,8 +45,6 @@ void BezierCurve :: processInput(GLFWwindow *window){
 		{uNum++;}
     if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
 		{uNum--;}
-    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-		{vLoader.getNextActiveVertex();}
     if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
 		{vLoader.moveVertexX(
 			glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS ? 0 : 1);}
@@ -56,6 +54,19 @@ void BezierCurve :: processInput(GLFWwindow *window){
     if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS)
 		{vLoader.moveVertexZ(
 			glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS ? 0 : 1);}
+}
+
+void BezierCurve::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	BezierCurve* bs = static_cast<BezierCurve*>(glfwGetWindowUserPointer(window));
+
+    if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
+		{bs->vLoader.getNextActiveVertex();}
+}
+
+void BezierCurve::setOptions( GLFWwindow *window ){
+	glfwSetWindowUserPointer(window, this);
+	glfwSetKeyCallback(window, key_callback);
 }
 
 void BezierCurve :: setUniforms(){

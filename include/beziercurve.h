@@ -19,6 +19,8 @@ private:
 	VertexLoader vLoader;
 	VertexLoader vLoader2;
 	void setUniforms();
+	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+	void setOptions( GLFWwindow *window );
 };
 
 #endif

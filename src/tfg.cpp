@@ -60,6 +60,7 @@ int main(int argc, char *argv[])
     glEnable(GL_PROGRAM_POINT_SIZE);
 	setOptions(MODE);
 	obj = setupModel(MODE);
+	obj->setOptions(window);
 	camera = &obj->camera;
     // render loop
     while (!glfwWindowShouldClose(window))
