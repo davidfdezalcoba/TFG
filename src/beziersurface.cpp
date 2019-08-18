@@ -56,8 +56,8 @@ void BezierSurface :: processInput(GLFWwindow *window){
 		{glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );}
     if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
 		{glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );}
-    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-		{vLoader.getNextActiveVertex();}
+//    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+//		{vLoader.getNextActiveVertex();}
     if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
 		{vLoader.moveVertexX(
 			glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS ? 0 : 1);}
@@ -67,6 +67,19 @@ void BezierSurface :: processInput(GLFWwindow *window){
     if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS)
 		{vLoader.moveVertexZ(
 			glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS ? 0 : 1);}
+}
+
+void BezierSurface::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	BezierSurface* bs = static_cast<BezierSurface*>(glfwGetWindowUserPointer(window));
+
+    if (key == GLFW_KEY_E && action == GLFW_PRESS)
+		{bs->vLoader.getNextActiveVertex();}
+}
+
+void BezierSurface::setOptions( GLFWwindow *window ){
+	glfwSetWindowUserPointer(window, this);
+	glfwSetKeyCallback(window, key_callback);
 }
 
 void BezierSurface :: setUniforms(){

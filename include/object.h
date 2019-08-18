@@ -14,6 +14,7 @@ class Object{
 		virtual void draw() = 0;
 		Camera camera;
 		virtual void processInput(GLFWwindow * window) = 0;
+		virtual void setOptions(GLFWwindow * window){}
 		void setDeltaTime(float deltaTime){
 			this->deltaTime = deltaTime;
 		}
