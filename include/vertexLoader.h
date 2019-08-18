@@ -35,6 +35,14 @@ public:
 			glDrawElements(primitive, 3*indices.size(), GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 	}
+
+	void getPreviousActiveVertex(){
+		vertices[activeVertex].Color = glm::vec3(1.0f, 1.0f, 1.0f);
+		activeVertex = (activeVertex - 1);
+		if (activeVertex == -1) activeVertex = numVertices - 1;
+		vertices[activeVertex].Color = glm::vec3(1.0f, 0.0f, 0.0f);
+		setupVertices();
+	}
 	
 	void getNextActiveVertex(){
 		vertices[activeVertex].Color = glm::vec3(1.0f, 1.0f, 1.0f);

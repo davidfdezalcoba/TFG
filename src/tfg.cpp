@@ -165,36 +165,8 @@ int createWindow(GLFWwindow* & window)
 }
 
 void setOptions(const Modes & mode){
-	switch(mode) {
-		case terrain: 
-			glfwSetCursorPosCallback(window, mouse_callback);
-			glfwSetScrollCallback(window, scroll_callback);
-			break;
-		case bezier:
-			glfwSetCursorPosCallback(window, mouse_callback);
-			glfwSetScrollCallback(window, scroll_callback);
-			break;	
-		case beziersurface:
-			glfwSetCursorPosCallback(window, mouse_callback);
-			glfwSetScrollCallback(window, scroll_callback);
-			break;
-		case negative:
-			glfwSetCursorPosCallback(window, mouse_callback);
-			glfwSetScrollCallback(window, scroll_callback);
-			break;
-		case cloud:
-			glfwSetCursorPosCallback(window, mouse_callback);
-			glfwSetScrollCallback(window, scroll_callback);
-			break;
-		case revolution:
-			glfwSetCursorPosCallback(window, mouse_callback);
-			glfwSetScrollCallback(window, scroll_callback);
-			break;
-		default:
-			glfwSetCursorPosCallback(window, mouse_callback);
-			glfwSetScrollCallback(window, scroll_callback);
-			break;
-	}
+	glfwSetCursorPosCallback(window, mouse_callback);
+	glfwSetScrollCallback(window, scroll_callback);
 }
 
 Object* setupModel(const Modes & mode){
@@ -206,7 +178,7 @@ Object* setupModel(const Modes & mode){
 			return new BezierCurve(SCR_WIDTH, SCR_HEIGHT);
 			break;
 		case beziersurface:
-			return new BezierSurface(SCR_WIDTH, SCR_HEIGHT, mouse_callback);
+			return new BezierSurface(SCR_WIDTH, SCR_HEIGHT);
 			break;
 		case negative:
 			return new Negative(SCR_WIDTH, SCR_HEIGHT);

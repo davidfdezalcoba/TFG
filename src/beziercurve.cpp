@@ -60,8 +60,10 @@ void BezierCurve::key_callback(GLFWwindow* window, int key, int scancode, int ac
 {
 	BezierCurve* bs = static_cast<BezierCurve*>(glfwGetWindowUserPointer(window));
 
-    if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
-		{bs->vLoader.getNextActiveVertex();}
+    if (key == GLFW_KEY_SPACE && action == GLFW_PRESS){
+		if(mods & GLFW_MOD_SHIFT) bs->vLoader.getNextActiveVertex();
+		else bs->vLoader.getPreviousActiveVertex();
+	}
 }
 
 void BezierCurve::setOptions( GLFWwindow *window ){

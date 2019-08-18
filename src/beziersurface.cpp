@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 
-BezierSurface :: BezierSurface(float width, float height, void (*mc)(GLFWwindow* window, double xpos, double ypos)) : 
+BezierSurface :: BezierSurface(float width, float height) : 
 	bezierShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/vertexshader.vs",
 				 "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/fragmentshader.frs",
 				 nullptr,
@@ -22,12 +22,11 @@ BezierSurface :: BezierSurface(float width, float height, void (*mc)(GLFWwindow*
 		camera = Camera(glm::vec3(3.0f, 3.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f), 225, -30);
 		this->width = width;
 	   	this->height = height;
-		mouse_callback = mc;
 	}
 
+// Draw the scene
 void BezierSurface :: draw(){
 	setUniforms();
-	// glPointSize(9);
 	pointShader.use();
 	vLoader.Draw(pointShader, GL_POINTS);	
 	axisShader.use();
@@ -37,6 +36,7 @@ void BezierSurface :: draw(){
 	vLoader.Draw(bezierShader, GL_PATCHES);	
 }
 
+// Process input continuously
 void BezierSurface :: processInput(GLFWwindow *window){
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		{glfwSetWindowShouldClose(window, true);}
@@ -56,8 +56,6 @@ void BezierSurface :: processInput(GLFWwindow *window){
 		{glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );}
     if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
 		{glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );}
-//    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-//		{vLoader.getNextActiveVertex();}
     if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
 		{vLoader.moveVertexX(
 			glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS ? 0 : 1);}
@@ -69,19 +67,24 @@ void BezierSurface :: processInput(GLFWwindow *window){
 			glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS ? 0 : 1);}
 }
 
+// Callback to change active vertex
 void BezierSurface::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	BezierSurface* bs = static_cast<BezierSurface*>(glfwGetWindowUserPointer(window));
 
-    if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
-		{bs->vLoader.getNextActiveVertex();}
+    if (key == GLFW_KEY_SPACE && action == GLFW_PRESS){
+		if(mods & GLFW_MOD_SHIFT) bs->vLoader.getNextActiveVertex();
+		else bs->vLoader.getPreviousActiveVertex();
+	}
 }
 
+// Set especific options for this object
 void BezierSurface::setOptions( GLFWwindow *window ){
 	glfwSetWindowUserPointer(window, this);
 	glfwSetKeyCallback(window, key_callback);
 }
 
+//Set uniforms needed in this scene
 void BezierSurface :: setUniforms(){
 	projection = glm::perspective(glm::radians(camera.Zoom), this->width / this->height, 0.1f, 100.0f);
 	view = camera.GetViewMatrix();
