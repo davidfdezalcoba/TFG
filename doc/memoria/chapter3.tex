@@ -60,9 +60,9 @@ valores del programa principal cada vez que se invoca el shader.
 El Vertex Shader es la etapa de sombreado en el pipeline de renderizado que se
 encarga del procesamiento de los vértices individuales~\cite{VertexShader}. El
 Vertex Shader tiene como entrada unos atributos de vértice especificados desde
-un \textit{Vertex Array Object (VAO)} por un comando de dibujo. Recibe un único
-vértice, formado por sus atributos, del flujo de vértices y genera un único
-vértice al flujo de salida. Por cada vértice de entrada ha de haber,
+un \textit{Vertex Array Object (VAO)} por un comando de renderizado. Recibe un
+único vértice, formado por sus atributos, del flujo de vértices y genera un
+único vértice al flujo de salida. Por cada vértice de entrada ha de haber,
 necesariamente, uno de salida. 
 
 Este shader se invoca una vez por cada vértice en el flujo de entrada,
@@ -95,16 +95,16 @@ El Tessellation Control Shader (TCS)~\cite{TesConShader} es la primera etapa del
 proceso de teselación, en el caso de ser utilizado. Se sitúa inmediatamente
 posterior al Vertex Shader e inmediatamente anterior al generador de primitivas
 de teselación. Controla cuánta teselación provocar en un parche determinado, así
-como el tamaño del parche, permitiendo aumentar la cantidad de datos. Su función
-principal es la de comunicar al generador de primitivas de teselación el nivel
-de teselación deseado, así como proveerle los datos del parche al Tessellation
-Evaluation Shader mediante sus variables de salida.
+como el tamaño del parche de salida, permitiendo aumentar la cantidad de datos.
+Su función principal es la de comunicar al generador de primitivas de teselación
+el nivel de teselación deseado, así como proveerle los datos del parche al
+Tessellation Evaluation Shader mediante sus variables de salida.
 
 Como entrada, el TCS obtiene la salida del Vertex Shader organizada en un vector
-de tantos vértices como tenga el parche de entrada. Cada invocación al TCS
-produce un único vértice como salida al parche de salida. Por cada vértice en
-el parche de entrada se realiza una invocación al TCS, resultando en tantas
-invocaciones como vértices hay en dicho parche. 
+de tantos vértices como tenga el parche de entrada. Por cada vértice en el
+parche de salida se realiza una invocación al TCS, y cada invocación al TCS
+produce un único vértice como salida al parche de salida. Esto resulta en tantas
+invocaciones como vértices hay en dicho parche.
 
 En el caso de no utilizar un TCS, se pueden pasar valores por defecto a las
 siguientes etapas de teselación.

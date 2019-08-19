@@ -1,7 +1,7 @@
 \babel@toc {spanish}{}
 \contentsline {chapter}{\IeC {\'I}ndice}{\es@scroman {v}}{section*.1}
-\contentsline {chapter}{Índice de figuras}{\es@scroman {vii}}{chapter*.3}
-\contentsline {chapter}{Índice de tablas}{\es@scroman {viii}}{chapter*.4}
+\contentsline {chapter}{Índice de figuras}{\es@scroman {viii}}{chapter*.3}
+\contentsline {chapter}{Índice de tablas}{\es@scroman {ix}}{chapter*.4}
 \contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Motivaci\IeC {\'o}n}{2}{section.1.1}
 \contentsline {section}{\numberline {1.2}Objetivos}{2}{section.1.2}
@@ -75,3 +75,21 @@
 \contentsline {subsection}{\numberline {6.0.2}Posible Trabajo Futuro}{72}{subsection.6.0.2}
 \contentsline {chapter}{Bibliography}{76}{chapter*.56}
 \contentsline {chapter}{\numberline {A}El lenguaje GLSL}{77}{appendix.Alph1}
+\contentsline {section}{\numberline {A.1}Versi\IeC {\'o}n}{77}{section.Alph1.1}
+\contentsline {section}{\numberline {A.2}Funciones y Estructuras de Control}{77}{section.Alph1.2}
+\contentsline {section}{\numberline {A.3}Tipos de Datos}{78}{section.Alph1.3}
+\contentsline {subsection}{\numberline {A.3.1}Escalares}{79}{subsection.Alph1.3.1}
+\contentsline {subsection}{\numberline {A.3.2}Vectoriales}{79}{subsection.Alph1.3.2}
+\contentsline {subsection}{\numberline {A.3.3}Swizzling}{79}{subsection.Alph1.3.3}
+\contentsline {subsection}{\numberline {A.3.4}Matrices}{80}{subsection.Alph1.3.4}
+\contentsline {subsection}{\numberline {A.3.5}Uniforms}{80}{subsection.Alph1.3.5}
+\contentsline {section}{\numberline {A.4}Variables y Entrada/Salida}{81}{section.Alph1.4}
+\contentsline {subsection}{\numberline {A.4.1}Entradas y salidas}{81}{subsection.Alph1.4.1}
+\contentsline {subsubsection}{TCS}{82}{section*.57}
+\contentsline {subsubsection}{TES}{82}{section*.58}
+\contentsline {subsubsection}{Geometry shader}{82}{section*.59}
+\contentsline {subsection}{\numberline {A.4.2}Variables Espec\IeC {\'\i }ficas}{83}{subsection.Alph1.4.2}
+\contentsline {subsubsection}{Vertex Shader}{83}{section*.60}
+\contentsline {subsubsection}{TCS}{83}{section*.61}
+\contentsline {subsubsection}{TES}{84}{section*.62}
+\contentsline {subsubsection}{Geometry Shader}{84}{section*.63}

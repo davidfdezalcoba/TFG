@@ -7,8 +7,302 @@
 \chapter{El lenguaje GLSL}
 \label{ApendiceA}
 
+En este apéndice se tratan algunas de las características del lenguaje GLSL,
+sobre todo aquellas necesarias para la implementación de los shaders vistos en
+la sección~\ref{makereference5.5}. Para una guía completa sobre el lenguaje se
+puede consultar la documentación detallada~\cite{GLSLreference}.
 
-% +--------------------------------------------------------------------+
-% | Enter text for your Appendix page in the space below this box.     |
-% |                                                                    |
-% +--------------------------------------------------------------------+
+\section{Versión}
+
+Un programa GLSL ha de comenzar obligatoriamente con una declaración de la
+versión de GLSL que se va a utilizar. Esto se realiza mediante una directiva que
+se utiliza para saber la versión que se ha de utilizar para compilar el
+programa. Esta directiva se declara del siguiente modo:
+
+\begin{verbatim}
+    #version 400
+\end{verbatim}
+En este caso se ha de utilizar la versión GLSL 4.0.
+
+\section{Funciones y Estructuras de Control}
+
+Como estructuras de control, GLSL soporta bucles y saltos, con las instrucciones
+comunes del lenguaje C (if-else, switch, while, for\ldots). Sin embargo, la
+recursión en este lenguaje no está permitida. 
+
+En cuanto a las funciones, este lenguaje soporta tanto funciones definidas por
+el usuario como funciones proporcionadas por el propio lenguaje. Una lista de
+las funciones incluidas puede encontrarse en~\citet{GLSLreference}. De entre
+estas funciones, se han utilizado las siguientes en los shaders desarrollados:
+
+\begin{itemize}
+		\item \verb|smoothstep| - Realiza una interpolación de Hermite entre dos
+				valores~\cite{Hermite}.
+		\item \verb|mix| - Realiza una interpolación lineal entre dos
+				valores~\cite{LinearInterpolation}.
+		\item \verb|normalize| - Calcula el vector unitario correspondiente a la
+				dirección del vector original.
+		\item \verb|max| - Devuelve el máximo entre dos valores.
+		\item \verb|dot| - Calcula el producto escalar entre dos vectores.
+		\item \verb|reflect| - Calcula la dirección de reflexión del vector
+				incidente.
+		\item \verb|pow| - Devuelve la potencia del primer parámetro elevado al
+				segundo parámetro.
+		\item \verb|EmitVertex| - Explicado en la sección~\ref{ref:GeoShader}.
+		\item \verb|sin| - Devuelve el seno del parámetro.
+		\item \verb|cos| - Devuelve el coseno del parámetro.
+		\item \verb|texture| - Devuelve texels de una textura.
+		\item \verb|clamp| - Restringir un valor para que se encuentre entre
+				otros dos valores.
+		\item \verb|discard| - Descarta el fragmento actual (Solo para el
+				fragment shader).
+\end{itemize}
+
+\section{Tipos de Datos}
+
+GLSL define una serie de tipos de datos. Algunos de estos son compartidos con
+los lenguajes C y C++, mientras que otros son completamente nuevos. En nuestro
+caso, los utilizados son los siguientes:
+
+\subsection{Escalares}
+
+\begin{itemize}
+		\item \verb|bool| - Condicional. Valores \verb|true| o \verb|false|.
+		\item \verb|int| - Entero con signo de 32 bits.
+		\item \verb|float| - Número de coma flotante.
+\end{itemize}
+
+\subsection{Vectoriales}
+
+GLSL soporta tipos de datos vectoriales de $n$ componentes, con $n$ siendo $2,
+3$ o $4$. Los tipos vectoriales soportan las mismas operaciones que los
+escalares. Estas operaciones se realizan componente a componente. Sin embargo,
+estas operaciones funcionarán solo si los dos vectores tienen el mismo número de
+componentes.
+
+\begin{itemize}
+		\item \verb|vec|$n$ - Un vector de $n$ componentes tipo
+				\verb|float|.
+\end{itemize}
+
+\subsection{Swizzling}
+
+El swizzling consiste en la posibilidad que ofrece GLSL de acceder a las
+componentes de un vector de la siguiente manera:
+
+\begin{verbatim}
+    vec4 someVec;
+    someVec.x + someVec.y;
+\end{verbatim}
+
+Se pueden utilizar \verb|x|, \verb|y|, \verb|z| y \verb|w| para acceder a las
+componentes primera, segunda, tercera y cuarta respectivamente. Además se puede
+construir un nuevo vector a partir de otro especificando el orden de las
+coordenadas del vector antiguo en el nuevo. Con todo esto, algunos ejemplos más
+ilustrativos del swizzling son los siguientes:
+
+\begin{verbatim}
+    vec2 someVec;
+    vec4 otherVec = someVec.xyxx;
+    vec3 thirdVec = otherVec.zyy;	
+    vec4 someVec;
+    someVec.wzyx = vec4(1.0, 2.0, 3.0, 4.0); // Da la vuelta al vector.
+    someVec.zx = vec2(3.0, 5.0); // Pone la componente z a 3 y la x a 5.
+\end{verbatim}
+
+Además, para facilitar el acceso a un vector que represente un color o a uno que
+represente coordenadas  de una textura, se pueden utilizar, juntos a las letras
+anteriores, las siguientes combinaciones:
+
+\begin{itemize}
+		\item \verb|rgba|
+		\item \verb|stpq|
+\end{itemize}
+
+Estas combinaciones no suponen ninguna diferencia con la principal, son
+simplemente azúcar sintáctico para ayudar al programador. Sin embargo, no se
+pueden realizar combinaciones que contengan letras de distintos tipos. Por
+ejemplo, la combinación: 
+\begin{verbatim}
+    vec3 aVec = someVec.xbg;
+\end{verbatim}
+resultaría en un error de compilación.
+
+\subsection{Matrices}
+
+También soporta tipos matriciales. Para declarar una matriz se utiliza la
+siguiente sintaxis:
+
+\begin{itemize}
+		\item \verb|mat|$n$\verb|x|$m$ - Matriz $n \times m$
+		\item \verb|mat|$n$ - Matriz $n \times n$
+\end{itemize}	
+donde $n$ puede ser $2, 3$ o $4$. En los tipos matriciales no se puede utilizar
+swizzling, por lo que han de ser accedidos mediante una sintaxis de array propia
+de C o C++.
+
+\subsection{Uniforms}
+
+Los \verb|uniform| son un tipo de variable de shader. Se utilizan como
+parámetros que el programador de un shader puede pasar al programa principal. Se
+llaman de esta manera porque su valor no cambia de una invocación de shader a
+otra durante la misma llamada de renderizado. 
+
+Estas variables han de ser declaradas de un modo global dentro del shader y
+pueden ser de cualquiera  de los tipos permitidos en GALS. Son variables  de
+solo lectura dentro del shader, y cualquier intento de cambio de su valor
+resultará en un error de compilación. Están pensados para utilizarse en el
+programa desde OpenGL y no desde el shader.
+
+Para utilizar una variable \verb|uniform| desde la aplicación, se ha de recabar
+la localización del shader mediante una llamada a la función
+\verb|glGetUniformLocation|.
+
+\section{Variables y Entrada/Salida}
+
+Los shaders han de ser capaces de comunicarse entre si dentro del pipeline. Las
+entradas y salidas de cada uno de los tipos de shader se han explicado en la
+sección~\ref{makereference3}. En esta sección se expone la sintaxis necesarias
+para declarar estas variables de entrada y salida desde cada tipo de shader.
+
+Asimismo, existe una serie de variables específicas construidas dentro del
+lenguaje GLSL que tienen un significado ya definido.
+
+\subsection{Entradas y salidas}
+
+De manera general, una variable de entrada a un shader ha  de llevar el
+modificador \verb|in|. De igual modo, una variable de salida dentro de un shader
+ha de llevar el modificador \verb|out|. Por tanto, si queremos pasar un valor
+desde el vertex shader al fragment shader (suponiendo que no se utilizan
+tessellation ni geometry shaders) declararíamos lo siguiente en el vertex shader:
+
+\begin{verbatim}
+    out vec3 vPos;	
+\end{verbatim}
+
+Y, de manera correspondiente, lo siguiente en el fragment shader:
+
+\begin{verbatim}
+    in vec3 vPos;	
+\end{verbatim}
+
+Un caso particular proviene de las entradas del vertex shader. Al ser el primero
+en el pipeline, las entradas a este shader provienen de los datos contenidos en
+un VBO. Estos datos corresponden a los diferentes atributos de un vértice en
+particular, y están referenciados en un VAO. Así, el primer atributo de un
+vértice, especificado en el VAO, puede ser la posición, mientras que el segundo
+puede ser el color. Para pasar esta información al shader se declaran las
+siguientes líneas dentro del shader:
+
+\begin{verbatim}
+    layout(location = 1) in vec3 aPos;		
+    layout(location = 2) in vec3 aColor;		
+\end{verbatim}
+
+Esto quiere decir al shader que en el primer atributo ha de encontrar
+un tipo \verb|vec3| que representa la posición y en el segundo atributo ha de
+encontrar otro \verb|vec3| que representa el color del vértice correspondiente.
+
+De igual modo se pueden especificar salidas desde la última etapa del pipeline,
+el fragment shader.
+
+Además de estos dos casos particulares, se dan los de aquellos shaders que
+necesitan instrucciones específicas para realizar su función. Son los
+siguientes:
+
+\subsubsection{TCS}
+
+Para utilizar el shader de teselación, se ha de habilitar una extensión ARB, que
+se realiza mediante la siguiente directiva.
+
+\begin{verbatim}
+    #extension GL_ARB_tessellation_shader : enable
+\end{verbatim}
+
+Además el TCS, acorde a lo expuesto en la seccion~\ref{ref:TesConShader}, ha de
+especificar el número de vértices en el parche de salida. Esto no se realiza
+mediante variables específicas, sino mediante la siguiente instrucción:
+
+\begin{verbatim}
+    layout( vertices = 16 ) out;
+\end{verbatim}
+
+\subsubsection{TES}
+
+En este caso, al igual que en el TCS, se ha de habilitar la extensión ARB que
+permite la utilización de tessellation shaders, por lo que se ha de incluir la
+misma línea. 
+
+Además, en este caso se ha de especificar lo explicado en la
+sección~\ref{ref:TesEvaShader} (espaciado, primitiva, orden), que se realiza
+mediante la siguiente instrucción:
+
+\begin{verbatim}
+    layout( quads, equal_spacing, ccw ) in;
+\end{verbatim}
+
+\subsubsection{Geometry shader}
+
+Para habilitar la utilización de este shader se ha de habilitar otra extensión
+ARB:
+
+\begin{verbatim}
+    #extension GL_EXT_geometry_shader4: enable
+\end{verbatim}
+
+Además se ha de definir tanto la primitiva de entrada como la de salida y el
+número máximo de vértices que se pueden generar (Sección~\ref{ref:GeoShader}).
+Para ello hay que utilizar las siguientes líneas:
+
+\begin{verbatim}
+    layout( lines_adjacency ) in;
+    layout( line_strip, max_vertices=256 ) out;
+\end{verbatim}
+
+\subsection{Variables Específicas}
+
+Además de las variables definidas por el usuario y de las instrucciones
+específicas necesarias anteriores, GLSL tiene algunas variables ya definidas que
+se utilizan para propósitos específicos, aunque no es necesario utilizarlas.
+Estas variables pueden ser específicas para cada tipo de shader o comunes a
+todos ellos. Una lista de estas variables puede encontrarse
+en~\citet{GLSLreference}. Aquí se muestran las utilizadas en la aplicación.
+
+\subsubsection{Vertex Shader}
+
+\begin{itemize}
+		\item \verb|out vec4 gl_Position| - La posición del vértice actual en el
+				clip space.
+		\item \verb|out float gl_PointSize| - El tamaño del punto siendo
+				rasterizado. Solo funciona con la primitiva \verb|GL_POINTS|.
+\end{itemize}
+
+\subsubsection{TCS}
+
+\begin{itemize}
+		\item \verb|in int gl_InvocationID| - El índice de la invocación del TCS
+				dentro del patch. El TCS escribe a las variables de salida
+				vértice a vértice utilizando esta variable para indexarlos.
+		\item \verb|patch out float gl_TessLevelOuter[4]| - Niveles externos de
+				teselación.
+		\item \verb|patch out float gl_TessLevelInner[2]| - Niveles internos de
+				teselación.
+		\item \verb|gl_in[gl_MaxPatchVertices]| - Información de cada vértice
+				proveniente del vertex shader.
+\end{itemize}
+
+\subsubsection{TES}
+
+\begin{itemize}
+		\item \verb|in vec3 gl_TessCoord| - La localización dentro del abstract
+				patch para cada vértice particular.
+		\item \verb|gl_in[gl_MaxPatchVertices]| - Información de cada vértice
+				proveniente del TCS.
+\end{itemize}
+
+\subsubsection{Geometry Shader}
+
+\begin{itemize}
+		\item \verb|gl_Position| - La posición del vértice actual dentro del
+				clip space.
+\end{itemize}

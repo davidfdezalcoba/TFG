@@ -1,4 +1,4 @@
-\begin{thebibliography}{44}
+\begin{thebibliography}{47}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -289,5 +289,26 @@ The EHT~Collaboration et~al.
 \newblock \emph{ApJL}, 875:\penalty0 4, 2019.
 \newblock URL
   \url{https://iopscience.iop.org/article/10.3847/2041-8213/ab0e85}.
+
+\bibitem[Inc.()]{GLSLreference}
+The Khronos~Group Inc.
+\newblock {OpenGL Reference Pages}.
+\newblock \url{https://www.khronos.org/registry/OpenGL-Refpages/gl4/index.php}.
+\newblock Accessed: 19/08/2019.
+
+\bibitem[Spitzbart(1960)]{Hermite}
+A.~Spitzbart.
+\newblock A generalization of hermite's interpolation formula.
+\newblock \emph{The American Mathematical Monthly}, 67\penalty0 (1):\penalty0
+  42--46, 1960.
+\newblock ISSN 00029890, 19300972.
+\newblock URL \url{http://www.jstor.org/stable/2308924}.
+
+\bibitem[of~Mathematics()]{LinearInterpolation}
+Encyclopedia of~Mathematics.
+\newblock {Linear interpolation}.
+\newblock
+  \url{http://www.encyclopediaofmath.org/index.php?title=Linear_interpolation&oldid=16431}.
+\newblock Accessed: 19/08/2019.
 
 \end{thebibliography}

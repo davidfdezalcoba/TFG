@@ -36,45 +36,47 @@ Warning--empty year in ASSIMP
 Warning--empty year in GLM
 Warning--empty journal in Vicci
 Warning--empty year in EHT
-You've used 44 entries,
+Warning--empty year in GLSLreference
+Warning--empty year in LinearInterpolation
+You've used 47 entries,
             2481 wiz_defined-function locations,
-            795 strings with 9894 characters,
-and the built_in function-call counts, 12737 in all, are:
-= -- 1127
-> -- 388
-< -- 47
-+ -- 211
-- -- 110
-* -- 623
-:= -- 1965
-add.period$ -- 171
-call.type$ -- 44
-change.case$ -- 84
-chr.to.int$ -- 31
-cite$ -- 77
-duplicate$ -- 707
-empty$ -- 1359
-format.name$ -- 162
-if$ -- 2798
+            816 strings with 10417 characters,
+and the built_in function-call counts, 13621 in all, are:
+= -- 1211
+> -- 409
+< -- 50
++ -- 223
+- -- 116
+* -- 667
+:= -- 2102
+add.period$ -- 184
+call.type$ -- 47
+change.case$ -- 90
+chr.to.int$ -- 34
+cite$ -- 82
+duplicate$ -- 754
+empty$ -- 1455
+format.name$ -- 171
+if$ -- 2991
 int.to.chr$ -- 14
-int.to.str$ -- 45
-missing$ -- 19
-newline$ -- 265
-num.names$ -- 132
-pop$ -- 563
+int.to.str$ -- 48
+missing$ -- 20
+newline$ -- 284
+num.names$ -- 141
+pop$ -- 598
 preamble$ -- 1
-purify$ -- 44
+purify$ -- 47
 quote$ -- 0
-skip$ -- 399
+skip$ -- 426
 stack$ -- 0
-substring$ -- 188
-swap$ -- 130
+substring$ -- 213
+swap$ -- 136
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 290
-warning$ -- 33
-while$ -- 95
+type$ -- 311
+warning$ -- 35
+while$ -- 103
 width$ -- 0
-write$ -- 609
-(There were 33 warnings)
+write$ -- 652
+(There were 35 warnings)
