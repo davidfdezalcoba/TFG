@@ -28,8 +28,8 @@ void setOptions(const Modes & mode);
 Modes selectmode(char * mode);
 Object* setupModel(const Modes & mode);
 
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+const unsigned int SCR_WIDTH = 1366;
+const unsigned int SCR_HEIGHT = 768;
 
 static GLFWwindow* window = nullptr;
 
@@ -88,20 +88,6 @@ int main(int argc, char *argv[])
     // Clear all previously allocated resources
     glfwTerminate();
     return 0;
-}
-
-void processInput(GLFWwindow *window)
-{
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-		{glfwSetWindowShouldClose(window, true);}
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		{camera->ProcessKeyboard(FORWARD, deltaTime);}
-    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		{camera->ProcessKeyboard(BACKWARD, deltaTime);}
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		{camera->ProcessKeyboard(LEFT, deltaTime);}
-    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		{camera->ProcessKeyboard(RIGHT, deltaTime);}
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -165,7 +151,6 @@ int createWindow(GLFWwindow* & window)
 }
 
 void setOptions(const Modes & mode){
-	glfwSetCursorPosCallback(window, mouse_callback);
 	glfwSetScrollCallback(window, scroll_callback);
 }
 

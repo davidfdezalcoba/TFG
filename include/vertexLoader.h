@@ -36,6 +36,14 @@ public:
 		glBindVertexArray(0);
 	}
 
+	vector<MyVertex> getVertices(){
+		return vertices;	
+	}
+
+	void reloadVertices(){
+		setupVertices();
+	}
+
 	void getPreviousActiveVertex(){
 		vertices[activeVertex].Color = glm::vec3(1.0f, 1.0f, 1.0f);
 		activeVertex = (activeVertex - 1);
@@ -47,6 +55,18 @@ public:
 	void getNextActiveVertex(){
 		vertices[activeVertex].Color = glm::vec3(1.0f, 1.0f, 1.0f);
 		activeVertex = (activeVertex + 1) % numVertices;
+		vertices[activeVertex].Color = glm::vec3(1.0f, 0.0f, 0.0f);
+		setupVertices();
+	}
+
+	void setActiveVertexPosition(glm::vec3 p0){
+		vertices[activeVertex].Position = p0;
+		setupVertices();
+	}
+
+	void setActiveVertex(int v){
+		vertices[activeVertex].Color = glm::vec3(1.0f, 1.0f, 1.0f);
+		activeVertex = v;
 		vertices[activeVertex].Color = glm::vec3(1.0f, 0.0f, 0.0f);
 		setupVertices();
 	}

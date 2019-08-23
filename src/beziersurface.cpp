@@ -76,12 +76,55 @@ void BezierSurface::key_callback(GLFWwindow* window, int key, int scancode, int 
 		if(mods & GLFW_MOD_SHIFT) bs->vLoader.getNextActiveVertex();
 		else bs->vLoader.getPreviousActiveVertex();
 	}
+
+	if (key == GLFW_KEY_M && action == GLFW_PRESS){
+		bs->move = !bs->move;
+		glfwSetInputMode(window, GLFW_CURSOR, (!bs->move ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED));
+		glfwSetCursorPosCallback(window, (!bs->move ? NULL : default_mouse_callback));
+		glfwSetCursorPos(window, bs->lastX, bs->lastY);
+	}
+}
+//
+// Callback to change active vertex
+void BezierSurface::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+	BezierSurface* bs = static_cast<BezierSurface*>(glfwGetWindowUserPointer(window));
+
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
+		double xpos, ypos;
+		glfwGetCursorPos(window, &xpos, &ypos);	
+
+		glm::vec3 p0 = glm::unProject(glm::vec3(xpos,bs->SCR_HEIGHT-ypos,0), bs->view*bs->model, bs->projection, glm::vec4(0,0,bs->SCR_WIDTH,bs->SCR_HEIGHT));
+		glm::vec3 p1 = glm::unProject(glm::vec3(xpos,bs->SCR_HEIGHT-ypos,1), bs->view*bs->model, bs->projection, glm::vec4(0,0,bs->SCR_WIDTH,bs->SCR_HEIGHT));
+
+		vector<MyVertex> posiciones = bs->vLoader.getVertices();
+
+		float minDist = 0.2;
+		for(unsigned int i = 0; i < posiciones.size(); i++){
+			glm::vec3 comp = posiciones[i].Position;
+			float dist = glm::length(glm::cross(comp-p0, comp-p1)) / glm::length(p1-p0);
+			if(dist < minDist){
+				bs->vLoader.setActiveVertex(i);
+				glReadPixels( xpos, bs->SCR_HEIGHT-ypos, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &bs->activevertexdepth);	
+				minDist = dist;
+			}
+		}
+	}
+    if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS){
+		double xpos, ypos;
+		glfwGetCursorPos(window, &xpos, &ypos);	
+		glm::vec3 p0 = glm::unProject(glm::vec3(xpos,bs->SCR_HEIGHT-ypos,bs->activevertexdepth), bs->view*bs->model, bs->projection, glm::vec4(0,0,bs->SCR_WIDTH,bs->SCR_HEIGHT));
+		bs->vLoader.setActiveVertexPosition(p0);
+	}
+
 }
 
 // Set especific options for this object
 void BezierSurface::setOptions( GLFWwindow *window ){
+	Object::setOptions(window);
 	glfwSetWindowUserPointer(window, this);
 	glfwSetKeyCallback(window, key_callback);
+	glfwSetMouseButtonCallback(window, mouse_button_callback);
 }
 
 //Set uniforms needed in this scene

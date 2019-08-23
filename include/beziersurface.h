@@ -17,6 +17,7 @@ private:
 	Shader bezierShader;	
 	Shader pointShader;
 	Shader axisShader;
+	GLfloat activevertexdepth;
 	float uOuter02;
 	float uOuter13;
 	float uInner0;
@@ -24,6 +25,7 @@ private:
 	float lastX, lastY;
 	bool move, firstMouse;
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+	static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 	VertexLoader vLoader;
 	VertexLoader vLoader2;
 	void setUniforms();
