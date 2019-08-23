@@ -3,9 +3,14 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: principal.aux
 The style file: unsrtnat.bst
 Database file #1: references.bib
-Warning--empty year in 3dimages
-Warning--empty journal in osti_10185520
-Warning--empty year in NASA
+Warning--I'm ignoring negativeimage's extra "author" field
+--line 68 of file references.bib
+Warning--I'm ignoring negativeimage's extra "author" field
+--line 69 of file references.bib
+Warning--I'm ignoring negativeimage's extra "author" field
+--line 70 of file references.bib
+Warning--I'm ignoring negativeimage's extra "author" field
+--line 71 of file references.bib
 Warning--empty booktitle in DEFANTI1991247
 Warning--empty year in OpenGL
 Warning--empty year in OpenGLARB
@@ -14,15 +19,24 @@ Warning--empty year in Vulkan
 Warning--empty year in AMD
 Warning--empty year in SPIR
 Warning--empty year in Primitivas
+Warning--empty year in PrimitiveImage
+Warning--empty year in ClippingImage
+Warning--empty year in RasterizationImage
 Warning--empty year in Microsoft
+Warning--empty year in 3dpipelineimage
 Warning--empty year in GLSL
 Warning--empty year in HLSL
 Warning--empty year in VertexShader
 Warning--empty year in TesConShader
+Warning--empty year in TessellationImages
 Warning--empty year in TesPriGen
 Warning--empty year in TesEvaShader
 Warning--empty year in GeoShader
 Warning--empty year in FragShader
+Warning--empty year in bsurfaceimage
+Warning--empty year in 3dimages
+Warning--empty year in terraincoloringimage
+Warning--empty journal in osti_10185520
 Warning--empty year in UBUNTU
 Warning--empty year in VIM
 Warning--empty year in GIT
@@ -34,49 +48,53 @@ Warning--empty year in GLFW
 Warning--empty year in GLAD
 Warning--empty year in ASSIMP
 Warning--empty year in GLM
+Warning--empty year in vectortraslationimage
+Warning--empty year in wolfram
+Warning--empty year in rotationimage
 Warning--empty journal in Vicci
+Warning--empty year in NASA
 Warning--empty year in EHT
 Warning--empty year in GLSLreference
 Warning--empty year in LinearInterpolation
-You've used 47 entries,
+You've used 58 entries,
             2481 wiz_defined-function locations,
-            816 strings with 10417 characters,
-and the built_in function-call counts, 13621 in all, are:
-= -- 1211
-> -- 409
-< -- 50
-+ -- 223
-- -- 116
-* -- 667
-:= -- 2102
-add.period$ -- 184
-call.type$ -- 47
-change.case$ -- 90
-chr.to.int$ -- 34
-cite$ -- 82
-duplicate$ -- 754
-empty$ -- 1455
-format.name$ -- 171
-if$ -- 2991
+            874 strings with 12138 characters,
+and the built_in function-call counts, 16664 in all, are:
+= -- 1484
+> -- 494
+< -- 61
++ -- 269
+- -- 140
+* -- 792
+:= -- 2569
+add.period$ -- 230
+call.type$ -- 58
+change.case$ -- 112
+chr.to.int$ -- 45
+cite$ -- 103
+duplicate$ -- 913
+empty$ -- 1793
+format.name$ -- 208
+if$ -- 3664
 int.to.chr$ -- 14
-int.to.str$ -- 48
-missing$ -- 20
-newline$ -- 284
-num.names$ -- 141
-pop$ -- 598
+int.to.str$ -- 59
+missing$ -- 21
+newline$ -- 352
+num.names$ -- 174
+pop$ -- 752
 preamble$ -- 1
-purify$ -- 47
+purify$ -- 58
 quote$ -- 0
-skip$ -- 426
+skip$ -- 518
 stack$ -- 0
-substring$ -- 213
-swap$ -- 136
+substring$ -- 256
+swap$ -- 158
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 311
-warning$ -- 35
-while$ -- 103
+type$ -- 388
+warning$ -- 45
+while$ -- 126
 width$ -- 0
-write$ -- 652
-(There were 35 warnings)
+write$ -- 801
+(There were 49 warnings)

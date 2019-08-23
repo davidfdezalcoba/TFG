@@ -184,7 +184,8 @@ figura~\ref{fig:traslation}. Para ello realizaríamos la siguiente operación:
 \begin{figure}
 	\centering	
 	\includegraphics[height=9cm]{figures/traslacion.png}
-	\caption{Traslación de un vector}
+	\caption[Traslación de un vector.]{Traslación de un vector.
+	Fuente:~\cite{vectortraslationimage}}
 	\label{fig:traslation}
 \end{figure}
 
@@ -261,7 +262,7 @@ la operación a realizar sería la siguiente:
 \begin{figure}[h]
 	\centering
 	\includegraphics{figures/scaling.png}
-	\caption{Escalar un vector}
+	\caption[Escalar un vector.]{Escalar un vector. Fuente:~\cite{wolfram}}
 	\label{fig:scaling}
 \end{figure}
 
@@ -327,7 +328,8 @@ mediante una matriz, dando lugar a la representación matricial de la rotación.
 \begin{figure}
 	\centering		
 	\includegraphics[height=10cm]{figures/rotation.png}
-	\caption{Rotación de un vector 3D}
+	\caption[Rotación de un vector 3D.]{Rotación de un vector 3D.
+	Fuente:~\cite{rotationimage}}
 	\label{fig:rotacion}
 \end{figure}
 
@@ -398,7 +400,7 @@ cualquiera en el espacio tridimensional viene dada por:
 \begin{figure}
 	\centering
 	\includegraphics[height=7.5cm,width=\textwidth]{figures/eulerangles.png}
-	\caption{Ángulos de Euler. Imagen de~\citet{LearnOpenGL}}
+	\caption[Ángulos de Euler.]{Ángulos de Euler. Fuente:~\citet{LearnOpenGL}}
 	\label{fig:eulerangles}
 \end{figure}
 
@@ -801,7 +803,8 @@ cálculos realizados y explorando las entradas y salidas de cada uno de ellos.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{figures/myterrain.png}
-	\caption{Coloreado de Valles Marineris. Modelo de NASA~\cite{NASA}}
+	\caption[Coloreado de Valles Marineris.]{Coloreado de Valles Marineris.
+	Modelo:~\cite{NASA}}
 	\label{fig:myterrain}
 \end{figure}
 
@@ -908,7 +911,6 @@ simplemente se encarga de realizar la transformación mediante
 \begin{verbatim}
     gl_Position = uProjection * uView * uModel * vec4(aPos, 1.0);
 \end{verbatim}
-
 mientras que el fragment shaders solo se encarga de darle color a la curva
 mediante la instrucción
 
@@ -1163,15 +1165,16 @@ El código para este shader se incluye a continuación.
 \begin{figure}[h]
 	\centering	
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[height=8cm,width=\textwidth]{figures/mynegative0.jpg}
+		\includegraphics[height=8cm,width=\textwidth]{figures/mynegative00.jpg}
 		\caption{Imagen original}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[height=8cm,width=\textwidth]{figures/mynegative1.png}
+		\includegraphics[height=8cm,width=\textwidth]{figures/mynegative01.png}
 		\caption{Negativo}
 	\end{subfigure}
-	\caption{Negativo de una imagen}
+	\caption[Negativo de una imagen.]{Negativo de una imagen.
+	Fuente:~\cite{negativeimage}}
 	\label{fig:mynegative}
 \end{figure}
 
@@ -1231,7 +1234,9 @@ textura la información del campo vectorial asociado al problema.
 	\begin{subfigure}{0.28\textwidth}
 			\includegraphics[width=\textwidth]{figures/lictexture.png}	
 	\end{subfigure}
-	\caption{LIC - Información del campo vectorial codificado en una textura}
+	\caption[LIC - Información del campo vectorial codificado en una
+	textura.]{LIC - Información del campo vectorial codificado en una textura.
+	Fuente:~\cite{Bailey}}
 	\label{fig:lictexture}
 \end{figure}
 
@@ -1268,7 +1273,7 @@ le asocia un valor mayor del color verde.
 		\caption{}
 		\label{fig:mylic4}
 	\end{subfigure}
-	\caption{Line Integral Convolution}
+	\caption{Line Integral Convolution.}
 	\label{fig:mylic}
 \end{figure}
 

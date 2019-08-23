@@ -145,7 +145,8 @@ al programador. La Figura~\ref{fig2.2} muestra el pipeline asociado a la versió
 		\caption{Pipeline detallado}
 		\label{fig2.2b}
 	\end{subfigure}
-	\caption{Pipeline de gráficos de OpenGL}
+	\caption[Pipeline de gráficos de OpenGL]
+	{Pipeline de gráficos de OpenGL. Fuente:~\cite{Bailey}}
 	\label{fig2.2}
 \end{figure}
 
@@ -205,7 +206,8 @@ vértices.
 \begin{figure}[h]
 	\centering	
 	\includegraphics[width=\textwidth]{figures/primitives.png}
-	\caption{Primitivas de OpenGL}
+	\caption[Primitivas de OpenGL]{Primitivas de OpenGL.
+	Fuente:~\cite{PrimitiveImage}}
 	\label{fig:primitives}
 \end{figure}
 
@@ -239,20 +241,23 @@ modificando las primitivas geométricas para que nada quede fuera de ese espacio
 (Ver Figura~\ref{fig2.3a}).
 
 \begin{figure}[h]
-	\begin{subfigure}[b]{0.5\textwidth}
+	\centering
+	\begin{minipage}[b]{0.5\textwidth}
 		\centering 
+		\captionsetup{justification=centering}
 		\includegraphics{figures/clipping.png}
-		\caption{Clipping en OpenGL}
+		\caption[Clipping en OpenGL.]{Clipping en OpenGL. \\
+		Fuente:~\cite{ClippingImage}}
 		\label{fig2.3a}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.5\textwidth}
+	\end{minipage}\hfill
+	\begin{minipage}[b]{0.5\textwidth}
 		\centering 
+		\captionsetup{justification=centering}
 		\includegraphics{figures/rasterization.png}
-		\caption{Rasterización en OpenGL}
+		\caption[Rasterización en OpenGL.]{Rasterización en OpenGL. \\
+		Fuente:~\cite{RasterizationImage}}
 		\label{fig2.3b}
-	\end{subfigure}
-	\caption{Clipping y rasterización en OpenGL}
-	\label{fig2.3}
+	\end{minipage}
 \end{figure}
 
 \subsection{Rasterización}
@@ -329,7 +334,8 @@ que suponía menos esfuerzo trabajar con esta última.
 \begin{figure}
 	\centering
 	\includegraphics[height=10cm]{figures/directxpipeline.png}
-	\caption{Pipeline de gráficos de Direct3D}
+	\caption[Pipeline de gráficos de Direct3D.]{Pipeline de gráficos de
+	Direct3D. Fuente:~\cite{3dpipelineimage}}
 	\label{fig:differences}
 \end{figure}
 

@@ -1,38 +1,9 @@
-\begin{thebibliography}{47}
+\begin{thebibliography}{58}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
-
-\bibitem[University()]{3dimages}
-Boston University.
-\newblock {Scientific Visualization Techniques - Boston University}.
-\newblock
-  \url{http://www.bu.edu/tech/support/research/training-consulting/online-tutorials/introduction-to-scientific-visualization-tutorial/techniques/}.
-\newblock Accessed: 30/07/2019.
-
-\bibitem[Cabral and Leedom(1993)]{osti_10185520}
-B.~Cabral and L.C. Leedom.
-\newblock Imaging vector fields using line integral convolution.
-\newblock 3 1993.
-
-\bibitem[Petkov(2005)]{licthesis}
-Alexander~Petrov Petkov.
-\newblock Transparent line integral convolution: A new approach for visualizing
-  vector fields in opendx.
-\newblock Master's thesis, University of Montana, 2005.
-
-\bibitem[de~Vries(2017)]{LearnOpenGL}
-Joey de~Vries.
-\newblock \emph{Learn OpenGL}, volume 3rd printing.
-\newblock Joey~de~Vries, 2017.
-
-\bibitem[Dunbar()]{NASA}
-Brian Dunbar.
-\newblock {NASA - National Aeronautics and Space Administration}.
-\newblock \url{https://www.nasa.gov/}.
-\newblock Accessed: 16/08/2019.
 
 \bibitem[Defanti and Brown(1991)]{DEFANTI1991247}
 Thomas~A. Defanti and Maxine~D. Brown.
@@ -103,17 +74,48 @@ The Khronos~Group Inc.
 \newblock \url{https://www.khronos.org/spir/}, {\natexlab{b}}.
 \newblock Accessed: 18/08/2019.
 
+\bibitem[Bailey and Cunningham(2011)]{Bailey}
+M.~Bailey and S.~Cunningham.
+\newblock \emph{Graphic Shaders, Theory and Practice}, volume 2nd Ed.
+\newblock CRC Press, 2011.
+
 \bibitem[Inc({\natexlab{c}})]{Primitivas}
 The Khronos~Group Inc.
 \newblock {Primitivas - OpenGL wiki}.
 \newblock \url{https://www.khronos.org/opengl/wiki/Primitive}, {\natexlab{c}}.
 \newblock Accessed: 26/07/2019.
 
+\bibitem[Hobart and Colleges()]{PrimitiveImage}
+Hobart and William~Smith Colleges.
+\newblock {Into 3D with OpenGL}.
+\newblock \url{http://math.hws.edu/eck/cs424/notes2013/06_Into_3D_OpenGL.html}.
+\newblock Accessed: 20/08/2019.
+
+\bibitem[Ahn()]{ClippingImage}
+Song~Ho Ahn.
+\newblock {OpenGL Projection Matrix}.
+\newblock \url{http://www.songho.ca/opengl/gl_projectionmatrix.html}.
+\newblock Accessed: 20/08/2019.
+
+\bibitem[Kraus()]{RasterizationImage}
+Martin Kraus.
+\newblock {Pixels Covered by a Triangle}.
+\newblock
+  \url{https://en.wikibooks.org/wiki/GLSL_Programming/Rasterization#/media/File:Pixels_covered_by_a_triangle.png}.
+\newblock Accessed: 20/08/2019.
+
 \bibitem[Microsoft({\natexlab{a}})]{Microsoft}
 Microsoft.
 \newblock {Microsoft Website}.
 \newblock \url{https://www.microsoft.com/es-es}, {\natexlab{a}}.
 \newblock Accessed: 23/07/2019.
+
+\bibitem[Bedwyr()]{3dpipelineimage}
+Bedwyr.
+\newblock {Proceso en la pipeline de gráficos}.
+\newblock
+  \url{https://es.wikipedia.org/wiki/Direct3D#/media/Archivo:D3D_Pipeline_(es).png}.
+\newblock Accessed: 20/08/2019.
 
 \bibitem[Inc({\natexlab{d}})]{GLSL}
 The Khronos~Group Inc.
@@ -144,6 +146,12 @@ The Khronos~Group Inc.
   \url{https://www.khronos.org/opengl/wiki/Tessellation_Control_Shader},
   {\natexlab{f}}.
 \newblock Accessed: 24/07/2019.
+
+\bibitem[Alfonse()]{TessellationImages}
+Alfonse.
+\newblock {Tessellation}.
+\newblock \url{https://www.khronos.org/opengl/wiki/Tessellation}.
+\newblock Accessed: 20/08/2019.
 
 \bibitem[Inc({\natexlab{g}})]{TesPriGen}
 The Khronos~Group Inc.
@@ -180,10 +188,37 @@ Donald Hearn and M.~Pauline Baker.
 \newblock \emph{Computer Graphics - C Version}, volume 2nd Ed.
 \newblock Pearson, 1997.
 
-\bibitem[Bailey and Cunningham(2011)]{Bailey}
-M.~Bailey and S.~Cunningham.
-\newblock \emph{Graphic Shaders, Theory and Practice}, volume 2nd Ed.
-\newblock CRC Press, 2011.
+\bibitem[mula()]{bsurfaceimage}
+Wojciech mula.
+\newblock {Sample Bézier Surface}.
+\newblock
+  \url{https://en.wikipedia.org/wiki/B%C3%A9zier_surface#/media/File:B%C3%A9zier_surface_example.svg}.
+\newblock Accessed: 20/08/2019.
+
+\bibitem[University()]{3dimages}
+Boston University.
+\newblock {Scientific Visualization Techniques - Boston University}.
+\newblock
+  \url{http://www.bu.edu/tech/support/research/training-consulting/online-tutorials/introduction-to-scientific-visualization-tutorial/techniques/}.
+\newblock Accessed: 30/07/2019.
+
+\bibitem[WhiteboxDev()]{terraincoloringimage}
+WhiteboxDev.
+\newblock {Choosing colour-ramp to use for elevation?}
+\newblock
+  \url{https://gis.stackexchange.com/questions/25099/choosing-colour-ramp-to-use-for-elevation}.
+\newblock Accessed: 20/08/2019.
+
+\bibitem[Cabral and Leedom(1993)]{osti_10185520}
+B.~Cabral and L.C. Leedom.
+\newblock Imaging vector fields using line integral convolution.
+\newblock 3 1993.
+
+\bibitem[Petkov(2005)]{licthesis}
+Alexander~Petrov Petkov.
+\newblock Transparent line integral convolution: A new approach for visualizing
+  vector fields in opendx.
+\newblock Master's thesis, University of Montana, 2005.
 
 \bibitem[(GB)()]{UBUNTU}
 Canonical Group~Ltd (GB).
@@ -227,6 +262,11 @@ Inc. Free Software~Foundation.
 \newblock \url{https://www.gnu.org/software/make/}, {\natexlab{c}}.
 \newblock Accessed: 08/08/2019.
 
+\bibitem[de~Vries(2017)]{LearnOpenGL}
+Joey de~Vries.
+\newblock \emph{Learn OpenGL}, volume 3rd printing.
+\newblock Joey~de~Vries, 2017.
+
 \bibitem[Löwy()]{GLFW}
 Camilla Löwy.
 \newblock {GLFW - An OpenGL Library}.
@@ -250,6 +290,26 @@ G-Truc Creation.
 \newblock {GLM - OpenGL Mathematics}.
 \newblock \url{https://glm.g-truc.net/0.9.9/index.html}.
 \newblock Accessed: 08/08/2019.
+
+\bibitem[Navarro()]{vectortraslationimage}
+Benjamín~Bonell Navarro.
+\newblock {Concepto de vector}.
+\newblock
+  \url{http://agrega.educacion.es/repositorio/02122013/e7/es_2013120213_9134249/concepto_de_vector.html}.
+\newblock Accessed: 20/08/2019.
+
+\bibitem[LLC()]{wolfram}
+Wolfram~Alpha LLC.
+\newblock {Wolfram Alpha}.
+\newblock \url{https://www.wolframalpha.com/}.
+\newblock Accessed: 20/08/2019.
+
+\bibitem[Dainis()]{rotationimage}
+Dainis.
+\newblock {Vector Rotation}.
+\newblock
+  \url{http://tm.spbstu.ru/%D0%A4%D0%B0%D0%B9%D0%BB:Vector_rotation.png}.
+\newblock Accessed: 20/08/2019.
 
 \bibitem[Vince(2011)]{Vince:2011:QCG:2016678}
 John Vince.
@@ -275,6 +335,22 @@ Leandra Vicci.
 J.~M. Arrieta, R.~Ferreira, R.~Pardo, and A.~Rodríguez.
 \newblock \emph{Análisis Numérico de Ecuaciones Diferenciales Ordinarias}.
 \newblock Universidad Complutense de Madrid, 2018.
+
+\bibitem[Dunbar()]{NASA}
+Brian Dunbar.
+\newblock {NASA - National Aeronautics and Space Administration}.
+\newblock \url{https://www.nasa.gov/}.
+\newblock Accessed: 16/08/2019.
+
+\bibitem[Gokaslan(2019)]{negativeimage}
+Cigdem~Ozer Gokaslan.
+\newblock Schwannomas of uncommon peripheral locations: Analysis of imaging
+  findings of 21 cases.
+\newblock \emph{Current Medical Imaging}, 15\penalty0 (6):\penalty0 578--584,
+  2019.
+\newblock ISSN 1573-4056/1875-6603.
+\newblock \doi{10.2174/1573405614666181005115631}.
+\newblock URL \url{http://www.eurekaselect.com/node/165982/article}.
 
 \bibitem[Telescope()]{EHT}
 Event~Horizon Telescope.
