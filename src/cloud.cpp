@@ -8,14 +8,13 @@
 #include <iostream>
 using namespace std;
 
-Cloud :: Cloud(float width, float height) : 
+Cloud :: Cloud() : 
 	cloudShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/cloud/vertexShader.vs",
 				  "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/cloud/fragmentShader.frs"),
 	vl("/home/david/Projects/TFG/Project/resources/objects/cloud/scalar.csv", false),
 	uMax(0)
 	{
-		this->width = width;
-	   	this->height = height;
+		camera = Camera(glm::vec3(3.0f, 3.0f, 1.6f), glm::vec3(0.0f, 1.0f, 0.0f), 225, -30);
 	}
 
 void Cloud :: draw(){
@@ -42,12 +41,11 @@ void Cloud :: processInput(GLFWwindow *window){
 
 void Cloud :: setUniforms(){
 	//setup model, view and projection matrices
-	projection = glm::perspective(glm::radians(camera.Zoom), this->width / this->height, 0.1f, 100.0f);
+	projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 	view = camera.GetViewMatrix();
 	model = glm::mat4(1.0f); 
 	model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.0f));
 	model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
-	// glm::mat3 normal = glm::mat3(transpose(inverse(model)));
 
 	cloudShader.use();	
 	cloudShader.setMat4("uModel", model);

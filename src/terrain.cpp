@@ -8,14 +8,10 @@
 #include <iostream>
 using namespace std;
 
-Terrain :: Terrain(float width, float height) : 
+Terrain :: Terrain() : 
 	terrainShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/terrain/notextures/vertexShader.vs",
 				  "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/terrain/notextures/fragmentShader.frs"),
-	dmodel("/home/david/Projects/TFG/Project/resources/objects/terrain/mars_valles_mar.stl", false)
-	{
-		this->width = width;
-	   	this->height = height;
-	}
+	dmodel("/home/david/Projects/TFG/Project/resources/objects/terrain/mars_valles_mar.stl", false) {}
 
 void Terrain :: draw(){
 	setUniforms();
@@ -37,7 +33,7 @@ void Terrain :: processInput(GLFWwindow *window){
 
 void Terrain :: setUniforms(){
 	//setup model, view and projection matrices
-	projection = glm::perspective(glm::radians(camera.Zoom), this->width / this->height, 0.1f, 100.0f);
+	projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 	view = camera.GetViewMatrix();
 	model = glm::mat4(1.0f); 
 	model = glm::translate(model, glm::vec3(0.0f, 0.0f, -15.0f));

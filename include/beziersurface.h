@@ -9,7 +9,7 @@
 
 class BezierSurface : public Object{
 public:
-	BezierSurface(float width, float height);
+	BezierSurface();
 	void draw();
 	void processInput(GLFWwindow * window);
 	void setOptions(GLFWwindow * window);
@@ -22,8 +22,7 @@ private:
 	float uOuter13;
 	float uInner0;
 	float uInner1;
-	float lastX, lastY;
-	bool move, firstMouse;
+	bool move;
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 	static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 	VertexLoader vLoader;

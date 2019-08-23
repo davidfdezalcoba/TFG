@@ -157,25 +157,25 @@ void setOptions(const Modes & mode){
 Object* setupModel(const Modes & mode){
 	switch(mode) {
 		case terrain: 
-			return new Terrain(SCR_WIDTH, SCR_HEIGHT);
+			return new Terrain();
 			break;
 		case bezier:
-			return new BezierCurve(SCR_WIDTH, SCR_HEIGHT);
+			return new BezierCurve();
 			break;
 		case beziersurface:
-			return new BezierSurface(SCR_WIDTH, SCR_HEIGHT);
+			return new BezierSurface();
 			break;
 		case negative:
-			return new Negative(SCR_WIDTH, SCR_HEIGHT);
+			return new Negative();
 			break;
 		case cloud:
-			return new Cloud(SCR_WIDTH, SCR_HEIGHT);
+			return new Cloud();
 			break;
 		case revolution:
-			return new Revolution(SCR_WIDTH, SCR_HEIGHT);
+			return new Revolution();
 			break;
 		case lic:
-			return new Lic(SCR_WIDTH, SCR_HEIGHT);
+			return new Lic();
 			break;
 		default:;	
 	}

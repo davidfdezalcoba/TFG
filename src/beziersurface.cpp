@@ -1,9 +1,7 @@
 #include "beziersurface.h"
-
-#include <iostream>
 using namespace std;
 
-BezierSurface :: BezierSurface(float width, float height) : 
+BezierSurface :: BezierSurface() : 
 	bezierShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/vertexshader.vs",
 				 "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/fragmentshader.frs",
 				 nullptr,
@@ -14,14 +12,11 @@ BezierSurface :: BezierSurface(float width, float height) :
 	axisShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/axisshader.vs",
 				"/home/david/Projects/TFG/Project/src/shaders/3Dshaders/beziersurface/axisshader.frs"),
 		uOuter02(10), uOuter13(10), uInner0(10), uInner1(10),
-		lastX(width / 2.0), lastY(height / 2.0),
-		move(true), firstMouse(true),
+		move(true),
 	vLoader("/home/david/Projects/TFG/Project/resources/objects/beziersurface/bezier.vtx"),
 	vLoader2("/home/david/Projects/TFG/Project/resources/objects/beziersurface/axis.vtx")
 	{
 		camera = Camera(glm::vec3(3.0f, 3.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f), 225, -30);
-		this->width = width;
-	   	this->height = height;
 	}
 
 // Draw the scene
@@ -129,7 +124,7 @@ void BezierSurface::setOptions( GLFWwindow *window ){
 
 //Set uniforms needed in this scene
 void BezierSurface :: setUniforms(){
-	projection = glm::perspective(glm::radians(camera.Zoom), this->width / this->height, 0.1f, 100.0f);
+	projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 	view = camera.GetViewMatrix();
 	model = glm::mat4(1.0f); 
 	model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));

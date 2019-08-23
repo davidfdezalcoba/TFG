@@ -1,7 +1,7 @@
 #include "revolution.h"
 #include <glfw3.h>
 
-Revolution :: Revolution(float width, float height) : 
+Revolution :: Revolution() : 
 	revolutionShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/revolution/vertexshader.vs",
 				 "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/revolution/fragmentshader.frs",
 				 "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/revolution/geometryshader.grs"), 
@@ -11,8 +11,6 @@ Revolution :: Revolution(float width, float height) :
 	vLoader2("/home/david/Projects/TFG/Project/resources/objects/revolution/axis.vtx")
 	{
 		camera = Camera(glm::vec3(3.0f, 3.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f), 225, -30);
-		this->width = width;
-	   	this->height = height;
 	}
 
 void Revolution :: draw(){
@@ -49,7 +47,7 @@ void Revolution :: processInput(GLFWwindow *window){
 }
 
 void Revolution :: setUniforms(){
-	projection = glm::perspective(glm::radians(camera.Zoom), this->width / this->height, 0.1f, 100.0f);
+	projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 	view = camera.GetViewMatrix();
 	model = glm::mat4(1.0f); 
 	model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));

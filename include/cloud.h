@@ -10,7 +10,7 @@
 
 class Cloud : public Object{
 public:
-	Cloud(float width, float height);
+	Cloud();
 	void draw();
 	void processInput(GLFWwindow *window);
 private:

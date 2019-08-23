@@ -8,14 +8,10 @@
 #include <iostream>
 using namespace std;
 
-Negative :: Negative(float width, float height) : 
+Negative :: Negative() : 
 		negativeShader("/home/david/Projects/TFG/Project/src/shaders/imageShaders/negative/vertexShader.vs",
 			   	"/home/david/Projects/TFG/Project/src/shaders/imageShaders/negative/fragmentShader.frs"),
-	   	image("/home/david/Projects/TFG/Project/resources/images/negativo.jpg")
-	{
-		this->width = width;
-		this->height = height;
-	}
+	   	image("/home/david/Projects/TFG/Project/resources/images/negativo.jpg") {}
 
 void Negative :: draw(){
 	setUniforms();

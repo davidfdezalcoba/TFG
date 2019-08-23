@@ -9,7 +9,7 @@
 
 class Lic : public Object{
 public:
-	Lic(float width, float height);
+	Lic();
 	void draw();
 	void processInput(GLFWwindow * window);
 private:

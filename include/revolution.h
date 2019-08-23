@@ -8,7 +8,7 @@
 
 class Revolution : public Object{
 public:
-	Revolution(float width, float height);
+	Revolution();
 	void draw();
 	void processInput(GLFWwindow * window);
 private:

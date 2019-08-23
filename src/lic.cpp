@@ -4,7 +4,7 @@
 #include "stb_image.h"
 using namespace std;
 
-Lic :: Lic(float width, float height) : 
+Lic :: Lic() : 
 	licShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/lic/vertexshader.vs", 
 				"/home/david/Projects/TFG/Project/src/shaders/3Dshaders/lic/fragmentshader.frs"), 
 		vLoader("/home/david/Projects/TFG/Project/resources/objects/lic/grid.txt", "/home/david/Projects/TFG/Project/resources/objects/lic/indices.txt"),
@@ -12,8 +12,6 @@ Lic :: Lic(float width, float height) :
 	{
 		this->noisetexture = ImageFromFile("/home/david/Projects/TFG/Project/resources/objects/lic/whitenoise.png", false);
 		this->vectortexture = ImageFromFile("/home/david/Projects/TFG/Project/resources/objects/lic/flow2.png", false);
-		this->width = width;
-	   	this->height = height;
 	}
 
 void Lic :: draw(){
@@ -48,7 +46,7 @@ void Lic :: processInput(GLFWwindow *window){
 }
 
 void Lic :: setUniforms(){
-	projection = glm::perspective(glm::radians(camera.Zoom), this->width / this->height, 0.1f, 100.0f);
+	projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 	view = camera.GetViewMatrix();
 	model = glm::mat4(1.0f); 
 	model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));

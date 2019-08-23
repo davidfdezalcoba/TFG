@@ -10,7 +10,7 @@
 
 class Terrain : public Object{
 public:
-	Terrain(float width, float height);
+	Terrain();
 	void draw();
 	void processInput(GLFWwindow *window);
 private:

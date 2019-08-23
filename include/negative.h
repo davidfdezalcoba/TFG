@@ -10,7 +10,7 @@
 
 class Negative : public Object{
 public:
-	Negative(float width, float height);
+	Negative();
 	void draw();
 	void processInput(GLFWwindow *window);
 private:
