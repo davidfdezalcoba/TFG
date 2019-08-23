@@ -160,14 +160,18 @@ hacer sobre lo que representa un flujo de vértices. Por ejemplo, tres vértices
 pueden significar tres puntos independientes, dos líneas, un triángulo, etc.
 OpenGL contiene los siguientes tipos principales de primitivas:
 
-\subsection{Primitivas de Puntos}
+\subsection{Primitivas de OpenGL}
+\label{ref:primitives}
+
+
+\subsubsection{Primitivas de Puntos}
 \label{ref:points}
 
 OpenGL contiene una única primitiva de puntos: \verb|GL_POINTS|. Cuando se llama
 a una función de dibujado con esta primitiva, OpenGL interpreta el flujo de
 vértices como puntos independientes.
 
-\subsection{Primitivas de Línea}
+\subsubsection{Primitivas de Línea}
 \label{ref:lines}
 
 En cuanto a las primitivas de línea, hay tres tipos, basándose en distintas
@@ -183,7 +187,7 @@ interpretaciones del flujo de vértices.
 				último vértices se consideran también una línea.
 \end{itemize}
 
-\subsection{Primitivas de Triángulo}
+\subsubsection{Primitivas de Triángulo}
 \label{ref:triangles}
 
 Un triángulo es una primitiva formada por tres vértices. También existen tres

@@ -32,13 +32,13 @@ etapas que se muestran en la Figura~\ref{fig2.2b}, aunque normalmente, si se
 decide utilizar alguno de ellos, se requiere utilizar, al menos, un Vertex
 Shader. 
 
-Los datos se proporcionan a los shaders de dos maneras distintas desde la
-aplicación principal. La primera es proporcionando los datos necesarios para el
-renderizado de vértices a la primera etapa, el Vertex Shader. A partir de ese
-momento Los shaders del pipeline se comunican entre ellos mediante variables
-proporcionadas por GLSL o definidas por el programador en los shaders, siendo la
-salida de un shader la entrada del siguiente, como se muestra en la
-Figura~\ref{fig3.1}. Un breve resumen acerca del lenguaje GLSL se incluye en el
+Los datos se proporcionan a los shaders de distintas maneras desde la aplicación
+principal. La primera es proporcionando los datos necesarios para el renderizado
+de vértices a la primera etapa, el Vertex Shader. A partir de ese momento los
+shaders del pipeline se comunican entre ellos mediante variables proporcionadas
+por GLSL o definidas por el programador en los shaders, siendo la salida de un
+shader la entrada del siguiente, como se muestra en la Figura~\ref{fig3.1}. Un
+breve resumen acerca del lenguaje GLSL se incluye en el
 Apéndice~\ref{ApendiceA}. 
 
 El segundo modo de especificar datos a los shaders es mediante variables
@@ -46,6 +46,12 @@ El segundo modo de especificar datos a los shaders es mediante variables
 de solo lectura por parte de los shaders. Al contrario que las variables
 definidas como entrada y salida de un shader a otro, estas variables toman sus
 valores del programa principal cada vez que se invoca el shader.  
+
+Por último, es posible comunicarse con los shaders desde la aplicación principal
+mediante el uso de texturas. Con ellas, el shader puede acceder a la información
+contenida en la textura con el fin de renderizar imágenes. Asimismo, desde la
+aplicación se pueden leer datos de texturas, permitiendo leer datos generados
+por los shaders y codificados en forma de textura.
 
 \begin{figure}
 		\centering
@@ -58,10 +64,10 @@ valores del programa principal cada vez que se invoca el shader.
 \section{Vertex Shader}
 \label{ref:Vertex}
 
-El Vertex Shader es la etapa de sombreado en el pipeline de renderizado que se
-encarga del procesamiento de los vértices individuales~\cite{VertexShader}. El
-Vertex Shader tiene como entrada unos atributos de vértice especificados desde
-un \textit{Vertex Array Object (VAO)} por un comando de renderizado. Recibe un
+El Vertex Shader es la etapa del pipeline de renderizado que se encarga del
+procesamiento de los vértices individuales~\cite{VertexShader}. El Vertex Shader
+tiene como entrada unos atributos de vértice especificados desde un
+\textit{Vertex Array Object (VAO)} por un comando de renderizado. Recibe un
 único vértice, formado por sus atributos, del flujo de vértices y genera un
 único vértice al flujo de salida. Por cada vértice de entrada ha de haber,
 necesariamente, uno de salida. 
@@ -312,7 +318,7 @@ triángulos o cuadriláteros.
 	\begin{subfigure}{0.45\textwidth}
 			\includegraphics[height=8cm,width=\textwidth]{figures/TriFull.png}	
 	\end{subfigure}
-	\caption[Teselación - Triángulos.]{Teselación - Triángulos.
+	\caption[Diferentes niveles de teselación en triángulos.]{Diferentes niveles de teselación en triángulos.
 	Fuente:~\cite{TessellationImages}}
 	\label{fig:triangletessellation}
 \end{figure}
@@ -338,7 +344,8 @@ triángulos o cuadriláteros.
 	\begin{subfigure}{0.40\textwidth}
 			\includegraphics[height=7cm,width=\textwidth]{figures/QuadFull.png}	
 	\end{subfigure}
-	\caption[Teselación - Cuadriláteros.]{Teselación - Cuadriláteros.
+	\caption[Diferentes niveles de teselación en cuadriláteros.]{Diferentes
+			niveles de teselación en cuadriláteros.
 	Fuente:~\cite{TessellationImages}}
 	\label{fig:quadtessellation}
 \end{figure}

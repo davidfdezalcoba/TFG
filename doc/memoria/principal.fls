@@ -330,9 +330,9 @@ INPUT ./figures/vectorvisualization.jpg
 INPUT figures/terraincoloring.jpg
 INPUT ./figures/terraincoloring.jpg
 INPUT ./figures/terraincoloring.jpg
-INPUT figures/lic2.png
-INPUT ./figures/lic2.png
-INPUT ./figures/lic2.png
+INPUT figures/licwhitenoise.png
+INPUT ./figures/licwhitenoise.png
+INPUT ./figures/licwhitenoise.png
 INPUT figures/lic1.png
 INPUT ./figures/lic1.png
 INPUT ./figures/lic1.png

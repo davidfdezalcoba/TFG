@@ -248,21 +248,23 @@ importante denominado Line Integral Convolution.
 
 El método Line Integral Convolution fue originalmente propuesto en el artículo
 de~\citet{osti_10185520}. Se utiliza para visualizar campos vectoriales densos.
-En este método, se utiliza una imagen junto con datos de un flujo vectorial,
-modificando esta imagen para mostrar el flujo de los datos. (ver
-Figura~\ref{fig:lic}). 
+En este método, se utiliza una imagen de ruido blanco junto con datos de un
+flujo vectorial, modificando esta imagen para mostrar el flujo de los datos.
+(ver Figura~\ref{fig:lic}). 
 
 \begin{figure}[h!]
 	\centering	
-	\begin{subfigure}{.45\textwidth}
-		\includegraphics[height=5cm,width=\textwidth]{figures/lic2.png}
+	\begin{subfigure}[t]{.45\textwidth}
+		\includegraphics[height=5cm,width=\textwidth]{figures/licwhitenoise.png}
+		\caption{Imagen utilizada para el método del LIC.}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}{.45\textwidth}
+	\begin{subfigure}[t]{.45\textwidth}
 		\includegraphics[height=5cm,width=\textwidth]{figures/lic1.png}
+		\caption{Resultado de aplicar el método del LIC a la imagen de la
+		izquierda con un flujo vectorial. Fuente:~\cite{osti_10185520}}
 	\end{subfigure}
-	\caption[Resultado del método Line Integral Convolution.]{Resultado del
-			método Line Integral Convolution. Fuente:~\cite{osti_10185520}}
+	\caption{Método Line Integral Convolution.}
 	\label{fig:lic}
 \end{figure}
 

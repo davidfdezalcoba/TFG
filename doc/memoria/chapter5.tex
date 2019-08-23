@@ -124,7 +124,7 @@ implementados por las clases específicas de cada tipo de visualización:
 \begin{itemize}
 		\item \verb|draw()|, que ha de encargarse de dibujar el objeto en
 				cuestión.
-		\item \verb|processInputGLFWwindow * window)|, que ha de especificar que
+		\item \verb|processInput(GLFWwindow * window)|, que ha de especificar que
 				hacer con la entrada del usuario para este tipo de
 				visualización.
 		\item \verb|setUniforms()|, que ha de especificar las variables
@@ -161,8 +161,7 @@ Entre estas transformaciones podemos encontrar lineales y no lineales. Así, par
 representar matricialmente transformaciones no lineales en un espacio Euclídeo
 $n$-dimensional $\mathbb{R}^n$ se puede utilizar una transformación lineal en el
 espacio $(n+1)$-dimensional $\mathbb{R}^{n+1}$. Este tipo de transformaciones
-incluye tanto las transformaciones afines (como la
-traslación~\ref{makereference5.4.1.1}) como transformaciones proyectivas.
+incluye tanto las transformaciones afines como transformaciones proyectivas.
 
 Esta es la razón por la que las matrices $4 \times 4$ son tan ampliamente
 utilizadas en la informática gráfica y, en consecuencia, en nuestra
@@ -1018,7 +1017,7 @@ En el TES es donde realmente se realizan los cálculos necesarios para obtener l
 superficie de Bézier. El siguiente código, que realiza el cálculo de la
 ecuación~\eqref{eq:6} es una versión simplificada del que se puede encontrar
 en~\citet{Bailey}. Este último utiliza también las propiedades de las derivadas
-de las superficies de Bézier para calcular el normal con el fin je utilizar un
+de las superficies de Bézier para calcular el normal con el fin de utilizar un
 modelo de luz como el utilizado en~\ref{makereference5.5.1}.
 
 \begin{verbatim}
@@ -1251,34 +1250,35 @@ le asocia un valor mayor del color verde.
 	\centering	
 	\begin{subfigure}{0.45\textwidth}
 		\includegraphics[height=\textwidth,width=\textwidth]{figures/mylic.png}
-		\caption{}
+		\caption{Lic para el flujo vectorial de debajo.}
 		\label{fig:mylic1}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.45\textwidth}
 		\includegraphics[height=\textwidth,width=\textwidth]{figures/mylic2.png}
-		\caption{}
+		\caption{Lic para el flujo vectorial de debajo.}
 		\label{fig:mylic2}
 	\end{subfigure}
 	\newline 
 	\par\bigskip\par\bigskip
 	\begin{subfigure}{0.45\textwidth}
 		\includegraphics[height=\textwidth,width=\textwidth]{figures/mylic3.jpg}
-		\caption{}
+		\caption{Flujo vectorial codificado en textura.}
 		\label{fig:mylic3}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.45\textwidth}
 		\includegraphics[height=\textwidth,width=\textwidth]{figures/mylic4.png}
-		\caption{}
+		\caption{Flujo vectorial codificado en textura.}
 		\label{fig:mylic4}
 	\end{subfigure}
 	\caption{Line Integral Convolution.}
 	\label{fig:mylic}
 \end{figure}
 
-La textura con estos valores así calculados tiene un aspecto similar al de las
-Figuras~\ref{fig:mylic3} y~\ref{fig:mylic4}.
+Las texturas con estos valores así calculados tienen un aspecto similar al de las
+Figuras~\ref{fig:mylic3} y~\ref{fig:mylic4}, dependiendo del flujo vectorial
+subyacente.
 
 Para esta técnica necesitaremos solo un vertex shader y un fragment shader. El
 vertex shader toma de nuevo la posición de los vértices, que en este caso se
