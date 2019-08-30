@@ -11,7 +11,7 @@ using namespace std;
 Cloud :: Cloud() : 
 	cloudShader("/home/david/Projects/TFG/Project/src/shaders/3Dshaders/cloud/vertexShader.vs",
 				  "/home/david/Projects/TFG/Project/src/shaders/3Dshaders/cloud/fragmentShader.frs"),
-	vl("/home/david/Projects/TFG/Project/resources/objects/cloud/scalar.csv", false),
+	vl("/home/david/Projects/TFG/Project/resources/objects/cloud/scalar.csv"),
 	uMax(0)
 	{
 		camera = Camera(glm::vec3(3.0f, 3.0f, 1.6f), glm::vec3(0.0f, 1.0f, 0.0f), 225, -30);

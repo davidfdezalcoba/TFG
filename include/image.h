@@ -9,8 +9,6 @@
 
 using namespace std;
 
-unsigned int ImageFromFile(const char *path, bool gamma = false);
-
 class Image
 {
 public:
@@ -36,9 +34,9 @@ private:
 
 	unsigned int VAO, VBO, EBO;
 
+	// Loads an image from the file in the path
+	unsigned int ImageFromFile(const char *path, bool gamma = false);
+
 	void setupQuad();
 };
-
-unsigned int ImageFromFile(const char *path, bool gamma);
-
 #endif

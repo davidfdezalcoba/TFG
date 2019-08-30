@@ -21,10 +21,12 @@ using namespace std;
 class ScalarDataLoader
 {
 public:
-	bool gammaCorrection;
+	
+	// Max scalar value read
 	float maxData = 0;
 
-	ScalarDataLoader(string const &path, bool gamma=false) : gammaCorrection(gamma)
+	// Constructor
+	ScalarDataLoader(string const &path)
 	{
 		ifstream in(path);
 		auto cinbuf = std::cin.rdbuf(in.rdbuf()); //save old buf and redirect std::cin to casos.txt
@@ -43,17 +45,26 @@ public:
 		setupVertices();
 	}		
 
+	// Draws the vertices loaded from the file with the specified shader and primitive
 	void Draw(Shader shader, GLenum primitive)
 	{
 		glBindVertexArray(VAO);
 		glDrawArrays(primitive, 0, vertices.size());
         glBindVertexArray(0);
 	}
+
 private:
+
+	// Number of vertices to load. 
+	// TODO Make this arbitrary
 	int numVertices;
+
+	// Array in which to load vertices
 	vector<ScalarVertex> vertices;
+
 	unsigned int VAO, VBO, EBO;
 
+	// Setup data from vertices into VAO, VBO, EBO
 	void setupVertices()
 	{
 		glGenVertexArrays(1, &VAO);

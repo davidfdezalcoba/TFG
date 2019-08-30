@@ -20,11 +20,8 @@
 #include <stdio.h>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void mouse_callback(GLFWwindow* window, double xpos, double ypos);
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
 int createWindow(GLFWwindow* & window);
-void setOptions(const Modes & mode);
 Modes selectmode(char * mode);
 Object* setupModel(const Modes & mode);
 
@@ -36,10 +33,6 @@ static GLFWwindow* window = nullptr;
 Camera* camera = nullptr;
 Object* obj = nullptr;
 
-float lastX = SCR_WIDTH / 2.0f;
-float lastY = SCR_HEIGHT / 2.0f;
-bool firstMouse = true;
-
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
@@ -48,6 +41,7 @@ int main(int argc, char *argv[])
 	Modes MODE = (argc > 1)? selectmode(argv[1]) : revolution;
 
     createWindow(window);
+
     // glad: load all OpenGL function pointers
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
@@ -58,14 +52,15 @@ int main(int argc, char *argv[])
     // Configure global opengl state
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_PROGRAM_POINT_SIZE);
-	setOptions(MODE);
+
+	// Configure object to be drawn
 	obj = setupModel(MODE);
 	obj->setOptions(window);
 	camera = &obj->camera;
+
     // render loop
     while (!glfwWindowShouldClose(window))
     {
-
         float currentFrame = (float) glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		obj->setDeltaTime(deltaTime);
@@ -73,11 +68,8 @@ int main(int argc, char *argv[])
 		
         obj->processInput(window);
 
-        glClearColor(0.0f, 0.3f, 0.3f, 1.0f);
+        glClearColor(0.0f, 0.3f, 0.3f, 1.0f); //background
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		//wireframe mode
-		// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 		obj->draw();
 
@@ -95,33 +87,6 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     glViewport(0, 0, width, height);
 }
 
-// glfw: whenever the mouse moves, this callback is called
-// -------------------------------------------------------
-void mouse_callback(GLFWwindow* window, double xpos, double ypos)
-{
-    if (firstMouse)
-    {
-        lastX = xpos;
-        lastY = ypos;
-        firstMouse = false;
-    }
-
-    float xoffset = xpos - lastX;
-    float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
-
-    lastX = xpos;
-    lastY = ypos;
-
-    camera->ProcessMouseMovement(xoffset, yoffset);
-}
-
-// glfw: whenever the mouse scroll wheel scrolls, this callback is called
-// ----------------------------------------------------------------------
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-{
-    camera->ProcessMouseScroll(yoffset);
-}
-
 int createWindow(GLFWwindow* & window)
 {
 	if (glfwInit() == GLFW_FALSE)
@@ -135,7 +100,7 @@ int createWindow(GLFWwindow* & window)
 
     // glfw window creation
     // --------------------
-    window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
+    window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Trabajo de Fin de Grado", NULL, NULL);
     if (window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -148,10 +113,6 @@ int createWindow(GLFWwindow* & window)
     // tell GLFW to capture our mouse
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     return 0;
-}
-
-void setOptions(const Modes & mode){
-	glfwSetScrollCallback(window, scroll_callback);
 }
 
 Object* setupModel(const Modes & mode){

@@ -11,7 +11,7 @@ Lic :: Lic() :
 		uLength(20)
 	{
 		this->noisetexture = ImageFromFile("/home/david/Projects/TFG/Project/resources/objects/lic/whitenoise.png", false);
-		this->vectortexture = ImageFromFile("/home/david/Projects/TFG/Project/resources/objects/lic/flow2.png", false);
+		this->vectortexture = ImageFromFile("/home/david/Projects/TFG/Project/resources/objects/lic/vectortexture.jpg", false);
 	}
 
 void Lic :: draw(){

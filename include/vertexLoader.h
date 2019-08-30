@@ -17,15 +17,16 @@ using namespace std;
 class VertexLoader
 {
 public:
-	bool gammaCorrection;
 
-	VertexLoader(string const &path, string const &indexpath="", bool gamma=false) : gammaCorrection(gamma)
+	// Constructor
+	VertexLoader(string const &path, string const &indexpath="")
 	{
 		loadVertices(path);
 		loadIndices(indexpath);
 		setupVertices();
 	}		
 
+	// Draw the loaded vertices with the specified shader and primitive
 	void Draw(Shader shader, GLenum primitive)
 	{
 		glBindVertexArray(VAO);
@@ -59,11 +60,13 @@ public:
 		setupVertices();
 	}
 
+	// Change active vertex position
 	void setActiveVertexPosition(glm::vec3 p0){
 		vertices[activeVertex].Position = p0;
 		setupVertices();
 	}
 
+	// Sets the active vertex to the specified vertex v
 	void setActiveVertex(int v){
 		vertices[activeVertex].Color = glm::vec3(1.0f, 1.0f, 1.0f);
 		activeVertex = v;
@@ -71,30 +74,38 @@ public:
 		setupVertices();
 	}
 
+	// Move active vertex in +x or -x direction
 	void moveVertexX(int dir){
 		vertices[activeVertex].Position.x += (dir == 0)? 0.1 : -0.1;
 		setupVertices();
 	}
 
+	// Move active vertex in +y or -y direction
 	void moveVertexY(int dir){
 		vertices[activeVertex].Position.y += (dir == 0)? 0.1 : -0.1;
 		setupVertices();
 	}
 
+	// Move active vertex in +z or -z direction
 	void moveVertexZ(int dir){
 		vertices[activeVertex].Position.z += (dir == 0)? 0.1 : -0.1;
 		setupVertices();
 	}
 
 private:
+	
 	int numVertices, numIndices;
 	int activeVertex = 0;
+
+	// Whether to use an EBO or not
 	bool drawfromindices = false;
+
 	vector<MyVertex> vertices;
 	vector<glm::uvec3> indices;
+
 	unsigned int VAO, VBO, EBO;
 
-	// This function loads vertices
+	// This function loads vertices from the specified path
 	void loadVertices(const string &path){
 		ifstream in(path);
 		auto cinbuf = std::cin.rdbuf(in.rdbuf()); //save old buf and redirect std::cin to casos.txt
@@ -133,6 +144,7 @@ private:
 		}
 	}
 
+	// Sets the loaded data in the VAO, VBO and EBO
 	void setupVertices()
 	{
 		// VAO data
