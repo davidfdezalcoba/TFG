@@ -86,7 +86,7 @@ preparación para las siguientes etapas del pipeline.
 \label{ref:TesShaders}
 
 La Teselación es la etapa, opcional, del pipeline de renderizado que consiste en
-subdividir un parche de algún tipo y computar los valores de los nuevos vértices
+subdividir un patch de algún tipo y computar los valores de los nuevos vértices
 creados en el proceso. Está compuesta, a su vez, por otras tres etapas, dos de
 ellas programables en forma de shader, y una intermedia fija. Cada una de estas
 etapas se encarga de una parte del proceso de teselación.
@@ -101,17 +101,22 @@ importante para entender el proceso y las entradas y salidas a los shaders.
 El Tessellation Control Shader (TCS)~\cite{TesConShader} es la primera etapa del
 proceso de teselación, en el caso de ser utilizado. Se sitúa inmediatamente
 posterior al Vertex Shader e inmediatamente anterior al generador de primitivas
-de teselación. Controla cuánta teselación provocar en un parche determinado, así
-como el tamaño del parche de salida, permitiendo aumentar la cantidad de datos.
+de teselación. Controla cuánta teselación provocar en un patch determinado, así
+como el tamaño del patch de salida, permitiendo aumentar la cantidad de datos.
 Su función principal es la de comunicar al generador de primitivas de teselación
-el nivel de teselación deseado, así como proveerle los datos del parche al
+el nivel de teselación deseado, así como proveerle los datos del patch al
 Tessellation Evaluation Shader mediante sus variables de salida.
 
 Como entrada, el TCS obtiene la salida del Vertex Shader organizada en un vector
-de tantos vértices como tenga el parche de entrada. Por cada vértice en el
-parche de salida se realiza una invocación al TCS, y cada invocación al TCS
-produce un único vértice como salida al parche de salida. Esto resulta en tantas
-invocaciones como vértices hay en dicho parche.
+de tantos vértices como tenga el patch de entrada, así como determinadas
+variables de entrada integradas (Ver~\ref{ApendiceA}). Las salidas de este
+shader pueden ser vértice a vértice en un array de tamaño el número de vértices
+en el patch de salida o salidas de patch, declaradas con la palabra reservada
+\verb|patch|, además de las salidas integradas.
+
+Por cada vértice en el patch de salida se realiza una invocación al TCS, y cada
+invocación al TCS produce un único vértice como salida al patch de salida. Esto
+resulta en tantas invocaciones como vértices hay en dicho patch.
 
 En el caso de no utilizar un TCS, se pueden pasar valores por defecto a las
 siguientes etapas de teselación.
@@ -146,17 +151,18 @@ siguientes etapas de teselación.
 El generador de primitivas de teselación~\cite{TesPriGen} es la etapa que se
 encuentra entre los dos shaders de teselación, el TCS y el Tessellation
 Evaluation Shader. Esta etapa, fija en el pipeline, es la encargada de crear
-nuevas primitivas a partir del parche de entrada. La función principal de este
+nuevas primitivas a partir del patch de entrada. La función principal de este
 sistema es la de determinar cuántos vértices crear, en qué orden hacerlo y qué
 clase de primitivas construir con ellos. Los datos reales de estos vértices,
 como color, posición, etc., han de ser generados por el TES. Debido a esto, el
-generador no tiene en cuenta el parche de salida producido por el TCS, sino que
-solo opera en términos de teselar un cuadrado o triángulo abstracto, o un bloque
-de isolíneas.
+generador no tiene en cuenta el patch de salida producido por el TCS, sino que
+solo opera en términos de lo que se llama un abstract patch. En lugar de mirar
+la salida de patch del TCS, solo piensa en teselar un cuadrado o triángulo
+abstracto, o un bloque de isolíneas.
 
-Esta etapa, está supeditada al Tessellation Evaluation Shader, puesto que solo
+Esta etapa está supeditada al Tessellation Evaluation Shader, puesto que solo
 se ejecutará en el caso de que exista uno activo. La generación de primitivas en
-esta etapa se ve afectada por distintos factores:
+esta etapa se ve afectada por los siguientes factores:
 
 \begin{itemize}
 		\item Niveles de teselación marcados por el TCS (O por defecto si no hay
@@ -170,19 +176,19 @@ La cantidad de teselación a realizar se define en niveles de teselación intern
 y externos (Ver Figura~\ref{fig:tesselationlevels}). Funcionan de la siguiente
 manera: un nivel de teselación 4 indica que un borde se convertirá en 4 bordes
 (2 vértices se convertirán en 5). El nivel externo define el grado de teselación
-para los bordes externos de la primitiva. Esto permite que dos parches distintos
+para los bordes externos de la primitiva. Esto permite que dos patches distintos
 se conecten apropiadamente, a pesar de tener distintos niveles de teselación
-dentro del parche. El nivel interno hace referencia el número de teselaciones a
-realizar dentro del parche abstracto. 
+dentro del patch. El nivel interno hace referencia el número de teselaciones a
+realizar dentro del patch abstracto. 
 
-Cabe destacar que no todos los parches abstractos utilizan los mismos niveles de
+Cabe destacar que no todos los patches abstractos utilizan los mismos niveles de
 teselación. Por ejemplo, los triángulos utilizan un único nivel interno y tres
 niveles externos. El resto de posibles niveles son ignorados. 
 
 El espaciado entre vértices puede realizarse de las siguientes maneras:
 espaciado equidistante, espaciado fraccional par o espaciado fraccional impar.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\begin{subfigure}{.45\textwidth}
 			\includegraphics[width=\textwidth]{figures/equal1.png}	
@@ -286,10 +292,17 @@ shader. Su función es la de coger los resultados obtenidos en la etapa anterior
 y computar las posiciones interpoladas y otros datos vértice a vértice a partir
 de ellos.
 
-El TES obtiene del generador de primitivas de teselación un parche abstracto,
-así como datos de los vértices para todo el parche, junto con otros datos,
-provenientes del TCS. Cada invocación a este shader produce un vértice
-particular y es invocado una vez por cada vértice en el parche abstracto.
+Como entrada, el TES obtiene del generador de primitivas de teselación un patch
+abstracto, así como datos de los vértices y del patch, provenientes del TCS. Los
+datos de vértices se obtienen del TCS como un array indexado por el índice del
+vértice y tiene tantos elementos como vértices hay en el patch de entrada. Los
+datos de patch se pueden obtener del TCS, de nuevo, mediante la palabra
+reservada \verb|patch|. Además posee variables de entrada integradas en GLSL.
+(Ver~\ref{ApendiceA}).
+
+Como salida se produce, por cada invocación a este shader, un vértice
+particular. Junto con este vértice se tienen tanto variables de salida definidas
+por el usuario como variables integradas en GLSL.
 
 Esta es la etapa donde el programador implementa el algoritmo que se usa para
 computar las nuevas posiciones, normales, coordenadas de texturas, etc. Como se
@@ -373,7 +386,7 @@ GPU.
 Entre las primitivas de entrada aceptadas por el geometry shader se encuentran
 las siguientes:
 
-\begin{table}[h]
+\begin{table}[ht]
 		%\centering
 		\begin{tabular}{|m{4cm}|m{7cm}|m{2.2cm}|m{1.5cm}|}
 

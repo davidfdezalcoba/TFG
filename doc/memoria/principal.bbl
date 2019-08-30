@@ -1,4 +1,4 @@
-\begin{thebibliography}{58}
+\begin{thebibliography}{60}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -7,9 +7,9 @@
 
 \bibitem[Defanti and Brown(1991)]{DEFANTI1991247}
 Thomas~A. Defanti and Maxine~D. Brown.
-\newblock Visualization in scientific computing.
-\newblock volume~33 of \emph{Advances in Computers}, pages 247 -- 307.
-  Elsevier, 1991.
+\newblock \emph{Visualization in Scientific Computing}, volume~33 of
+  \emph{Advances in Computers}.
+\newblock Elsevier, 1991.
 \newblock \doi{https://doi.org/10.1016/S0065-2458(08)60168-0}.
 \newblock URL
   \url{http://www.sciencedirect.com/science/article/pii/S0065245808601680}.
@@ -304,6 +304,19 @@ Wolfram~Alpha LLC.
 \newblock \url{https://www.wolframalpha.com/}.
 \newblock Accessed: 20/08/2019.
 
+\bibitem[Meiri()]{projectionmatrix}
+Etay Meiri.
+\newblock {Perspective Projection}.
+\newblock \url{http://ogldev.atspace.co.uk/www/tutorial12/tutorial12.html}.
+\newblock Accessed: 30/08/2019.
+
+\bibitem[Hock-Chuan()]{projectionimage}
+Chua Hock-Chuan.
+\newblock {3D Graphics with OpenGL}.
+\newblock
+  \url{https://www.ntu.edu.sg/home/ehchua/programming/opengl/CG_BasicsTheory.html}.
+\newblock Accessed: 30/08/2019.
+
 \bibitem[Dainis()]{rotationimage}
 Dainis.
 \newblock {Vector Rotation}.
@@ -342,8 +355,10 @@ Brian Dunbar.
 \newblock \url{https://www.nasa.gov/}.
 \newblock Accessed: 16/08/2019.
 
-\bibitem[Gokaslan(2019)]{negativeimage}
-Cigdem~Ozer Gokaslan.
+\bibitem[Gokaslan et~al.(2019)Gokaslan, Toprak, Demirel, Erdim, Yardimci, and
+  Turan]{negativeimage}
+Cigdem~Ozer Gokaslan, Ugur Toprak, Emin Demirel, Cagri Erdim, Aytul~Hande
+  Yardimci, and Ceyda~Bektas Turan.
 \newblock Schwannomas of uncommon peripheral locations: Analysis of imaging
   findings of 21 cases.
 \newblock \emph{Current Medical Imaging}, 15\penalty0 (6):\penalty0 578--584,

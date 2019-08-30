@@ -141,10 +141,10 @@ desarrollo de la aplicación y los shaders concretos.
 
 Con el fin de desarrollar el sistema de cámaras que utiliza la aplicación es
 necesario conocer varios conceptos importantes sobre álgebra, geometría lineal y
-transformaciones matriciales, así como los ángulos de Euler y su relación con
-los cuaterniones. También se explorarán distintos métodos numéricos, relevantes
-en el método de Line Integral Convolution, así como fórmulas matemáticas
-específicas de cada tipo de visualización.
+y proyectiva y transformaciones matriciales, así como los ángulos de Euler y su
+relación con los cuaterniones. También se explorarán distintos métodos
+numéricos, relevantes en el método de Line Integral Convolution, así como
+fórmulas matemáticas específicas de cada tipo de visualización.
 
 \subsection{Transformaciones matriciales}
 \label{makereference5.4.1}
@@ -157,19 +157,58 @@ puesto que éstas permiten presentar transformaciones arbitrarias en un
 formato consistente y apto para la computación. Así, se pueden concatenar
 diferentes transformaciones de manera sencilla multiplicando sus matrices. 
 
-Entre estas transformaciones podemos encontrar lineales y no lineales. Así, para
+Entre estas transformaciones podemos encontrar lineales y no lineales. Sin
+embargo, las transformaciones no lineales y proyectivas no se pueden representar
+con una matriz de dimensión la dimensión del espacio Euclídeo. Así, para
 representar matricialmente transformaciones no lineales en un espacio Euclídeo
-$n$-dimensional $\mathbb{R}^n$ se puede utilizar una transformación lineal en el
-espacio $(n+1)$-dimensional $\mathbb{R}^{n+1}$. Este tipo de transformaciones
-incluye tanto las transformaciones afines como transformaciones proyectivas.
-
-Esta es la razón por la que las matrices $4 \times 4$ son tan ampliamente
-utilizadas en la informática gráfica y, en consecuencia, en nuestra
+$n$-dimensional $\mathbb{R}^n$ se ha de utilizar una transformación lineal en el
+espacio $(n+1)$-dimensional $\mathbb{R}^{n+1}$. Esta es la razón por la que
+utilizaremos geometría proyectiva y \textit{coordenadas homogéneas} en la
 aplicación.
 
-En esta sección se presentan las transformaciones lineales y afines más
-habituales y necesarias para nuestra aplicación, así como sus formas
-matriciales. 
+En esta sección se presentan las coordenadas homogéneas y transformaciones
+lineales y afines más habituales y necesarias para nuestra aplicación, así como
+sus formas matriciales. 
+
+\subsubsection{Coordenadas Homogéneas}
+\label{ref:HomogeneousCoordinates}
+
+Las coordenadas homogéneas son un sistema de coordenadas utilizado en geometría
+proyectiva, del mismo modo que las coordenadas cartesianas se utilizan en la
+geometría Euclídea. Tienen la ventaja de que las coordenadas de todos los puntos
+del espacio, incluidos los puntos en el infinito, se pueden representar mediante
+coordenadas finitas.
+
+Debido a que este sistema permite la representación de puntos en el infinito, el
+número de coordenadas necesarias para permitirlo ha de ser uno más que la
+dimensión del espacio proyectivo considerado. Este sistema, además, permite la
+representación de transformaciones afines y proyectivas de forma matricial,
+proporcionando un método rápido y eficiente de calcular proyecciones
+consecutivas. Como en nuestra aplicación estamos interesados principalmente en
+el espacio tridimensional, las matrices que utilizaremos serán $4 \times 4$. Y
+los puntos se representarán con $4$ coordenadas. Cabe destacar algunas de las
+propiedades de las coordenadas homogéneas antes de continuar con las
+transformaciones que vamos a utilizar.
+
+\begin{itemize}
+
+		\item Un punto en el espacio tridimensional está representado por $4$
+				coordenadas homogéneas $(x,y,z,w)$, donde $x,y,z$ y $w$ no son
+				todas $0$.
+
+		\item Dos conjuntos de coordenadas homogéneas $p$ y $q$ que cumplen la
+				relación $p = a \dot q, a \in \mathbb{R}$, es decir, que sólo se
+				diferencian en la multiplicación por un escalar, representan el
+				mismo punto en el espacio.
+
+		\item Si $w \neq 0$, entonces el punto representado es el punto
+				$(\frac{x}{w},\frac{y}{w},\frac{z}{w})$ del espacio Euclídeo
+				tridimensional.
+
+		\item Si $w = 0$, entonces el punto representado en un punto del
+				infinito.
+
+\end{itemize}
 
 \subsubsection{Traslación}
 \label{makereference5.4.1.1}
@@ -258,17 +297,18 @@ la operación a realizar sería la siguiente:
 	\end{array} \right)
 \end{equation}\\
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\includegraphics{figures/scaling.png}
 	\caption[Escalar un vector.]{Escalar un vector. Fuente:~\cite{wolfram}}
 	\label{fig:scaling}
 \end{figure}
 
-Esta operación de escalado se puede escribir matricialmente como sigue.
-Supongamos que tenemos un vector $\overrightarrow{v}=(x,y,z)$ y lo queremos
-escalar por un factor $fac=(F_1,F_2,F_3)$. Entonces podemos escribir la
-operación anterior con la matriz $FAC$ como sigue:
+Esta operación de escalado se puede escribir matricialmente en coordenadas
+homogéneas como sigue.  Supongamos que tenemos un vector
+$\overrightarrow{v}=(x,y,z)$ y lo queremos escalar por un factor
+$fac=(F_1,F_2,F_3)$. Entonces podemos escribir la operación anterior con la
+matriz $FAC$ como sigue:
 
 \begin{equation}
 	\label{eq:matrixscaling}
@@ -293,10 +333,6 @@ operación anterior con la matriz $FAC$ como sigue:
 	\end{array} \right)
 \end{equation}\\
 
-Nótese que también en este caso al vector $\overrightarrow{v}$ se le ha añadido
-una cuarta coordenada $w$ con el fin de ser consistentes con aquellas
-transformaciones no lineales que necesitan de un espacio de dimensión mayor. 
-
 \subsubsection{Rotación}
 \label{makereference5.4.1.3}
 
@@ -304,6 +340,54 @@ Al contrario de los casos de la rotación y traslación de vectores expuestas
 anteriormente, el caso de la rotación requiere un estudio más profundo en el
 caso tridimensional para la matemática aplicada. Por esto, se dedica una sección
 exclusiva para este tema. (Ver sección~\ref{makereference5.4.2}).
+
+\subsubsection{Perspectiva}
+\label{ref:ProjectionMatrix}
+
+Además de las transformaciones anteriores, se hace necesario realizar una
+última, muy importante en el caso de la visualización. Se trata de la
+perspectiva. Con esta transformación se conseguirá que los objetos más lejanos
+aparezcan más pequeños mientras que los más cercanos aparecerán más grandes.
+
+En la creación de esta matriz aparecen diferentes parámetros a tener en cuenta,
+que son los siguientes:
+
+\begin{itemize}
+		\item $aspect$ - El ratio entre la anchura y altura del rectángulo en el que se
+				realizará esta proyección
+		\item $fov$ - El campo de visión vertical. Es el ángulo vertical de la cámara
+				mediante la que estamos viendo la escena
+		\item $near$ - La localización del plano Z cercano. Se utiliza para realizar
+				clipping sobre los objetos que quedan demasiado cerca de la
+				cámara
+		\item $far$ - La localización del plano Z lejano. Se utiliza para realizar
+				clipping sobre los objetos que quedan demasiado lejos de la
+				cámara
+\end{itemize}
+
+La matriz correspondiente a esta transformación es la siguiente:
+
+\begin{equation}
+	\left( 
+		\begin{array}{cccc}
+				\frac{1}{aspect*\tan{\frac{fov}{2}}} & 0 & 0 & 0 \\
+				0 & \frac{1}{\tan{\frac{fov}{2}}} & 0 & 0 \\
+				0 & 0 & -\frac{far+near}{far-near} & - \frac{2far \cdot near}{far
+				- near} \\
+				0 & 0 & -1 & 0 \\
+		\end{array}	
+	\right)
+\end{equation}
+
+La derivación de esta matriz puede verse en~\citet{projectionmatrix}.
+
+\begin{figure}[ht]
+	\centering	
+	\includegraphics[height=8cm]{figures/projectionimage.png}
+	\caption[Proyección perspectiva - Parámetros y significado.]{Proyección
+	perspectiva - Parámetros y significado. Fuente:~\cite{projectionimage}}
+	\label{fig:projectionimage}
+\end{figure}
 
 \subsection{Rotación: Ángulos de Euler y Cuaterniones}
 \label{makereference5.4.2}
@@ -326,7 +410,7 @@ mediante una matriz, dando lugar a la representación matricial de la rotación.
 
 \begin{figure}
 	\centering		
-	\includegraphics[height=10cm]{figures/rotation.png}
+	\includegraphics[height=9.5cm]{figures/rotation.png}
 	\caption[Rotación de un vector 3D.]{Rotación de un vector 3D.
 	Fuente:~\cite{rotationimage}}
 	\label{fig:rotacion}
@@ -354,7 +438,8 @@ composición, dando lugar a otra nueva rotación. Lo mismo pasa con la
 representación matricial, multiplicando dos matrices de rotación. Para nuestra
 aplicación, es conveniente realizar las rotaciones como composición de
 rotaciones en torno a los ejes de referencia. Para ello definimos las matrices
-de rotación. 
+de rotación, de nuevo utilizando coordenadas homogéneas acorde a lo explicado
+anteriormente. 
 
 \begin{equation}
 	R_x(\theta) =
@@ -407,9 +492,8 @@ cualquiera en el espacio tridimensional viene dada por:
 		R = Roll(\phi)Pitch(\theta)Yaw(\varphi) = R_x(\phi)R_y(\theta)R_z(\varphi)	
 \end{equation}
 
-Ahora bien, aunque este sistema es el que utilizaremos en nuestra aplicación,
-tanto mediante GLM como implementándolo nosotros, existen diversos problemas
-derivados de él. El más importante es el llamado Bloqueo del
+Ahora bien, existen diversos problemas derivados de la utilización de este
+sistema. El más importante es el llamado Bloqueo del
 Cardán~\cite{Vince:2011:QCG:2016678}. Aunque los formalismos matemáticos son más
 complejos, intuitivamente este bloqueo ocurre debido a que la descripción de
 cualquier rotación tridimensional mediante ángulos de Euler no es única y
@@ -799,7 +883,7 @@ cálculos realizados y explorando las entradas y salidas de cada uno de ellos.
 \subsection{Coloreado de terrenos}
 \label{makereference5.5.1}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\includegraphics[width=\textwidth]{figures/myterrain.png}
 	\caption[Coloreado de Valles Marineris.]{Coloreado de Valles Marineris.
@@ -1065,13 +1149,6 @@ Figura~\ref{fig:mybeziersurface}.
 \subsection{Sólidos de revolución}
 \label{makereference5.5.4}
 
-\begin{figure}
-	\centering		
-	\includegraphics[width=\textwidth]{figures/myrevolution.png}
-	\caption{Sólido de revolución}
-	\label{fig:myrevolution}
-\end{figure}
-
 En este caso, de nuevo, tanto el vertex shader como el fragment shader son los
 más simples posible, como en los casos anteriores. Todo el trabajo recae en el
 geometry shader. Así, dados los vértices que forman una curva, se van generando
@@ -1104,10 +1181,17 @@ siguiente:
     }
 \end{verbatim}
 
+\begin{figure}[ht]
+	\centering		
+	\includegraphics[width=\textwidth]{figures/myrevolution.png}
+	\caption{Sólido de revolución}
+	\label{fig:myrevolution}
+\end{figure}
+
 \subsection{Nube de puntos}
 \label{makereference5.5.5}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering	
 	\includegraphics[width=\textwidth]{figures/mycloud.png}
 	\caption{Nube de puntos}
@@ -1125,18 +1209,10 @@ necesarias, utilizamos la siguiente instrucción
 \begin{verbatim}
     gl_PointSize = 2 + pow((smoothstep(0.0, uMaxData, aScalar) + 1), 2);
 \end{verbatim}
-
 para definir el tamaño del punto acorde al escalar. Así, los puntos que se
 correspondan con escalares más altos tendrán un tamaño mayor. El valor escalar
 \verb|aScalar| es pasado también al fragment shader para realizar una coloración
 del punto acorde a este valor. 
-
-\begin{figure}[hb]
-	\centering	
-	\includegraphics[width=\textwidth]{figures/mycloud2.png}
-	\caption{Nube de puntos con valores descartados}
-	\label{fig:mycloud2}
-\end{figure}
 
 Además, en el fragment shader se ha declarado la variable \verb|uniform uMax|
 que se utiliza para descartar los puntos que tengan valores escalares menores
@@ -1158,10 +1234,17 @@ El código para este shader se incluye a continuación.
     }
 \end{verbatim}
 
+\begin{figure}[ht]
+	\centering	
+	\includegraphics[width=\textwidth]{figures/mycloud2.png}
+	\caption{Nube de puntos con valores descartados}
+	\label{fig:mycloud2}
+\end{figure}
+
 \subsection{Negativo de una imagen}
 \label{makereference5.5.6}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering	
 	\begin{subfigure}{0.45\textwidth}
 		\includegraphics[height=8cm,width=\textwidth]{figures/mynegative00.jpg}
@@ -1193,7 +1276,6 @@ con la instrucción
 \begin{verbatim}
     vec3 irgb = texture( texture1, vTexCoords ).rgb;
 \end{verbatim}
-
 para posteriormente computar el color negativo y escribirlo como salida para el
 pixel. Esta tarea se realiza con las siguientes instrucciones:
 
@@ -1204,16 +1286,6 @@ pixel. Esta tarea se realiza con las siguientes instrucciones:
 
 Una muestra del funcionamiento de este shader se puede encontrar en la
 Figura~\ref{fig:mynegative}.
-
-% \subsection{Detección de bordes}
-% \label{makereference5.5.7}
-% 
-% \begin{figure}
-% 	\centering	
-% 	\includegraphics[width=\textwidth]{figures/myborder.png}
-% 	\caption{Detección de bordes}
-% 	\label{fig:myborder}
-% \end{figure}
 
 \subsection{Line Integral Convolution}
 \label{makereference5.5.8}
@@ -1373,6 +1445,11 @@ Opciones:
 		\item \verb|\textvisiblespace| - Seleccionar siguiente vértice.
 		\item \verb|\uparrow| - Aumentar número de segmentos.
 		\item \verb|\downarrow| - Disminuir número de segmentos.
+		\item \verb|m| - Cambiar modo cámara/selección.
+		\item \verb|Ratón izquierdo| - Seleccionar vértice. (Solo modo
+				selección).
+		\item \verb|Ratón derecho| - Mover vértice seleccionado. (Solo modo
+				selección).
 		\item \verb|x| - Mover el vértice seleccionado en la dirección $+x$.
 		\item \verb|y| - Mover el vértice seleccionado en la dirección $+y$.
 		\item \verb|z| - Mover el vértice seleccionado en la dirección $+z$.
@@ -1395,6 +1472,11 @@ Opciones:
 		\item \verb|\downarrow| - Disminuir grado de teselación.
 		\item \verb|t| - Activar el modo wireframe
 		\item \verb|u| - Desactivar el modo wireframe
+		\item \verb|m| - Cambiar modo cámara/selección.
+		\item \verb|Ratón izquierdo| - Seleccionar vértice. (Solo modo
+				selección).
+		\item \verb|Ratón derecho| - Mover vértice seleccionado. (Solo modo
+				selección).
 		\item \verb|x| - Mover el vértice seleccionado en la dirección $+x$.
 		\item \verb|y| - Mover el vértice seleccionado en la dirección $+y$.
 		\item \verb|z| - Mover el vértice seleccionado en la dirección $+z$.

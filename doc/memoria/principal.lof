@@ -25,18 +25,19 @@
 \contentsline {figure}{\numberline {4.7}{\ignorespaces Computar los pesos.}}{35}{figure.caption.29}
 \contentsline {figure}{\numberline {4.8}{\ignorespaces Computar valores de salida del pixel.}}{36}{figure.caption.30}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Traslaci\IeC {\'o}n de un vector.}}{42}{figure.caption.32}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Escalar un vector.}}{43}{figure.caption.34}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Rotaci\IeC {\'o}n de un vector 3D.}}{44}{figure.caption.36}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces \IeC {\'A}ngulos de Euler.}}{46}{figure.caption.38}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Coloreado de Valles Marineris.}}{54}{figure.caption.43}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces B\IeC {\'e}zier Curve\relax }}{58}{figure.caption.44}
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Superficie de B\IeC {\'e}zier\relax }}{59}{figure.caption.45}
-\contentsline {figure}{\numberline {5.8}{\ignorespaces S\IeC {\'o}lido de revoluci\IeC {\'o}n\relax }}{61}{figure.caption.46}
-\contentsline {figure}{\numberline {5.9}{\ignorespaces Nube de puntos\relax }}{62}{figure.caption.47}
-\contentsline {figure}{\numberline {5.10}{\ignorespaces Nube de puntos con valores descartados\relax }}{63}{figure.caption.48}
-\contentsline {figure}{\numberline {5.11}{\ignorespaces Negativo de una imagen.}}{64}{figure.caption.49}
-\contentsline {figure}{\numberline {5.12}{\ignorespaces LIC - Informaci\IeC {\'o}n del campo vectorial codificado en una textura.}}{65}{figure.caption.50}
-\contentsline {figure}{\numberline {5.13}{\ignorespaces Line Integral Convolution.\relax }}{66}{figure.caption.51}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Traslaci\IeC {\'o}n de un vector.}}{42}{figure.caption.33}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Escalar un vector.}}{44}{figure.caption.35}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Proyecci\IeC {\'o}n perspectiva - Par\IeC {\'a}metros y significado.}}{45}{figure.caption.38}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Rotaci\IeC {\'o}n de un vector 3D.}}{46}{figure.caption.39}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces \IeC {\'A}ngulos de Euler.}}{48}{figure.caption.41}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Coloreado de Valles Marineris.}}{56}{figure.caption.46}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces B\IeC {\'e}zier Curve\relax }}{59}{figure.caption.47}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Superficie de B\IeC {\'e}zier\relax }}{61}{figure.caption.48}
+\contentsline {figure}{\numberline {5.9}{\ignorespaces S\IeC {\'o}lido de revoluci\IeC {\'o}n\relax }}{63}{figure.caption.49}
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Nube de puntos\relax }}{64}{figure.caption.50}
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Nube de puntos con valores descartados\relax }}{65}{figure.caption.51}
+\contentsline {figure}{\numberline {5.12}{\ignorespaces Negativo de una imagen.}}{66}{figure.caption.52}
+\contentsline {figure}{\numberline {5.13}{\ignorespaces LIC - Informaci\IeC {\'o}n del campo vectorial codificado en una textura.}}{67}{figure.caption.53}
+\contentsline {figure}{\numberline {5.14}{\ignorespaces Line Integral Convolution.\relax }}{68}{figure.caption.54}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

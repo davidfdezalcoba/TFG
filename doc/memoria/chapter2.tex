@@ -280,10 +280,11 @@ actualizar su localización de pixel asociada.
 \label{ref:procesamientofrags}
 
 En la última etapa, el procesado de fragmentos se realiza a su vez en dos pasos,
-uno de ellos programable con el shader de fragmentos y otras operaciones sobre
-fragmentos realizadas automáticamente por OpenGL.  Durante este último
-procesamiento, la visibilidad de cada fragmento es determinada utilizando
-diferentes tests (profundidad, color, plantilla, ruido\ldots). 
+uno de ellos programable con el shader de fragmentos y otro que consta de
+distintas operaciones sobre fragmentos realizadas automáticamente por OpenGL.
+Durante este último procesamiento, la visibilidad de cada fragmento es
+determinada utilizando diferentes tests (profundidad, color, plantilla,
+ruido\ldots). 
 
 Cuando un fragmento pasa por todas estas etapas y todos los test activos, puede
 ser escrito directamente en el framebuffer, actualizando su color y valor de

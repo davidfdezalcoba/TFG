@@ -18,7 +18,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[spanish,es-tabla]{babel}
 
-\usepackage{caption}
+%\usepackage{caption}
 \usepackage{subcaption}
 \usepackage{array}
 %\usepackage{     caption2} % Customize captions a bit more
@@ -52,7 +52,6 @@
 \hypersetup{
     linktocpage=true,
     colorlinks=true,
-    bookmarks=true,
     citecolor=blue,
     urlcolor=red,
     linkcolor=Maroon,
@@ -60,17 +59,12 @@
     urlbordercolor={1 0 0},
     linkbordercolor={.7 .8 .8},
     breaklinks=true,
-    pdfpagelabels=true,
 }
-
-% Margins
 
 \topmargin      = -0.56in
 \textheight     =  8.60in
 \textwidth      =  6.46in
 \oddsidemargin  =  0.02in
-
-% Beginning of document
 
 \begin{document}
 
@@ -90,33 +84,11 @@
 
  \vfill
 
-% +--------------------------------------------------------------------+
-% | We use the following code to suppress page numbers and other
-% | style issues we do not want present on a given page.               |
-% +--------------------------------------------------------------------+
-
 %\thispagestyle{empty} Looks like it's ok to remove this line
 \newpage
 \pagenumbering{roman}
 
-% +--------------------------------------------------------------------+
-% | On the line below, set the number to represent the page number of
-% | the Table of Contents page.  For example, if the Table of Contents
-% | page is the 8th page of your document, enter 8 in the brackets.  This
-% | number may vary, depending on the length of your abstract.
-% |
-% | Numbers do not appear on the title and abstract pages, but they are
-% | included in the page count.  The Table of Contents page is the
-% | first page on which page numbers are displayed.
-% +--------------------------------------------------------------------+
-
 \setcounter{page}{5}
-
-% +--------------------------------------------------------------------+
-% | Here, we will generate our Table of Contents (TOC) entries.        |
-% | This adds the section to the TOC and then generates the indicated  |
-% | section.                                                           |
-% +--------------------------------------------------------------------+
 
 \phantomsection
 \addcontentsline{toc}{chapter}{Índice}
@@ -128,26 +100,9 @@
 \hfill  %Are these lines necessary?
 \hfill
 
-% +--------------------------------------------------------------------+
-% | We use arabic (1, 2, 3...) page numbering starting from page 1.    |
-% | Note, however, that there are many pages where this is not the     |
-% | desired behavior - such as the Title page, or abstract.  In these  |
-% | cases, we can use \thispagestyle{empty} to suppress page numbers,  |
-% | and other general style issues that we've defined globally.        |
-% +--------------------------------------------------------------------+
-
 \newpage
 \pagenumbering{arabic}
 \setcounter{page}{1}
-
-% +--------------------------------------------------------------------+
-% | Here is where we include individual sections of the thesis or
-% | dissertation.                                                      |
-% +--------------------------------------------------------------------+
-
-% +--------------------------------------------------------------------+
-% | Chapters
-% +--------------------------------------------------------------------+
 
 \input{chapter1.tex}
 \input{chapter2.tex}
@@ -156,48 +111,11 @@
 \input{chapter5.tex}
 \input{chapter6.tex}
 
-% +-------------------------------------------------------------------------+
-% | References                                                              |
-% +-------------------------------------------------------------------------+
-
-% +-------------------------------------------------------------------------+
-% | In order for WinEDT to index references correctly, it has to know where |
-% | the file resides.  The following command is prefaced by %, and will be  |
-% | ignored completely by LaTeX.  However, WinEDT will use this line to     |
-% | access the external .bib bibliography file.  Also note that WinEDT can  |
-% | read file path names with either "\" or "/" - LaTeX, however, doesn't   |
-% | like "\", so it's easier to store a path name in the "Unix" style.      |
-% +-------------------------------------------------------------------------+
-
-%Included for Gather Purpose only.  Do NOT uncomment:
-%input "references.bib"
-
-% +--------------------------------------------------------------------+
-% | This template uses the BibTeX program to format references.  The
-% | 3 lines below create a separate Bibliography section and add
-% | an entry for "Bibliography" to the Table of Contents.  The actual
-% | data for your references (author, title, journal, date, etc.) are
-% | entered in the references.bib file.  See that file for information
-% | on how to enter references.
-% +--------------------------------------------------------------------+
-
 \bibdata{references}
 \bibliography{references}
 \addcontentsline{toc}{chapter}{Bibliography}
 
-% +--------------------------------------------------------------------+
-% | Finally, we generate the appendix.  To add or delete appendices,
-% | add or remove the line
-% |
-% |     \input{appendixX.tex}
-% |
-% | where "X" is the letter designation of the Appendix (A, B, C, etc.)
-% | You should have one \input{appendixX.tex} line and a corresponding
-% | file appendixX.tex for each appendix.                                 |
-% +--------------------------------------------------------------------+
-
 \appendix
 \input{appendixA.tex}
-% \input{appendixB.tex}
 
 \end{document}

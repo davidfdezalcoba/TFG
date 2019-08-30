@@ -35,14 +35,14 @@ INPUT /usr/share/texlive/texmf-dist/tex/generic/babel-spanish/spanish.ldf
 INPUT /usr/share/texlive/texmf-dist/tex/generic/babel-spanish/spanish.ldf
 INPUT /usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
 INPUT /usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
@@ -353,6 +353,9 @@ INPUT ./figures/traslacion.png
 INPUT figures/scaling.png
 INPUT ./figures/scaling.png
 INPUT ./figures/scaling.png
+INPUT figures/projectionimage.png
+INPUT ./figures/projectionimage.png
+INPUT ./figures/projectionimage.png
 INPUT figures/rotation.png
 INPUT ./figures/rotation.png
 INPUT ./figures/rotation.png
@@ -428,6 +431,7 @@ INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
