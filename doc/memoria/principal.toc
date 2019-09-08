@@ -1,7 +1,7 @@
 \babel@toc {spanish}{}
-\contentsline {chapter}{\IeC {\'I}ndice}{\es@scroman {v}}{section*.1}
-\contentsline {chapter}{Índice de figuras}{\es@scroman {vii}}{chapter*.3}
-\contentsline {chapter}{Índice de tablas}{\es@scroman {ix}}{chapter*.4}
+\contentsline {chapter}{\IeC {\'I}ndice General}{\es@scroman {vi}}{chapter*.2}
+\contentsline {chapter}{\IeC {\'I}ndice de Figuras}{\es@scroman {viii}}{chapter*.3}
+\contentsline {chapter}{\IeC {\'I}ndice de Tablas}{\es@scroman {ix}}{chapter*.4}
 \contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Motivaci\IeC {\'o}n}{2}{section.1.1}
 \contentsline {section}{\numberline {1.2}Objetivos}{2}{section.1.2}
@@ -76,7 +76,7 @@
 \contentsline {chapter}{\numberline {6}Conclusiones y Trabajo Futuro}{73}{chapter.6}
 \contentsline {subsection}{\numberline {6.0.1}Conclusiones}{73}{subsection.6.0.1}
 \contentsline {subsection}{\numberline {6.0.2}Posible Trabajo Futuro}{73}{subsection.6.0.2}
-\contentsline {chapter}{Bibliography}{79}{chapter*.62}
+\contentsline {chapter}{Referencias}{79}{chapter*.62}
 \contentsline {chapter}{\numberline {A}El lenguaje GLSL}{80}{appendix.Alph1}
 \contentsline {section}{\numberline {A.1}Versi\IeC {\'o}n}{80}{section.Alph1.1}
 \contentsline {section}{\numberline {A.2}Funciones y Estructuras de Control}{80}{section.Alph1.2}

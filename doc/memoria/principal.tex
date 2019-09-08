@@ -16,7 +16,13 @@
 \setlength{\parindent}{20pt}%
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[spanish,es-tabla]{babel}
+\usepackage[spanish]{babel}
+\addto\captionsspanish{%
+	\renewcommand{\contentsname}{Índice General}
+	\renewcommand{\listfigurename}{Índice de Figuras}
+	\renewcommand{\listtablename}{Índice de Tablas}
+	\renewcommand{\bibname}{Referencias}
+}
 
 %\usepackage{caption}
 \usepackage{subcaption}
@@ -91,11 +97,13 @@
 \setcounter{page}{5}
 
 \phantomsection
-\addcontentsline{toc}{chapter}{Índice}
 
 \tableofcontents
+\addcontentsline{toc}{chapter}{Índice General}
 \listoffigures
+\addcontentsline{toc}{chapter}{Índice de Figuras}
 \listoftables
+\addcontentsline{toc}{chapter}{Índice de Tablas}
 
 \hfill  %Are these lines necessary?
 \hfill
@@ -113,7 +121,7 @@
 
 \bibdata{references}
 \bibliography{references}
-\addcontentsline{toc}{chapter}{Bibliography}
+\addcontentsline{toc}{chapter}{Referencias}
 
 \appendix
 \input{appendixA.tex}
