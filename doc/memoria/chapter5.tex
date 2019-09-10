@@ -14,13 +14,12 @@ concreto se desarrollarán shaders para los siguientes problemas:
 		\item Sólidos de revolución
 		\item Nubes de puntos
 		\item Negativo de una imagen
-		\item Detección de bordes en una imagen
 		\item Line Integral Convolution
 \end{itemize}
 
 Para el desarrollo de la aplicación y los shaders será necesario introducir
 algunos conceptos matemáticos importantes, que se explican en la
-sección~\ref{makereference5.1}.
+sección~\ref{makereference5.4}.
 
 \section{Plan de desarrollo}
 \label{makereference5.1}
@@ -32,7 +31,7 @@ necesario, se comenzó a desarrollar el esqueleto principal de la aplicación,
 sobre el cual se incorporarían después los distintos tipos de visualización a
 realizar.
 
-Una vez desarrollado este esqueleto se comenzó a la preparación de los shaders
+Una vez desarrollado este esqueleto se procedió a la preparación de los shaders
 que se utilizarían en cada uno de los problemas, para lo que se utilizó en gran
 medida la información expuesta en el texto~\citet{Bailey}.
 
@@ -101,7 +100,7 @@ la aplicación consta de un esqueleto principal utilizado por todos los tipos de
 visualización. Este esqueleto consta de una ventana principal, creada en el
 programa principal, en la que se renderizará el objeto particular que representa
 el tipo de visualización. Así, con el fin de añadir un nuevo tipo de
-visualización solo se habrían de realizar las siguientes acciones:
+visualización solo se tendrían que realizar las siguientes acciones:
 
 \begin{enumerate}
 		\item Crear un nuevo objeto que implemente los métodos necesarios
@@ -196,7 +195,7 @@ transformaciones que vamos a utilizar.
 				coordenadas homogéneas $(x,y,z,w)$, donde $x,y,z$ y $w$ no son
 				todas $0$.
 
-		\item Dos conjuntos de coordenadas homogéneas $p$ y $q$ que cumplen la
+		\item Dos tuplas de coordenadas homogéneas $p$ y $q$ que cumplen la
 				relación $p = a \dot q, a \in \mathbb{R}$, es decir, que sólo se
 				diferencian en la multiplicación por un escalar, representan el
 				mismo punto en el espacio.
@@ -213,9 +212,9 @@ transformaciones que vamos a utilizar.
 \subsubsection{Traslación}
 \label{makereference5.4.1.1}
 
-Se denomina traslación a la operación consistente en \textit{mover} un vector en
+Se denomina traslación a la operación consistente en \textit{mover} un punto en
 una posición a otra nueva posición. Supongamos, pues, que queremos trasladar un
-vector $\overrightarrow{v} = (x,y,z)$ en la dirección marcada por el vector
+punto $p = (x,y,z)$ en la dirección marcada por el vector
 $\overrightarrow{t} = (t_1, t_2, t_3)$ como se muestra en la
 figura~\ref{fig:traslation}. Para ello realizaríamos la siguiente operación:
 
@@ -229,7 +228,7 @@ figura~\ref{fig:traslation}. Para ello realizaríamos la siguiente operación:
 
 \begin{equation}
 	\label{eq:translation}
-	\overrightarrow{v}' = \overrightarrow{v} + \overrightarrow{t} = 
+	p' = p + \overrightarrow{t} = 
 	\left( \begin{array}{c}
 			x + t_1 \\
 			y + t_2 \\
@@ -241,10 +240,9 @@ La traslación se trata de una transformación afín sin puntos fijos. Como se h
 expuesto previamente, para poder representar esta transformación de forma
 matricial se ha de recurrir a un espacio de una dimensión más. Por tanto, se
 recurre a las coordenadas homogéneas para representar la traslación de un
-espacio vectorial con multiplicación de matrices. Escribiendo el vector
-$\overrightarrow{v} = (x,y,z)$ utilizando una cuarta coordenada homogénea
-$\overrightarrow{v} = (x,y,z,1)$. Esta operación se muestra
-en~\eqref{eq:matrixtranslation}. 
+espacio vectorial con multiplicación de matrices. Escribiendo el punto $p =
+(x,y,z)$ utilizando una cuarta coordenada homogénea $p = (x,y,z,1)$. Esta
+operación se muestra en~\eqref{eq:matrixtranslation}. 
 
 \begin{equation}
 	\label{eq:matrixtranslation}
@@ -574,7 +572,7 @@ $u$. Esto puede ser representado mediante un cuaternión de la siguiente forma:
 		u_z\boldsymbol{k})} = \cos{\frac{\theta}{2}} + (u_x\boldsymbol{i} + 
 u_y\boldsymbol{j} + u_z\boldsymbol{k})\sin{\frac{\theta}{2}} \]
 
-Se puede demostrar que un la rotación deseada se puede aplicar a un vector
+Se puede demostrar que la rotación deseada se puede aplicar a un vector
 ordinario $\boldsymbol{p} = (p_x, p_y, p_z) = p_x\boldsymbol{i} +
 p_y\boldsymbol{j} + p_z\boldsymbol{k}$ en el espacio tridimensional, considerado
 como un cuaternión con parte real igual a cero, evaluando la conjunción de
@@ -730,7 +728,7 @@ calcular la solución aproximada se calcula en cada paso. Para ello, se ha de
 fijar previamente una tolerancia permitida para el error cometido. Por tanto,
 necesitamos ser capaces de \textbf{estimar} el error que vamos a cometer al
 escoger el siguiente paso. Entonces, si el error estimado es mayor que la
-tolerancia fijada, el cálculo se descarta y se vuelve a realiza, y si éste es
+tolerancia fijada, el cálculo se descarta y se vuelve a realizar, y si éste es
 menor que la tolerancia, entonces se acepta y se pasa al siguiente cálculo.
 
 Con el fin de realizar esta estimación, como hemos dicho, necesitamos introducir
@@ -832,7 +830,7 @@ que suele escribirse como
 		\end{aligned}
 	\right. \]
 
-En este caso, el método tiene $2$ etapas. Esta familia de métodos de puede
+En este caso, el método tiene $2$ etapas. Esta familia de métodos se puede
 generalizar, dando lugar a los métodos de Runge-Kutta de $s$ etapas. La
 forma de escribir estos métodos es la siguiente:
 
@@ -954,8 +952,9 @@ Esto es todo lo que realiza el vertex shader, y sería suficiente para renderiza
 el terreno coloreado. Sin embargo, con el fin de darle más realismo, en esta
 ocasión se ha utilizado el fragment shader para dotar de iluminación a la
 escena. Así, se han utilizado los normales, la posición y el color del fragmento
-para elaborar un modelo de iluminación ADS~\cite{Bailey}. Esto es todo lo que
-realiza el fragment shader, quedándonos lo siguiente:
+para elaborar un modelo de iluminación ADS \textit{(Ambient, Diffusion,
+Specular)}~\cite{Bailey}. Esto es todo lo que realiza el fragment shader,
+quedándonos lo siguiente:
 
 \begin{verbatim}
     //Ambient
@@ -1089,7 +1088,7 @@ siguientes niveles de teselación:
     gl_TessLevelInner[1] = uInner1;
 \end{verbatim}
 
-Además se pasa al TES la posición del vértice dentro del parche mediante la
+Además se pasa al TES la posición del vértice dentro del patch mediante la
 instrucción:
 
 \begin{verbatim}
@@ -1291,7 +1290,7 @@ Figura~\ref{fig:mynegative}.
 \label{makereference5.5.8}
 
 El caso del Line Integral Convolution presenta un problema a la hora de realizar
-mediante un shader los cálculos necesarios. Esto se debe a que, como hemos visto
+los cálculos necesarios mediante un shader. Esto se debe a que, como hemos visto
 anteriormente, necesitamos, para calcular la línea de flujo, los valores del
 campo vectorial de los demás vértices, algo que no podemos, a priori, obtener en
 un shader. La solución para este problema consiste en codificar en forma de
@@ -1312,7 +1311,7 @@ textura la información del campo vectorial asociado al problema.
 \end{figure}
 
 Para ello, como se explica en~\citet{Bailey} y como se puede observar en la
-Figura~\ref{fig:lictexture}, se asocia a cada punto del campo un color
+Figura~\ref{fig:lictexture}, se asocia a cada punto del campo vectorial un color
 dependiendo de los valores de las componentes vectoriales de dicho punto. A
 mayor valor de la coordenada $x$ se le asocia un valor más alto del color rojo
 siguiendo el convenio RGB. Similarmente, a mayor valor de la coordenada $y$ se
@@ -1354,9 +1353,9 @@ subyacente.
 
 Para esta técnica necesitaremos solo un vertex shader y un fragment shader. El
 vertex shader toma de nuevo la posición de los vértices, que en este caso se
-trata de una malla de $256\times 256$ vértices y las coordenadas de textura de
-cada uno de ellos. Este shader simplemente pasa las coordenadas de textura al
-fragment shader y escribe la posición del vértice. 
+trata de una malla uniforme de $256\times 256$ vértices y las coordenadas de
+textura de cada uno de ellos. Este shader simplemente pasa las coordenadas de
+textura al fragment shader y escribe la posición del vértice. 
 
 El fragment shader toma las coordenadas de textura procedentes del vertex shader
 y realiza las operaciones explicadas en la sección~\ref{ref:lic}. Primero

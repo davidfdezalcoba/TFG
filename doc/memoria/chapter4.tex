@@ -7,17 +7,17 @@ En este capítulo se muestran técnicas relevantes de visualización científica
 Algunas de ellas serán implementadas mediante shaders en nuestra aplicación,
 explicando los shaders utilizados en ella.
 
-\section{Manipulación de imágenes}
+\section{Procesamiento de imágenes}
 \label{ref:images}
 
 % Incluir imágenes de las diferentes manipulaciones
 % TODO
 
-La manipulación de imágenes es la disciplina que incluye las diferentes técnicas
-de filtrado, combinación o modificación de imágenes con el fin de resaltar
-características deseables de la imagen. En visualización científica, por
-ejemplo, se puede utilizar el negativo de la imagen de una estructura ósea con
-el fin de detectar defectos que de otro modo resulta más complicado ver;
+El procesamiento de imágenes es la disciplina que incluye las diferentes
+técnicas de filtrado, combinación o modificación de imágenes con el fin de
+resaltar características deseables de la imagen. En visualización científica,
+por ejemplo, se puede utilizar el negativo de la imagen de una estructura ósea
+con el fin de detectar defectos que de otro modo resulta más complicado ver;
 utilizar una mezcla de imágenes astronómicas en diferentes espectros para
 conseguir una imagen mas realista; o aumentar el brillo y nitidez de una imagen
 para conseguir una visualización más eficaz. 
@@ -239,12 +239,12 @@ figura~\ref{fig:terrain}.
 	\label{fig:terrain}
 \end{figure}
 
-\section{Line Integral Convolution}
+\section{Visualización de campos vectoriales}
 \label{ref:lic}
 
 La última de las técnicas de visualización que vamos a ver tiene que ver con la
-visualización de fluidos en dos dimensiones. Para ello veremos un método
-importante denominado Line Integral Convolution.
+visualización de campos vectoriales en dos dimensiones. Para ello veremos un
+método importante denominado Line Integral Convolution.
 
 El método Line Integral Convolution fue originalmente propuesto en el artículo
 de~\citet{osti_10185520}. Se utiliza para visualizar campos vectoriales densos.
@@ -314,7 +314,7 @@ el análisis del flujo a visualizar, la opción recomendada y casi siempre
 utilizada en este método es la del ruido blanco, debido a la distribución
 uniforme de los colores de sus píxeles. 
 
-\subsection{Computar la línea de flujo}
+\subsubsection{Computar la línea de flujo}
 \label{ref:streamline}
 
 Para computar la línea de flujo se ha de utilizar algún método numérico. Entre
@@ -327,7 +327,7 @@ para su implementación. De esta manera, se consiguen una serie de puntos a lo
 largo de la línea de flujo, dependiendo del paso escogido en el método numérico
 y la longitud de la línea escogida por el usuario.
 
-\subsection{Computar los pesos de convolución}
+\subsubsection{Computar los pesos de convolución}
 \label{ref:convolution}
 
 Este paso consiste en encontrar la integral exacta del núcleo de convolución $k$
@@ -337,14 +337,13 @@ ha de resolver la integral~\eqref{eq:11}.
 \begin{equation}
 		h_i = \int_{a}^{b}k(\omega) d\omega \label{eq:11}
 \end{equation}
-
-donde $i$ se representa el índice del punto actual en la línea de flujo, $a$
+donde $i$ representa el índice del punto actual en la línea de flujo, $a$
 es la distancia a lo largo de la línea de flujo entre el punto actual y el pixel
 para el que queremos calcular el valor de salida y $b$ es igual a $a$ más el
 tamaño del paso utilizado en el paso actual $\Delta s_i$. Más información acerca
 del núcleo de convolución puede encontrarse en~\citet{osti_10185520}.
 
-\subsection{Computar los valores de salida del pixel}
+\subsubsection{Computar los valores de salida del pixel}
 \label{ref:salida}
 
 Para calcular los valores de salida del pixel una vez calculados los pesos de

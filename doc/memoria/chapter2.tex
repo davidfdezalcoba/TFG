@@ -29,8 +29,8 @@ como software, en el caso de que el sistema no posea hardware de gráficos.
 OpenGL no proporciona ninguna funcionalidad para describir modelos en tres
 dimensiones ni operaciones para leer ficheros (como imágenes JPEG, por ejemplo).
 En su lugar, se deben construir los objetos tridimensionales a partir de un
-pequeño conjunto de primitivas geométricas---puntos, líneas, triángulos y
-parches.---(Ver Sección~\ref{makereference2.3}).
+pequeño conjunto de primitivas geométricas---points, lines, triangles y
+patches.---(Ver Sección~\ref{makereference2.3}).
 
 \section{Breve historia de OpenGL}
 \label{makereference2.2}
@@ -82,7 +82,7 @@ la GPU, disminuyendo la carga de la CPU.
 Junto con Vulkan surgió SPIR-V \textit{(Standard Portable Intermediate
 Representation)}~\cite{SPIR}, un lenguaje intermedio de computación paralela y
 gráficos, también perteneciente al grupo Khronos. Su principal finalidad era la
-permitir a los desarrolladores la creación y distribución de binarios
+de permitir a los desarrolladores la creación y distribución de binarios
 independientes del dispositivo.
 
 Con su aparición, se pasó de utilizar un compilador de GLSL implementado en cada
@@ -207,6 +207,17 @@ En la Figura~\ref{fig:primitives} se pueden ver las diferentes interpretaciones
 en forma de primitiva que puede realizar OpenGL para renderizar un flujo de
 vértices. 
 
+\subsubsection{Patches}
+\label{ref:patches}
+
+La primitiva patches se utiliza principalmente para la etapa de teselación,
+explicada en la sección~\ref{}. En este caso solo existe una primitiva,
+\verb|GL_PATCHES|. Esta primitiva contiene el número de vértices definido por el
+usuario ($n$), siempre en el intervalo $[1,$\verb|GL_MAX_PATCH_VERTICES|$]$. El
+valor de \verb|GL_MAX_PATCH_VERTICES| depende de la implementación. Utilizando
+esta primitiva, cada grupo de $n$ vértices del flujo de vértices conforma un
+patch diferente.
+
 \begin{figure}[h]
 	\centering	
 	\includegraphics[width=\textwidth]{figures/primitives.png}
@@ -272,25 +283,27 @@ implementa la transición de vértice a fragmento. Inmediatamente después del
 clipping, las primitivas geométricas actualizadas se mandan al rasterizador para
 la generación de fragmentos. Podemos considerar un fragmento como un ``candidato
 a pixel'', en el sentido de que un pixel reside en el \textit{framebuffer}--- un
-espacio de memoria manejado por el hardware gráfico que manda al dispositivo de
-salida digital--- mientras que un fragmento puede ser rechazado y nunca
-actualizar su localización de pixel asociada. 
+espacio de memoria manejado por el hardware gráfico que manda información al
+dispositivo de salida digital--- mientras que un fragmento puede ser rechazado y
+nunca actualizar su localización de pixel asociada. El framebuffer consta, a su
+vez, de tres buffers llamados \textit{color buffer, depth buffer, stencil
+buffer}, que nos permiten realizar tests para descartar fragmentos.
 
 \subsection{Procesamiento de Fragmentos}
 \label{ref:procesamientofrags}
 
 En la última etapa, el procesado de fragmentos se realiza a su vez en dos pasos,
-uno de ellos programable con el shader de fragmentos y otro que consta de
+uno de ellos programable con el \textit{fragment shader} y otro que consta de
 distintas operaciones sobre fragmentos realizadas automáticamente por OpenGL.
 Durante este último procesamiento, la visibilidad de cada fragmento es
-determinada utilizando diferentes tests (profundidad, color, plantilla,
-ruido\ldots). 
+determinada utilizando diferentes tests (depth, color, stencil\ldots), para lo
+que se utilizan los buffers indicados en la sección anterior. 
 
 Cuando un fragmento pasa por todas estas etapas y todos los test activos, puede
 ser escrito directamente en el framebuffer, actualizando su color y valor de
 profundidad de su pixel o, si el \textit{blending} está activado, mezclando su
-color con el del pixel actual para generar un nuevo color que se escribe en el
-buffer de fragmentos.
+color con el del pixel actual para generar un nuevo color que se escribe en
+dicho framebuffer.
 
 \section{Diferencias con Direct3D}
 \label{makereference2.4}
@@ -349,8 +362,8 @@ pipeline gráfico es bastante parecido, como puede apreciarse en la
 Figura~\ref{fig:differences}.
 
 Además, las etapas programables del pipeline de OpenGL (vertex, tessellation,
-geometry y fragment shader) se escriben en GLSL \textit{OpenGL Shading
-Language}~\cite{GLSL}, un lenguaje creado específicamente para este propósito
+geometry y fragment shader) se escriben en GLSL \textit{(OpenGL Shading
+Language)}~\cite{GLSL}, un lenguaje creado específicamente para este propósito
 por el OpenGL ARB. En contraposición, las etapas programables del pipeline
 implementado por Direct3D (vertex, geometry y pixel shaders) se escriben en el
 lenguaje HLSL \textit{(High Level Shader Language)}~\cite{HLSL} desarrollado por
