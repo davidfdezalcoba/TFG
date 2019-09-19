@@ -1,71 +1,70 @@
 \BOOKMARK [0][-]{PDFPortadaPage.0}{Portada}{}% 1
-\BOOKMARK [0][-]{PDFAutorizacionPage.0}{Autorizaci\363n}{}% 2
-\BOOKMARK [0][-]{PDFResumenPage.0}{Resumen}{}% 3
-\BOOKMARK [0][-]{PDFAbstractPage.0}{Abstract}{}% 4
-\BOOKMARK [0][-]{chapter*.2}{\315ndice General}{}% 5
-\BOOKMARK [0][-]{chapter*.3}{\315ndice de Figuras}{}% 6
-\BOOKMARK [0][-]{chapter*.4}{\315ndice de Tablas}{}% 7
-\BOOKMARK [0][-]{chapter.1}{Introducci\363n}{}% 8
-\BOOKMARK [1][-]{section.1.1}{Motivaci\363n}{chapter.1}% 9
-\BOOKMARK [1][-]{section.1.2}{Objetivos}{chapter.1}% 10
-\BOOKMARK [1][-]{section.1.3}{Plan de trabajo}{chapter.1}% 11
-\BOOKMARK [1][-]{section.1.4}{Estructura de la memoria}{chapter.1}% 12
-\BOOKMARK [0][-]{chapter.2}{OpenGL y Direct3D}{}% 13
-\BOOKMARK [1][-]{section.2.1}{\277Qu\351 es?}{chapter.2}% 14
-\BOOKMARK [1][-]{section.2.2}{Breve historia de OpenGL}{chapter.2}% 15
-\BOOKMARK [1][-]{section.2.3}{Dise\361o de OpenGL}{chapter.2}% 16
-\BOOKMARK [2][-]{subsection.2.3.1}{Primitivas de OpenGL}{section.2.3}% 17
-\BOOKMARK [2][-]{subsection.2.3.2}{Procesamiento de V\351rtices}{section.2.3}% 18
-\BOOKMARK [2][-]{subsection.2.3.3}{Clipping}{section.2.3}% 19
-\BOOKMARK [2][-]{subsection.2.3.4}{Rasterizaci\363n}{section.2.3}% 20
-\BOOKMARK [2][-]{subsection.2.3.5}{Procesamiento de Fragmentos}{section.2.3}% 21
-\BOOKMARK [1][-]{section.2.4}{Diferencias con Direct3D}{chapter.2}% 22
-\BOOKMARK [0][-]{chapter.3}{Shaders Gr\341ficos}{}% 23
-\BOOKMARK [1][-]{section.3.1}{Vertex Shader}{chapter.3}% 24
-\BOOKMARK [1][-]{section.3.2}{Tessellation Shaders}{chapter.3}% 25
-\BOOKMARK [2][-]{subsection.3.2.1}{Tessellation Control Shader}{section.3.2}% 26
-\BOOKMARK [2][-]{subsection.3.2.2}{Tessellation Primitive Generator}{section.3.2}% 27
-\BOOKMARK [2][-]{subsection.3.2.3}{Tessellation Evaluation Shader}{section.3.2}% 28
-\BOOKMARK [1][-]{section.3.3}{Geometry Shader}{chapter.3}% 29
-\BOOKMARK [1][-]{section.3.4}{Fragment Shader}{chapter.3}% 30
-\BOOKMARK [0][-]{chapter.4}{Visualizaci\363n Cient\355fica}{}% 31
-\BOOKMARK [1][-]{section.4.1}{Procesamiento de im\341genes}{chapter.4}% 32
-\BOOKMARK [1][-]{section.4.2}{Curvas y superficies de B\351zier}{chapter.4}% 33
-\BOOKMARK [1][-]{section.4.3}{Visualizaci\363n de datos en 3D}{chapter.4}% 34
-\BOOKMARK [1][-]{section.4.4}{S\363lidos de revoluci\363n}{chapter.4}% 35
-\BOOKMARK [1][-]{section.4.5}{Coloreado de terrenos}{chapter.4}% 36
-\BOOKMARK [1][-]{section.4.6}{Visualizaci\363n de campos vectoriales}{chapter.4}% 37
-\BOOKMARK [0][-]{chapter.5}{Aplicaci\363n desarrollada}{}% 38
-\BOOKMARK [1][-]{section.5.1}{Plan de desarrollo}{chapter.5}% 39
-\BOOKMARK [1][-]{section.5.2}{Herramientas de desarrollo}{chapter.5}% 40
-\BOOKMARK [1][-]{section.5.3}{Dise\361o de la aplicaci\363n}{chapter.5}% 41
-\BOOKMARK [1][-]{section.5.4}{Matem\341ticas necesarias}{chapter.5}% 42
-\BOOKMARK [2][-]{subsection.5.4.1}{Transformaciones matriciales}{section.5.4}% 43
-\BOOKMARK [2][-]{subsection.5.4.2}{Rotaci\363n: \301ngulos de Euler y Cuaterniones}{section.5.4}% 44
-\BOOKMARK [2][-]{subsection.5.4.3}{M\351todos Num\351ricos para la resoluci\363n de Ecuaciones Diferenciales}{section.5.4}% 45
-\BOOKMARK [2][-]{subsection.5.4.4}{Otras F\363rmulas}{section.5.4}% 46
-\BOOKMARK [1][-]{section.5.5}{Shaders en la aplicaci\363n}{chapter.5}% 47
-\BOOKMARK [2][-]{subsection.5.5.1}{Coloreado de terrenos}{section.5.5}% 48
-\BOOKMARK [2][-]{subsection.5.5.2}{Curvas de B\351zier}{section.5.5}% 49
-\BOOKMARK [2][-]{subsection.5.5.3}{Superficies de B\351zier}{section.5.5}% 50
-\BOOKMARK [2][-]{subsection.5.5.4}{S\363lidos de revoluci\363n}{section.5.5}% 51
-\BOOKMARK [2][-]{subsection.5.5.5}{Nube de puntos}{section.5.5}% 52
-\BOOKMARK [2][-]{subsection.5.5.6}{Negativo de una imagen}{section.5.5}% 53
-\BOOKMARK [2][-]{subsection.5.5.7}{Line Integral Convolution}{section.5.5}% 54
-\BOOKMARK [2][-]{subsection.5.5.8}{Uso de la aplicaci\363n}{section.5.5}% 55
-\BOOKMARK [0][-]{chapter.6}{Conclusiones y Trabajo Futuro}{}% 56
-\BOOKMARK [1][-]{subsection.6.0.1}{Conclusiones}{chapter.6}% 57
-\BOOKMARK [2][-]{subsection.6.0.2}{Posible Trabajo Futuro}{subsection.6.0.1}% 58
-\BOOKMARK [0][-]{chapter*.66}{Referencias}{}% 59
-\BOOKMARK [0][-]{appendix.Alph1}{El lenguaje GLSL}{}% 60
-\BOOKMARK [1][-]{section.Alph1.1}{Versi\363n}{appendix.Alph1}% 61
-\BOOKMARK [1][-]{section.Alph1.2}{Funciones y Estructuras de Control}{appendix.Alph1}% 62
-\BOOKMARK [1][-]{section.Alph1.3}{Tipos de Datos}{appendix.Alph1}% 63
-\BOOKMARK [2][-]{subsection.Alph1.3.1}{Escalares}{section.Alph1.3}% 64
-\BOOKMARK [2][-]{subsection.Alph1.3.2}{Vectoriales}{section.Alph1.3}% 65
-\BOOKMARK [2][-]{subsection.Alph1.3.3}{Swizzling}{section.Alph1.3}% 66
-\BOOKMARK [2][-]{subsection.Alph1.3.4}{Matrices}{section.Alph1.3}% 67
-\BOOKMARK [2][-]{subsection.Alph1.3.5}{Uniforms}{section.Alph1.3}% 68
-\BOOKMARK [1][-]{section.Alph1.4}{Variables y Entrada/Salida}{appendix.Alph1}% 69
-\BOOKMARK [2][-]{subsection.Alph1.4.1}{Entradas y salidas}{section.Alph1.4}% 70
-\BOOKMARK [2][-]{subsection.Alph1.4.2}{Variables Espec\355ficas}{section.Alph1.4}% 71
+\BOOKMARK [0][-]{PDFResumenPage.0}{Resumen}{}% 2
+\BOOKMARK [0][-]{PDFAbstractPage.0}{Abstract}{}% 3
+\BOOKMARK [0][-]{section*.1}{\315ndice General}{}% 4
+\BOOKMARK [0][-]{chapter*.2}{\315ndice de Figuras}{}% 5
+\BOOKMARK [0][-]{chapter*.4}{\315ndice de Tablas}{}% 6
+\BOOKMARK [0][-]{chapter.1}{Introducci\363n}{}% 7
+\BOOKMARK [1][-]{section.1.1}{Motivaci\363n}{chapter.1}% 8
+\BOOKMARK [1][-]{section.1.2}{Objetivos}{chapter.1}% 9
+\BOOKMARK [1][-]{section.1.3}{Plan de trabajo}{chapter.1}% 10
+\BOOKMARK [1][-]{section.1.4}{Estructura de la memoria}{chapter.1}% 11
+\BOOKMARK [0][-]{chapter.2}{OpenGL y Direct3D}{}% 12
+\BOOKMARK [1][-]{section.2.1}{\277Qu\351 es?}{chapter.2}% 13
+\BOOKMARK [1][-]{section.2.2}{Breve historia de OpenGL}{chapter.2}% 14
+\BOOKMARK [1][-]{section.2.3}{Dise\361o de OpenGL}{chapter.2}% 15
+\BOOKMARK [2][-]{subsection.2.3.1}{Primitivas de OpenGL}{section.2.3}% 16
+\BOOKMARK [2][-]{subsection.2.3.2}{Procesamiento de V\351rtices}{section.2.3}% 17
+\BOOKMARK [2][-]{subsection.2.3.3}{Clipping}{section.2.3}% 18
+\BOOKMARK [2][-]{subsection.2.3.4}{Rasterizaci\363n}{section.2.3}% 19
+\BOOKMARK [2][-]{subsection.2.3.5}{Procesamiento de Fragmentos}{section.2.3}% 20
+\BOOKMARK [1][-]{section.2.4}{Diferencias con Direct3D}{chapter.2}% 21
+\BOOKMARK [0][-]{chapter.3}{Shaders Gr\341ficos}{}% 22
+\BOOKMARK [1][-]{section.3.1}{Vertex Shader}{chapter.3}% 23
+\BOOKMARK [1][-]{section.3.2}{Tessellation Shaders}{chapter.3}% 24
+\BOOKMARK [2][-]{subsection.3.2.1}{Tessellation Control Shader}{section.3.2}% 25
+\BOOKMARK [2][-]{subsection.3.2.2}{Tessellation Primitive Generator}{section.3.2}% 26
+\BOOKMARK [2][-]{subsection.3.2.3}{Tessellation Evaluation Shader}{section.3.2}% 27
+\BOOKMARK [1][-]{section.3.3}{Geometry Shader}{chapter.3}% 28
+\BOOKMARK [1][-]{section.3.4}{Fragment Shader}{chapter.3}% 29
+\BOOKMARK [0][-]{chapter.4}{Visualizaci\363n Cient\355fica}{}% 30
+\BOOKMARK [1][-]{section.4.1}{Procesamiento de im\341genes}{chapter.4}% 31
+\BOOKMARK [1][-]{section.4.2}{Curvas y superficies de B\351zier}{chapter.4}% 32
+\BOOKMARK [1][-]{section.4.3}{Visualizaci\363n de datos en 3D}{chapter.4}% 33
+\BOOKMARK [1][-]{section.4.4}{S\363lidos de revoluci\363n}{chapter.4}% 34
+\BOOKMARK [1][-]{section.4.5}{Coloreado de terrenos}{chapter.4}% 35
+\BOOKMARK [1][-]{section.4.6}{Visualizaci\363n de campos vectoriales}{chapter.4}% 36
+\BOOKMARK [0][-]{chapter.5}{Aplicaci\363n desarrollada}{}% 37
+\BOOKMARK [1][-]{section.5.1}{Plan de desarrollo}{chapter.5}% 38
+\BOOKMARK [1][-]{section.5.2}{Herramientas de desarrollo}{chapter.5}% 39
+\BOOKMARK [1][-]{section.5.3}{Dise\361o de la aplicaci\363n}{chapter.5}% 40
+\BOOKMARK [1][-]{section.5.4}{Matem\341ticas necesarias}{chapter.5}% 41
+\BOOKMARK [2][-]{subsection.5.4.1}{Transformaciones matriciales}{section.5.4}% 42
+\BOOKMARK [2][-]{subsection.5.4.2}{Rotaci\363n: \301ngulos de Euler y Cuaterniones}{section.5.4}% 43
+\BOOKMARK [2][-]{subsection.5.4.3}{M\351todos Num\351ricos para la resoluci\363n de Ecuaciones Diferenciales}{section.5.4}% 44
+\BOOKMARK [2][-]{subsection.5.4.4}{Otras F\363rmulas}{section.5.4}% 45
+\BOOKMARK [1][-]{section.5.5}{Shaders en la aplicaci\363n}{chapter.5}% 46
+\BOOKMARK [2][-]{subsection.5.5.1}{Coloreado de terrenos}{section.5.5}% 47
+\BOOKMARK [2][-]{subsection.5.5.2}{Curvas de B\351zier}{section.5.5}% 48
+\BOOKMARK [2][-]{subsection.5.5.3}{Superficies de B\351zier}{section.5.5}% 49
+\BOOKMARK [2][-]{subsection.5.5.4}{S\363lidos de revoluci\363n}{section.5.5}% 50
+\BOOKMARK [2][-]{subsection.5.5.5}{Nube de puntos}{section.5.5}% 51
+\BOOKMARK [2][-]{subsection.5.5.6}{Negativo de una imagen}{section.5.5}% 52
+\BOOKMARK [2][-]{subsection.5.5.7}{Line Integral Convolution}{section.5.5}% 53
+\BOOKMARK [2][-]{subsection.5.5.8}{Uso de la aplicaci\363n}{section.5.5}% 54
+\BOOKMARK [0][-]{chapter.6}{Conclusiones y Trabajo Futuro}{}% 55
+\BOOKMARK [1][-]{subsection.6.0.1}{Conclusiones}{chapter.6}% 56
+\BOOKMARK [2][-]{subsection.6.0.2}{Posible Trabajo Futuro}{subsection.6.0.1}% 57
+\BOOKMARK [0][-]{chapter*.66}{Referencias}{}% 58
+\BOOKMARK [0][-]{appendix.Alph1}{El lenguaje GLSL}{}% 59
+\BOOKMARK [1][-]{section.Alph1.1}{Versi\363n}{appendix.Alph1}% 60
+\BOOKMARK [1][-]{section.Alph1.2}{Funciones y Estructuras de Control}{appendix.Alph1}% 61
+\BOOKMARK [1][-]{section.Alph1.3}{Tipos de Datos}{appendix.Alph1}% 62
+\BOOKMARK [2][-]{subsection.Alph1.3.1}{Escalares}{section.Alph1.3}% 63
+\BOOKMARK [2][-]{subsection.Alph1.3.2}{Vectoriales}{section.Alph1.3}% 64
+\BOOKMARK [2][-]{subsection.Alph1.3.3}{Swizzling}{section.Alph1.3}% 65
+\BOOKMARK [2][-]{subsection.Alph1.3.4}{Matrices}{section.Alph1.3}% 66
+\BOOKMARK [2][-]{subsection.Alph1.3.5}{Uniforms}{section.Alph1.3}% 67
+\BOOKMARK [1][-]{section.Alph1.4}{Variables y Entrada/Salida}{appendix.Alph1}% 68
+\BOOKMARK [2][-]{subsection.Alph1.4.1}{Entradas y salidas}{section.Alph1.4}% 69
+\BOOKMARK [2][-]{subsection.Alph1.4.2}{Variables Espec\355ficas}{section.Alph1.4}% 70

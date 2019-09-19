@@ -1,7 +1,7 @@
 \babel@toc {spanish}{}
-\contentsline {chapter}{\IeC {\'I}ndice General}{\es@scroman {vi}}{chapter*.2}
-\contentsline {chapter}{\IeC {\'I}ndice de Figuras}{\es@scroman {viii}}{chapter*.3}
-\contentsline {chapter}{\IeC {\'I}ndice de Tablas}{\es@scroman {ix}}{chapter*.4}
+\contentsline {chapter}{\IeC {\'I}ndice General}{\es@scroman {iv}}{section*.1}
+\contentsline {chapter}{\IeC {\'I}ndice de Figuras}{\es@scroman {v}}{chapter*.2}
+\contentsline {chapter}{\IeC {\'I}ndice de Tablas}{\es@scroman {viii}}{chapter*.4}
 \contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Motivaci\IeC {\'o}n}{2}{section.1.1}
 \contentsline {section}{\numberline {1.2}Objetivos}{2}{section.1.2}

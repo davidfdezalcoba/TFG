@@ -79,8 +79,8 @@
 \input{title.tex}
    \pdfbookmark[0]{Portada}{PDFPortadaPage}
 
-\input{autorizacion.tex}
-   \pdfbookmark[0]{Autorización}{PDFAutorizacionPage}
+%\input{autorizacion.tex}
+%   \pdfbookmark[0]{Autorización}{PDFAutorizacionPage}
 
 \input{resumen.tex}
    \pdfbookmark[0]{Resumen}{PDFResumenPage}
@@ -94,14 +94,16 @@
 \newpage
 \pagenumbering{roman}
 
-\setcounter{page}{5}
+\setcounter{page}{4}
 
 \phantomsection
 
-\tableofcontents
 \addcontentsline{toc}{chapter}{Índice General}
-\listoffigures
+\tableofcontents
+
 \addcontentsline{toc}{chapter}{Índice de Figuras}
+\listoffigures
+
 \listoftables
 \addcontentsline{toc}{chapter}{Índice de Tablas}
 
